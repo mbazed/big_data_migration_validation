@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:file_picker/file_picker.dart';
 
 class DataValidatorPage extends StatefulWidget {
   const DataValidatorPage({Key? key}) : super(key: key);
@@ -14,7 +15,10 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
   String selectedMode = 'File Mode';
   String source = '';
   String target = '';
-
+  final TextEditingController _sourceController = TextEditingController();
+  final TextEditingController _targetController = TextEditingController();
+  final TextEditingController _resultController = TextEditingController();
+  String fileName = 'No file selected';
   // Use your _list here
   final List<String> _list = [
     'File Mode',
@@ -32,7 +36,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 4, top: 15),
+              padding: const EdgeInsets.only(bottom: 4, top: 1),
               child: Image.asset(
                 'assets/images/Vector.png',
                 width: 46,
@@ -211,7 +215,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                         Container(
                           alignment: AlignmentDirectional.topStart,
                           width: width100,
-                          padding: EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.only(bottom: 2),
                           child: RichText(
                             text: TextSpan(children: <TextSpan>[
                               TextSpan(
@@ -235,6 +239,20 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                             ]),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Container(
+                            width: width100,
+                            alignment: AlignmentDirectional.topStart,
+                            child: Text('Supported file types: .csv, .xlsx',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w400,
+                                )),
+                          ),
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -244,6 +262,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                           ),
                           width: width100,
                           child: TextField(
+                            controller: _sourceController,
                             onChanged: (_) {},
                             onSubmitted: (_) {},
                             style: TextStyle(),
@@ -261,18 +280,51 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 29),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(
-                            color: Colors.grey.withOpacity(0.7),
+                      padding: const EdgeInsets.only(left: 10, top: 40),
+                      child: InkWell(
+                        onTap: () async {
+                          // Open file picker
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles(
+                            allowMultiple: false,
+                            type: FileType.custom,
+                            allowedExtensions: ['csv', 'xlsx'],
+                          );
+                          // Check if a file was selected
+                          if (result != null) {
+                            setState(() {
+                              // Update the 'source' variable with the selected file path
+                              source = result.files.single.name;
+                              _sourceController.text = source;
+                              if (_resultController.text != '') {
+                                _resultController.text =
+                                    '${_resultController.text}Source selected: $source\n';
+                              } else {
+                                _resultController.text =
+                                    '\n${_resultController.text}Source selected: $source\n';
+                              }
+                            });
+                          } else {
+                            setState(() {
+                              source = 'No file selected';
+                              _sourceController.text = source;
+                              _resultController.text =
+                                  '${_resultController.text}No file selected\n';
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            border: Border.all(
+                              color: Colors.grey.withOpacity(0.7),
+                            ),
                           ),
+                          child:
+                              Icon(Icons.drive_folder_upload_rounded, size: 35),
                         ),
-                        child:
-                            Icon(Icons.drive_folder_upload_rounded, size: 35),
                       ),
                     )
                   ],
@@ -285,7 +337,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                         Container(
                           alignment: AlignmentDirectional.topStart,
                           width: width100,
-                          padding: EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.only(bottom: 3),
                           child: RichText(
                             text: TextSpan(children: <TextSpan>[
                               TextSpan(
@@ -309,6 +361,20 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                             ]),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Container(
+                            width: width100,
+                            alignment: AlignmentDirectional.topStart,
+                            child: Text('Supported file types: .csv, .xlsx',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w400,
+                                )),
+                          ),
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -318,6 +384,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                           ),
                           width: width100,
                           child: TextField(
+                            controller: _targetController,
                             onChanged: (_) {},
                             onSubmitted: (_) {},
                             style: TextStyle(),
@@ -335,19 +402,52 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 29),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(
-                            color: Colors.grey.withOpacity(0.7),
+                      padding: const EdgeInsets.only(left: 10, top: 42),
+                      child: InkWell(
+                        onTap: () async {
+                          // Open file picker
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles(
+                            allowMultiple: false,
+                            type: FileType.custom,
+                            allowedExtensions: ['csv', 'xlsx'],
+                          );
+                          // Check if a file was selected
+                          if (result != null) {
+                            setState(() {
+                              // Update the 'source' variable with the selected file path
+                              target = result.files.single.name;
+                              _targetController.text = target;
+                              if (_resultController.text != '') {
+                                _resultController.text =
+                                    '${_resultController.text}Target selected: $target\n';
+                              } else {
+                                _resultController.text =
+                                    '\n${_resultController.text}Target selected: $target\n';
+                              }
+                            });
+                          } else {
+                            setState(() {
+                              target = 'No file selected';
+                              _targetController.text = target;
+                              _resultController.text =
+                                  '${_resultController.text}No file selected\n';
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            border: Border.all(
+                              color: Colors.grey.withOpacity(0.7),
+                            ),
                           ),
-                        ),
-                        child: Icon(
-                          Icons.drive_folder_upload_rounded,
-                          size: 35,
+                          child: Icon(
+                            Icons.drive_folder_upload_rounded,
+                            size: 35,
+                          ),
                         ),
                       ),
                     )
@@ -355,7 +455,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                 ),
                 SizedBox(height: 32.0),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.4075,
+                  width: width100,
                   height: MediaQuery.of(context).size.height * 0.075,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -368,7 +468,8 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                     onPressed: () {
                       // Implement 'Validate' functionality
                     },
-                    child: Text('Validate'),
+                    child: Align(
+                        alignment: Alignment.center, child: Text('Validate')),
                   ),
                 ),
               ],
@@ -378,7 +479,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                 Container(
                   alignment: AlignmentDirectional.topStart,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  padding: EdgeInsets.only(bottom: 11, top: 81),
+                  padding: EdgeInsets.only(bottom: 11, top: 104),
                   child: RichText(
                     text: TextSpan(children: <TextSpan>[
                       TextSpan(
@@ -413,8 +514,9 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                       ),
                     ),
                     width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.height * 0.23,
+                    height: MediaQuery.of(context).size.height * 0.215,
                     child: TextField(
+                      controller: _resultController,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       onChanged: (_) {},
