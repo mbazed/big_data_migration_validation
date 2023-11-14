@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class DataValidatorPage extends StatefulWidget {
   const DataValidatorPage({Key? key}) : super(key: key);
@@ -465,8 +467,27 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       // Implement 'Validate' functionality
+
+                      // Assuming your Python server is running on http://localhost:5000
+                      final url = Uri.parse('http://localhost:4564/validate');
+
+                      try {
+                        
+                        final response = await http.post(
+                          url,
+                          body: {'source': source},
+                        );
+
+                        if (response.statusCode == 200) {
+                          print('Validation successful!');
+                        } else {
+                          print('Validation failed: ${response.statusCode}');
+                        }
+                      } catch (e) {
+                        print('Error during validation: $e');
+                      }
                     },
                     child: Align(
                         alignment: Alignment.center, child: Text('Validate')),
