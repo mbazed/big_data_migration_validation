@@ -17,6 +17,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
   String selectedMode = 'File Mode';
   String source = '';
   String target = '';
+  String message = '';
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _targetController = TextEditingController();
   final TextEditingController _resultController = TextEditingController();
@@ -470,18 +471,27 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                     onPressed: () async {
                       // Implement 'Validate' functionality
 
-                      // Assuming your Python server is running on http://localhost:5000
+                      // Assuming your Python server is running on http://localhost:4564
                       final url = Uri.parse('http://localhost:4564/validate');
 
                       try {
-                        
                         final response = await http.post(
                           url,
                           body: {'source': source},
                         );
 
                         if (response.statusCode == 200) {
-                          print('Validation successful!');
+                          print('Validation successful! ');
+
+                          final Map<String, dynamic> data =
+                              jsonDecode(response.body);
+
+                          // Access the 'primarykey' value
+                          setState(() {
+                            message = data['primarykey'].toString();
+                            _resultController.text =
+                                '${_resultController.text}${message}\n';
+                          });
                         } else {
                           print('Validation failed: ${response.statusCode}');
                         }
