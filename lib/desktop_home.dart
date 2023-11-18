@@ -3,17 +3,16 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-class DataValidatorPage extends StatefulWidget {
-  const DataValidatorPage({Key? key}) : super(key: key);
+class DesktopDataValidatorPage extends StatefulWidget {
+  const DesktopDataValidatorPage({Key? key}) : super(key: key);
 
   @override
-  State<DataValidatorPage> createState() {
-    return _DataValidatorPageState();
+  State<DesktopDataValidatorPage> createState() {
+    return _DesktopDataValidatorPageState();
   }
 }
 
-class _DataValidatorPageState extends State<DataValidatorPage> {
+class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String selectedMode = 'File Mode';
   String source = '';
   String target = '';
@@ -32,71 +31,13 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
   @override
   Widget build(BuildContext context) {
     double width100 = MediaQuery.of(context).size.width * 0.35;
-    return Scaffold(
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4, top: 1),
-              child: Image.asset(
-                'assets/images/Vector.png',
-                width: 46,
-                height: 46,
-              ),
-            ),
-            Text(
-              'Data Validator',
-              style: TextStyle(
-                color: Color(0xFF3A4F39),
-                fontSize: 32,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0, bottom: 4, top: 10),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.15,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Implement 'About' functionality
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(
-                      color: Color(0xFF3A4F39),
-                      width: 1,
-                    ),
-                  ),
-                ),
-                child: Text(
-                  'ABOUT',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF3A4F39),
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
+    return Row(
+      children: [
+        // Left side (Input)
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -208,11 +149,13 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                         selectedMode = newValue!;
                       });
                     },
+                    // ... (Your existing code for dropdown)
                   ),
                 ),
                 SizedBox(height: 16.0),
                 Row(
                   children: [
+                    // ... (Your existing code for source)
                     Column(
                       children: [
                         Container(
@@ -335,6 +278,7 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                 SizedBox(height: 16.0),
                 Row(
                   children: [
+                    // ... (Your existing code for target)
                     Column(
                       children: [
                         Container(
@@ -470,7 +414,6 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                     ),
                     onPressed: () async {
                       // Implement 'Validate' functionality
-
                       // Assuming your Python server is running on http://localhost:4564
                       final url = Uri.parse('http://localhost:4564/validate');
 
@@ -505,7 +448,13 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                 ),
               ],
             ),
-            Column(
+          ),
+        ),
+        // Right side (Results)
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
               children: [
                 Container(
                   alignment: AlignmentDirectional.topStart,
@@ -578,16 +527,16 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
                       ),
                     ),
                     onPressed: () {
-                      // Implement 'Validate' functionality
+                      // Implement 'Download' functionality
                     },
                     child: Text('Download'),
                   ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
