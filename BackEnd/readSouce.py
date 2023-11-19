@@ -1,4 +1,20 @@
 import csv
+import pandas as pd
+from io import StringIO
+from io import StringIO
+
+
+# Use StringIO to simulate a file-like object from the string
+def read_csv_string(csv_string):
+    
+
+
+    data_df = pd.read_csv(StringIO(csv_string))
+    
+    
+
+# Print the result
+    return data_df
 
 def read_csv_file(csv_file_path):
     # Create an empty list to store dictionaries

@@ -2,6 +2,27 @@
 # from readSouce import read_csv_file,find_majority_element
 import csv
 from collections import Counter
+import csv
+from io import StringIO
+
+def read_csv_String_to_dic(csv_string):
+    # Create an empty list to store dictionaries
+    data_list = []
+
+    # Create a StringIO object to treat the string as a file
+    csv_file = StringIO(csv_string)
+
+    # Read the CSV file
+    csv_reader = csv.DictReader(csv_file)
+
+    # Iterate over rows in the CSV file
+    for row in csv_reader:
+        data_list.append(row)
+
+    return data_list
+
+# Example usage:
+
 
 
 
@@ -52,11 +73,15 @@ def find_majority_element(nums):
         return None
 
 def replace_substrings_with_keys(input_str, substitution_dict):
+    if input_str == None:
+        return None
     for key, value in substitution_dict.items():
-        input_str = input_str.replace(value, f'{{{key}}}')
+        if value != None:
+            input_str = input_str.replace(value, f'{{{key}}}')
     return input_str
     
 def mappColumn(Sourcedata, TargetData):
+    outputString="Maping Doc\n-------------------\n"
     output_file_path="mappingLog.txt"
     with open(output_file_path, 'w') as output_file:
         for key in TargetData[0].keys():
@@ -64,7 +89,11 @@ def mappColumn(Sourcedata, TargetData):
             mappingResult = None
 
             for i in range(len(Sourcedata)):
+                if TargetData[i][key] == "":
+                    continue
                 output_string = replace_substrings_with_keys(TargetData[i][key], Sourcedata[i])
+                if output_string == None:
+                    continue
                 outlist.append(output_string)
                 mappingResult = find_repeated_element(outlist, 5)
                 if(mappingResult != None):
@@ -81,12 +110,17 @@ def mappColumn(Sourcedata, TargetData):
                 output_file.write(output_line)
 
             print("-------------------------------------------------------------")
-            
+        
+            outputString += f"{key}: {mappingResult}\n"
             print("Data in target: ", TargetData[i][key])
             print(key, ": ", mappingResult)
+    return outputString
 
-Sourcedata=read_csv_file('studentsData.csv')
-TargetData=read_csv_file('targetStudent.csv')
-mappColumn(Sourcedata,TargetData)
+# Sourcedata=read_csv_file('studentsData.csv')
+# TargetData=read_csv_file('targetStudent.csv')
+def mapColumnstring(SourcedataString, TargetDataString):
+    Sourcedata=read_csv_String_to_dic(SourcedataString);
+    Targetdata=read_csv_String_to_dic(TargetDataString);
+    return mappColumn(Sourcedata,Targetdata)
     
         

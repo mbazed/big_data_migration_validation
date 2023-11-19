@@ -43,7 +43,7 @@ def find_minimal_primary_key(data):
                 return 1,min_key, key
                 
            
-            print(" " * 200, end='\r')
+            print(" " *len(f"Current Combination: {column_combination}"), end='\r')
             print(f"Current Combination: {column_combination}", end='\r')
             
             is_unique = data.groupby(list(column_combination)).size().max() == 1

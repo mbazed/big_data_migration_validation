@@ -5,3 +5,5 @@ sampledata1 = pd.DataFrame({
     'Age': [25, 30, 22],
     'Location': ['New York', 'San Francisco', 'Los Angeles']
 })
+
+

@@ -1,8 +1,14 @@
+import 'package:data_validation/FileReadRoutine.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart'
+    show kIsWeb; // Import kIsWeb from flutter/foundation
+
 import 'package:http/http.dart' as http;
+
 class DesktopDataValidatorPage extends StatefulWidget {
   const DesktopDataValidatorPage({Key? key}) : super(key: key);
 
@@ -17,6 +23,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String source = '';
   String target = '';
   String message = '';
+  String sourceData = '';
+  String targetData = '';
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _targetController = TextEditingController();
   final TextEditingController _resultController = TextEditingController();
@@ -229,26 +237,23 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       padding: const EdgeInsets.only(left: 10, top: 40),
                       child: InkWell(
                         onTap: () async {
-                          // Open file picker
                           FilePickerResult? result =
                               await FilePicker.platform.pickFiles(
                             allowMultiple: false,
                             type: FileType.custom,
                             allowedExtensions: ['csv', 'xlsx'],
                           );
+
                           // Check if a file was selected
                           if (result != null) {
                             setState(() {
-                              // Update the 'source' variable with the selected file path
+                              sourceData = readFile(result);
+
                               source = result.files.single.name;
                               _sourceController.text = source;
-                              if (_resultController.text != '') {
-                                _resultController.text =
-                                    '${_resultController.text}Source selected: $source\n';
-                              } else {
-                                _resultController.text =
-                                    '\n${_resultController.text}Source selected: $source\n';
-                              }
+
+                              _resultController.text =
+                                  '\nSource selected: $source\n';
                             });
                           } else {
                             setState(() {
@@ -363,6 +368,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                           if (result != null) {
                             setState(() {
                               // Update the 'source' variable with the selected file path
+
+                              targetData = readFile(result);
                               target = result.files.single.name;
                               _targetController.text = target;
                               if (_resultController.text != '') {
@@ -415,12 +422,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     onPressed: () async {
                       // Implement 'Validate' functionality
                       // Assuming your Python server is running on http://localhost:4564
-                      final url = Uri.parse('http://localhost:4564/validate');
+                      final url = Uri.parse('http://localhost:4564/findKeys');
 
                       try {
                         final response = await http.post(
                           url,
-                          body: {'source': source},
+                          body: {'source': sourceData, 'target': targetData},
                         );
 
                         if (response.statusCode == 200) {
@@ -431,9 +438,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
                           // Access the 'primarykey' value
                           setState(() {
-                            message = data['primarykey'].toString();
+                            var srcpk = data['sourcePrimaryKey'].toString();
+                            var trgpk = data['targetPrimaryKey'].toString();
                             _resultController.text =
-                                '${_resultController.text}${message}\n';
+                                '${_resultController.text}Primary Key of source: ${srcpk}\nPrimary Key of Target: ${trgpk}\n';
                           });
                         } else {
                           print('Validation failed: ${response.statusCode}');
@@ -526,8 +534,37 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onPressed: () {
-                      // Implement 'Download' functionality
+                    onPressed: () async {
+                      // Implement 'Validate' functionality
+                      // Assuming your Python server is running on http://localhost:4564
+                      final url = Uri.parse('http://localhost:4564/mapData');
+
+                      try {
+                        final response = await http.post(
+                          url,
+                          body: {'source': sourceData, 'target': targetData},
+                        );
+
+                        if (response.statusCode == 200) {
+                          print('Mapping successful! ');
+
+                          final Map<String, dynamic> data =
+                              jsonDecode(response.body);
+
+                          // Access the 'primarykey' value
+                          setState(() {
+                            var mapingDoc = data['MapingDoc'].toString();
+                            var mapingStatus = data['message'].toString();
+
+                            _resultController.text =
+                                'Maping status ${mapingStatus}\nResult:\n${mapingDoc}\n';
+                          });
+                        } else {
+                          print('maping failed: ${response.statusCode}');
+                        }
+                      } catch (e) {
+                        print('Error during maping: $e');
+                      }
                     },
                     child: Text('Download'),
                   ),

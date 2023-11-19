@@ -1,0 +1,108 @@
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+-------------------------------------------------------------
+Region: {Region}
+-------------------------------------------------------------
+Original String: Azerbaijan   Output String: {{Order Priority}ountry}
+Original String: Panama   Output String: {Country}
+Original String: Sao Tome and Principe   Output String: {Country}
+Original String: Sao Tome and Principe   Output String: {Country}
+Original String: Belize   Output String: {Country}
+Original String: Denmark   Output String: {{Order Priority}ountry}
+Original String: Germany   Output String: {Country}
+-------------------------------------------------------------
+Country: {Country}
+-------------------------------------------------------------
+Original String: Online   Output String: {Sales {Order Priority}hannel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales {Order Priority}hannel}
+Original String: Offline   Output String: {Sales Channel}
+-------------------------------------------------------------
+Sales Channel: {Sales Channel}
+-------------------------------------------------------------
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+-------------------------------------------------------------
+Order Priority: {Order Priority}
+-------------------------------------------------------------
+Original String: 10/23/2014   Output String: {Ship Date}
+Original String: 2/27/2015   Output String: {Ship Date}
+Original String: 1/18/2016   Output String: {Ship Date}
+Original String: 10/12/2014   Output String: {Ship Date}
+Original String: 3/5/2010   Output String: {Ship Date}
+-------------------------------------------------------------
+Ship Date: {Ship Date}
+-------------------------------------------------------------
+Original String: 934   Output String: {Units Sold}
+Original String: 4551   Output String: {Units Sold}
+Original String: 9986   Output String: {Units Sold}
+Original String: 9118   Output String: {Units Sold}
+Original String: 5858   Output String: {Units Sold}
+-------------------------------------------------------------
+Units Sold: {Units Sold}
+-------------------------------------------------------------
+Original String: 152.58   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+-------------------------------------------------------------
+Unit Price: {Unit Price}
+-------------------------------------------------------------
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+-------------------------------------------------------------
+Unit Cost: {Unit Cost}
+-------------------------------------------------------------
+Original String: 142509.72   Output String: {Total Revenue}
+Original String: 857960.14   Output String: {Total Revenue}
+Original String: 70251.36   Output String: {Total Revenue}
+Original String: 2300073.72   Output String: {Total Revenue}
+Original String: 3260637.6   Output String: {Total Revenue}
+-------------------------------------------------------------
+Total Revenue: {Total Revenue}
+-------------------------------------------------------------
+Original String: 91008.96   Output String: {Total Cost}
+Original String: 1198414.83   Output String: {Total Cost}
+Original String: 69103.12   Output String: {Total Cost}
+Original String: 516717.06   Output String: {Total Cost}
+Original String: 2943879.32   Output String: {Total Cost}
+-------------------------------------------------------------
+Total Cost: {Total Cost}
+-------------------------------------------------------------
+Original String: 51500.76   Output String: {Total Profit}
+Original String: 791282.37   Output String: {Total Profit}
+Original String: 24066.26   Output String: {Total Profit}
+Original String: 228497.08   Output String: {Total Profit}
+Original String: 970846.34   Output String: {Total Profit}
+-------------------------------------------------------------
+Total Profit: {Total Profit}
+-------------------------------------------------------------
+Original String: Snacks   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+-------------------------------------------------------------
+Type of item: {Item Type}
+-------------------------------------------------------------
+Original String: 10/8/2014   Output String: {Order Date}
+Original String: 2/22/2015   Output String: {Order Date}
+Original String: 12/9/2015   Output String: {Order Date}
+Original String: 9/17/2014   Output String: {Order Date}
+Original String: 2/4/2010   Output String: {Order Date}
+-------------------------------------------------------------
+Date of order: {Order Date}
+-------------------------------------------------------------
