@@ -33,6 +33,7 @@ def find_minimal_primary_key(data):
     key = []
     is_unique = False
     foundKey=0
+    prevLen=10
     
     print("All Columns: ", columns)
     for subset_size in range(1, len(columns)//2 + 1):
@@ -43,8 +44,9 @@ def find_minimal_primary_key(data):
                 return 1,min_key, key
                 
            
-            print(" " *len(f"Current Combination: {column_combination}"), end='\r')
+            print(" " *prevLen, end='\r')
             print(f"Current Combination: {column_combination}", end='\r')
+            prevLen=len(f"Current Combination: {column_combination}")
             
             is_unique = data.groupby(list(column_combination)).size().max() == 1
             if is_unique and len(column_combination) < min_key_size:

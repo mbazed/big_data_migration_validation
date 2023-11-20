@@ -15,8 +15,8 @@ def findKeys():
     targetdata = read_csv_string(targetFileString)
     sourcePrimaryKey=getPrimaryKey(sourcedata)
     targetPrimaryKey=getPrimaryKey(targetdata)
-    print(f'Primary Key: {sourcePrimaryKey}')
-    mapColumnstring(sourceFileString, targetFileString)
+    # print(f'Primary Key: {sourcePrimaryKey}')
+    # mapColumnstring(sourceFileString, targetFileString)
     return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': 'Primary key identification Success!'})
 @app.route('/mapData', methods=['POST'])
 def mapData():
