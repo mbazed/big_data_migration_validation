@@ -451,7 +451,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       }
                     },
                     child: Align(
-                        alignment: Alignment.center, child: Text('Validate')),
+                        alignment: Alignment.center, child: Text('Upload')),
                   ),
                 ),
               ],
@@ -566,7 +566,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         print('Error during maping: $e');
                       }
                     },
-                    child: Text('Download'),
+                    child: Text('Map'),
                   ),
                 ),
               ],
