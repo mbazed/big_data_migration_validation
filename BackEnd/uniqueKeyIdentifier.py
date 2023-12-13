@@ -17,13 +17,9 @@ def read_data(file_path):
     else:
         print("Unsupported file format. Please provide an Excel (XLSX) or CSV file.")
         return None
-        
 
-  
     data.columns = [str(col) for col in data.columns]
     return data
-
-
 
 
 def find_minimal_primary_key(data):
@@ -86,11 +82,12 @@ def getPrimaryKey(data):
     if foundKey:
         print("\nMinimal Primary Key:", ', '.join(minimal_primary_key))
         print("======================\nAll Primary Keys:", all_Pk)
-        return str(', '.join(minimal_primary_key))
+        #return str(', '.join(minimal_primary_key))
+        return data, minimal_primary_key
 
     else:
         print("No minimal primary key found")
-    
+        return None, None
     
 
 
