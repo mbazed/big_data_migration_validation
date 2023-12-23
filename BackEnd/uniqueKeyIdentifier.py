@@ -76,20 +76,17 @@ def getPrimaryKey(data):
     if data is None:
         print("No data found")
     
-
     foundKey, minimal_primary_key, all_Pk = find_minimal_primary_key(data)
 
     if foundKey:
         print("\nMinimal Primary Key:", ', '.join(minimal_primary_key))
         print("======================\nAll Primary Keys:", all_Pk)
-        #return str(', '.join(minimal_primary_key))
-        return data, minimal_primary_key
-
+        # return str(', '.join(minimal_primary_key))
+        return minimal_primary_key
+        
     else:
         print("No minimal primary key found")
         return None, None
-    
-
 
 
 
