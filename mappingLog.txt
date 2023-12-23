@@ -1,33 +1,83 @@
-Original String: TVE-S4_CS2-1   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-2   Output String: TVE-S4_CS{Roll No.}-{Roll No.}
-Original String: TVE-S4_CS2-3   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-4   Output String: TVE-S{Roll No.}_CS2-{Roll No.}
-Original String: TVE-S4_CS2-5   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-6   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-7   Output String: TVE-{Class}-{Roll No.}
+Original String: 1   Output String: {Index}
+Original String: 2   Output String: {Index}
+Original String: 3   Output String: {Index}
+Original String: 4   Output String: {Index}
+Original String: 5   Output String: {Index}
 -------------------------------------------------------------
-College id: TVE-{Class}-{Roll No.}
+Index: {Index}
 -------------------------------------------------------------
-Original String: ABHAY O   Output String: {Name}
-Original String: ABHINAND J NAMBIAR   Output String: {Name}
-Original String: ABHIRAM S MENON   Output String: {Name}
-Original String: ADARSH MENON   Output String: {Name}
-Original String: AISWARYA M S   Output String: {Name}
+Original String: 8717bbf45cCDbEe   Output String: 87{Index}7bbf45cCDbEe
+Original String: 3d5AD30A4cD38ed   Output String: {User_id}
+Original String: 810Ce0F276Badec   Output String: {User_id}
+Original String: BF2a889C00f0cE1   Output String: {User_id}
+Original String: 9afFEafAe1CBBB9   Output String: {User_id}
+Original String: aF75e6dDEBC5b66   Output String: aF75e{Index}dDEBC5b{Index}{Index}
+Original String: efeb05c7Cc94EA3   Output String: efeb05c{Index}Cc94EA3
+Original String: fb1BF3FED57E9d7   Output String: {User_id}
 -------------------------------------------------------------
-Student Name: {Name}
+User_id: {User_id}
 -------------------------------------------------------------
-Original String: +91 8547960839   Output String: +9{Roll No.} {Phone Number}
-Original String: +91 8921347402   Output String: +91 89{Roll No.}134740{Roll No.}
-Original String: +91 9778138706   Output String: +91 97781{Roll No.}8706
-Original String: +91 9061676796   Output String: +91 {Phone Number}
-Original String: +91 8590199574   Output String: +91 8{Roll No.}90199{Roll No.}74
-Original String: +91 7736957108   Output String: +91 773{Roll No.}957108
-Original String: +91 9544049564   Output String: +91 {Phone Number}
-Original String: +91 7025734481   Output String: +91 70257344{Roll No.}1
-Original String: +91 9895537625   Output String: +{Roll No.}1 {Roll No.}8{Roll No.}5537625
-Original String: +91 8281479453   Output String: +91 {Phone Number}
-Original String: +91 9496960369   Output String: +91 {Phone Number}
-Original String: +91 7592816941   Output String: +91 {Phone Number}
+Original String: Shelia   Output String: {Fname}
+Original String: Jo   Output String: {Fname}
+Original String: Sheryl   Output String: {Fname}
+Original String: Whitney   Output String: {Fname}
+Original String: Lindsey   Output String: {Fname}
 -------------------------------------------------------------
-Contact no: +91 {Phone Number}
+Fname: {Fname}
+-------------------------------------------------------------
+Original String: Mahoney   Output String: {Lname}
+Original String: Rivers   Output String: {Lname}
+Original String: Lowery   Output String: {Lname}
+Original String: Hooper   Output String: {Lname}
+Original String: Rice   Output String: {Lname}
+-------------------------------------------------------------
+Lname: {Lname}
+-------------------------------------------------------------
+Original String: Male   Output String: {Sex}
+Original String: Female   Output String: {Sex}
+Original String: Female   Output String: {Sex}
+Original String: Male   Output String: {Sex}
+Original String: Female   Output String: {Sex}
+-------------------------------------------------------------
+Sex: {Sex}
+-------------------------------------------------------------
+Original String: pwarner@example.org   Output String: {Email}
+Original String: fergusonkatherine@example.net   Output String: {Email}
+Original String: fhoward@example.org   Output String: {Email}
+Original String: zjohnston@example.com   Output String: {Email}
+Original String: elin@example.net   Output String: {Email}
+-------------------------------------------------------------
+Email: {Email}
+-------------------------------------------------------------
+Original String: 857.139.8239   Output String: 857.{Index}39.8239
+Original String: -10395   Output String: {Phone Number}
+Original String: (599)782-0605   Output String: {Phone Number}
+Original String: -7326   Output String: {Phone Number}
+Original String: (390)417-1635x3010   Output String: (390)417-163{Index}x3010
+Original String: 8537800927   Output String: {Phone Number}
+Original String: 093.655.7480x7895   Output String: 093.655.{Index}480x{Index}895
+Original String: 4709522945   Output String: {Phone Number}
+-------------------------------------------------------------
+Phone_Number: {Phone Number}
+-------------------------------------------------------------
+Original String: 1/27/2014   Output String: {Index}/27/20{Index}4
+Original String: 7/26/1931   Output String: 7/{Index}6/1931
+Original String: 11/25/2013   Output String: 11/25/201{Index}
+Original String: 11/17/2012   Output String: {Date Of Birth}
+Original String: 4/15/1923   Output String: 4/1{Index}/1923
+Original String: 8/6/1917   Output String: 8/{Index}/1917
+Original String: 12/22/1984   Output String: {Date Of Birth}
+Original String: 12/2/2016   Output String: {Date Of Birth}
+Original String: 12/16/2012   Output String: {Date Of Birth}
+Original String: 6/29/1953   Output String: {Date Of Birth}
+-------------------------------------------------------------
+Date_Of_Birth: {Date Of Birth}
+-------------------------------------------------------------
+Original String: Probation officer   Output String: {Job Title}
+Original String: Dancer   Output String: {Job Title}
+Original String: Copy   Output String: {Job Title}
+Original String: Counselling psychologist   Output String: {Job Title}
+Original String: Biomedical engineer   Output String: {Job Title}
+-------------------------------------------------------------
+Job_Title: {Job Title}
 -------------------------------------------------------------
