@@ -23,6 +23,38 @@ def read_data(file_path):
     data.columns = [str(col) for col in data.columns]
     return data
 
+def find_primary_key(data):
+    columns = data.columns
+    min_key = None
+    min_key_size = float('inf')
+    key = []
+    is_unique = False
+    foundKey=0
+    
+    # print("All Columns: ", columns)
+    for subset_size in range(1, len(columns)//2 + 1):
+        
+        for column_combination in combinations(columns, subset_size):
+            if len(column_combination) >2 and foundKey==1:
+                return  min_key
+            if len(column_combination) > min_key_size:
+                return min_key
+                
+           
+            # print(" " *150, end='\r')
+            # print(f"Current Combination: {column_combination}", end='\r')
+            
+            is_unique = data.groupby(list(column_combination)).size().max() == 1
+            if is_unique and len(column_combination) < min_key_size:
+                key = []
+                min_key = column_combination
+                min_key_size = len(column_combination)
+                foundKey=1
+            if is_unique and len(column_combination) == min_key_size:
+                key.append(column_combination)
+                foundKey=1
+                
+    return min_key
 
 def find_candidtae_keys(data):
     columns = data.columns
