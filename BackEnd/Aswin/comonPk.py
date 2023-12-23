@@ -22,14 +22,16 @@ list2 =  [('Roll No.',), ('Name',), ('Phone Number',)]
 data1 = get_file()
 data2 = get_file()
 
-print("Data 1:", data1)
-print("Data 2:", data2)
+# print("Data 1:", data1)
+# print("Data 2:", data2)
 
 ck_set_1 = find_candidtae_keys(data1)
 ck_set_2 = find_candidtae_keys(data2)
 
-print("Candidate Keys 1:", ck_set_1)
-print("Candidate Keys 2:", ck_set_2)
+# print("Candidate Keys 1:", ck_set_1)
+# print("Candidate Keys 2:", ck_set_2)
 
 result = common_lists(ck_set_1, ck_set_2)
 print("Common Lists Result:", result)
+
+

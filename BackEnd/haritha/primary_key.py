@@ -143,12 +143,12 @@ def get_file():
             print("No data found")
         return data
     
-data=get_file()
-foundKey, minimal_primary_key, all_Pk = find_minimal_primary_key(data)
+# data=get_file()
+# foundKey, minimal_primary_key, all_Pk = find_minimal_primary_key(data)
 
-if foundKey:
-    print("\nMinimal Primary Key:", ', '.join(minimal_primary_key))
-    print("======================\nAll Primary Keys:", all_Pk)
-else:
-    print("No minimal primary key found")
+# if foundKey:
+#     print("\nMinimal Primary Key:", ', '.join(minimal_primary_key))
+#     print("======================\nAll Primary Keys:", all_Pk)
+# else:
+#     print("No minimal primary key found")
 
