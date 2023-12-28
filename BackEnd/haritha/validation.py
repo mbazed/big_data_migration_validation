@@ -1,51 +1,61 @@
 import pandas as pd
-from pandas.errors import ParserError
-from io import StringIO
 from primary_key import find_primary_key
+
+def apply_transformations(row):
+    college_id = f"TVE-{row['Class']}-{row['Roll No.']}"
+    student_name = row['Name']
+    contact_no = f"+91 {row['Phone Number']}"
+    # ... more transformations ...
+
+    return pd.Series({
+        "College id": college_id,
+        "Student Name": student_name,
+        "Contact no": contact_no,
+        # ... more transformations ...
+    })
 
 # Assuming you've already read the CSV files into source_df and target_df
 source_df = pd.read_csv('studentsData.csv')
 target_df = pd.read_csv('targetStudent.csv')
+print(source_df)
 
-def apply_transformations(row):
-    return {
-        "College id": f"TVE-{row['Class']}-{row['Roll No.']}",
-        "Student Name": row['Name'],
-        "Contact no": f"+91 {row['Phone Number']}",
-        # ... more transformations ...
-    }
+# Apply transformations to source_df
+transformed_source_df = source_df.apply(apply_transformations, axis=1)
+print(transformed_source_df)
 
-# Find primary keys for both source and target dataframes
-primary_keys_s = find_primary_key(source_df)
+# Find primary key columns
+primary_keys_s = find_primary_key(transformed_source_df)
 primary_keys_t = find_primary_key(target_df)
 
-# Transform and store data for the target dataframe
-data_by_primary_key_t = {}
-for primary_key_t in primary_keys_t:
-    selected_row_t = target_df.loc[target_df[primary_key_t].notnull()]
-    if not selected_row_t.empty:
-        data_by_primary_key_t[primary_key_t] = selected_row_t.to_dict(orient='records')
+# Ensure primary_keys_s and primary_keys_t are strings, not tuples
+primary_keys_s = primary_keys_s[0] if isinstance(primary_keys_s, tuple) else primary_keys_s
+primary_keys_t = primary_keys_t[0] if isinstance(primary_keys_t, tuple) else primary_keys_t
 
-# Transform and store data for the source dataframe
-data_by_primary_key_s = {}
-for primary_key_s in primary_keys_s:
-    selected_row_s = source_df.loc[source_df[primary_key_s].notnull()]
-    if not selected_row_s.empty:
-        # Apply transformations to the entire DataFrame and convert to a list of dictionaries
-        transformed_data_s = selected_row_s.apply(apply_transformations, axis=1)
-        data_by_primary_key_s[primary_key_s] = transformed_data_s.tolist()
+# Assuming primary_keys_s contains the primary key column name
+primary_key_column_s = primary_keys_s[0] if isinstance(primary_keys_s, tuple) else primary_keys_s
+primary_key_values_s = transformed_source_df[primary_key_column_s].tolist()
+primary_key_values_t = target_df[primary_keys_t].tolist()
 
+# Loop through each primary key value
+for primary_key_value in primary_key_values_s:
+    if primary_key_value in primary_key_values_t:
+        # Fetch corresponding row using primary_key_value from transformed_source_df
+        row_s_transformed = transformed_source_df[transformed_source_df[primary_key_column_s] == primary_key_value]
 
-# Compare transformed data
-for primary_key in primary_keys_s:
-    if primary_key in primary_keys_t:
-        data_s = data_by_primary_key_s[primary_key]
-        data_t = data_by_primary_key_t[primary_key]
+        # Fetch corresponding row using primary_key_value from target_df
+        row_t = target_df[target_df[primary_keys_t] == primary_key_value]
 
-        if data_s != data_t:
-            for i, (row_s, row_t) in enumerate(zip(data_s, data_t)):
-                for field, value_s, value_t in zip(row_s.keys(), row_s.values(), row_t.values()):
-                    if value_s != value_t:
-                        print(f"Row {i + 1}, Field: {field}, Source Value: {value_s}, Target Value: {value_t}")
-    else:
-        print(f"Error: Primary Key {primary_key} not found in target.")
+        # Compare values for each column////
+        for column in source_df.columns:
+            value_s = row_s_transformed[column].iloc[0]
+            value_t = row_t[column].iloc[0]
+
+            # Check if value_t is null
+            if pd.isna(value_t):
+                print(f"Value for {column} is missing for {primary_keys_s} = {primary_key_value}")
+            else:
+                # Compare values and print if they are not equal
+                if value_s != value_t:
+                    print(f"Column {column} values for {primary_keys_s} = {primary_key_value} differ:")
+                    print(f"Source: {value_s}")
+                    print(f"Target: {value_t}")
