@@ -122,24 +122,7 @@ def find_minimal_primary_key(data):
                 
     return foundKey,min_key, key
 
-def get_file_by_name(file_path):
-        # try:
-        #     root = tk.Tk()
-        #     root.withdraw()
-        #     file_path = filedialog.askopenfilename(title="Select a file")
-        # except Exception:
-        #     file_path = input("Enter the path of the file: ")
 
-        # if not file_path:
-        #     print("No file selected")
-    
-
-        print(f"Selected file: {file_path}")
-        data = read_data(file_path)
-        
-        if data is None:
-            print("No data found")
-        return data
 
 def get_file():
         try:
@@ -169,9 +152,3 @@ def get_file():
 # else:
 #     print("No minimal primary key found")
 
-        
-    
-
-
-    
-    

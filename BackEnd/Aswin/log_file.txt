@@ -1,0 +1,370 @@
+2023-12-27 00:26:52,968 - INFO - Getting two keys
+2023-12-27 00:26:52,968 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:26:52,977 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:26:52,977 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:26:52,986 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 00:26:52,986 - INFO - Finding common columns by value
+2023-12-27 00:26:52,987 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
+2023-12-27 00:27:04,792 - INFO - Getting two keys
+2023-12-27 00:27:04,792 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:27:04,795 - INFO - Candidate keys for Data 1: [('Roll No.',)]
+2023-12-27 00:27:04,795 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:27:04,795 - INFO - Candidate keys for Data 2: [('Roll No.',)]
+2023-12-27 00:27:04,795 - INFO - Finding common columns by value
+2023-12-27 00:27:04,795 - INFO - Common columns found by value: [('Roll No.', 'Roll No.')]
+2023-12-27 00:27:04,795 - WARNING - Unexpected result structure. Unable to unpack.
+2023-12-27 00:30:06,386 - INFO - Getting two keys
+2023-12-27 00:30:06,386 - INFO - Getting candidate keys for data1
+2023-12-27 00:30:06,389 - INFO - Candidate keys for data1: [('Roll No.',)]
+2023-12-27 00:30:06,389 - INFO - Getting candidate keys for data2
+2023-12-27 00:30:06,391 - INFO - Candidate keys for data2: [('Roll No.',)]
+2023-12-27 00:30:06,391 - INFO - Finding common columns by value
+2023-12-27 00:30:06,391 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
+2023-12-27 00:30:22,738 - INFO - Getting two keys
+2023-12-27 00:30:22,738 - INFO - Getting candidate keys for data1
+2023-12-27 00:30:22,748 - INFO - Candidate keys for data1: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 00:30:22,748 - INFO - Getting candidate keys for data2
+2023-12-27 00:30:22,755 - INFO - Candidate keys for data2: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:30:22,755 - INFO - Finding common columns by value
+2023-12-27 00:30:22,756 - WARNING - Unexpected number of common columns found.
+2023-12-27 00:30:22,756 - WARNING - No common columns found.
+2023-12-27 00:32:47,559 - INFO - Getting two keys
+2023-12-27 00:32:47,560 - INFO - Getting candidate keys for data1
+2023-12-27 00:32:47,565 - INFO - Candidate keys for data1: [('Roll No.',)]
+2023-12-27 00:32:47,565 - INFO - Getting candidate keys for data2
+2023-12-27 00:32:47,568 - INFO - Candidate keys for data2: [('Roll No.',)]
+2023-12-27 00:32:47,568 - INFO - Finding common columns by value
+2023-12-27 00:32:47,568 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
+2023-12-27 00:32:54,464 - INFO - Getting two keys
+2023-12-27 00:32:54,465 - INFO - Getting candidate keys for data1
+2023-12-27 00:32:54,467 - INFO - Candidate keys for data1: [('Roll No.',)]
+2023-12-27 00:32:54,467 - INFO - Getting candidate keys for data2
+2023-12-27 00:32:54,469 - INFO - Candidate keys for data2: [('Roll No.',)]
+2023-12-27 00:32:54,469 - INFO - Finding common columns by value
+2023-12-27 00:32:54,469 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
+2023-12-27 00:33:11,884 - INFO - Getting two keys
+2023-12-27 00:33:11,884 - INFO - Getting candidate keys for data1
+2023-12-27 00:33:11,894 - INFO - Candidate keys for data1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:33:11,894 - INFO - Getting candidate keys for data2
+2023-12-27 00:33:11,903 - INFO - Candidate keys for data2: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:33:11,903 - INFO - Finding common columns by value
+2023-12-27 00:33:11,904 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone Number')]
+2023-12-27 00:35:12,155 - INFO - Getting two keys
+2023-12-27 00:35:12,155 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:35:12,164 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:35:12,165 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:35:12,172 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 00:35:12,172 - INFO - Finding common columns by value
+2023-12-27 00:35:12,173 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
+2023-12-27 00:36:35,356 - INFO - Getting two keys
+2023-12-27 00:36:35,356 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:36:35,356 - ERROR - An exception occurred: 'NoneType' object has no attribute 'columns'
+Traceback (most recent call last):
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\comonPk.py", line 42, in get_two_keys
+    ck_set_1 = find_candidtae_keys(data_1)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\getCks.py", line 60, in find_candidtae_keys
+    columns = data.columns
+AttributeError: 'NoneType' object has no attribute 'columns'
+2023-12-27 00:36:35,357 - WARNING - No common columns found.
+2023-12-27 00:36:57,777 - INFO - Getting two keys
+2023-12-27 00:36:57,777 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:36:57,781 - INFO - Candidate keys for Data 1: [('Roll No.',)]
+2023-12-27 00:36:57,781 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:36:57,784 - INFO - Candidate keys for Data 2: [('Roll No.',)]
+2023-12-27 00:36:57,784 - INFO - Finding common columns by value
+2023-12-27 00:36:57,784 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
+2023-12-27 00:37:09,719 - INFO - Getting two keys
+2023-12-27 00:37:09,719 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:37:09,735 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:37:09,736 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:37:09,755 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 00:37:09,756 - INFO - Finding common columns by value
+2023-12-27 00:37:09,759 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
+2023-12-27 00:39:04,512 - INFO - Getting two keys
+2023-12-27 00:39:04,513 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:39:04,519 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:39:04,520 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:39:04,527 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number ',)]
+2023-12-27 00:39:04,527 - INFO - Finding common columns by value
+2023-12-27 00:39:04,527 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Phone Number', 'Phone Number ')]
+2023-12-27 00:39:37,746 - INFO - Getting two keys
+2023-12-27 00:39:37,746 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:39:37,749 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:39:37,750 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:39:37,752 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number ',)]
+2023-12-27 00:39:37,752 - INFO - Finding common columns by value
+2023-12-27 00:39:37,752 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Phone Number', 'Phone Number ')]
+2023-12-27 00:40:28,527 - INFO - Getting two keys
+2023-12-27 00:40:28,527 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:40:28,530 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:40:28,530 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:40:28,533 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number ',)]
+2023-12-27 00:40:28,533 - INFO - Finding common columns by value
+2023-12-27 00:40:28,533 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Phone Number', 'Phone Number ')]
+2023-12-27 00:40:53,229 - INFO - Getting two keys
+2023-12-27 00:40:53,229 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:40:53,232 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:40:53,232 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:40:53,234 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 00:40:53,234 - INFO - Finding common columns by value
+2023-12-27 00:40:53,234 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
+2023-12-27 00:42:56,119 - INFO - Getting two keys
+2023-12-27 00:42:56,119 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:42:56,123 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 00:42:56,123 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:42:56,125 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:42:56,125 - INFO - Finding common columns by value
+2023-12-27 00:42:56,126 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+2023-12-27 00:43:26,636 - INFO - Getting two keys
+2023-12-27 00:43:26,637 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:43:26,640 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:43:26,640 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:43:26,642 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 00:43:26,643 - INFO - Finding common columns by value
+2023-12-27 00:43:26,643 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
+2023-12-27 00:43:55,479 - INFO - Getting two keys
+2023-12-27 00:43:55,480 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:43:55,483 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:43:55,483 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:43:55,485 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 00:43:55,485 - INFO - Finding common columns by value
+2023-12-27 00:43:55,485 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
+2023-12-27 00:44:08,589 - INFO - Getting two keys
+2023-12-27 00:44:08,590 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:44:08,593 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 00:44:08,593 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:44:08,595 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:44:08,595 - INFO - Finding common columns by value
+2023-12-27 00:44:08,595 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+2023-12-27 00:44:08,595 - ERROR - An exception occurred during result processing: not enough values to unpack (expected 2, got 1)
+Traceback (most recent call last):
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\comonPk.py", line 83, in <module>
+    pk_1, pk_2 = result
+ValueError: not enough values to unpack (expected 2, got 1)
+2023-12-27 00:44:32,839 - INFO - Getting two keys
+2023-12-27 00:44:32,839 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:44:32,842 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:44:32,843 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:44:32,845 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 00:44:32,845 - INFO - Finding common columns by value
+2023-12-27 00:44:32,845 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
+2023-12-27 00:44:46,875 - INFO - Getting two keys
+2023-12-27 00:44:46,875 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:44:46,884 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:44:46,884 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:44:46,893 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 00:44:46,893 - INFO - Finding common columns by value
+2023-12-27 00:44:46,894 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
+2023-12-27 00:46:12,292 - INFO - Getting two keys
+2023-12-27 00:46:12,293 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:46:12,295 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 00:46:12,295 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:46:12,297 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:46:12,297 - INFO - Finding common columns by value
+2023-12-27 00:46:12,297 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+
+2023-12-27 00:46:59,326 - INFO - Getting two keys
+2023-12-27 00:46:59,326 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:46:59,332 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 00:46:59,332 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:46:59,342 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 00:46:59,342 - INFO - Finding common columns by value
+2023-12-27 00:46:59,343 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
+2023-12-27 00:47:36,939 - INFO - Getting two keys
+2023-12-27 00:47:36,940 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:47:36,955 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 00:47:36,955 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:47:36,969 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 00:47:36,969 - INFO - Finding common columns by value
+2023-12-27 00:47:36,972 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
+2023-12-27 00:53:24,361 - INFO - Getting two keys
+2023-12-27 00:53:24,361 - INFO - Getting candidate keys for Data 1
+2023-12-27 00:53:24,482 - INFO - Candidate keys for Data 1: [('EEID', 'Full Name'), ('EEID', 'Hire Date'), ('EEID', 'Annual Salary'), ('EEID', 'Exit Date'), ('Full Name', 'Job Title'), ('Full Name', 'Age'), ('Full Name', 'Hire Date'), ('Full Name', 'Annual Salary'), ('Full Name', 'City'), ('Full Name', 'Exit Date'), ('Job Title', 'Exit Date'), ('Department', 'Annual Salary'), ('Department', 'Exit Date'), ('Business Unit', 'Exit Date'), ('Ethnicity', 'Exit Date'), ('Age', 'Annual Salary'), ('Age', 'Exit Date'), ('Hire Date', 'Annual Salary'), ('Hire Date', 'Exit Date'), ('Annual Salary', 'Bonus %'), ('Annual Salary', 'City'), ('Annual Salary', 'Exit Date'), ('Bonus %', 'Exit Date'), ('Country', 'Exit Date'), ('City', 'Exit Date')]
+2023-12-27 00:53:24,482 - INFO - Getting candidate keys for Data 2
+2023-12-27 00:53:24,626 - INFO - Candidate keys for Data 2: [('EEID', 'Full Name'), ('EEID', 'Hire Date'), ('EEID', 'Annual Salary'), ('EEID', 'Exit Date'), ('Full Name', 'Job Title'), ('Full Name', 'Age'), ('Full Name', 'Hire Date'), ('Full Name', 'Annual Salary'), ('Full Name', 'City'), ('Full Name', 'Exit Date'), ('Job Title', 'Exit Date'), ('Department', 'Annual Salary'), ('Department', 'Exit Date'), ('Business Unit', 'Exit Date'), ('Ethnicity', 'Exit Date'), ('Age', 'Annual Salary'), ('Age', 'Exit Date'), ('Hire Date', 'Annual Salary'), ('Hire Date', 'Exit Date'), ('Annual Salary', 'Bonus %'), ('Annual Salary', 'City'), ('Annual Salary', 'Exit Date'), ('Bonus %', 'Exit Date'), ('Country', 'Exit Date'), ('City', 'Exit Date')]
+2023-12-27 00:53:24,626 - INFO - Finding common columns by value
+2023-12-27 00:53:24,648 - INFO - Common columns found by value: [('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Job Title', 'Job Title'), ('Department', 'Department'), ('Department', 'Department'), ('Department', 'Department'), ('Department', 'Department'), ('Business Unit', 'Business Unit'), ('Ethnicity', 'Ethnicity'), ('Age', 'Age'), ('Age', 'Age'), ('Age', 'Age'), ('Age', 'Age'), ('Hire Date', 'Hire Date'), ('Hire Date', 'Hire Date'), ('Hire Date', 'Hire Date'), ('Hire Date', 'Hire Date'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Bonus %', 'Bonus %'), ('Country', 'Country'), ('City', 'City')]
+2023-12-27 01:47:40,570 - INFO - Getting two keys
+2023-12-27 01:47:40,570 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:47:40,624 - INFO - Candidate keys for Data 1: [('Row ID',)]
+2023-12-27 01:47:40,624 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:47:40,661 - INFO - Candidate keys for Data 2: [('Row ID',)]
+2023-12-27 01:47:40,661 - INFO - Finding common columns by value
+2023-12-27 01:47:40,661 - INFO - Single common column found by value: [('Row ID', 'Row ID')]
+2023-12-27 01:48:20,028 - INFO - Getting two keys
+2023-12-27 01:48:20,028 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:48:20,032 - INFO - Candidate keys for Data 1: [('College id',), ('Student Name',), ('Contact no',)]
+2023-12-27 01:48:20,032 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:48:20,036 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-27 01:48:20,036 - INFO - Finding common columns by value
+2023-12-27 01:48:20,038 - INFO - Single common column found by value: [('Student Name', 'Name')]
+2023-12-27 01:49:30,500 - INFO - Getting two keys
+2023-12-27 01:49:30,500 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:49:30,503 - INFO - Candidate keys for Data 1: [('College id',), ('Student Name',), ('Contact no',)]
+2023-12-27 01:49:30,503 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:49:30,505 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-27 01:49:30,505 - INFO - Finding common columns by value
+2023-12-27 01:49:30,505 - INFO - Single common column found by value: [('Student Name', 'Name')]
+2023-12-27 01:49:48,594 - INFO - Getting two keys
+2023-12-27 01:49:48,594 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:49:48,596 - INFO - Candidate keys for Data 1: [('College id',), ('Student Name',), ('Contact no',)]
+2023-12-27 01:49:48,597 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:49:48,599 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-27 01:49:48,599 - INFO - Finding common columns by value
+2023-12-27 01:49:48,599 - INFO - Single common column found by value: [('Student Name', 'Name')]
+2023-12-27 01:50:06,562 - INFO - Getting two keys
+2023-12-27 01:50:06,562 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:50:06,567 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-27 01:50:06,567 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:50:06,570 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2023-12-27 01:50:06,570 - INFO - Finding common columns by value
+2023-12-27 01:50:06,571 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2023-12-27 01:50:17,544 - INFO - Getting two keys
+2023-12-27 01:50:17,545 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:50:17,552 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-27 01:50:17,552 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:50:17,556 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2023-12-27 01:50:17,556 - INFO - Finding common columns by value
+2023-12-27 01:50:17,556 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2023-12-27 01:50:37,011 - INFO - Getting two keys
+2023-12-27 01:50:37,011 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:50:37,013 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 01:50:37,013 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:50:37,013 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 01:50:37,013 - INFO - Finding common columns by value
+2023-12-27 01:50:37,013 - INFO - Common columns found by value: (None, None)
+2023-12-27 01:56:35,525 - INFO - Getting two keys
+2023-12-27 01:56:35,525 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:56:35,528 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 01:56:35,528 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:56:35,530 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 01:56:35,530 - INFO - Finding common columns by value
+2023-12-27 01:56:35,530 - INFO - Common columns found by value: (None, None)
+2023-12-27 01:58:05,655 - INFO - Getting two keys
+2023-12-27 01:58:05,655 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:58:05,658 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 01:58:05,658 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:58:05,661 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 01:58:05,661 - INFO - Finding common columns by value
+2023-12-27 01:58:05,667 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+2023-12-27 01:58:28,401 - INFO - Getting two keys
+2023-12-27 01:58:28,401 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:58:28,405 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 01:58:28,405 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:58:28,407 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 01:58:28,407 - INFO - Finding common columns by value
+2023-12-27 01:58:28,407 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+2023-12-27 01:58:37,539 - INFO - Getting two keys
+2023-12-27 01:58:37,540 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:58:37,544 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 01:58:37,544 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:58:37,547 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
+2023-12-27 01:58:37,548 - INFO - Finding common columns by value
+2023-12-27 01:58:37,548 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+2023-12-27 01:58:54,189 - INFO - Getting two keys
+2023-12-27 01:58:54,189 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:58:54,192 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
+2023-12-27 01:58:54,193 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:58:54,195 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
+2023-12-27 01:58:54,195 - INFO - Finding common columns by value
+2023-12-27 01:58:54,195 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
+2023-12-27 01:59:15,430 - INFO - Getting two keys
+2023-12-27 01:59:15,430 - INFO - Getting candidate keys for Data 1
+2023-12-27 01:59:15,432 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 01:59:15,432 - INFO - Getting candidate keys for Data 2
+2023-12-27 01:59:15,434 - INFO - Candidate keys for Data 2: [('Phone Number',)]
+2023-12-27 01:59:15,434 - INFO - Finding common columns by value
+2023-12-27 01:59:15,435 - INFO - Common columns found by value: (None, None)
+2023-12-27 10:07:44,652 - INFO - Getting two keys
+2023-12-27 10:07:44,653 - INFO - Getting candidate keys for Data 1
+2023-12-27 10:07:44,668 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
+2023-12-27 10:07:44,668 - INFO - Getting candidate keys for Data 2
+2023-12-27 10:07:44,670 - INFO - Candidate keys for Data 2: [('Phone Number',)]
+2023-12-27 10:07:44,670 - INFO - Finding common columns by value
+2023-12-27 10:07:44,670 - INFO - Common columns found by value: (None, None)
+2023-12-27 10:07:57,784 - INFO - Getting two keys
+2023-12-27 10:07:57,785 - INFO - Getting candidate keys for Data 1
+2023-12-27 10:07:57,793 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
+2023-12-27 10:07:57,793 - INFO - Getting candidate keys for Data 2
+2023-12-27 10:07:57,802 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
+2023-12-27 10:07:57,802 - INFO - Finding common columns by value
+2023-12-27 10:07:57,805 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
+2023-12-27 16:40:31,313 - INFO - Getting two keys
+2023-12-27 16:40:31,314 - INFO - Getting candidate keys for Data 1
+2023-12-27 16:40:33,706 - INFO - Candidate keys for Data 1: [('Country', 'Total Revenue'), ('Country', 'Total Profit'), ('Ship Date', 'Units Sold'), ('Ship Date', 'Total Revenue'), ('Ship Date', 'Total Cost'), ('Ship Date', 'Total Profit'), ('Units Sold', 'Date of order'), ('Total Revenue', 'Date of order'), ('Total Cost', 'Date of order'), ('Total Profit', 'Date of order')]
+2023-12-27 16:40:33,706 - INFO - Getting candidate keys for Data 2
+2023-12-27 16:40:35,993 - INFO - Candidate keys for Data 2: [('Country', 'Total Revenue'), ('Country', 'Total Profit'), ('Order Date', 'Units Sold'), ('Order Date', 'Total Revenue'), ('Order Date', 'Total Cost'), ('Order Date', 'Total Profit'), ('Ship Date', 'Units Sold'), ('Ship Date', 'Total Revenue'), ('Ship Date', 'Total Cost'), ('Ship Date', 'Total Profit')]
+2023-12-27 16:40:35,994 - INFO - Finding common columns by value
+2023-12-27 16:40:37,643 - INFO - Common columns found by value: [('Country', 'Country'), ('Country', 'Country'), ('Country', 'Country'), ('Country', 'Country'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date')]
+2023-12-27 16:50:14,219 - INFO - Getting two keys
+2023-12-27 16:50:14,219 - INFO - Getting candidate keys for Data 1
+2023-12-27 16:50:14,226 - INFO - Candidate keys for Data 1: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
+2023-12-27 16:50:14,226 - INFO - Getting candidate keys for Data 2
+2023-12-27 16:50:14,230 - INFO - Candidate keys for Data 2: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
+2023-12-27 16:50:14,231 - INFO - Finding common columns by value
+2023-12-27 16:50:14,232 - INFO - Common columns found by value: [('index', 'index'), ('Organization_id', 'Organization_id'), ('Name', 'Name'), ('Website', 'Website'), ('Description', 'Description'), ('No.of_Employees', 'No.of_Employees')]
+2023-12-27 17:25:44,764 - INFO - Getting two keys
+2023-12-27 17:25:44,764 - INFO - Getting candidate keys for Data 1
+2023-12-27 17:25:44,784 - INFO - Candidate keys for Data 1: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
+2023-12-27 17:25:44,784 - INFO - Getting candidate keys for Data 2
+2023-12-27 17:25:44,792 - INFO - Candidate keys for Data 2: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
+2023-12-27 17:25:44,792 - INFO - Finding common columns by value
+2023-12-27 17:25:44,794 - INFO - Common columns found by value: [('index', 'index'), ('Organization_id', 'Organization_id'), ('Name', 'Name'), ('Website', 'Website'), ('Description', 'Description'), ('No.of_Employees', 'No.of_Employees')]
+2023-12-28 22:02:10,281 - INFO - Getting two keys
+2023-12-28 22:02:10,282 - INFO - Getting candidate keys for Data 1
+2023-12-28 22:02:10,284 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:02:10,285 - INFO - Getting candidate keys for Data 2
+2023-12-28 22:02:10,286 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:02:10,286 - INFO - Finding common columns by name
+2023-12-28 22:02:10,293 - ERROR - An exception occurred: isinstance expected 2 arguments, got 1
+Traceback (most recent call last):
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 58, in get_two_keys
+    result_names = find_same_columns_by_name(ck_name_set1, ck_name_set2)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 14, in find_same_columns_by_name
+    set2 = {tuple(lst) if isinstance(lst) else tuple([lst]) for lst in list2}
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 14, in <setcomp>
+    set2 = {tuple(lst) if isinstance(lst) else tuple([lst]) for lst in list2}
+TypeError: isinstance expected 2 arguments, got 1
+2023-12-28 22:02:10,294 - WARNING - No common columns found.
+2023-12-28 22:03:59,877 - INFO - Getting two keys
+2023-12-28 22:03:59,878 - INFO - Getting candidate keys for Data 1
+2023-12-28 22:03:59,882 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:03:59,882 - INFO - Getting candidate keys for Data 2
+2023-12-28 22:03:59,885 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:03:59,886 - INFO - Finding common columns by name
+2023-12-28 22:03:59,886 - ERROR - An exception occurred: find_same_columns_by_value() missing 2 required positional arguments: 'ck_set1' and 'ck_set2'
+Traceback (most recent call last):
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 58, in get_two_keys
+    result_names = find_same_columns_by_value(ck_name_set1, ck_name_set2)
+TypeError: find_same_columns_by_value() missing 2 required positional arguments: 'ck_set1' and 'ck_set2'
+2023-12-28 22:03:59,887 - WARNING - No common columns found.
+2023-12-28 22:04:40,765 - INFO - Getting two keys
+2023-12-28 22:04:40,765 - INFO - Getting candidate keys for Data 1
+2023-12-28 22:04:40,768 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:04:40,768 - INFO - Getting candidate keys for Data 2
+2023-12-28 22:04:40,771 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:04:40,771 - INFO - Finding common columns by name
+2023-12-28 22:04:40,771 - ERROR - An exception occurred: 'numpy.int64' object is not iterable
+Traceback (most recent call last):
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 58, in get_two_keys
+    result_names = find_same_columns_by_value(data1,data2,ck_name_set1, ck_name_set2)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 32, in find_same_columns_by_value
+    common_values = set(tuple(row) for row in df_src[col1].values) & set(tuple(row) for row in df_tgt[col2].values)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 32, in <genexpr>
+    common_values = set(tuple(row) for row in df_src[col1].values) & set(tuple(row) for row in df_tgt[col2].values)
+TypeError: 'numpy.int64' object is not iterable
+2023-12-28 22:04:40,772 - WARNING - No common columns found.
+2023-12-28 22:05:44,561 - INFO - Getting two keys
+2023-12-28 22:05:44,562 - INFO - Getting candidate keys for Data 1
+2023-12-28 22:05:44,564 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:05:44,565 - INFO - Getting candidate keys for Data 2
+2023-12-28 22:05:44,567 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:05:44,567 - INFO - Finding common columns by value
+2023-12-28 22:05:44,567 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Name', 'Name'), ('Phone Number', 'Phone Number')]
+2023-12-28 22:05:52,139 - INFO - Getting two keys
+2023-12-28 22:05:52,139 - INFO - Getting candidate keys for Data 1
+2023-12-28 22:05:52,143 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2023-12-28 22:05:52,144 - INFO - Getting candidate keys for Data 2
+2023-12-28 22:05:52,146 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2023-12-28 22:05:52,146 - INFO - Finding common columns by value
+2023-12-28 22:05:52,146 - INFO - Single common column found by value: [('Name', 'Student Name')]
