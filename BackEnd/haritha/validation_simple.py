@@ -22,7 +22,9 @@ for primary_key_value in primary_key_values_s:
     if primary_key_value in primary_key_values_t:
         # Fetch corresponding row using primary_key_value
         row_s = source_df[source_df[primary_keys_s] == primary_key_value]
+        
         row_t = target_df[target_df[primary_keys_t] == primary_key_value]
+        
 
         # Compare values for each column
         for column in source_df.columns:
@@ -31,6 +33,8 @@ for primary_key_value in primary_key_values_s:
 
             # Compare values and print if they are not equal
             if value_s != value_t:
-                print(f"Column {column} values for {primary_keys_s} = {primary_key_value} differ:")
+                print(f"for {primary_keys_s} : {primary_key_value} Column {column} values  differ:")
                 print(f"Source: {value_s}")
                 print(f"Target: {value_t}")
+    else:
+        print( print(f"for {primary_keys_s} : {primary_key_value} Data is Missing"))                
