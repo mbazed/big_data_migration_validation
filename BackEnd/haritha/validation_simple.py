@@ -22,7 +22,6 @@ for primary_key_value in primary_key_values_s:
     if primary_key_value in primary_key_values_t:
         # Fetch corresponding row using primary_key_value
         row_s = source_df[source_df[primary_keys_s] == primary_key_value]
-        
         row_t = target_df[target_df[primary_keys_t] == primary_key_value]
         
 
