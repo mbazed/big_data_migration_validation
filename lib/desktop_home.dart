@@ -444,10 +444,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 '${_resultController.text}Primary Key of source: ${srcpk}\nPrimary Key of Target: ${trgpk}\n';
                           });
                         } else {
-                          print('Validation failed: ${response.statusCode}');
+                          print(
+                              'Primary Key Fetch failed: ${response.statusCode}');
                         }
                       } catch (e) {
-                        print('Error during validation: $e');
+                        print('Error during Primary Key Fetch: $e');
                       }
                     },
                     child: Align(
@@ -535,9 +536,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       ),
                     ),
                     onPressed: () async {
-                      // Implement 'Validate' functionality
-                      // Assuming your Python server is running on http://localhost:4564
-                      final url = Uri.parse('http://localhost:4564/mapData');
+                      final mapUrl = Uri.parse('http://localhost:4564/mapData');
+                      final validateUrl =
+                          Uri.parse('http://localhost:4564/validateData');
+                      final url = Uri.parse('http://localhost:4564/findKeys');
+                      var srcpk = '';
+                      var trgpk = '';
 
                       try {
                         final response = await http.post(
@@ -546,24 +550,83 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         );
 
                         if (response.statusCode == 200) {
-                          print('Mapping successful! ');
+                          print('Validation successful! ');
 
                           final Map<String, dynamic> data =
                               jsonDecode(response.body);
 
                           // Access the 'primarykey' value
                           setState(() {
+                            srcpk = data['sourcePrimaryKey'].toString();
+                            trgpk = data['targetPrimaryKey'].toString();
+                            _resultController.text =
+                                '${_resultController.text}Primary Key of source: ${srcpk}\nPrimary Key of Target: ${trgpk}\n';
+                          });
+                        } else {
+                          print(
+                              'Primary Key Fetch failed: ${response.statusCode}');
+                        }
+                      } catch (e) {
+                        print('Error during Primary Key Fetch: $e');
+                      }
+
+                      try {
+                        final responseMap = await http.post(
+                          mapUrl,
+                          body: {'source': sourceData, 'target': targetData},
+                        );
+
+                        if (responseMap.statusCode == 200) {
+                          print('Mapping successful! ');
+
+                          final Map<String, dynamic> data =
+                              jsonDecode(responseMap.body);
+
+                          setState(() async {
                             var mapingDoc = data['MapingDoc'].toString();
                             var mapingStatus = data['message'].toString();
 
                             _resultController.text =
                                 'Maping status ${mapingStatus}\nResult:\n${mapingDoc}\n';
+
+                            if (responseMap.statusCode == 200) {
+                              try {
+                                final responseValidation = await http.post(
+                                  validateUrl,
+                                  body: {
+                                    'source': sourceData,
+                                    'target': targetData,
+                                    'sourcePrimaryKey': srcpk,
+                                    'targetPrimaryKey': trgpk,
+                                  },
+                                );
+
+                                if (responseValidation.statusCode == 200) {
+                                  print('Validation successful! ');
+
+                                  final Map<String, dynamic> data =
+                                      jsonDecode(responseValidation.body);
+                                  var validationDoc =
+                                      data['validationDoc'].toString();
+                                  var validationStatus =
+                                      data['message'].toString();
+
+                                  _resultController.text =
+                                      '${_resultController.text} Validation Doc:\n${validationDoc}\n Validation Status: ${validationStatus}\n';
+                                } else {
+                                  print(
+                                      'Validation failed: ${responseValidation.statusCode}');
+                                }
+                              } catch (e) {
+                                print('Error during validation: $e');
+                              }
+                            }
                           });
                         } else {
-                          print('maping failed: ${response.statusCode}');
+                          print('Mapping failed: ${responseMap.statusCode}');
                         }
                       } catch (e) {
-                        print('Error during maping: $e');
+                        print('Error during mapping: $e');
                       }
                     },
                     child: Text('Map'),

@@ -4,7 +4,12 @@ from tokenfinder import *
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from uniqueKeyIdentifier import getPrimaryKey
-import sampleModels
+# import sampleModels
+from validation import *
+targetdata=None
+sourcedata=None
+sourcePrimaryKey=None
+targetPrimaryKey=None
 
 
 app = Flask(__name__)
@@ -26,7 +31,7 @@ def findKeys():
         message = '[-] Primary key identification Failed!'
         
         
-    return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
+    return jsonify({'sourcePrimaryKey': sourcePrimaryKey[0], 'targetPrimaryKey': targetPrimaryKey[0],'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():
     try:
@@ -34,17 +39,38 @@ def mapData():
         targetFileString = request.form.get('target')
         mapingDoc = mapColumnstring(sourceFileString, targetFileString)
         message =  '[+] Data maping Success!'
+        # sourcedata = read_csv_string(sourceFileString)
+        # targetdata = read_csv_string(targetFileString)
+        # validationDoc =validateData()
+        
         
     except:
         mapingDoc=None
-        message =  '[-] Data maping Failed!'
+        message =  '[-] Data maping Failed7!'
+        
+        
         
     
-    return jsonify({'MapingDoc': mapingDoc, 'message': 'Data maping Success!'}) 
+    return jsonify({'MapingDoc': mapingDoc, 'message': message }) 
+
+
 @app.route('/validateData', methods=['POST'])
 def validateData():
     
-    return jsonify({'MapingDoc': "mapingDoc", 'message': 'Data maping Success!'}) 
+    sourceFileString = request.form.get('source')
+    targetFileString = request.form.get('target')
+    sourcePrimaryKey = request.form.get('sourcePrimaryKey')
+    targetPrimaryKey = request.form.get('targetPrimaryKey')   
+    targetdata = read_csv_string(targetFileString)
+    sourcedata = read_csv_string(sourceFileString)
+    # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
+    resultString =compareData(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
+    print(resultString)
+    
+    # resultString = driver(sourcedata,targetdata)
+    # return resultString
+    
+    return jsonify({'validationDoc': resultString, 'message': 'Validation Complete!'}) 
 
 
 
