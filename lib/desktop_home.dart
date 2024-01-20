@@ -539,13 +539,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       final mapUrl = Uri.parse('http://localhost:4564/mapData');
                       final validateUrl =
                           Uri.parse('http://localhost:4564/validateData');
-                      final url = Uri.parse('http://localhost:4564/findKeys');
+                      final uploadUrl =
+                          Uri.parse('http://localhost:4564/findKeys');
                       var srcpk = '';
                       var trgpk = '';
 
                       try {
                         final response = await http.post(
-                          url,
+                          uploadUrl,
                           body: {'source': sourceData, 'target': targetData},
                         );
 
@@ -573,7 +574,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       try {
                         final responseMap = await http.post(
                           mapUrl,
-                          body: {'source': sourceData, 'target': targetData},
+                          body: {
+                            'sourcePk': srcpk,
+                            'targetPk': trgpk,
+                          },
                         );
 
                         if (responseMap.statusCode == 200) {
@@ -612,7 +616,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       data['message'].toString();
 
                                   _resultController.text =
-                                      '${_resultController.text} Validation Doc:\n${validationDoc}\n Validation Status: ${validationStatus}\n';
+                                      '${_resultController.text}Validation Doc:\n${validationDoc}\n Validation Status: ${validationStatus}\n';
                                 } else {
                                   print(
                                       'Validation failed: ${responseValidation.statusCode}');

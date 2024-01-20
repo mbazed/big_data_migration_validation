@@ -1,370 +1,752 @@
-2023-12-27 00:26:52,968 - INFO - Getting two keys
-2023-12-27 00:26:52,968 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:26:52,977 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:26:52,977 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:26:52,986 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 00:26:52,986 - INFO - Finding common columns by value
-2023-12-27 00:26:52,987 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
-2023-12-27 00:27:04,792 - INFO - Getting two keys
-2023-12-27 00:27:04,792 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:27:04,795 - INFO - Candidate keys for Data 1: [('Roll No.',)]
-2023-12-27 00:27:04,795 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:27:04,795 - INFO - Candidate keys for Data 2: [('Roll No.',)]
-2023-12-27 00:27:04,795 - INFO - Finding common columns by value
-2023-12-27 00:27:04,795 - INFO - Common columns found by value: [('Roll No.', 'Roll No.')]
-2023-12-27 00:27:04,795 - WARNING - Unexpected result structure. Unable to unpack.
-2023-12-27 00:30:06,386 - INFO - Getting two keys
-2023-12-27 00:30:06,386 - INFO - Getting candidate keys for data1
-2023-12-27 00:30:06,389 - INFO - Candidate keys for data1: [('Roll No.',)]
-2023-12-27 00:30:06,389 - INFO - Getting candidate keys for data2
-2023-12-27 00:30:06,391 - INFO - Candidate keys for data2: [('Roll No.',)]
-2023-12-27 00:30:06,391 - INFO - Finding common columns by value
-2023-12-27 00:30:06,391 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
-2023-12-27 00:30:22,738 - INFO - Getting two keys
-2023-12-27 00:30:22,738 - INFO - Getting candidate keys for data1
-2023-12-27 00:30:22,748 - INFO - Candidate keys for data1: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 00:30:22,748 - INFO - Getting candidate keys for data2
-2023-12-27 00:30:22,755 - INFO - Candidate keys for data2: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:30:22,755 - INFO - Finding common columns by value
-2023-12-27 00:30:22,756 - WARNING - Unexpected number of common columns found.
-2023-12-27 00:30:22,756 - WARNING - No common columns found.
-2023-12-27 00:32:47,559 - INFO - Getting two keys
-2023-12-27 00:32:47,560 - INFO - Getting candidate keys for data1
-2023-12-27 00:32:47,565 - INFO - Candidate keys for data1: [('Roll No.',)]
-2023-12-27 00:32:47,565 - INFO - Getting candidate keys for data2
-2023-12-27 00:32:47,568 - INFO - Candidate keys for data2: [('Roll No.',)]
-2023-12-27 00:32:47,568 - INFO - Finding common columns by value
-2023-12-27 00:32:47,568 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
-2023-12-27 00:32:54,464 - INFO - Getting two keys
-2023-12-27 00:32:54,465 - INFO - Getting candidate keys for data1
-2023-12-27 00:32:54,467 - INFO - Candidate keys for data1: [('Roll No.',)]
-2023-12-27 00:32:54,467 - INFO - Getting candidate keys for data2
-2023-12-27 00:32:54,469 - INFO - Candidate keys for data2: [('Roll No.',)]
-2023-12-27 00:32:54,469 - INFO - Finding common columns by value
-2023-12-27 00:32:54,469 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
-2023-12-27 00:33:11,884 - INFO - Getting two keys
-2023-12-27 00:33:11,884 - INFO - Getting candidate keys for data1
-2023-12-27 00:33:11,894 - INFO - Candidate keys for data1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:33:11,894 - INFO - Getting candidate keys for data2
-2023-12-27 00:33:11,903 - INFO - Candidate keys for data2: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:33:11,903 - INFO - Finding common columns by value
-2023-12-27 00:33:11,904 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone Number')]
-2023-12-27 00:35:12,155 - INFO - Getting two keys
-2023-12-27 00:35:12,155 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:35:12,164 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:35:12,165 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:35:12,172 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 00:35:12,172 - INFO - Finding common columns by value
-2023-12-27 00:35:12,173 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
-2023-12-27 00:36:35,356 - INFO - Getting two keys
-2023-12-27 00:36:35,356 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:36:35,356 - ERROR - An exception occurred: 'NoneType' object has no attribute 'columns'
-Traceback (most recent call last):
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\comonPk.py", line 42, in get_two_keys
-    ck_set_1 = find_candidtae_keys(data_1)
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\getCks.py", line 60, in find_candidtae_keys
-    columns = data.columns
-AttributeError: 'NoneType' object has no attribute 'columns'
-2023-12-27 00:36:35,357 - WARNING - No common columns found.
-2023-12-27 00:36:57,777 - INFO - Getting two keys
-2023-12-27 00:36:57,777 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:36:57,781 - INFO - Candidate keys for Data 1: [('Roll No.',)]
-2023-12-27 00:36:57,781 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:36:57,784 - INFO - Candidate keys for Data 2: [('Roll No.',)]
-2023-12-27 00:36:57,784 - INFO - Finding common columns by value
-2023-12-27 00:36:57,784 - INFO - Single common column found by value: [('Roll No.', 'Roll No.')]
-2023-12-27 00:37:09,719 - INFO - Getting two keys
-2023-12-27 00:37:09,719 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:37:09,735 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:37:09,736 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:37:09,755 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 00:37:09,756 - INFO - Finding common columns by value
-2023-12-27 00:37:09,759 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
-2023-12-27 00:39:04,512 - INFO - Getting two keys
-2023-12-27 00:39:04,513 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:39:04,519 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:39:04,520 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:39:04,527 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number ',)]
-2023-12-27 00:39:04,527 - INFO - Finding common columns by value
-2023-12-27 00:39:04,527 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Phone Number', 'Phone Number ')]
-2023-12-27 00:39:37,746 - INFO - Getting two keys
-2023-12-27 00:39:37,746 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:39:37,749 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:39:37,750 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:39:37,752 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number ',)]
-2023-12-27 00:39:37,752 - INFO - Finding common columns by value
-2023-12-27 00:39:37,752 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Phone Number', 'Phone Number ')]
-2023-12-27 00:40:28,527 - INFO - Getting two keys
-2023-12-27 00:40:28,527 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:40:28,530 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:40:28,530 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:40:28,533 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number ',)]
-2023-12-27 00:40:28,533 - INFO - Finding common columns by value
-2023-12-27 00:40:28,533 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Phone Number', 'Phone Number ')]
-2023-12-27 00:40:53,229 - INFO - Getting two keys
-2023-12-27 00:40:53,229 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:40:53,232 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:40:53,232 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:40:53,234 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 00:40:53,234 - INFO - Finding common columns by value
-2023-12-27 00:40:53,234 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
-2023-12-27 00:42:56,119 - INFO - Getting two keys
-2023-12-27 00:42:56,119 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:42:56,123 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 00:42:56,123 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:42:56,125 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:42:56,125 - INFO - Finding common columns by value
-2023-12-27 00:42:56,126 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
-2023-12-27 00:43:26,636 - INFO - Getting two keys
-2023-12-27 00:43:26,637 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:43:26,640 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:43:26,640 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:43:26,642 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 00:43:26,643 - INFO - Finding common columns by value
-2023-12-27 00:43:26,643 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
-2023-12-27 00:43:55,479 - INFO - Getting two keys
-2023-12-27 00:43:55,480 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:43:55,483 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:43:55,483 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:43:55,485 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 00:43:55,485 - INFO - Finding common columns by value
-2023-12-27 00:43:55,485 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
-2023-12-27 00:44:08,589 - INFO - Getting two keys
-2023-12-27 00:44:08,590 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:44:08,593 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 00:44:08,593 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:44:08,595 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:44:08,595 - INFO - Finding common columns by value
-2023-12-27 00:44:08,595 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
-2023-12-27 00:44:08,595 - ERROR - An exception occurred during result processing: not enough values to unpack (expected 2, got 1)
-Traceback (most recent call last):
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\comonPk.py", line 83, in <module>
-    pk_1, pk_2 = result
-ValueError: not enough values to unpack (expected 2, got 1)
-2023-12-27 00:44:32,839 - INFO - Getting two keys
-2023-12-27 00:44:32,839 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:44:32,842 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:44:32,843 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:44:32,845 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 00:44:32,845 - INFO - Finding common columns by value
-2023-12-27 00:44:32,845 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
-2023-12-27 00:44:46,875 - INFO - Getting two keys
-2023-12-27 00:44:46,875 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:44:46,884 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:44:46,884 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:44:46,893 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 00:44:46,893 - INFO - Finding common columns by value
-2023-12-27 00:44:46,894 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
-2023-12-27 00:46:12,292 - INFO - Getting two keys
-2023-12-27 00:46:12,293 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:46:12,295 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 00:46:12,295 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:46:12,297 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:46:12,297 - INFO - Finding common columns by value
-2023-12-27 00:46:12,297 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
+2024-01-20 03:25:00,336 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:25:00,352 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:25:00,352 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:25:00,352 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:25:00,360 - INFO - Finding common columns by value
+2024-01-20 03:25:00,360 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:25:00,360 - INFO - 127.0.0.1 - - [20/Jan/2024 03:25:00] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:25:14,520 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:25:14,528 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:25:14,528 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:25:14,536 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:25:14,536 - INFO - Finding common columns by value
+2024-01-20 03:25:14,536 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:25:14,536 - INFO - 127.0.0.1 - - [20/Jan/2024 03:25:14] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:25:14,871 - INFO - 127.0.0.1 - - [20/Jan/2024 03:25:14] "POST /mapData HTTP/1.1" 200 -
+2024-01-20 03:25:15,131 - INFO - Comparing Data with primary keys: Name, Student Name
+2024-01-20 03:25:15,139 - INFO - Mapping Document: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,139 - INFO - Read CSV files into DataFrames
+2024-01-20 03:25:15,139 - INFO - Applying transformations to row: Roll No.                    41
+Name            PRAJWAL G NAIK
+Phone Number        6361385262
+Class                   S4_CS2
+Name: 0, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,139 - INFO - Applying transformations to row: Roll No.                42
+Name             PREJITH P
+Phone Number    9778028748
+Class               S4_CS2
+Name: 1, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,147 - INFO - Applying transformations to row: Roll No.                      43
+Name            RAHUL C MADHAVAN
+Phone Number          7510447992
+Class                     S4_CS2
+Name: 2, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,147 - INFO - Applying transformations to row: Roll No.                44
+Name             RAYAN M N
+Phone Number    9946018912
+Class               S4_CS2
+Name: 3, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,147 - INFO - Applying transformations to row: Roll No.                  45
+Name            RITHWIK BAGE
+Phone Number      7063916269
+Class                 S4_CS2
+Name: 4, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,155 - INFO - Applying transformations to row: Roll No.                 46
+Name            ROSHAN MAJO
+Phone Number     6238554182
+Class                S4_CS2
+Name: 5, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,155 - INFO - Applying transformations to row: Roll No.                  47
+Name            SARATH RAGHU
+Phone Number      8078856069
+Class                 S4_CS2
+Name: 6, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,155 - INFO - Applying transformations to row: Roll No.                      48
+Name            SHIV DEV SAI RAJ
+Phone Number          9496749717
+Class                     S4_CS2
+Name: 7, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,163 - INFO - Applying transformations to row: Roll No.                                  49
+Name            SIDDHARTH SHANKAR BYLOPPILLY
+Phone Number                      8588817622
+Class                                 S4_CS2
+Name: 8, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,163 - INFO - Applying transformations to row: Roll No.                50
+Name            SNEHA SANI
+Phone Number    8086095935
+Class               S4_CS2
+Name: 9, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,163 - INFO - Applying transformations to row: Roll No.                51
+Name              SOURAV K
+Phone Number    9496675748
+Class               S4_CS2
+Name: 10, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,171 - INFO - Applying transformations to row: Roll No.                52
+Name            SREEHARI C
+Phone Number    9946295790
+Class               S4_CS2
+Name: 11, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,171 - INFO - Applying transformations to row: Roll No.                   53
+Name            STIJO STEPHEN
+Phone Number       7902788412
+Class                  S4_CS2
+Name: 12, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,171 - INFO - Applying transformations to row: Roll No.                           54
+Name            SURAJ KUMAR JAYAKUMAR
+Phone Number               9048906799
+Class                          S4_CS2
+Name: 13, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,179 - INFO - Applying transformations to row: Roll No.                    55
+Name            UDITH SUDHAKAR
+Phone Number        9605171570
+Class                   S4_CS2
+Name: 14, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,179 - INFO - Applying transformations to row: Roll No.                56
+Name            VAISHNAV M
+Phone Number    8943699619
+Class               S4_CS2
+Name: 15, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,179 - INFO - Applying transformations to row: Roll No.                      57
+Name            VIVEK P CHANDRAN
+Phone Number          9645898941
+Class                     S4_CS2
+Name: 16, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,179 - INFO - Applying transformations to row: Roll No.                   58
+Name            CHRISTIN SIBI
+Phone Number       9846656129
+Class                  S4_CS2
+Name: 17, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,187 - INFO - Applying transformations to row: Roll No.                    59
+Name            DEVIKA S KUMAR
+Phone Number        9495640802
+Class                   S4_CS2
+Name: 18, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,187 - INFO - Applying transformations to row: Roll No.                     60
+Name            DON JOSE MATHEW
+Phone Number         6282568769
+Class                    S4_CS2
+Name: 19, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,187 - INFO - Applying transformations to row: Roll No.                 61
+Name            HARITHA DAS
+Phone Number     8086478576
+Class                S4_CS2
+Name: 20, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,187 - INFO - Applying transformations to row: Roll No.                62
+Name              SANDRA E
+Phone Number    6282584148
+Class               S4_CS2
+Name: 21, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,195 - INFO - Applying transformations to row: Roll No.                 63
+Name            SREEDEV C V
+Phone Number     7736971193
+Class                S4_CS2
+Name: 22, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,195 - INFO - Applying transformations to row: Roll No.                       64
+Name            THOMAS V VARGHESE
+Phone Number           8075581672
+Class                      S4_CS2
+Name: 23, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,195 - INFO - Applying transformations to row: Roll No.                        65
+Name            ALLEN BENNY MATHEW
+Phone Number            9074286056
+Class                       S4_CS2
+Name: 24, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,195 - INFO - Applying transformations to row: Roll No.                       66
+Name            ARJUN VIJAYAKUMAR
+Phone Number           9496641497
+Class                      S4_CS2
+Name: 25, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,203 - INFO - Applying transformations to row: Roll No.                          67
+Name            MIDHUN MURALEEDHARAN
+Phone Number              9656612087
+Class                         S4_CS2
+Name: 26, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,203 - INFO - Applying transformations to row: Roll No.                 68
+Name            ARYA THAMPI
+Phone Number     9072194621
+Class                S4_CS2
+Name: 27, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,203 - INFO - Applying transformations to row: Roll No.                        69
+Name            MOHAMMED BAZED ALI
+Phone Number            9946520134
+Class                       S4_CS2
+Name: 28, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,203 - INFO - Applying transformations to row: Roll No.                   70
+Name            NIRANJANA M S
+Phone Number       6282572815
+Class                  S4_CS2
+Name: 29, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,203 - INFO - Applying transformations to row: Roll No.                71
+Name              ADARSH D
+Phone Number    9746418043
+Class               S4_CS2
+Name: 30, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,211 - INFO - Applying transformations to row: Roll No.                72
+Name             AMRUTHA P
+Phone Number    8075484215
+Class               S4_CS2
+Name: 31, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,211 - INFO - Applying transformations to row: Roll No.                                 73
+Name            THOUKHEER IBNU ALI ASHRAF A
+Phone Number                     8139841294
+Class                                S4_CS2
+Name: 32, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,211 - INFO - Applying transformations to row: Roll No.                74
+Name               ASWIN K
+Phone Number    7994627349
+Class               S4_CS2
+Name: 33, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,211 - INFO - Applying transformations to row: Roll No.                 75
+Name            JACOB DEEPU
+Phone Number     8943234578
+Class                S4_CS2
+Name: 34, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,211 - INFO - Applying transformations to row: Roll No.                 1
+Name               ABHAY O
+Phone Number    8547960839
+Class               S4_CS2
+Name: 35, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,211 - INFO - Applying transformations to row: Roll No.                         2
+Name            ABHINAND J NAMBIAR
+Phone Number            8921347402
+Class                       S4_CS2
+Name: 36, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,219 - INFO - Applying transformations to row: Roll No.                      3
+Name            ABHIRAM S MENON
+Phone Number         9778138706
+Class                    S4_CS2
+Name: 37, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,219 - INFO - Applying transformations to row: Roll No.                   4
+Name            ADARSH MENON
+Phone Number      9061676796
+Class                 S4_CS2
+Name: 38, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,227 - INFO - Applying transformations to row: Roll No.                   5
+Name            AISWARYA M S
+Phone Number      8590199574
+Class                 S4_CS2
+Name: 39, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,227 - INFO - Applying transformations to row: Roll No.                 6
+Name            AJITH JOSE
+Phone Number    7736957108
+Class               S4_CS2
+Name: 40, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,235 - INFO - Applying transformations to row: Roll No.                       7
+Name            AKSSHAY MATHEW P
+Phone Number          9544049564
+Class                     S4_CS2
+Name: 41, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,235 - INFO - Applying transformations to row: Roll No.                   8
+Name            ALFEEN SADIQ
+Phone Number      7025734481
+Class                 S4_CS2
+Name: 42, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,259 - INFO - Applying transformations to row: Roll No.                 9
+Name             ANAMIKA S
+Phone Number    9895537625
+Class               S4_CS2
+Name: 43, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,267 - INFO - Applying transformations to row: Roll No.                          10
+Name            ANANTHAPADMANABHAN V
+Phone Number              8281479453
+Class                         S4_CS2
+Name: 44, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,267 - INFO - Applying transformations to row: Roll No.                 11
+Name            ANIRUDH A V
+Phone Number     9496960369
+Class                S4_CS2
+Name: 45, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,267 - INFO - Applying transformations to row: Roll No.                12
+Name            ANJALI AJU
+Phone Number    7592816941
+Class               S4_CS2
+Name: 46, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,275 - INFO - Applying transformations to row: Roll No.                13
+Name               ARJUN S
+Phone Number    7592906780
+Class               S4_CS2
+Name: 47, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,275 - INFO - Applying transformations to row: Roll No.                14
+Name             A R ASHIQ
+Phone Number    9074873430
+Class               S4_CS2
+Name: 48, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,283 - INFO - Applying transformations to row: Roll No.                15
+Name            ASHWATHY A
+Phone Number    8157940237
+Class               S4_CS2
+Name: 49, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,283 - INFO - Applying transformations to row: Roll No.                       16
+Name            ASHWIN JACOB GIGO
+Phone Number           8921838679
+Class                      S4_CS2
+Name: 50, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,283 - INFO - Applying transformations to row: Roll No.                17
+Name             ASWANTH R
+Phone Number    7012172392
+Class               S4_CS2
+Name: 51, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,299 - INFO - Applying transformations to row: Roll No.                18
+Name               ASWIN A
+Phone Number    7034634277
+Class               S4_CS2
+Name: 52, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,299 - INFO - Applying transformations to row: Roll No.                19
+Name               ASWIN C
+Phone Number    9605159952
+Class               S4_CS2
+Name: 53, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,307 - INFO - Applying transformations to row: Roll No.                20
+Name              ATHIRA B
+Phone Number    9496895715
+Class               S4_CS2
+Name: 54, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,307 - INFO - Applying transformations to row: Roll No.                21
+Name            BINCE BABU
+Phone Number    8301007670
+Class               S4_CS2
+Name: 55, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,315 - INFO - Applying transformations to row: Roll No.                  22
+Name            DEMEL C JOHN
+Phone Number      8281272471
+Class                 S4_CS2
+Name: 56, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,315 - INFO - Applying transformations to row: Roll No.                 23
+Name            DON JOSHI N
+Phone Number     9496164302
+Class                S4_CS2
+Name: 57, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,315 - INFO - Applying transformations to row: Roll No.                   24
+Name            GOKUL G MENON
+Phone Number       9567551970
+Class                  S4_CS2
+Name: 58, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,315 - INFO - Applying transformations to row: Roll No.                25
+Name              GOVIND P
+Phone Number    9947412343
+Class               S4_CS2
+Name: 59, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,315 - INFO - Applying transformations to row: Roll No.                     26
+Name            HAREESH MOHAN S
+Phone Number         9961197039
+Class                    S4_CS2
+Name: 60, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,315 - INFO - Applying transformations to row: Roll No.                   27
+Name            HRIDYA S ANIL
+Phone Number       8304064833
+Class                  S4_CS2
+Name: 61, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,323 - INFO - Applying transformations to row: Roll No.                     28
+Name            JERRY PAUL ALEX
+Phone Number         9496933257
+Class                    S4_CS2
+Name: 62, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,323 - INFO - Applying transformations to row: Roll No.                 29
+Name            JESVIN JOSE
+Phone Number     8304857182
+Class                S4_CS2
+Name: 63, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,323 - INFO - Applying transformations to row: Roll No.                 30
+Name            KALYAN DATH
+Phone Number     9074795860
+Class                S4_CS2
+Name: 64, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                       31
+Name            KEERTHI ANIL NAIR
+Phone Number           9544270166
+Class                      S4_CS2
+Name: 65, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                     32
+Name            MEERA SREEKUMAR
+Phone Number         9188449599
+Class                    S4_CS2
+Name: 66, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                 33
+Name            MITHUN JOBY
+Phone Number     9747358541
+Class                S4_CS2
+Name: 67, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                       34
+Name            MOHAMMED SABITH C
+Phone Number           8943108040
+Class                      S4_CS2
+Name: 68, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                            35
+Name            MUHAMMED AMAL SHAN K T
+Phone Number                8113002501
+Class                           S4_CS2
+Name: 69, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                36
+Name             NANDANA S
+Phone Number    8086786440
+Class               S4_CS2
+Name: 70, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,331 - INFO - Applying transformations to row: Roll No.                           37
+Name            NAVIN VARGHESE GEORGE
+Phone Number               9847756420
+Class                          S4_CS2
+Name: 71, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,339 - INFO - Applying transformations to row: Roll No.                  38
+Name            NIRUPAMA T S
+Phone Number      9895304296
+Class                 S4_CS2
+Name: 72, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,339 - INFO - Applying transformations to row: Roll No.                     39
+Name            NIVED NARAYANAN
+Phone Number         9447300552
+Class                    S4_CS2
+Name: 73, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,339 - INFO - Applying transformations to row: Roll No.                    40
+Name            PARVATHI BAI M
+Phone Number        7736613891
+Class                   S4_CS2
+Name: 74, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:25:15,347 - INFO - Applied transformations to source DataFrame
+2024-01-20 03:25:15,355 - INFO - Primary Key values for source DataFrame: ['TVE-S4_CS2-41', 'TVE-S4_CS2-42', 'TVE-S4_CS2-43', 'TVE-S4_CS2-44', 'TVE-S4_CS2-45', 'TVE-S4_CS2-46', 'TVE-S4_CS2-47', 'TVE-S4_CS2-48', 'TVE-S4_CS2-49', 'TVE-S4_CS2-50', 'TVE-S4_CS2-51', 'TVE-S4_CS2-52', 'TVE-S4_CS2-53', 'TVE-S4_CS2-54', 'TVE-S4_CS2-55', 'TVE-S4_CS2-56', 'TVE-S4_CS2-57', 'TVE-S4_CS2-58', 'TVE-S4_CS2-59', 'TVE-S4_CS2-60', 'TVE-S4_CS2-61', 'TVE-S4_CS2-62', 'TVE-S4_CS2-63', 'TVE-S4_CS2-64', 'TVE-S4_CS2-65', 'TVE-S4_CS2-66', 'TVE-S4_CS2-67', 'TVE-S4_CS2-68', 'TVE-S4_CS2-69', 'TVE-S4_CS2-70', 'TVE-S4_CS2-71', 'TVE-S4_CS2-72', 'TVE-S4_CS2-73', 'TVE-S4_CS2-74', 'TVE-S4_CS2-75', 'TVE-S4_CS2-1', 'TVE-S4_CS2-2', 'TVE-S4_CS2-3', 'TVE-S4_CS2-4', 'TVE-S4_CS2-5', 'TVE-S4_CS2-6', 'TVE-S4_CS2-7', 'TVE-S4_CS2-8', 'TVE-S4_CS2-9', 'TVE-S4_CS2-10', 'TVE-S4_CS2-11', 'TVE-S4_CS2-12', 'TVE-S4_CS2-13', 'TVE-S4_CS2-14', 'TVE-S4_CS2-15', 'TVE-S4_CS2-16', 'TVE-S4_CS2-17', 'TVE-S4_CS2-18', 'TVE-S4_CS2-19', 'TVE-S4_CS2-20', 'TVE-S4_CS2-21', 'TVE-S4_CS2-22', 'TVE-S4_CS2-23', 'TVE-S4_CS2-24', 'TVE-S4_CS2-25', 'TVE-S4_CS2-26', 'TVE-S4_CS2-27', 'TVE-S4_CS2-28', 'TVE-S4_CS2-29', 'TVE-S4_CS2-30', 'TVE-S4_CS2-31', 'TVE-S4_CS2-32', 'TVE-S4_CS2-33', 'TVE-S4_CS2-34', 'TVE-S4_CS2-35', 'TVE-S4_CS2-36', 'TVE-S4_CS2-37', 'TVE-S4_CS2-38', 'TVE-S4_CS2-39', 'TVE-S4_CS2-40']
+2024-01-20 03:25:15,355 - INFO - Primary Key values for target DataFrame: ['TVE-S4_CS2-1', 'TVE-S4_CS2-2', 'TVE-S4_CS2-3', 'TVE-S4_CS2-4', 'TVE-S4_CS2-5', 'TVE-S4_CS2-6', 'TVE-S4_CS2-7', 'TVE-S4_CS2-8', 'TVE-S4_CS2-9', 'TVE-S4_CS2-10', 'TVE-S4_CS2-11', 'TVE-S4_CS2-12', 'TVE-S4_CS2-13', 'TVE-S4_CS2-14', 'TVE-S4_CS2-15', 'TVE-S4_CS2-16', 'TVE-S4_CS2-17', 'TVE-S4_CS2-18', 'TVE-S4_CS2-19', 'TVE-S4_CS2-20', 'TVE-S4_CS2-21', 'TVE-S4_CS2-22', 'TVE-S4_CS2-23', 'TVE-S4_CS2-24', 'TVE-S4_CS2-25', 'TVE-S4_CS2-26', 'TVE-S4_CS2-27', 'TVE-S4_CS2-28', 'TVE-S4_CS2-29', 'TVE-S4_CS2-30', 'TVE-S4_CS2-31', 'TVE-S4_CS2-32', 'TVE-S4_CS2-33', 'TVE-S4_CS2-34', 'TVE-S4_CS2-35', 'TVE-S4_CS2-36', 'TVE-S4_CS2-37', 'TVE-S4_CS2-38', 'TVE-S4_CS2-39', 'TVE-S4_CS2-40', 'TVE-S4_CS2-41', 'TVE-S4_CS2-42', 'TVE-S4_CS2-43', 'TVE-S4_CS2-44', 'TVE-S4_CS2-45', 'TVE-S4_CS2-46', 'TVE-S4_CS2-47', 'TVE-S4_CS2-48', 'TVE-S4_CS2-49', 'TVE-S4_CS2-50', 'TVE-S4_CS2-51', 'TVE-S4_CS2-52', 'TVE-S4_CS2-53', 'TVE-S4_CS2-54', 'TVE-S4_CS2-55', 'TVE-S4_CS2-56', 'TVE-S4_CS2-57', 'TVE-S4_CS2-58', 'TVE-S4_CS2-59', 'TVE-S4_CS2-60', 'TVE-S4_CS2-61', 'TVE-S4_CS2-62', 'TVE-S4_CS2-63', 'TVE-S4_CS2-64', 'TVE-S4_CS2-65', 'TVE-S4_CS2-66', 'TVE-S4_CS2-67', 'TVE-S4_CS2-68', 'TVE-S4_CS2-69', 'TVE-S4_CS2-70', 'TVE-S4_CS2-71', 'TVE-S4_CS2-72', 'TVE-S4_CS2-73', 'TVE-S4_CS2-74', 'TVE-S4_CS2-75']
+2024-01-20 03:25:15,355 - INFO - Comparing Data with primary keys: College id, College id
+2024-01-20 03:25:15,355 - INFO - Checking primary key value: TVE-S4_CS2-41
+2024-01-20 03:25:15,363 - INFO - Checking primary key value: TVE-S4_CS2-42
+2024-01-20 03:25:15,363 - INFO - Checking primary key value: TVE-S4_CS2-43
+2024-01-20 03:25:15,363 - INFO - Checking primary key value: TVE-S4_CS2-44
+2024-01-20 03:25:15,363 - INFO - Checking primary key value: TVE-S4_CS2-45
+2024-01-20 03:25:15,371 - INFO - Checking primary key value: TVE-S4_CS2-46
+2024-01-20 03:25:15,371 - INFO - Checking primary key value: TVE-S4_CS2-47
+2024-01-20 03:25:15,379 - INFO - Checking primary key value: TVE-S4_CS2-48
+2024-01-20 03:25:15,387 - INFO - Checking primary key value: TVE-S4_CS2-49
+2024-01-20 03:25:15,387 - INFO - Checking primary key value: TVE-S4_CS2-50
+2024-01-20 03:25:15,395 - INFO - Checking primary key value: TVE-S4_CS2-51
+2024-01-20 03:25:15,395 - INFO - Checking primary key value: TVE-S4_CS2-52
+2024-01-20 03:25:15,395 - INFO - Checking primary key value: TVE-S4_CS2-53
+2024-01-20 03:25:15,395 - INFO - Checking primary key value: TVE-S4_CS2-54
+2024-01-20 03:25:15,403 - INFO - Checking primary key value: TVE-S4_CS2-55
+2024-01-20 03:25:15,403 - INFO - Checking primary key value: TVE-S4_CS2-56
+2024-01-20 03:25:15,403 - INFO - Checking primary key value: TVE-S4_CS2-57
+2024-01-20 03:25:15,403 - INFO - Checking primary key value: TVE-S4_CS2-58
+2024-01-20 03:25:15,403 - INFO - Checking primary key value: TVE-S4_CS2-59
+2024-01-20 03:25:15,403 - INFO - Checking primary key value: TVE-S4_CS2-60
+2024-01-20 03:25:15,411 - INFO - Checking primary key value: TVE-S4_CS2-61
+2024-01-20 03:25:15,411 - INFO - Checking primary key value: TVE-S4_CS2-62
+2024-01-20 03:25:15,411 - INFO - Checking primary key value: TVE-S4_CS2-63
+2024-01-20 03:25:15,411 - INFO - Checking primary key value: TVE-S4_CS2-64
+2024-01-20 03:25:15,411 - INFO - Checking primary key value: TVE-S4_CS2-65
+2024-01-20 03:25:15,411 - INFO - Checking primary key value: TVE-S4_CS2-66
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-67
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-68
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-69
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-70
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-71
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-72
+2024-01-20 03:25:15,419 - INFO - Checking primary key value: TVE-S4_CS2-73
+2024-01-20 03:25:15,427 - INFO - Checking primary key value: TVE-S4_CS2-74
+2024-01-20 03:25:15,427 - INFO - Checking primary key value: TVE-S4_CS2-75
+2024-01-20 03:25:15,427 - INFO - Checking primary key value: TVE-S4_CS2-1
+2024-01-20 03:25:15,427 - INFO - Checking primary key value: TVE-S4_CS2-2
+2024-01-20 03:25:15,427 - INFO - Checking primary key value: TVE-S4_CS2-3
+2024-01-20 03:25:15,427 - INFO - Checking primary key value: TVE-S4_CS2-4
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-5
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-6
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-7
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-8
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-9
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-10
+2024-01-20 03:25:15,436 - INFO - Checking primary key value: TVE-S4_CS2-11
+2024-01-20 03:25:15,444 - INFO - Checking primary key value: TVE-S4_CS2-12
+2024-01-20 03:25:15,444 - INFO - Checking primary key value: TVE-S4_CS2-13
+2024-01-20 03:25:15,444 - WARNING - For College id: TVE-S4_CS2-13, Column Student Name values differ
+2024-01-20 03:25:15,444 - INFO - Checking primary key value: TVE-S4_CS2-14
+2024-01-20 03:25:15,444 - WARNING - For College id: TVE-S4_CS2-14, Column Contact no values differ
+2024-01-20 03:25:15,444 - INFO - Checking primary key value: TVE-S4_CS2-15
+2024-01-20 03:25:15,444 - INFO - Checking primary key value: TVE-S4_CS2-16
+2024-01-20 03:25:15,444 - INFO - Checking primary key value: TVE-S4_CS2-17
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-18
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-19
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-20
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-21
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-22
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-23
+2024-01-20 03:25:15,453 - INFO - Checking primary key value: TVE-S4_CS2-24
+2024-01-20 03:25:15,461 - INFO - Checking primary key value: TVE-S4_CS2-25
+2024-01-20 03:25:15,461 - INFO - Checking primary key value: TVE-S4_CS2-26
+2024-01-20 03:25:15,461 - INFO - Checking primary key value: TVE-S4_CS2-27
+2024-01-20 03:25:15,461 - INFO - Checking primary key value: TVE-S4_CS2-28
+2024-01-20 03:25:15,461 - INFO - Checking primary key value: TVE-S4_CS2-29
+2024-01-20 03:25:15,461 - INFO - Checking primary key value: TVE-S4_CS2-30
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-31
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-32
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-33
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-34
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-35
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-36
+2024-01-20 03:25:15,469 - INFO - Checking primary key value: TVE-S4_CS2-37
+2024-01-20 03:25:15,477 - INFO - Checking primary key value: TVE-S4_CS2-38
+2024-01-20 03:25:15,477 - INFO - Checking primary key value: TVE-S4_CS2-39
+2024-01-20 03:25:15,477 - INFO - Checking primary key value: TVE-S4_CS2-40
+2024-01-20 03:25:15,477 - INFO - Result String: For College id: TVE-S4_CS2-13, Column Student Name values differ:
+Source: ARJUN S
+Target: ARJUN S RAJ
+For College id: TVE-S4_CS2-14, Column Contact no values differ:
+Source: +91 9074873430
+Target: +91 9174873430
 
-2023-12-27 00:46:59,326 - INFO - Getting two keys
-2023-12-27 00:46:59,326 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:46:59,332 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 00:46:59,332 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:46:59,342 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 00:46:59,342 - INFO - Finding common columns by value
-2023-12-27 00:46:59,343 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
-2023-12-27 00:47:36,939 - INFO - Getting two keys
-2023-12-27 00:47:36,940 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:47:36,955 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 00:47:36,955 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:47:36,969 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 00:47:36,969 - INFO - Finding common columns by value
-2023-12-27 00:47:36,972 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
-2023-12-27 00:53:24,361 - INFO - Getting two keys
-2023-12-27 00:53:24,361 - INFO - Getting candidate keys for Data 1
-2023-12-27 00:53:24,482 - INFO - Candidate keys for Data 1: [('EEID', 'Full Name'), ('EEID', 'Hire Date'), ('EEID', 'Annual Salary'), ('EEID', 'Exit Date'), ('Full Name', 'Job Title'), ('Full Name', 'Age'), ('Full Name', 'Hire Date'), ('Full Name', 'Annual Salary'), ('Full Name', 'City'), ('Full Name', 'Exit Date'), ('Job Title', 'Exit Date'), ('Department', 'Annual Salary'), ('Department', 'Exit Date'), ('Business Unit', 'Exit Date'), ('Ethnicity', 'Exit Date'), ('Age', 'Annual Salary'), ('Age', 'Exit Date'), ('Hire Date', 'Annual Salary'), ('Hire Date', 'Exit Date'), ('Annual Salary', 'Bonus %'), ('Annual Salary', 'City'), ('Annual Salary', 'Exit Date'), ('Bonus %', 'Exit Date'), ('Country', 'Exit Date'), ('City', 'Exit Date')]
-2023-12-27 00:53:24,482 - INFO - Getting candidate keys for Data 2
-2023-12-27 00:53:24,626 - INFO - Candidate keys for Data 2: [('EEID', 'Full Name'), ('EEID', 'Hire Date'), ('EEID', 'Annual Salary'), ('EEID', 'Exit Date'), ('Full Name', 'Job Title'), ('Full Name', 'Age'), ('Full Name', 'Hire Date'), ('Full Name', 'Annual Salary'), ('Full Name', 'City'), ('Full Name', 'Exit Date'), ('Job Title', 'Exit Date'), ('Department', 'Annual Salary'), ('Department', 'Exit Date'), ('Business Unit', 'Exit Date'), ('Ethnicity', 'Exit Date'), ('Age', 'Annual Salary'), ('Age', 'Exit Date'), ('Hire Date', 'Annual Salary'), ('Hire Date', 'Exit Date'), ('Annual Salary', 'Bonus %'), ('Annual Salary', 'City'), ('Annual Salary', 'Exit Date'), ('Bonus %', 'Exit Date'), ('Country', 'Exit Date'), ('City', 'Exit Date')]
-2023-12-27 00:53:24,626 - INFO - Finding common columns by value
-2023-12-27 00:53:24,648 - INFO - Common columns found by value: [('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('EEID', 'EEID'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Full Name', 'Full Name'), ('Job Title', 'Job Title'), ('Department', 'Department'), ('Department', 'Department'), ('Department', 'Department'), ('Department', 'Department'), ('Business Unit', 'Business Unit'), ('Ethnicity', 'Ethnicity'), ('Age', 'Age'), ('Age', 'Age'), ('Age', 'Age'), ('Age', 'Age'), ('Hire Date', 'Hire Date'), ('Hire Date', 'Hire Date'), ('Hire Date', 'Hire Date'), ('Hire Date', 'Hire Date'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Annual Salary', 'Annual Salary'), ('Bonus %', 'Bonus %'), ('Country', 'Country'), ('City', 'City')]
-2023-12-27 01:47:40,570 - INFO - Getting two keys
-2023-12-27 01:47:40,570 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:47:40,624 - INFO - Candidate keys for Data 1: [('Row ID',)]
-2023-12-27 01:47:40,624 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:47:40,661 - INFO - Candidate keys for Data 2: [('Row ID',)]
-2023-12-27 01:47:40,661 - INFO - Finding common columns by value
-2023-12-27 01:47:40,661 - INFO - Single common column found by value: [('Row ID', 'Row ID')]
-2023-12-27 01:48:20,028 - INFO - Getting two keys
-2023-12-27 01:48:20,028 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:48:20,032 - INFO - Candidate keys for Data 1: [('College id',), ('Student Name',), ('Contact no',)]
-2023-12-27 01:48:20,032 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:48:20,036 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-27 01:48:20,036 - INFO - Finding common columns by value
-2023-12-27 01:48:20,038 - INFO - Single common column found by value: [('Student Name', 'Name')]
-2023-12-27 01:49:30,500 - INFO - Getting two keys
-2023-12-27 01:49:30,500 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:49:30,503 - INFO - Candidate keys for Data 1: [('College id',), ('Student Name',), ('Contact no',)]
-2023-12-27 01:49:30,503 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:49:30,505 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-27 01:49:30,505 - INFO - Finding common columns by value
-2023-12-27 01:49:30,505 - INFO - Single common column found by value: [('Student Name', 'Name')]
-2023-12-27 01:49:48,594 - INFO - Getting two keys
-2023-12-27 01:49:48,594 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:49:48,596 - INFO - Candidate keys for Data 1: [('College id',), ('Student Name',), ('Contact no',)]
-2023-12-27 01:49:48,597 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:49:48,599 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-27 01:49:48,599 - INFO - Finding common columns by value
-2023-12-27 01:49:48,599 - INFO - Single common column found by value: [('Student Name', 'Name')]
-2023-12-27 01:50:06,562 - INFO - Getting two keys
-2023-12-27 01:50:06,562 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:50:06,567 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-27 01:50:06,567 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:50:06,570 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
-2023-12-27 01:50:06,570 - INFO - Finding common columns by value
-2023-12-27 01:50:06,571 - INFO - Single common column found by value: [('Name', 'Student Name')]
-2023-12-27 01:50:17,544 - INFO - Getting two keys
-2023-12-27 01:50:17,545 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:50:17,552 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-27 01:50:17,552 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:50:17,556 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
-2023-12-27 01:50:17,556 - INFO - Finding common columns by value
-2023-12-27 01:50:17,556 - INFO - Single common column found by value: [('Name', 'Student Name')]
-2023-12-27 01:50:37,011 - INFO - Getting two keys
-2023-12-27 01:50:37,011 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:50:37,013 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 01:50:37,013 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:50:37,013 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 01:50:37,013 - INFO - Finding common columns by value
-2023-12-27 01:50:37,013 - INFO - Common columns found by value: (None, None)
-2023-12-27 01:56:35,525 - INFO - Getting two keys
-2023-12-27 01:56:35,525 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:56:35,528 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 01:56:35,528 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:56:35,530 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 01:56:35,530 - INFO - Finding common columns by value
-2023-12-27 01:56:35,530 - INFO - Common columns found by value: (None, None)
-2023-12-27 01:58:05,655 - INFO - Getting two keys
-2023-12-27 01:58:05,655 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:58:05,658 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 01:58:05,658 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:58:05,661 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 01:58:05,661 - INFO - Finding common columns by value
-2023-12-27 01:58:05,667 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
-2023-12-27 01:58:28,401 - INFO - Getting two keys
-2023-12-27 01:58:28,401 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:58:28,405 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 01:58:28,405 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:58:28,407 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 01:58:28,407 - INFO - Finding common columns by value
-2023-12-27 01:58:28,407 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
-2023-12-27 01:58:37,539 - INFO - Getting two keys
-2023-12-27 01:58:37,540 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:58:37,544 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 01:58:37,544 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:58:37,547 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Phone Number',)]
-2023-12-27 01:58:37,548 - INFO - Finding common columns by value
-2023-12-27 01:58:37,548 - INFO - Single common column found by value: [('Roll Number.', 'Roll No.')]
-2023-12-27 01:58:54,189 - INFO - Getting two keys
-2023-12-27 01:58:54,189 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:58:54,192 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Phone Number',)]
-2023-12-27 01:58:54,193 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:58:54,195 - INFO - Candidate keys for Data 2: [('Roll Number.',)]
-2023-12-27 01:58:54,195 - INFO - Finding common columns by value
-2023-12-27 01:58:54,195 - INFO - Single common column found by value: [('Roll No.', 'Roll Number.')]
-2023-12-27 01:59:15,430 - INFO - Getting two keys
-2023-12-27 01:59:15,430 - INFO - Getting candidate keys for Data 1
-2023-12-27 01:59:15,432 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 01:59:15,432 - INFO - Getting candidate keys for Data 2
-2023-12-27 01:59:15,434 - INFO - Candidate keys for Data 2: [('Phone Number',)]
-2023-12-27 01:59:15,434 - INFO - Finding common columns by value
-2023-12-27 01:59:15,435 - INFO - Common columns found by value: (None, None)
-2023-12-27 10:07:44,652 - INFO - Getting two keys
-2023-12-27 10:07:44,653 - INFO - Getting candidate keys for Data 1
-2023-12-27 10:07:44,668 - INFO - Candidate keys for Data 1: [('Roll Number.',)]
-2023-12-27 10:07:44,668 - INFO - Getting candidate keys for Data 2
-2023-12-27 10:07:44,670 - INFO - Candidate keys for Data 2: [('Phone Number',)]
-2023-12-27 10:07:44,670 - INFO - Finding common columns by value
-2023-12-27 10:07:44,670 - INFO - Common columns found by value: (None, None)
-2023-12-27 10:07:57,784 - INFO - Getting two keys
-2023-12-27 10:07:57,785 - INFO - Getting candidate keys for Data 1
-2023-12-27 10:07:57,793 - INFO - Candidate keys for Data 1: [('Index',), ('User_id',), ('Email',), ('Phone Number',)]
-2023-12-27 10:07:57,793 - INFO - Getting candidate keys for Data 2
-2023-12-27 10:07:57,802 - INFO - Candidate keys for Data 2: [('Index',), ('User_id',), ('Email',), ('Phone_Number',)]
-2023-12-27 10:07:57,802 - INFO - Finding common columns by value
-2023-12-27 10:07:57,805 - INFO - Common columns found by value: [('Index', 'Index'), ('User_id', 'User_id'), ('Email', 'Email'), ('Phone Number', 'Phone_Number')]
-2023-12-27 16:40:31,313 - INFO - Getting two keys
-2023-12-27 16:40:31,314 - INFO - Getting candidate keys for Data 1
-2023-12-27 16:40:33,706 - INFO - Candidate keys for Data 1: [('Country', 'Total Revenue'), ('Country', 'Total Profit'), ('Ship Date', 'Units Sold'), ('Ship Date', 'Total Revenue'), ('Ship Date', 'Total Cost'), ('Ship Date', 'Total Profit'), ('Units Sold', 'Date of order'), ('Total Revenue', 'Date of order'), ('Total Cost', 'Date of order'), ('Total Profit', 'Date of order')]
-2023-12-27 16:40:33,706 - INFO - Getting candidate keys for Data 2
-2023-12-27 16:40:35,993 - INFO - Candidate keys for Data 2: [('Country', 'Total Revenue'), ('Country', 'Total Profit'), ('Order Date', 'Units Sold'), ('Order Date', 'Total Revenue'), ('Order Date', 'Total Cost'), ('Order Date', 'Total Profit'), ('Ship Date', 'Units Sold'), ('Ship Date', 'Total Revenue'), ('Ship Date', 'Total Cost'), ('Ship Date', 'Total Profit')]
-2023-12-27 16:40:35,994 - INFO - Finding common columns by value
-2023-12-27 16:40:37,643 - INFO - Common columns found by value: [('Country', 'Country'), ('Country', 'Country'), ('Country', 'Country'), ('Country', 'Country'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Order Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date'), ('Ship Date', 'Ship Date')]
-2023-12-27 16:50:14,219 - INFO - Getting two keys
-2023-12-27 16:50:14,219 - INFO - Getting candidate keys for Data 1
-2023-12-27 16:50:14,226 - INFO - Candidate keys for Data 1: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
-2023-12-27 16:50:14,226 - INFO - Getting candidate keys for Data 2
-2023-12-27 16:50:14,230 - INFO - Candidate keys for Data 2: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
-2023-12-27 16:50:14,231 - INFO - Finding common columns by value
-2023-12-27 16:50:14,232 - INFO - Common columns found by value: [('index', 'index'), ('Organization_id', 'Organization_id'), ('Name', 'Name'), ('Website', 'Website'), ('Description', 'Description'), ('No.of_Employees', 'No.of_Employees')]
-2023-12-27 17:25:44,764 - INFO - Getting two keys
-2023-12-27 17:25:44,764 - INFO - Getting candidate keys for Data 1
-2023-12-27 17:25:44,784 - INFO - Candidate keys for Data 1: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
-2023-12-27 17:25:44,784 - INFO - Getting candidate keys for Data 2
-2023-12-27 17:25:44,792 - INFO - Candidate keys for Data 2: [('index',), ('Organization_id',), ('Name',), ('Website',), ('Description',), ('No.of_Employees',)]
-2023-12-27 17:25:44,792 - INFO - Finding common columns by value
-2023-12-27 17:25:44,794 - INFO - Common columns found by value: [('index', 'index'), ('Organization_id', 'Organization_id'), ('Name', 'Name'), ('Website', 'Website'), ('Description', 'Description'), ('No.of_Employees', 'No.of_Employees')]
-2023-12-28 22:02:10,281 - INFO - Getting two keys
-2023-12-28 22:02:10,282 - INFO - Getting candidate keys for Data 1
-2023-12-28 22:02:10,284 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:02:10,285 - INFO - Getting candidate keys for Data 2
-2023-12-28 22:02:10,286 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:02:10,286 - INFO - Finding common columns by name
-2023-12-28 22:02:10,293 - ERROR - An exception occurred: isinstance expected 2 arguments, got 1
+2024-01-20 03:25:15,477 - INFO - Comparison Result: For College id: TVE-S4_CS2-13, Column Student Name values differ:
+Source: ARJUN S
+Target: ARJUN S RAJ
+For College id: TVE-S4_CS2-14, Column Contact no values differ:
+Source: +91 9074873430
+Target: +91 9174873430
+
+2024-01-20 03:25:15,486 - INFO - 127.0.0.1 - - [20/Jan/2024 03:25:15] "POST /validateData HTTP/1.1" 200 -
+2024-01-20 03:38:15,278 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:38:15,278 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:38:23,015 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:38:23,031 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:38:23,031 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:38:23,039 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:38:23,039 - INFO - Finding common columns by value
+2024-01-20 03:38:23,039 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:38:23,039 - INFO - 127.0.0.1 - - [20/Jan/2024 03:38:23] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:38:24,200 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:38:24,210 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:38:24,210 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:38:24,214 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:38:24,214 - INFO - Finding common columns by value
+2024-01-20 03:38:24,214 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:38:24,214 - INFO - 127.0.0.1 - - [20/Jan/2024 03:38:24] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:38:24,542 - ERROR - Exception on /mapData [POST]
 Traceback (most recent call last):
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 58, in get_two_keys
-    result_names = find_same_columns_by_name(ck_name_set1, ck_name_set2)
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 14, in find_same_columns_by_name
-    set2 = {tuple(lst) if isinstance(lst) else tuple([lst]) for lst in list2}
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 14, in <setcomp>
-    set2 = {tuple(lst) if isinstance(lst) else tuple([lst]) for lst in list2}
-TypeError: isinstance expected 2 arguments, got 1
-2023-12-28 22:02:10,294 - WARNING - No common columns found.
-2023-12-28 22:03:59,877 - INFO - Getting two keys
-2023-12-28 22:03:59,878 - INFO - Getting candidate keys for Data 1
-2023-12-28 22:03:59,882 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:03:59,882 - INFO - Getting candidate keys for Data 2
-2023-12-28 22:03:59,885 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:03:59,886 - INFO - Finding common columns by name
-2023-12-28 22:03:59,886 - ERROR - An exception occurred: find_same_columns_by_value() missing 2 required positional arguments: 'ck_set1' and 'ck_set2'
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\myapp.py", line 106, in mapData
+    return jsonify({'MapingDoc': mapingStr, 'message': message})
+UnboundLocalError: local variable 'mapingStr' referenced before assignment
+2024-01-20 03:38:24,542 - INFO - 127.0.0.1 - - [20/Jan/2024 03:38:24] "[35m[1mPOST /mapData HTTP/1.1[0m" 500 -
+2024-01-20 03:38:34,210 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:38:34,210 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:38:34,210 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:38:34,218 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:38:34,218 - INFO - Finding common columns by value
+2024-01-20 03:38:34,218 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:38:34,226 - INFO - 127.0.0.1 - - [20/Jan/2024 03:38:34] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:38:34,552 - ERROR - Exception on /mapData [POST]
 Traceback (most recent call last):
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 58, in get_two_keys
-    result_names = find_same_columns_by_value(ck_name_set1, ck_name_set2)
-TypeError: find_same_columns_by_value() missing 2 required positional arguments: 'ck_set1' and 'ck_set2'
-2023-12-28 22:03:59,887 - WARNING - No common columns found.
-2023-12-28 22:04:40,765 - INFO - Getting two keys
-2023-12-28 22:04:40,765 - INFO - Getting candidate keys for Data 1
-2023-12-28 22:04:40,768 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:04:40,768 - INFO - Getting candidate keys for Data 2
-2023-12-28 22:04:40,771 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:04:40,771 - INFO - Finding common columns by name
-2023-12-28 22:04:40,771 - ERROR - An exception occurred: 'numpy.int64' object is not iterable
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\myapp.py", line 106, in mapData
+    return jsonify({'MapingDoc': mapingStr, 'message': message})
+UnboundLocalError: local variable 'mapingStr' referenced before assignment
+2024-01-20 03:38:34,560 - INFO - 127.0.0.1 - - [20/Jan/2024 03:38:34] "[35m[1mPOST /mapData HTTP/1.1[0m" 500 -
+2024-01-20 03:39:53,934 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:39:53,934 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:43:30,022 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:43:30,022 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:44:19,508 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:44:19,516 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:44:23,011 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:44:23,019 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:44:23,019 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:44:23,027 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:44:23,027 - INFO - Finding common columns by value
+2024-01-20 03:44:23,027 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:44:23,035 - INFO - 127.0.0.1 - - [20/Jan/2024 03:44:23] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:44:24,014 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:44:24,022 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:44:24,022 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:44:24,022 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:44:24,022 - INFO - Finding common columns by value
+2024-01-20 03:44:24,022 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:44:24,022 - INFO - 127.0.0.1 - - [20/Jan/2024 03:44:24] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:44:24,363 - INFO - 127.0.0.1 - - [20/Jan/2024 03:44:24] "POST /mapData HTTP/1.1" 200 -
+2024-01-20 03:44:24,635 - INFO - Comparing Data with primary keys: Name, Student Name
+2024-01-20 03:44:24,635 - INFO - Mapping Document: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:44:24,635 - INFO - Read CSV files into DataFrames
+2024-01-20 03:44:24,643 - INFO - Applying transformations to row: Roll No.                    41
+Name            PRAJWAL G NAIK
+Phone Number        6361385262
+Class                   S4_CS2
+Name: 0, dtype: object, using rules: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}    as this : ['College id = TVE-row[Class]-row[Roll No.]', 'Student Name = row[Name]', 'Contact no = +91 row[Phone Number]']
+2024-01-20 03:44:24,643 - ERROR - Exception on /validateData [POST]
 Traceback (most recent call last):
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 58, in get_two_keys
-    result_names = find_same_columns_by_value(data1,data2,ck_name_set1, ck_name_set2)
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 32, in find_same_columns_by_value
-    common_values = set(tuple(row) for row in df_src[col1].values) & set(tuple(row) for row in df_tgt[col2].values)
-  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\commonCompositePk.py", line 32, in <genexpr>
-    common_values = set(tuple(row) for row in df_src[col1].values) & set(tuple(row) for row in df_tgt[col2].values)
-TypeError: 'numpy.int64' object is not iterable
-2023-12-28 22:04:40,772 - WARNING - No common columns found.
-2023-12-28 22:05:44,561 - INFO - Getting two keys
-2023-12-28 22:05:44,562 - INFO - Getting candidate keys for Data 1
-2023-12-28 22:05:44,564 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:05:44,565 - INFO - Getting candidate keys for Data 2
-2023-12-28 22:05:44,567 - INFO - Candidate keys for Data 2: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:05:44,567 - INFO - Finding common columns by value
-2023-12-28 22:05:44,567 - INFO - Common columns found by value: [('Roll No.', 'Roll No.'), ('Name', 'Name'), ('Phone Number', 'Phone Number')]
-2023-12-28 22:05:52,139 - INFO - Getting two keys
-2023-12-28 22:05:52,139 - INFO - Getting candidate keys for Data 1
-2023-12-28 22:05:52,143 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
-2023-12-28 22:05:52,144 - INFO - Getting candidate keys for Data 2
-2023-12-28 22:05:52,146 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
-2023-12-28 22:05:52,146 - INFO - Finding common columns by value
-2023-12-28 22:05:52,146 - INFO - Single common column found by value: [('Name', 'Student Name')]
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\myapp.py", line 118, in validateData
+    resultString =compareData(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata,mapingDoc)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 87, in compareData
+    transformed_source_df = source_df.apply(apply_transformations, axis=1, args=(mapingDoc,))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\frame.py", line 10037, in apply
+    return op.apply().__finalize__(self, method="apply")
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\apply.py", line 837, in apply
+    return self.apply_standard()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\apply.py", line 963, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\apply.py", line 979, in apply_series_generator
+    results[i] = self.func(v, *self.args, **self.kwargs)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 36, in apply_transformations
+    return pd.Series({
+TypeError: unhashable type: 'list'
+2024-01-20 03:44:24,651 - INFO - 127.0.0.1 - - [20/Jan/2024 03:44:24] "[35m[1mPOST /validateData HTTP/1.1[0m" 500 -
+2024-01-20 03:51:32,556 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:51:32,556 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:51:35,969 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:51:35,978 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:51:35,978 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:51:35,986 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:51:35,986 - INFO - Finding common columns by value
+2024-01-20 03:51:35,986 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:51:35,986 - INFO - 127.0.0.1 - - [20/Jan/2024 03:51:35] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:51:36,770 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:51:36,778 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:51:36,778 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:51:36,786 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:51:36,786 - INFO - Finding common columns by value
+2024-01-20 03:51:36,786 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:51:36,786 - INFO - 127.0.0.1 - - [20/Jan/2024 03:51:36] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:51:37,126 - INFO - 127.0.0.1 - - [20/Jan/2024 03:51:37] "POST /mapData HTTP/1.1" 200 -
+2024-01-20 03:51:37,382 - INFO - Comparing Data with primary keys: Name, Student Name
+2024-01-20 03:51:37,382 - INFO - Mapping Document: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:51:37,382 - INFO - Read CSV files into DataFrames
+2024-01-20 03:51:37,382 - ERROR - Exception on /validateData [POST]
+Traceback (most recent call last):
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\myapp.py", line 118, in validateData
+    resultString =compareData(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata,mapingDoc)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 86, in compareData
+    transformed_source_df = source_df.apply(transform_row, axis=1, args=(mapingDoc,))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\frame.py", line 10037, in apply
+    return op.apply().__finalize__(self, method="apply")
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\apply.py", line 837, in apply
+    return self.apply_standard()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\apply.py", line 963, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\apply.py", line 979, in apply_series_generator
+    results[i] = self.func(v, *self.args, **self.kwargs)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 19, in transform_row
+    transformed_value = eval(f'f"{rule}"', {'row': row})
+  File "<string>", line 1
+    (Roll No.)
+     ^^^^^^^
+SyntaxError: f-string: invalid syntax. Perhaps you forgot a comma?
+2024-01-20 03:51:37,398 - INFO - 127.0.0.1 - - [20/Jan/2024 03:51:37] "[35m[1mPOST /validateData HTTP/1.1[0m" 500 -
+2024-01-20 03:53:32,472 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:53:32,472 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:53:36,274 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:53:36,282 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:53:36,282 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:53:36,290 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:53:36,290 - INFO - Finding common columns by value
+2024-01-20 03:53:36,290 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:53:36,290 - INFO - 127.0.0.1 - - [20/Jan/2024 03:53:36] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:53:38,215 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:53:38,223 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:53:38,223 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:53:38,223 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:53:38,223 - INFO - Finding common columns by value
+2024-01-20 03:53:38,223 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:53:38,223 - INFO - 127.0.0.1 - - [20/Jan/2024 03:53:38] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:53:38,559 - INFO - 127.0.0.1 - - [20/Jan/2024 03:53:38] "POST /mapData HTTP/1.1" 200 -
+2024-01-20 03:53:38,818 - INFO - Comparing Data with primary keys: Name, Student Name
+2024-01-20 03:53:38,818 - INFO - Mapping Document: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:53:38,818 - INFO - Read CSV files into DataFrames
+2024-01-20 03:53:38,826 - INFO - Applied transformations to source DataFrame
+2024-01-20 03:53:38,826 - ERROR - Exception on /validateData [POST]
+Traceback (most recent call last):
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\myapp.py", line 118, in validateData
+    resultString =compareData(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata,mapingDoc)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 92, in compareData
+    primary_keys_s = find_primary_key(transformed_source_df)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\primary_key.py", line 27, in find_primary_key
+    columns = data.columns
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\generic.py", line 6204, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'Series' object has no attribute 'columns'
+2024-01-20 03:53:38,915 - INFO - 127.0.0.1 - - [20/Jan/2024 03:53:38] "[35m[1mPOST /validateData HTTP/1.1[0m" 500 -
+2024-01-20 03:57:09,618 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:4564
+2024-01-20 03:57:09,626 - INFO - [33mPress CTRL+C to quit[0m
+2024-01-20 03:57:17,496 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:57:17,505 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:57:17,505 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:57:17,512 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:57:17,512 - INFO - Finding common columns by value
+2024-01-20 03:57:17,512 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:57:17,512 - INFO - 127.0.0.1 - - [20/Jan/2024 03:57:17] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:57:18,543 - INFO - Getting candidate keys for Data 1
+2024-01-20 03:57:18,551 - INFO - Candidate keys for Data 1: [('Roll No.',), ('Name',), ('Phone Number',)]
+2024-01-20 03:57:18,551 - INFO - Getting candidate keys for Data 2
+2024-01-20 03:57:18,559 - INFO - Candidate keys for Data 2: [('College id',), ('Student Name',), ('Contact no',)]
+2024-01-20 03:57:18,559 - INFO - Finding common columns by value
+2024-01-20 03:57:18,559 - INFO - Single common column found by value: [('Name', 'Student Name')]
+2024-01-20 03:57:18,559 - INFO - 127.0.0.1 - - [20/Jan/2024 03:57:18] "POST /findKeys HTTP/1.1" 200 -
+2024-01-20 03:57:18,922 - INFO - 127.0.0.1 - - [20/Jan/2024 03:57:18] "POST /mapData HTTP/1.1" 200 -
+2024-01-20 03:57:19,170 - INFO - Comparing Data with primary keys: Name, Student Name
+2024-01-20 03:57:19,170 - INFO - Mapping Document: {'College id': 'TVE-{Class}-{Roll No.}', 'Student Name': '{Name}', 'Contact no': '+91 {Phone Number}'}
+2024-01-20 03:57:19,170 - INFO - Read CSV files into DataFrames
+2024-01-20 03:57:19,178 - INFO - Applied transformations to source DataFrame
+2024-01-20 03:57:19,178 - WARNING - No primary keys found for source DataFrame
+2024-01-20 03:57:19,191 - INFO - Primary Key values for target DataFrame: ['TVE-S4_CS2-1', 'TVE-S4_CS2-2', 'TVE-S4_CS2-3', 'TVE-S4_CS2-4', 'TVE-S4_CS2-5', 'TVE-S4_CS2-6', 'TVE-S4_CS2-7', 'TVE-S4_CS2-8', 'TVE-S4_CS2-9', 'TVE-S4_CS2-10', 'TVE-S4_CS2-11', 'TVE-S4_CS2-12', 'TVE-S4_CS2-13', 'TVE-S4_CS2-14', 'TVE-S4_CS2-15', 'TVE-S4_CS2-16', 'TVE-S4_CS2-17', 'TVE-S4_CS2-18', 'TVE-S4_CS2-19', 'TVE-S4_CS2-20', 'TVE-S4_CS2-21', 'TVE-S4_CS2-22', 'TVE-S4_CS2-23', 'TVE-S4_CS2-24', 'TVE-S4_CS2-25', 'TVE-S4_CS2-26', 'TVE-S4_CS2-27', 'TVE-S4_CS2-28', 'TVE-S4_CS2-29', 'TVE-S4_CS2-30', 'TVE-S4_CS2-31', 'TVE-S4_CS2-32', 'TVE-S4_CS2-33', 'TVE-S4_CS2-34', 'TVE-S4_CS2-35', 'TVE-S4_CS2-36', 'TVE-S4_CS2-37', 'TVE-S4_CS2-38', 'TVE-S4_CS2-39', 'TVE-S4_CS2-40', 'TVE-S4_CS2-41', 'TVE-S4_CS2-42', 'TVE-S4_CS2-43', 'TVE-S4_CS2-44', 'TVE-S4_CS2-45', 'TVE-S4_CS2-46', 'TVE-S4_CS2-47', 'TVE-S4_CS2-48', 'TVE-S4_CS2-49', 'TVE-S4_CS2-50', 'TVE-S4_CS2-51', 'TVE-S4_CS2-52', 'TVE-S4_CS2-53', 'TVE-S4_CS2-54', 'TVE-S4_CS2-55', 'TVE-S4_CS2-56', 'TVE-S4_CS2-57', 'TVE-S4_CS2-58', 'TVE-S4_CS2-59', 'TVE-S4_CS2-60', 'TVE-S4_CS2-61', 'TVE-S4_CS2-62', 'TVE-S4_CS2-63', 'TVE-S4_CS2-64', 'TVE-S4_CS2-65', 'TVE-S4_CS2-66', 'TVE-S4_CS2-67', 'TVE-S4_CS2-68', 'TVE-S4_CS2-69', 'TVE-S4_CS2-70', 'TVE-S4_CS2-71', 'TVE-S4_CS2-72', 'TVE-S4_CS2-73', 'TVE-S4_CS2-74', 'TVE-S4_CS2-75']
+2024-01-20 03:57:19,191 - INFO - Comparing Data with primary keys: None, College id
+2024-01-20 03:57:19,191 - ERROR - Exception on /validateData [POST]
+Traceback (most recent call last):
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\myapp.py", line 118, in validateData
+    resultString =compareData(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata,mapingDoc)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 109, in compareData
+    result = compare(primary_keys_s, primary_keys_t, transformed_source_df, target_df)
+  File "C:\Users\aswin\Development\projects\mainproject\big_data_migration_validation\BackEnd\Aswin\validation.py", line 47, in compare
+    primary_key_values_s = transformed_source_df[primary_keys_s].tolist()
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\series.py", line 1040, in __getitem__
+    return self._get_value(key)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\series.py", line 1156, in _get_value
+    loc = self.index.get_loc(label)
+  File "C:\Users\aswin\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\indexes\range.py", line 418, in get_loc
+    raise KeyError(key)
+KeyError: None
+2024-01-20 03:57:19,279 - INFO - 127.0.0.1 - - [20/Jan/2024 03:57:19] "[35m[1mPOST /validateData HTTP/1.1[0m" 500 -

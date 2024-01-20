@@ -24,6 +24,11 @@ def read_data(file_path):
     return data
 
 def find_primary_key(data):
+    
+    
+    if isinstance(data, pd.Series):
+        # Convert Series to DataFrame with a single column
+        data = pd.DataFrame(data, columns=['Column'])
     columns = data.columns
     min_key = None
     min_key_size = float('inf')

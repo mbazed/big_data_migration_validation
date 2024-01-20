@@ -6,19 +6,19 @@ import numpy as np
 # Configure logging to write to a file
 logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# def find_same_columns_by_name(list1, list2):
-#     # Convert tuples and single-element lists to sets of tuples for efficient comparison
-#     set1 = {tuple(lst) if isinstance(lst, list) else (lst,) for lst in list1}
-#     set2 = {tuple(lst) if isinstance(lst) else (lst,) for lst in list2}
+def find_same_columns_by_name(list1, list2):
+    # Convert tuples and single-element lists to sets of tuples for efficient comparison
+    set1 = {tuple(lst) if isinstance(lst, list) else (lst,) for lst in list1}
+    set2 = {tuple(lst) if isinstance(lst) else (lst,) for lst in list2}
     
-#     # Find the common sets
-#     common_sets = set1.intersection(set2)
+    # Find the common sets
+    common_sets = set1.intersection(set2)
     
-#     # Convert sets back to lists
-#     common_lists_result = [list(common_set) for common_set in common_sets]
-#     if common_lists_result == []:
-#         return None
-#     return list(common_lists_result[0][0])
+    # Convert sets back to lists
+    common_lists_result = [list(common_set) for common_set in common_sets]
+    if common_lists_result == []:
+        return None
+    return list(common_lists_result[0][0])
 
 def find_same_columns_by_value(df_src, df_tgt, ck_set1, ck_set2):
     duplicate_columns = []
@@ -73,27 +73,36 @@ def get_two_keys(data1, data2):
         return None
 
 
-# Example usage:
-data1 = get_file()
-data2 = get_file()
 
-logging.info("Getting two keys")
-result = get_two_keys(data1, data2)
 
-try:
-    if result is not None:
-        if len(result) == 2:
-            pk1, pk2 = result
-            print(f"Primary key for Data 1: {pk1}")
-            print(f"Primary key for Data 2: {pk2}")
-        elif len(result) > 2:
-            print("Multiple options for primary keys. Displaying options:")
-            headers = ["Option", "Primary Key for Data 1", "Primary Key for Data 2"]
-            options = [(i + 1, item[0], item[1]) for i, item in enumerate(result)]
-            print(tabulate(options, headers=headers, tablefmt="pretty"))
+def printKeys(result):
+    try:
+        if result is not None:
+            if len(result) == 2:
+                pk1, pk2 = result
+                print(f"Primary key for Data 1: {pk1}")
+                print(f"Primary key for Data 2: {pk2}")
+            elif len(result) > 2:
+                print("Multiple options for primary keys. Displaying options:")
+                headers = ["Option", "Primary Key for Data 1", "Primary Key for Data 2"]
+                options = [(i + 1, item[0], item[1]) for i, item in enumerate(result)]
+                print(tabulate(options, headers=headers, tablefmt="pretty"))
+            else:
+                logging.warning("Unexpected result structure. Unable to unpack.")
         else:
-            logging.warning("Unexpected result structure. Unable to unpack.")
-    else:
-        logging.warning("No common columns found.")
-except Exception as ex:
-    logging.exception(f"An exception occurred during result processing: {ex}")
+            logging.warning("No common columns found.")
+    except Exception as ex:
+        logging.exception(f"An exception occurred during result processing: {ex}")
+        
+        
+# Example usage:
+# data1 = get_file()
+# data2 = get_file()
+# result = get_two_keys(data1, data2)
+# printKeys(result)
+
+def comonPkDriverFunction(data1,data2):
+    logging.info("Getting two keys")
+    result = get_two_keys(data1, data2)
+    printKeys(result)
+    return result
