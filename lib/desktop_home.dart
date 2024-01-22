@@ -28,6 +28,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _targetController = TextEditingController();
   final TextEditingController _resultController = TextEditingController();
+  final TextEditingController _keyController1 = TextEditingController();
+  final TextEditingController _keyController2 = TextEditingController();
+
+
   String fileName = 'No file selected';
   // Use your _list here
   final List<String> _list = [
@@ -465,10 +469,66 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 35),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          border: Border.all(
+                            color: Colors.grey.withOpacity(0.7),
+                          ),
+                        ),
+                        width: width100 * 0.5,
+                        child: TextField(
+                          controller: _keyController2,
+                          onChanged: (_) {},
+                          onSubmitted: (_) {},
+                          style: TextStyle(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            contentPadding: EdgeInsets.only(left: 10),
+                            hintText: '--',
+                            hintStyle: TextStyle(),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          border: Border.all(
+                            color: Colors.grey.withOpacity(0.7),
+                          ),
+                        ),
+                        width: width100 * 0.5,
+                        child: TextField(
+                          controller: _keyController2,
+                          onChanged: (_) {},
+                          onSubmitted: (_) {},
+                          style: TextStyle(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            contentPadding: EdgeInsets.only(left: 10),
+                            hintText: '--',
+                            hintStyle: TextStyle(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Container(
                   alignment: AlignmentDirectional.topStart,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  padding: EdgeInsets.only(bottom: 11, top: 104),
+                  padding: EdgeInsets.only(bottom: 11, top: 15),
                   child: RichText(
                     text: TextSpan(children: <TextSpan>[
                       TextSpan(
