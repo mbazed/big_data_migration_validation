@@ -1,3 +1,4 @@
+from validation3 import *
 import pandas as pd
 from readSouce import read_csv_string
 from tokenfinder import *
@@ -6,6 +7,7 @@ from flask_cors import CORS
 from uniqueKeyIdentifier import getPrimaryKey
 from validation import *
 from comonPk import *
+from validationHaritha import *
 sourceFileString = None
 sourcedata = None
 targetFileString = None
@@ -17,6 +19,36 @@ mapingDoc = None
 
 app = Flask(__name__)
 
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    global uploaded_file  # Access the global variable
+
+    if 'file' not in request.files:
+        return 'No file part'
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return 'No selected file'
+
+    # Save the file to a desired location
+    file.save('uploads/' + file.filename)
+
+    # Assign the file object to the global variable
+    uploaded_file = file
+
+    return 'File uploaded successfully'
+
+@app.route('/process')
+def process_file():
+    global uploaded_file  # Access the global variable
+
+    if uploaded_file is not None:
+        # Process the file as needed
+        content = uploaded_file.read()
+        return f'File content: {content}'
+    else:
+        return 'No file uploaded yet'
 
 
 CORS(app)
@@ -32,42 +64,24 @@ def findKeys():
         sourcedata = read_csv_string(sourceFileString)
         targetFileString = request.form.get('target')
         targetdata = read_csv_string(targetFileString)
-        sourcePrimaryKey=""
-        targetPrimaryKey=""
         
         pks = get_two_keys(sourcedata,targetdata)
-        if(pks[0]==None or pks[1]==None):
-            sourcePrimaryKey=   getPrimaryKey(sourcedata)
-            targetPrimaryKey= getPrimaryKey(targetdata)
-            
-            sourcePrimaryKey = sourcePrimaryKey[0]
-            targetPrimaryKey = targetPrimaryKey[0]
-            
-            if(sourcePrimaryKey==None or targetPrimaryKey==None):
-                message = '[-] Primary key identification Failed!'
-            else:
-                message = '[+] Primary key identification Success! Choose Primary Key(s) from the list'
-        
-            
-        elif(len(pks) == 2):
+        if(len(pks) == 2):
             sourcePrimaryKey= pks[0]
             targetPrimaryKey=pks[1]
-            message = '[+] Primary key identification Success! Found Common Primary Key(s)'
         elif(len(pks)>2):
             printKeys(pks)
             for pair in pks:
-                sourcePrimaryKey += pair[0] + ", "
-                targetPrimaryKey += pair[1] + ", "
-                message = '[+] Primary key identification Success! Found multiple Common Primary Key(s)'
-    
-    except Exception as e:
-        print(e)
+                print(pair[0],"-------->",pair[1],"\n...........")
+                sourcePrimaryKey +=pair[0]+", "
+                targetPrimaryKey +=pair[1]+", "
+        message = '[+] Primary key identification Success!'
+    except:
+        sourcePrimaryKey=None
+        targetPrimaryKey=None
+        message = '[-] Primary key identification Failed!'
         
         
-        
-        
-        
-    print("sourcePrimaryKey: {sourcePrimaryKey}, targetPrimaryKey: {targetPrimaryKey},message: {message}".format(sourcePrimaryKey=sourcePrimaryKey,targetPrimaryKey=targetPrimaryKey,message=message))  
     return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():
@@ -85,7 +99,7 @@ def mapData():
         
         mapingStr,mapingDoc = mapColumnstring(sourceFileString, targetFileString,sourcePrimaryKey,targetPrimaryKey)
         message =  '[+] Data maping Success!'
-        
+
     except:
         mapingDoc=None
         message =  '[-] Data maping Failed!'
@@ -103,9 +117,10 @@ def validateData():
     targetdata = read_csv_string(targetFileString)
     sourcedata = read_csv_string(sourceFileString)
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
-    resultString =compareData(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata,mapingDoc)
-    print(resultString)
-
+    resultString =dividedCompare(sourcedata,targetdata,mapingDoc)
+    
+    # print(resultString)
+    
     # resultString = driver(sourcedata,targetdata)
     # return resultString
 

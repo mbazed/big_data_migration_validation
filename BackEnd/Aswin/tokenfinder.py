@@ -119,8 +119,8 @@ def mappColumn(Sourcedata, TargetData, source_key_column, target_key_column):
                     
                     # Add to mappingDoc immediately after writing to outputString
                     outputString += f"{key}: {mappingResult}\n"
-                    print("Data in target: ", target_row[key])
-                    print(key, ": ", mappingResult)
+                    # print("Data in target: ", target_row[key])
+                    # print(key, ": ", mappingResult)
                     
                     break
 
@@ -128,7 +128,7 @@ def mappColumn(Sourcedata, TargetData, source_key_column, target_key_column):
                 output_line = f"Original String: {target_row[key]}   Output String: {output_string}\n"
                 output_file.write(output_line)
 
-            print("-------------------------------------------------------------")
+            # print("-------------------------------------------------------------")
 
     # Return the output string and mapping dictionary
     return outputString, mappingDoc

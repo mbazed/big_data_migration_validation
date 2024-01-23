@@ -1,24 +1,24 @@
-Original String: TVE-S4_CS2-41   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-42   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-43   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-44   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-45   Output String: TVE-{Class}-{Roll No.}
+Original String: TVE-S4_CS2-1   Output String: {College id}
+Original String: TVE-S4_CS2-2   Output String: {College id}
+Original String: TVE-S4_CS2-3   Output String: {College id}
+Original String: TVE-S4_CS2-4   Output String: {College id}
+Original String: TVE-S4_CS2-5   Output String: {College id}
 -------------------------------------------------------------
-College id: TVE-{Class}-{Roll No.}
+College id: {College id}
 -------------------------------------------------------------
-Original String: PRAJWAL G NAIK   Output String: {Name}
-Original String: PREJITH P   Output String: {Name}
-Original String: RAHUL C MADHAVAN   Output String: {Name}
-Original String: RAYAN M N   Output String: {Name}
-Original String: RITHWIK BAGE   Output String: {Name}
+Original String: ABHAY O   Output String: {Student Name}
+Original String: ABHINAND J NAMBIAR   Output String: {Student Name}
+Original String: ABHIRAM S MENON   Output String: {Student Name}
+Original String: ADARSH MENON   Output String: {Student Name}
+Original String: AISWARYA M S   Output String: {Student Name}
 -------------------------------------------------------------
-Student Name: {Name}
+Student Name: {Student Name}
 -------------------------------------------------------------
-Original String: +91 6361385262   Output String: +91 {Phone Number}
-Original String: +91 9778028748   Output String: +91 {Phone Number}
-Original String: +91 7510447992   Output String: +91 {Phone Number}
-Original String: +91 9946018912   Output String: +91 {Phone Number}
-Original String: +91 7063916269   Output String: +91 {Phone Number}
+Original String: +91 8547960839   Output String: {Contact no}
+Original String: +91 8921347402   Output String: {Contact no}
+Original String: +91 9778138706   Output String: {Contact no}
+Original String: +91 9061676796   Output String: {Contact no}
+Original String: +91 8590199574   Output String: {Contact no}
 -------------------------------------------------------------
-Contact no: +91 {Phone Number}
+Contact no: {Contact no}
 -------------------------------------------------------------
