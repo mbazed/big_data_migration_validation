@@ -25,12 +25,16 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String message = '';
   String sourceData = '';
   String targetData = '';
+  String secondButtonText = 'Map Data';
+
+  final mapUrl = Uri.parse('http://localhost:4564/mapData');
+  final validateUrl = Uri.parse('http://localhost:4564/validateData');
+  final uploadUrl = Uri.parse('http://localhost:4564/findKeys');
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _targetController = TextEditingController();
   final TextEditingController _resultController = TextEditingController();
   final TextEditingController _keyController1 = TextEditingController();
   final TextEditingController _keyController2 = TextEditingController();
-
 
   String fileName = 'No file selected';
   // Use your _list here
@@ -424,18 +428,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       ),
                     ),
                     onPressed: () async {
-                      // Implement 'Validate' functionality
-                      // Assuming your Python server is running on http://localhost:4564
-                      final url = Uri.parse('http://localhost:4564/findKeys');
-
                       try {
                         final response = await http.post(
-                          url,
+                          uploadUrl,
                           body: {'source': sourceData, 'target': targetData},
                         );
 
                         if (response.statusCode == 200) {
-                          print('Validation successful! ');
+                          print('Primary Key Fetch successful! ');
 
                           final Map<String, dynamic> data =
                               jsonDecode(response.body);
@@ -596,40 +596,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       ),
                     ),
                     onPressed: () async {
-                      final mapUrl = Uri.parse('http://localhost:4564/mapData');
-                      final validateUrl =
-                          Uri.parse('http://localhost:4564/validateData');
-                      final uploadUrl =
-                          Uri.parse('http://localhost:4564/findKeys');
                       var srcpk = '';
                       var trgpk = '';
-
-                      try {
-                        final response = await http.post(
-                          uploadUrl,
-                          body: {'source': sourceData, 'target': targetData},
-                        );
-
-                        if (response.statusCode == 200) {
-                          print('Validation successful! ');
-
-                          final Map<String, dynamic> data =
-                              jsonDecode(response.body);
-
-                          // Access the 'primarykey' value
-                          setState(() {
-                            srcpk = data['sourcePrimaryKey'].toString();
-                            trgpk = data['targetPrimaryKey'].toString();
-                            _resultController.text =
-                                '${_resultController.text}Primary Key of source: ${srcpk}\nPrimary Key of Target: ${trgpk}\n';
-                          });
-                        } else {
-                          print(
-                              'Primary Key Fetch failed: ${response.statusCode}');
-                        }
-                      } catch (e) {
-                        print('Error during Primary Key Fetch: $e');
-                      }
 
                       try {
                         final responseMap = await http.post(
@@ -641,7 +609,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         );
 
                         if (responseMap.statusCode == 200) {
-                          print('Mapping successful! ');
+                          print('Mapping Response Recived ');
+                          setState(() {
+                            secondButtonText = 'Validate Data';
+                          });
 
                           final Map<String, dynamic> data =
                               jsonDecode(responseMap.body);
@@ -693,7 +664,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         print('Error during mapping: $e');
                       }
                     },
-                    child: Text('Map'),
+                    child: Text(secondButtonText),
                   ),
                 ),
               ],
