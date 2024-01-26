@@ -26,15 +26,21 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String sourceData = '';
   String targetData = '';
   String secondButtonText = 'Map Data';
+  bool multiKey = false;
 
   final mapUrl = Uri.parse('http://localhost:4564/mapData');
   final validateUrl = Uri.parse('http://localhost:4564/validateData');
   final uploadUrl = Uri.parse('http://localhost:4564/findKeys');
+
+  var srcpk = "";
+  var trgpk = "";
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _targetController = TextEditingController();
   final TextEditingController _resultController = TextEditingController();
-  final TextEditingController _keyController1 = TextEditingController();
-  final TextEditingController _keyController2 = TextEditingController();
+  TextEditingController _keyController1 = TextEditingController();
+  TextEditingController _keyController2 = TextEditingController();
+  List<String> srcCandidateKeys = ['src1', 'src2', 'src3'];
+  List<String> trgCandidateKeys = ['trg1', 'trg2', 'trg3'];
 
   String fileName = 'No file selected';
   // Use your _list here
@@ -435,24 +441,42 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         );
 
                         if (response.statusCode == 200) {
-                          print('Primary Key Fetch successful! ');
+                          print('[+] Primary Key Fetch successful! ');
+                          secondButtonText = 'Map Data';
 
                           final Map<String, dynamic> data =
                               jsonDecode(response.body);
 
                           // Access the 'primarykey' value
                           setState(() {
-                            var srcpk = data['sourcePrimaryKey'].toString();
-                            var trgpk = data['targetPrimaryKey'].toString();
+                            _keyController1.text = "";
+                            _keyController2.text = "";
+                            srcCandidateKeys =
+                                data['sourcePrimaryKey'].toString().split(',');
+                            trgCandidateKeys =
+                                data['targetPrimaryKey'].toString().split(',');
+                            var srcCandidateKeysStr =
+                                data['sourcePrimaryKey'].toString();
+                            var trgCandidateKeysStr =
+                                data['targetPrimaryKey'].toString();
+                            if (srcCandidateKeys.length > 1 ||
+                                trgCandidateKeys.length > 1) {
+                              multiKey = true;
+                            } else {
+                              multiKey = false;
+                            }
+
+                            srcpk = srcCandidateKeys[0];
+                            trgpk = trgCandidateKeys[0];
                             _resultController.text =
-                                '${_resultController.text}Primary Key of source: ${srcpk}\nPrimary Key of Target: ${trgpk}\n';
+                                '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
                           });
                         } else {
                           print(
-                              'Primary Key Fetch failed: ${response.statusCode}');
+                              '[-] Primary Key Fetch failed: ${response.statusCode}');
                         }
                       } catch (e) {
-                        print('Error during Primary Key Fetch: $e');
+                        print('[!] Error during Primary Key Fetch: $e');
                       }
                     },
                     child: Align(
@@ -473,56 +497,176 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   padding: const EdgeInsets.only(top: 35),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(
-                            color: Colors.grey.withOpacity(0.7),
-                          ),
-                        ),
-                        width: width100 * 0.5,
-                        child: TextField(
-                          controller: _keyController2,
-                          onChanged: (_) {},
-                          onSubmitted: (_) {},
-                          style: TextStyle(),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(8.0),
+                    children: multiKey == true
+                        ? [
+                            //Aswin: key sugessions
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(
+                                  color: Colors.grey.withOpacity(0.7),
+                                ),
+                              ),
+                              width: width100 * 0.5,
+                              child: Autocomplete<String>(
+                                optionsBuilder:
+                                    (TextEditingValue textEditingValue) {
+                                  return srcCandidateKeys
+                                      .where(
+                                        (String suggestion) =>
+                                            suggestion.toLowerCase().contains(
+                                                  textEditingValue.text
+                                                      .toLowerCase(),
+                                                ),
+                                      )
+                                      .where(
+                                        (String suggestion) =>
+                                            suggestion.toLowerCase().contains(
+                                                  textEditingValue.text
+                                                      .toLowerCase(),
+                                                ),
+                                      )
+                                      .toList();
+                                },
+                                onSelected: (String selectedValue) {
+                                  _keyController1.text = selectedValue;
+                                },
+                                fieldViewBuilder: (BuildContext context,
+                                    TextEditingController textEditingController,
+                                    FocusNode focusNode,
+                                    VoidCallback onFieldSubmitted) {
+                                  _keyController1 = textEditingController;
+                                  return TextField(
+                                    controller: textEditingController,
+                                    focusNode: focusNode,
+                                    onTapOutside: (_) {
+                                      srcpk = _keyController1.text;
+                                      print("src-pk: $srcpk");
+                                      onFieldSubmitted();
+                                    },
+                                    onSubmitted: (_) {},
+                                    style: TextStyle(),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      hintText: 'Select Source Primary Key',
+                                      hintStyle: TextStyle(),
+                                    ),
+                                  );
+                                },
+                                optionsViewBuilder: (BuildContext context,
+                                    AutocompleteOnSelected<String> onSelected,
+                                    Iterable<String> options) {
+                                  return Material(
+                                    elevation: 4.0,
+                                    child: ListView(
+                                      children: options
+                                          .map(
+                                            (String option) => ListTile(
+                                              title: Text(option),
+                                              onTap: () {
+                                                onSelected(option);
+                                              },
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                            contentPadding: EdgeInsets.only(left: 10),
-                            hintText: '--',
-                            hintStyle: TextStyle(),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(
-                            color: Colors.grey.withOpacity(0.7),
-                          ),
-                        ),
-                        width: width100 * 0.5,
-                        child: TextField(
-                          controller: _keyController2,
-                          onChanged: (_) {},
-                          onSubmitted: (_) {},
-                          style: TextStyle(),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(8.0),
+
+                            //Aswin: end 1st key sugessions
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(
+                                  color: Colors.grey.withOpacity(0.7),
+                                ),
+                              ),
+                              width: width100 * 0.5,
+                              child: Autocomplete<String>(
+                                optionsBuilder:
+                                    (TextEditingValue textEditingValue) {
+                                  return trgCandidateKeys
+                                      .where(
+                                        (String suggestion) =>
+                                            suggestion.toLowerCase().contains(
+                                                  textEditingValue.text
+                                                      .toLowerCase(),
+                                                ),
+                                      )
+                                      .where(
+                                        (String suggestion) =>
+                                            suggestion.toLowerCase().contains(
+                                                  textEditingValue.text
+                                                      .toLowerCase(),
+                                                ),
+                                      )
+                                      .toList();
+                                },
+                                onSelected: (String selectedValue) {
+                                  _keyController2.text = selectedValue;
+                                },
+                                fieldViewBuilder: (BuildContext context,
+                                    TextEditingController textEditingController,
+                                    FocusNode focusNode,
+                                    VoidCallback onFieldSubmitted) {
+                                  _keyController2 = textEditingController;
+                                  return TextField(
+                                    controller: textEditingController,
+                                    focusNode: focusNode,
+                                    onTapOutside: (_) {
+                                      trgpk = _keyController2.text;
+                                      print("trg-pk: $trgpk");
+                                      onFieldSubmitted();
+                                    },
+                                    onSubmitted: (_) {
+                                      onFieldSubmitted();
+                                    },
+                                    style: TextStyle(),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      hintText: 'Select Target Primary Key',
+                                      hintStyle: TextStyle(),
+                                    ),
+                                  );
+                                },
+                                optionsViewBuilder: (BuildContext context,
+                                    AutocompleteOnSelected<String> onSelected,
+                                    Iterable<String> options) {
+                                  return Material(
+                                    elevation: 4.0,
+                                    child: ListView(
+                                      children: options
+                                          .map(
+                                            (String option) => ListTile(
+                                              title: Text(option),
+                                              onTap: () {
+                                                onSelected(option);
+                                              },
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                            contentPadding: EdgeInsets.only(left: 10),
-                            hintText: '--',
-                            hintStyle: TextStyle(),
-                          ),
-                        ),
-                      ),
-                    ],
+                            //Aswin: end 1st key sugessions
+                          ]
+                        : [],
                   ),
                 ),
                 Container(
@@ -595,75 +739,81 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onPressed: () async {
-                      var srcpk = '';
-                      var trgpk = '';
+                    onPressed: secondButtonText == "Map Data"
+                        ? () async {
+                            try {
+                              final responseMap = await http.post(
+                                mapUrl,
+                                body: {
+                                  'sourcePk': srcpk,
+                                  'targetPk': trgpk,
+                                },
+                              );
 
-                      try {
-                        final responseMap = await http.post(
-                          mapUrl,
-                          body: {
-                            'sourcePk': srcpk,
-                            'targetPk': trgpk,
-                          },
-                        );
+                              if (responseMap.statusCode == 200) {
+                                print('[+] Mapping Response Received ');
 
-                        if (responseMap.statusCode == 200) {
-                          print('Mapping Response Recived ');
-                          setState(() {
-                            secondButtonText = 'Validate Data';
-                          });
+                                final Map<String, dynamic> data =
+                                    jsonDecode(responseMap.body);
 
-                          final Map<String, dynamic> data =
-                              jsonDecode(responseMap.body);
+                                var mapingDoc = data['MapingDoc'].toString();
+                                var mapingStatus = data['message'].toString();
 
-                          setState(() async {
-                            var mapingDoc = data['MapingDoc'].toString();
-                            var mapingStatus = data['message'].toString();
+                                // Move the setState outside and update the state synchronously
+                                _resultController.text =
+                                    '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
+                                if (mapingStatus[1] == '+')
+                                  secondButtonText = 'Validate Data';
+                                else if (mapingStatus[1] == '-')
+                                  secondButtonText = 'Map Data';
 
-                            _resultController.text =
-                                'Maping status ${mapingStatus}\nResult:\n${mapingDoc}\n';
-
-                            if (responseMap.statusCode == 200) {
-                              try {
-                                final responseValidation = await http.post(
-                                  validateUrl,
-                                  body: {
-                                    'source': sourceData,
-                                    'target': targetData,
-                                    'sourcePrimaryKey': srcpk,
-                                    'targetPrimaryKey': trgpk,
-                                  },
-                                );
-
-                                if (responseValidation.statusCode == 200) {
-                                  print('Validation successful! ');
-
-                                  final Map<String, dynamic> data =
-                                      jsonDecode(responseValidation.body);
-                                  var validationDoc =
-                                      data['validationDoc'].toString();
-                                  var validationStatus =
-                                      data['message'].toString();
-
-                                  _resultController.text =
-                                      '${_resultController.text}Validation Doc:\n${validationDoc}\n Validation Status: ${validationStatus}\n';
-                                } else {
-                                  print(
-                                      'Validation failed: ${responseValidation.statusCode}');
-                                }
-                              } catch (e) {
-                                print('Error during validation: $e');
+                                // Update the widget state
+                                setState(() {});
+                              } else {
+                                print(
+                                    '[-] Mapping failed: ${responseMap.statusCode}');
                               }
+                            } catch (e) {
+                              print('[!] Error during mapping: $e');
                             }
-                          });
-                        } else {
-                          print('Mapping failed: ${responseMap.statusCode}');
-                        }
-                      } catch (e) {
-                        print('Error during mapping: $e');
-                      }
-                    },
+                          }
+                        : () async {
+                            try {
+                              final responseValidation = await http.post(
+                                validateUrl,
+                                body: {
+                                  'source': sourceData,
+                                  'target': targetData,
+                                  'sourcePrimaryKey': srcpk,
+                                  'targetPrimaryKey': trgpk,
+                                },
+                              );
+
+                              if (responseValidation.statusCode == 200) {
+                                final Map<String, dynamic> data =
+                                    jsonDecode(responseValidation.body);
+                                var validationDoc =
+                                    data['validationDoc'].toString();
+                                var validationStatus =
+                                    data['message'].toString();
+                                print('[+] Validation successful!  \n' +
+                                    validationStatus);
+
+                                // Move the setState outside and update the state synchronously
+                                _resultController.text =
+                                    '\n Validation Status: $validationStatus\nValidation Doc:\n$validationDoc\n';
+                                secondButtonText = 'Download Report';
+
+                                // Update the widget state
+                                setState(() {});
+                              } else {
+                                print(
+                                    '[-] Validation failed: ${responseValidation.statusCode}');
+                              }
+                            } catch (e) {
+                              print('[!] Error during validation: $e');
+                            }
+                          },
                     child: Text(secondButtonText),
                   ),
                 ),

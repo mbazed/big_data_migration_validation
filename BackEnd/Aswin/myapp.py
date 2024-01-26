@@ -72,10 +72,12 @@ def findKeys():
             targetPrimaryKey=pks[1]
         elif(len(pks)>2):
             printKeys(pks)
+            sourcePrimaryKey=''
+            targetPrimaryKey=''
             for pair in pks:
-                print(pair[0],"-------->",pair[1],"\n...........")
-                sourcePrimaryKey +=pair[0]+", "
-                targetPrimaryKey +=pair[1]+", "
+                
+                sourcePrimaryKey +=pair[0]+","
+                targetPrimaryKey +=pair[1]+","
         message = '[+] Primary key identification Success!'
     except:
         sourcePrimaryKey=None
@@ -91,7 +93,11 @@ def mapData():
     global sourcePrimaryKey
     global targetPrimaryKey
     global mapingDoc
+    mapingStr = ""
+    sourcePrimaryKey = request.form.get('sourcePk').strip()
+    targetPrimaryKey = request.form.get('targetPk').strip()
     print("Data map request received...")
+    print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
     try:
         # sourceFileString = request.form.get('source')
         # targetFileString = request.form.get('target')
@@ -99,7 +105,10 @@ def mapData():
         # targetPrimaryKey = request.form.get('targetPk')
         
         mapingStr,mapingDoc = mapColumnstring(sourceFileString, targetFileString,sourcePrimaryKey,targetPrimaryKey)
-        message =  '[+] Data maping Success!'
+        if(mapingDoc == {}):
+            message =  '[-] Data maping Failed!'
+        else:
+            message =  '[+] Data maping Success!'
 
     except:
         mapingDoc=None

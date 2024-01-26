@@ -131,6 +131,8 @@ def mappColumn(Sourcedata, TargetData, source_key_column, target_key_column):
             # print("-------------------------------------------------------------")
 
     # Return the output string and mapping dictionary
+    if len(mappingDoc) == 0:
+        return "No mapping found", mappingDoc
     return outputString, mappingDoc
 
 
