@@ -1,7 +1,8 @@
 [build]
-  command = "flutter build web"
+  command = "./install_flutter.sh && flutter build web"
   publish = "build/web"
   functions = "functions"  # Optional: If you have serverless functions
+  environment = { FLUTTER_VERSION = "3.16.9"}
 
 [context.production.environment]
   FLUTTER_VERSION = "3.16.9"  
