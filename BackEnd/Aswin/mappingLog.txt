@@ -50,34 +50,34 @@ Original String: elin@example.net   Output String: {Email}
 Email: {Email}
 -------------------------------------------------------------
 Original String: 857.139.8239   Output String: 857.{Index}39.8239
-Original String: -10395   Output String: {Phone_Number}
-Original String: (599)782-0605   Output String: {Phone_Number}
-Original String: -7326   Output String: {Phone_Number}
+Original String: -10395   Output String: {Phone Number}
+Original String: (599)782-0605   Output String: {Phone Number}
+Original String: -7326   Output String: {Phone Number}
 Original String: (390)417-1635x3010   Output String: (390)417-163{Index}x3010
-Original String: 8537800927   Output String: {Phone_Number}
+Original String: 8537800927   Output String: {Phone Number}
 Original String: 093.655.7480x7895   Output String: 093.655.{Index}480x{Index}895
-Original String: 4709522945   Output String: {Phone_Number}
+Original String: 4709522945   Output String: {Phone Number}
 -------------------------------------------------------------
-Phone Number: {Phone_Number}
+Phone_Number: {Phone Number}
 -------------------------------------------------------------
 Original String: 1/27/2014   Output String: {Index}/27/20{Index}4
 Original String: 7/26/1931   Output String: 7/{Index}6/1931
 Original String: 11/25/2013   Output String: 11/25/201{Index}
-Original String: 11/17/2012   Output String: {Date_Of_Birth}
+Original String: 11/17/2012   Output String: {Date Of Birth}
 Original String: 4/15/1923   Output String: 4/1{Index}/1923
 Original String: 8/6/1917   Output String: 8/{Index}/1917
-Original String: 12/22/1984   Output String: {Date_Of_Birth}
-Original String: 12/2/2016   Output String: {Date_Of_Birth}
-Original String: 12/16/2012   Output String: {Date_Of_Birth}
-Original String: 6/29/1953   Output String: {Date_Of_Birth}
+Original String: 12/22/1984   Output String: {Date Of Birth}
+Original String: 12/2/2016   Output String: {Date Of Birth}
+Original String: 12/16/2012   Output String: {Date Of Birth}
+Original String: 6/29/1953   Output String: {Date Of Birth}
 -------------------------------------------------------------
-Date Of Birth: {Date_Of_Birth}
+Date_Of_Birth: {Date Of Birth}
 -------------------------------------------------------------
-Original String: Probation officer   Output String: {Job_Title}
-Original String: Dancer   Output String: {Job_Title}
-Original String: Copy   Output String: {Job_Title}
-Original String: Counselling psychologist   Output String: {Job_Title}
-Original String: Biomedical engineer   Output String: {Job_Title}
+Original String: Probation officer   Output String: {Job Title}
+Original String: Dancer   Output String: {Job Title}
+Original String: Copy   Output String: {Job Title}
+Original String: Counselling psychologist   Output String: {Job Title}
+Original String: Biomedical engineer   Output String: {Job Title}
 -------------------------------------------------------------
-Job Title: {Job_Title}
+Job_Title: {Job Title}
 -------------------------------------------------------------

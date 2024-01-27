@@ -60,7 +60,7 @@ def findKeys():
     global targetPrimaryKey
     
     try:
-        print("request received...")
+        print("[⌄]request received...")
         sourceFileString = request.form.get('source')
         sourcedata = read_csv_string(sourceFileString)
         targetFileString = request.form.get('target')
@@ -84,7 +84,8 @@ def findKeys():
         targetPrimaryKey=None
         message = '[-] Primary key identification Failed!'
         
-    print(message,"returning response...")    
+    print(message)
+    print("[^] returning response...")    
     return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():
@@ -96,7 +97,7 @@ def mapData():
     mapingStr = ""
     sourcePrimaryKey = request.form.get('sourcePk').strip()
     targetPrimaryKey = request.form.get('targetPk').strip()
-    print("Data map request received...")
+    print("[⌄] Data map request received...")
     print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
     try:
         # sourceFileString = request.form.get('source')
@@ -114,7 +115,8 @@ def mapData():
         mapingDoc=None
         message =  '[-] Data maping Failed!'
         
-    print(message,"returning response...")
+    print(message)
+    print("[^] returning response...")
     return jsonify({'MapingDoc': mapingStr, 'message': message}) 
 @app.route('/validateData', methods=['POST'])
 def validateData():
@@ -125,25 +127,25 @@ def validateData():
     global targetPrimaryKey  
     global mapingDoc
     
-    print("validation request received...")
+    print("[⌄] validation request received...")
     targetdata = read_csv_string(targetFileString)
     sourcedata = read_csv_string(sourceFileString)
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
-        resultString =dividedCompare(sourcedata,targetdata,mapingDoc)
+        resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
     except:
-        print("error in validation")
+        print("[!] error in validation")
     
     
     # print(resultString)
     
     # resultString = driver(sourcedata,targetdata)
     # return resultString
-    print("returning response...")
+    print("[^] returning response...")
 
     return jsonify({'validationDoc': resultString, 'message': 'Validation Complete!'}) 
 
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=4564)
+    app.run(host='127.0.0.1', port=4564,debug=True)
