@@ -16,6 +16,31 @@ def read_csv_string(csv_string):
 # Print the result
     return data_df
 
+
+def read_file_content_df(file):
+    """
+    Reads the content of a CSV or Excel file and returns a Pandas DataFrame.
+
+    Parameters:
+        file (werkzeug.datastructures.FileStorage): The uploaded file.
+
+    Returns:
+        pd.DataFrame: The DataFrame containing the file data.
+    """
+    # Check the file extension
+    file_extension = file.filename.split('.')[-1].lower()
+
+    if file_extension == 'csv':
+        # Read CSV file
+        df = pd.read_csv(file)
+    elif file_extension in ['xls', 'xlsx']:
+        # Read Excel file
+        df = pd.read_excel(file)
+    else:
+        raise ValueError(f"Unsupported file format: {file_extension}. Supported formats are CSV and Excel.")
+
+    return df
+
 def read_csv_file(csv_file_path):
     # Create an empty list to store dictionaries
     data_list = []

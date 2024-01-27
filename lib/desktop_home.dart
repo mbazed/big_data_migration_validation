@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
+import 'dart:html' as html;
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart'
     show kIsWeb; // Import kIsWeb from flutter/foundation
-
-import 'package:http/http.dart' as http;
 
 class DesktopDataValidatorPage extends StatefulWidget {
   const DesktopDataValidatorPage({Key? key}) : super(key: key);
@@ -26,11 +26,17 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String sourceData = '';
   String targetData = '';
   String secondButtonText = 'Map Data';
+  String firstButtonText = 'Upload';
   bool multiKey = false;
+
+  FilePickerResult? targetResult;
+  FilePickerResult? sourceResult;
+
+  final pkUrl = Uri.parse('http://localhost:4564/findKeys');
 
   final mapUrl = Uri.parse('http://localhost:4564/mapData');
   final validateUrl = Uri.parse('http://localhost:4564/validateData');
-  final uploadUrl = Uri.parse('http://localhost:4564/findKeys');
+  final uploadUrl = Uri.parse('http://localhost:4564/upload');
 
   var srcpk = "";
   var trgpk = "";
@@ -39,8 +45,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final TextEditingController _resultController = TextEditingController();
   TextEditingController _keyController1 = TextEditingController();
   TextEditingController _keyController2 = TextEditingController();
-  List<String> srcCandidateKeys = ['src1', 'src2', 'src3'];
-  List<String> trgCandidateKeys = ['trg1', 'trg2', 'trg3'];
+  List<String> srcCandidateKeys = [];
+  List<String> trgCandidateKeys = [];
 
   String fileName = 'No file selected';
   // Use your _list here
@@ -251,19 +257,19 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       padding: const EdgeInsets.only(left: 10, top: 40),
                       child: InkWell(
                         onTap: () async {
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles(
+                          sourceResult = await FilePicker.platform.pickFiles(
                             allowMultiple: false,
                             type: FileType.custom,
-                            allowedExtensions: ['csv', 'xlsx'],
+                            allowedExtensions: ['csv', 'xlsx', 'xls'],
                           );
 
                           // Check if a file was selected
-                          if (result != null) {
+                          if (sourceResult != null) {
                             setState(() {
-                              sourceData = readFile(result);
+                              firstButtonText = 'Upload';
+                              // sourceData = readFile(sourceResult);
 
-                              source = result.files.single.name;
+                              source = sourceResult!.files.single.name;
                               _sourceController.text = source;
 
                               _resultController.text =
@@ -372,19 +378,20 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       child: InkWell(
                         onTap: () async {
                           // Open file picker
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles(
+                          targetResult = await FilePicker.platform.pickFiles(
                             allowMultiple: false,
                             type: FileType.custom,
-                            allowedExtensions: ['csv', 'xlsx'],
+                            allowedExtensions: ['csv', 'xlsx','xls'],
                           );
                           // Check if a file was selected
-                          if (result != null) {
+                          if (targetResult != null) {
                             setState(() {
                               // Update the 'source' variable with the selected file path
 
-                              targetData = readFile(result);
-                              target = result.files.single.name;
+                              // targetData = readFile(result);
+                              firstButtonText = 'Upload';
+
+                              target = targetResult!.files.single.name;
                               _targetController.text = target;
                               if (_resultController.text != '') {
                                 _resultController.text =
@@ -433,54 +440,135 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onPressed: () async {
-                      try {
-                        final response = await http.post(
-                          uploadUrl,
-                          body: {'source': sourceData, 'target': targetData},
-                        );
+                    onPressed: firstButtonText == 'Upload'
+                        ? () async {
+                            try {
+                              var request;
 
-                        if (response.statusCode == 200) {
-                          print('[+] Primary Key Fetch successful! ');
-                          secondButtonText = 'Map Data';
+                              if (sourceResult != null &&
+                                  targetResult != null) {
+                                request =
+                                    http.MultipartRequest('POST', uploadUrl);
 
-                          final Map<String, dynamic> data =
-                              jsonDecode(response.body);
+                                // Add source file to request
+                                if (kIsWeb) {
+                                  // Use bytes property for web
+                                  request.files
+                                      .add(http.MultipartFile.fromBytes(
+                                    'sourceFile',
+                                    sourceResult!.files.single.bytes!,
+                                    filename: sourceResult!.files.single.name,
+                                  ));
+                                } else {
+                                  // Use fromPath for other platforms
+                                  request.files
+                                      .add(await http.MultipartFile.fromPath(
+                                    'sourceFile',
+                                    sourceResult!.files.single.path!,
+                                  ));
+                                }
 
-                          // Access the 'primarykey' value
-                          setState(() {
-                            _keyController1.text = "";
-                            _keyController2.text = "";
-                            srcCandidateKeys =
-                                data['sourcePrimaryKey'].toString().split(',');
-                            trgCandidateKeys =
-                                data['targetPrimaryKey'].toString().split(',');
-                            var srcCandidateKeysStr =
-                                data['sourcePrimaryKey'].toString();
-                            var trgCandidateKeysStr =
-                                data['targetPrimaryKey'].toString();
-                            if (srcCandidateKeys.length > 1 ||
-                                trgCandidateKeys.length > 1) {
-                              multiKey = true;
-                            } else {
-                              multiKey = false;
+                                // Add target file to request
+                                if (kIsWeb) {
+                                  // Use bytes property for web
+                                  request.files
+                                      .add(http.MultipartFile.fromBytes(
+                                    'targetFile',
+                                    targetResult!.files.single.bytes!,
+                                    filename: targetResult!.files.single.name,
+                                  ));
+                                } else {
+                                  // Use fromPath for other platforms
+                                  request.files
+                                      .add(await http.MultipartFile.fromPath(
+                                    'targetFile',
+                                    targetResult!.files.single.path!,
+                                  ));
+                                }
+
+                                var response = await request.send();
+
+                                if (response.statusCode == 200) {
+                                  print('[+] Files Uploaded successfully!');
+                                  setState(() {
+                                    _resultController.text =
+                                        '${_resultController.text}Files Uploaded successfully!\n';
+                                    firstButtonText = 'Find Primary Keys';
+                                  });
+                                }
+                              } else {
+                                _resultController.text =
+                                    '${_resultController.text}Source or target result is Null\n';
+                                print('[!] Source or target result is null');
+                                // Handle the case when either sourceResult or targetResult is null
+                              }
+                            } catch (e) {
+                              _resultController.text =
+                                  '${_resultController.text}Error during File Upload: $e\n';
+                              print('[!] Error during File Upload: $e');
+                              // Handle other errors
                             }
+                          }
+                        : () async {
+                            try {
+                              final response = await http.post(
+                                pkUrl,
+                                body: {
+                                  'source': sourceData,
+                                  'target': targetData
+                                },
+                              );
 
-                            srcpk = srcCandidateKeys[0];
-                            trgpk = trgCandidateKeys[0];
-                            _resultController.text =
-                                '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
-                          });
-                        } else {
-                          print(
-                              '[-] Primary Key Fetch failed: ${response.statusCode}');
-                        }
-                      } catch (e) {
-                        print('[!] Error during Primary Key Fetch: $e');
-                      }
-                    },
+                              if (response.statusCode == 200) {
+                                print('[+] Primary Key Fetch successful! ');
+                                secondButtonText = 'Map Data';
+
+                                final Map<String, dynamic> data =
+                                    jsonDecode(response.body);
+
+                                // Access the 'primarykey' value
+                                setState(() {
+                                  _keyController1.text = "";
+                                  _keyController2.text = "";
+                                  srcCandidateKeys = data['sourcePrimaryKey']
+                                      .toString()
+                                      .split(',');
+                                  trgCandidateKeys = data['targetPrimaryKey']
+                                      .toString()
+                                      .split(',');
+                                  var srcCandidateKeysStr =
+                                      data['sourcePrimaryKey'].toString();
+                                  var trgCandidateKeysStr =
+                                      data['targetPrimaryKey'].toString();
+                                  if (srcCandidateKeys.length > 1 ||
+                                      trgCandidateKeys.length > 1) {
+                                    multiKey = true;
+                                  } else {
+                                    multiKey = false;
+                                  }
+
+                                  srcpk = srcCandidateKeys[0];
+                                  trgpk = trgCandidateKeys[0];
+                                  _resultController.text =
+                                      '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
+                                });
+                              } else {
+                                print(
+                                    '[-] Primary Key Fetch failed: ${response.statusCode}');
+                                setState(() {
+                                  firstButtonText = 'Upload';
+                                });
+                              }
+                            } catch (e) {
+                              print('[!] Error during Primary Key Fetch: $e');
+                              setState(() {
+                                firstButtonText = 'Upload';
+                              });
+                            }
+                          },
                     child: Align(
-                        alignment: Alignment.center, child: Text('Upload')),
+                        alignment: Alignment.center,
+                        child: Text(firstButtonText)),
                   ),
                 ),
               ],

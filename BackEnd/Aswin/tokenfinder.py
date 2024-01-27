@@ -24,7 +24,24 @@ def read_csv_String_to_dic(csv_string):
 
 # Example usage:
 
+def df_to_list_of_dicts(df):
+    # Convert DataFrame to CSV string
+    csv_string = df.to_csv(index=False)
 
+    # Create an empty list to store dictionaries
+    data_list = []
+
+    # Create a StringIO object to treat the string as a file
+    csv_file = StringIO(csv_string)
+
+    # Read the CSV file
+    csv_reader = csv.DictReader(csv_file)
+
+    # Iterate over rows in the CSV file
+    for row in csv_reader:
+        data_list.append(row)
+
+    return data_list
 
 
 def read_csv_file(csv_file_path):
@@ -81,7 +98,10 @@ def replace_substrings_with_keys(input_str, substitution_dict):
             input_str = input_str.replace(value, f'{{{key}}}')
     return input_str
     
-def mappColumn(Sourcedata, TargetData, source_key_column, target_key_column):
+def mappColumn(src, trg, source_key_column, target_key_column):
+    Sourcedata=df_to_list_of_dicts(src)
+    TargetData=df_to_list_of_dicts(trg)
+    
     outputString = "Mapping Doc\n-------------------\n"
     output_file_path = "mappingLog.txt"
     mappingDoc = {}  # Dictionary to store mapping results
@@ -95,7 +115,7 @@ def mappColumn(Sourcedata, TargetData, source_key_column, target_key_column):
                 # Fetch the corresponding row from the target data based on the primary key
                 target_row = next((row for row in TargetData if row[target_key_column] == source_row[source_key_column]), None)
 
-                if target_row is None or target_row[key] == "":
+                if target_row is None or target_row[key] == "" or source_row[key] == "" or source_row[key] is None:
                     continue
 
                 output_string = replace_substrings_with_keys(target_row[key], source_row)

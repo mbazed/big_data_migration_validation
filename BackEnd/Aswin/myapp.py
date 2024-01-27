@@ -1,6 +1,6 @@
 from validation3 import *
 import pandas as pd
-from readSouce import read_csv_string
+from readSouce import *
 from tokenfinder import *
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -17,27 +17,31 @@ targetPrimaryKey= None
 mapingDoc = None
 
 
+
+
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/upload', methods=['POST'])
-def upload_file():
-    global uploaded_file  # Access the global variable
+def upload_files():
+    global sourcedata
+    global targetdata
+    
+    print("[⌄]uploaded Files...")
+    source_file = request.files['sourceFile']
+    target_file = request.files['targetFile']
 
-    if 'file' not in request.files:
-        return 'No file part'
+    if source_file.filename == '' or target_file.filename == '':
+        message =  '[-] No selected files'
+    else:
+        sourcedata=read_file_content_df(source_file)
+        targetdata=read_file_content_df(target_file)
 
-    file = request.files['file']
+        message= '[+] Files Recieved successfully'
 
-    if file.filename == '':
-        return 'No selected file'
+    # Process the files as needed
+    print(message)
+    return jsonify({'message': message})
 
-    # Save the file to a desired location
-    file.save('uploads/' + file.filename)
-
-    # Assign the file object to the global variable
-    uploaded_file = file
-
-    return 'File uploaded successfully'
 
 @app.route('/process')
 def process_file():
@@ -51,20 +55,16 @@ def process_file():
         return 'No file uploaded yet'
 
 
-CORS(app)
+
 @app.route('/findKeys', methods=['POST'])
 def findKeys():
-    global sourceFileString
-    global targetFileString
+    global sourcedata
+    global targetdata
     global sourcePrimaryKey
     global targetPrimaryKey
     
     try:
-        print("[⌄]request received...")
-        sourceFileString = request.form.get('source')
-        sourcedata = read_csv_string(sourceFileString)
-        targetFileString = request.form.get('target')
-        targetdata = read_csv_string(targetFileString)
+        print("[⌄] Primary key request received...")
         
         pks = get_two_keys(sourcedata,targetdata)
         if(len(pks) == 2):
@@ -89,8 +89,8 @@ def findKeys():
     return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():
-    global sourceFileString
-    global targetFileString
+    global sourcedata
+    global targetdata
     global sourcePrimaryKey
     global targetPrimaryKey
     global mapingDoc
@@ -100,18 +100,18 @@ def mapData():
     print("[⌄] Data map request received...")
     print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
     try:
-        # sourceFileString = request.form.get('source')
-        # targetFileString = request.form.get('target')
-        # sourcePrimaryKey = request.form.get('sourcePk')
-        # targetPrimaryKey = request.form.get('targetPk')
         
-        mapingStr,mapingDoc = mapColumnstring(sourceFileString, targetFileString,sourcePrimaryKey,targetPrimaryKey)
+        
+        mapingStr,mapingDoc = mappColumn(sourcedata,targetdata,sourcePrimaryKey,targetPrimaryKey)
         if(mapingDoc == {}):
             message =  '[-] Data maping Failed!'
         else:
             message =  '[+] Data maping Success!'
 
-    except:
+    except Exception as e:
+    # Print the exception message
+        
+        print(f"mapData/Exception occurred : {str(e)}")
         mapingDoc=None
         message =  '[-] Data maping Failed!'
         
@@ -121,20 +121,22 @@ def mapData():
 @app.route('/validateData', methods=['POST'])
 def validateData():
 
-    global sourceFileString
-    global targetFileString
+    global sourcedata
+    global targetdata
     global sourcePrimaryKey
     global targetPrimaryKey  
     global mapingDoc
     
     print("[⌄] validation request received...")
-    targetdata = read_csv_string(targetFileString)
-    sourcedata = read_csv_string(sourceFileString)
+    
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
         resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
-    except:
-        print("[!] error in validation")
+    except Exception as e:
+    # Print the exception message
+        
+        print(f"validateData/Exception occurred: {str(e)}")
+        
     
     
     # print(resultString)
@@ -148,4 +150,4 @@ def validateData():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=4564,debug=True)
+    app.run(host='127.0.0.1', port=4564,debug=False)

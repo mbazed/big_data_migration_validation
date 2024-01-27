@@ -54,20 +54,26 @@ def get_two_keys(data1, data2):
 
         logging.info("Finding common columns by value")
         result = find_same_columns_by_value(data1, data2, ck_name_set1, ck_name_set2)
-
+       
         if result is not None:
             if len(result) == 1:
                 logging.info(f"Single common column found by value: {result}")
                 return result[0]  # Return the single common column as a tuple
             elif len(result) > 1:
                 logging.info(f"Common columns found by value: {result}")
-                return result
+                list_1 = []
+                list_2 = []
+                for item in result:
+                    list_1.append(item[0])
+                    list_2.append(item[1])
+                
+                return ', '.join(list_1), ', '.join(list_2)
             else:
                 logging.warning("Unexpected number of common columns found.")
                 return None
         else:
             logging.warning("No common columns found.")
-            return None
+            return ck_name_set1,ck_name_set2
     except Exception as ex:
         logging.exception(f"An exception occurred: {ex}")
         return None

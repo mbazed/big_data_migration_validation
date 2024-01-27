@@ -37,19 +37,14 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
     # logging.info(f"rowByRowCompare: primaryKey - {primaryKey}, sourceRow - {sourceRow}, targetRow - {targetRow}, outputString - {outputString}")
     return outputString
 
-def dividedCompare(sourceData, targetData, mappingDoc_input):
+def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
     source_df = sourceData
     target_df = targetData
     logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
     
-    # Choose the primary key
-    primary_key = get_two_keys(target_df, target_df)[0][0]
-    # logging.info(f"dividedCompare: primary_key found1 - {primary_key}")
     
-    # Alternatively, you can use find_primary_key function
-    primary_key = find_primary_key(target_df)[0]
-    logging.info(f"dividedCompare: primary_key found - {primary_key}")
+    logging.info(f"dividedCompare: primary_key used - {primary_key}")
 
     outputString = []  
 
