@@ -28,6 +28,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String secondButtonText = 'Map Data';
   String firstButtonText = 'Upload';
   bool multiKey = false;
+  String requestID = "";
 
   FilePickerResult? targetResult;
   FilePickerResult? sourceResult;
@@ -381,7 +382,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                           targetResult = await FilePicker.platform.pickFiles(
                             allowMultiple: false,
                             type: FileType.custom,
-                            allowedExtensions: ['csv', 'xlsx','xls'],
+                            allowedExtensions: ['csv', 'xlsx', 'xls'],
                           );
                           // Check if a file was selected
                           if (targetResult != null) {
@@ -487,12 +488,24 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 }
 
                                 var response = await request.send();
+                                print(
+                                    'Response Status Code: ${response.statusCode}');
 
                                 if (response.statusCode == 200) {
                                   print('[+] Files Uploaded successfully!');
+                                  var responseBody =
+                                      await response.stream.bytesToString();
+                                  final Map<String, dynamic> data =
+                                      jsonDecode(responseBody);
+                                  requestID = data['request_id'].toString();
+                                  var message = data['message'].toString();
+
+                                  print('Request ID: $requestID');
+                                  print('Message: $message');
+
                                   setState(() {
                                     _resultController.text =
-                                        '${_resultController.text}Files Uploaded successfully!\n';
+                                        '${_resultController.text}${message}\n';
                                     firstButtonText = 'Find Primary Keys';
                                   });
                                 }
@@ -514,8 +527,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                               final response = await http.post(
                                 pkUrl,
                                 body: {
-                                  'source': sourceData,
-                                  'target': targetData
+                                  'request_id': requestID,
                                 },
                               );
 
@@ -835,6 +847,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 body: {
                                   'sourcePk': srcpk,
                                   'targetPk': trgpk,
+                                  'request_id': requestID,
                                 },
                               );
 
@@ -870,10 +883,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                               final responseValidation = await http.post(
                                 validateUrl,
                                 body: {
-                                  'source': sourceData,
-                                  'target': targetData,
-                                  'sourcePrimaryKey': srcpk,
-                                  'targetPrimaryKey': trgpk,
+                                  'request_id': requestID,
                                 },
                               );
 

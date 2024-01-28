@@ -1,4 +1,5 @@
 import csv
+import json
 import pandas as pd
 from io import StringIO
 from io import StringIO
@@ -16,7 +17,10 @@ def read_csv_string(csv_string):
 # Print the result
     return data_df
 
-
+def json_to_df(json_string):
+    data_dict = json.loads(json_string)
+    dfdata = pd.DataFrame(data_dict)
+    return dfdata
 def read_file_content_df(file):
     """
     Reads the content of a CSV or Excel file and returns a Pandas DataFrame.

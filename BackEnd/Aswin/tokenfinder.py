@@ -94,7 +94,7 @@ def replace_substrings_with_keys(input_str, substitution_dict):
     if input_str == None:
         return None
     for key, value in substitution_dict.items():
-        if value != None:
+        if value != None or value != '':
             input_str = input_str.replace(value, f'{{{key}}}')
     return input_str
     

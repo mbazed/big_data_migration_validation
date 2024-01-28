@@ -1,46 +1,88 @@
-from validation3 import *
+import json
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String, create_engine
 import pandas as pd
 from readSouce import *
 from tokenfinder import *
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 from uniqueKeyIdentifier import getPrimaryKey
 from validation import *
 from comonPk import *
-from validationHaritha import *
-sourceFileString = None
-sourcedata = None
-targetFileString = None
-targetdata = None 
-sourcePrimaryKey= None
-targetPrimaryKey= None
-mapingDoc = None
-
-
-
+from validation3 import *
+import uuid  # for generating unique request IDs
 
 app = Flask(__name__)
 CORS(app)
+
+
+# Configure your database URI (SQLite in this example)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+class DataRecord(db.Model):
+    id = Column(Integer, primary_key=True)
+    request_id = Column(String, unique=True)
+    source_data = Column(String)
+    target_data = Column(String)
+    source_primary_key = Column(String)
+    target_primary_key = Column(String)
+    mapping_document = Column(String)
+
+# Create tables within the application context
+with app.app_context():
+    db.create_all()
+
 @app.route('/upload', methods=['POST'])
 def upload_files():
-    global sourcedata
-    global targetdata
-    
+   
+
     print("[⌄]uploaded Files...")
-    source_file = request.files['sourceFile']
-    target_file = request.files['targetFile']
 
-    if source_file.filename == '' or target_file.filename == '':
-        message =  '[-] No selected files'
-    else:
-        sourcedata=read_file_content_df(source_file)
-        targetdata=read_file_content_df(target_file)
+    # Generate a unique request ID for each upload
+    try:
+        
+        request_id = str(uuid.uuid4())
 
-        message= '[+] Files Recieved successfully'
+        source_file = request.files['sourceFile']
+        target_file = request.files['targetFile']
 
-    # Process the files as needed
-    print(message)
-    return jsonify({'message': message})
+        if source_file.filename == '' or target_file.filename == '':
+            message = '[-] No selected files'
+        else:
+            sourcedata = read_file_content_df(source_file)
+            targetdata = read_file_content_df(target_file)
+
+        # Convert DataFrames to JSON strings for storage
+            source_json = sourcedata.to_json()
+            target_json = targetdata.to_json()
+
+        # Store data in the database with the associated request ID
+            record = DataRecord(
+                request_id=request_id,
+                source_data=source_json,
+                target_data=target_json,
+           
+            )
+            db.session.add(record)
+            db.session.commit()
+
+            message = '[+] Files Received successfully'
+            print(message , "with request_id:", request_id)
+        return jsonify({'message': message, 'request_id': request_id})
+    except Exception as e:
+        print(f"upload_files/Exception occurred: {str(e)}")
+        message = '[-] Files Receive Failed!'
+        return jsonify({'message': message, 'request_id': request_id}),500
+        
+        
+        
+    
+
+# Add other routes and functions as needed
+
+
 
 
 @app.route('/process')
@@ -58,10 +100,16 @@ def process_file():
 
 @app.route('/findKeys', methods=['POST'])
 def findKeys():
-    global sourcedata
-    global targetdata
-    global sourcePrimaryKey
-    global targetPrimaryKey
+    sourcePrimaryKey= None
+    targetPrimaryKey= None
+    request_id = request.form.get('request_id')
+    
+    record = DataRecord.query.filter_by(request_id=request_id).first()
+    
+    
+
+    sourcedata = json_to_df(record.source_data)
+    targetdata = json_to_df(record.target_data)
     
     try:
         print("[⌄] Primary key request received...")
@@ -83,22 +131,44 @@ def findKeys():
         sourcePrimaryKey=None
         targetPrimaryKey=None
         message = '[-] Primary key identification Failed!'
+    
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
+
+            # Commit the changes to the database
+    db.session.commit()
+
+    message = '[+] Primary keys updated successfully'
+        
+    
         
     print(message)
     print("[^] returning response...")    
     return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():
-    global sourcedata
-    global targetdata
-    global sourcePrimaryKey
-    global targetPrimaryKey
-    global mapingDoc
+    
+    
+    
+    
     mapingStr = ""
+    request_id = request.form.get('request_id')
     sourcePrimaryKey = request.form.get('sourcePk').strip()
     targetPrimaryKey = request.form.get('targetPk').strip()
+    record = DataRecord.query.filter_by(request_id=request_id).first()
+    sourcedata = json_to_df(record.source_data)
+    targetdata= json_to_df(record.target_data)
+    
+    
     print("[⌄] Data map request received...")
     print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
+    
+    
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
+
+            # Commit the changes to the database
+    
     try:
         
         
@@ -107,6 +177,8 @@ def mapData():
             message =  '[-] Data maping Failed!'
         else:
             message =  '[+] Data maping Success!'
+            record.mapping_document = json.dumps(mapingDoc)
+            db.session.commit()
 
     except Exception as e:
     # Print the exception message
@@ -120,13 +192,13 @@ def mapData():
     return jsonify({'MapingDoc': mapingStr, 'message': message}) 
 @app.route('/validateData', methods=['POST'])
 def validateData():
-
-    global sourcedata
-    global targetdata
-    global sourcePrimaryKey
-    global targetPrimaryKey  
-    global mapingDoc
+    request_id = request.form.get('request_id')
     
+    record = DataRecord.query.filter_by(request_id=request_id).first()
+    sourcedata = json_to_df(record.source_data)
+    targetdata= json_to_df(record.target_data)
+    mapingDoc = json.loads(record.mapping_document)
+    targetPrimaryKey = record.target_primary_key
     print("[⌄] validation request received...")
     
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
@@ -150,4 +222,6 @@ def validateData():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=4564,debug=False)
+    # Create the database tables before running the app
+    
+    app.run(host='127.0.0.1', port=4564, debug=False)
