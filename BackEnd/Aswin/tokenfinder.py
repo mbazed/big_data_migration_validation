@@ -115,7 +115,7 @@ def mappColumn(src, trg, source_key_column, target_key_column):
                 # Fetch the corresponding row from the target data based on the primary key
                 target_row = next((row for row in TargetData if row[target_key_column] == source_row[source_key_column]), None)
 
-                if target_row is None or target_row[key] == "" or source_row[key] == "" or source_row[key] is None:
+                if target_row is None or target_row[key] == "" :
                     continue
 
                 output_string = replace_substrings_with_keys(target_row[key], source_row)
