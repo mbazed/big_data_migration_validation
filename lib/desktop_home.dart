@@ -98,6 +98,24 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     });
   }
 
+  Widget getIconOrImage(String? selectedItem) {
+    if (selectedItem == 'File Mode') {
+      return Icon(Icons.file_copy_outlined, size: 14);
+    } else if (selectedItem == 'MySQL') {
+      return ImageIcon(AssetImage('assets/images/mysql.png'), size: 16);
+    } else if (selectedItem == 'Oracle DB') {
+      return ImageIcon(AssetImage('assets/images/oracle.png'), size: 16);
+    } else if (selectedItem == 'MongoDB') {
+      return ImageIcon(AssetImage('assets/images/mongodb.png'), size: 16);
+    } else {
+      return Icon(Icons.error, size: 14); // Default icon for unknown items
+    }
+  }
+
+  Widget iconOrImageWidget(Widget iconOrImage) {
+    return iconOrImage;
+  }
+
   @override
   Widget build(BuildContext context) {
     double width100 = MediaQuery.of(context).size.width * 0.35;
@@ -133,22 +151,13 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       width: 1,
                     ),
                     listItemBuilder: (BuildContext context, String item) {
-                      IconData icon;
-                      if (item == 'File Mode') {
-                        icon = Icons
-                            .file_copy_outlined; // Replace with the desired icon
-                      } else if (item == 'Database Mode') {
-                        icon = Icons.storage; // Replace with the desired icon
-                      } else {
-                        icon = Icons.error; // Default icon for unknown items
-                      }
-
+                      Widget iconOrImage = getIconOrImage(item);
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Icon(icon, size: 14),
+                              iconOrImage,
                               SizedBox(width: 8),
                               Text(
                                 item,
@@ -165,22 +174,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     },
                     headerBuilder:
                         (BuildContext context, String? selectedItem) {
-                      IconData icon;
-                      if (selectedItem == 'File Mode') {
-                        icon = Icons
-                            .file_copy_outlined; // Replace with the desired icon
-                      } else if (selectedItem == 'Database Mode') {
-                        icon = Icons.storage; // Replace with the desired icon
-                      } else {
-                        icon = Icons.error; // Default icon for unknown items
-                      }
+                      Widget iconOrImage = getIconOrImage(selectedItem);
 
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Icon(icon, size: 14),
+                              iconOrImage,
                               SizedBox(width: 8),
                               Text(
                                 selectedItem ?? '',
