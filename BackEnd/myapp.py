@@ -229,4 +229,4 @@ def validateData():
 if __name__ == '__main__':
     # Create the database tables before running the app
     
-    app.run( debug=True)
+    app.run(host='127.0.0.1', port=4564, debug=False)
