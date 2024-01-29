@@ -4,6 +4,7 @@ import csv
 from collections import Counter
 import csv
 from io import StringIO
+from comonPk import *
 
 def read_csv_String_to_dic(csv_string):
     # Create an empty list to store dictionaries
@@ -23,7 +24,24 @@ def read_csv_String_to_dic(csv_string):
 
 # Example usage:
 
+def df_to_list_of_dicts(df):
+    # Convert DataFrame to CSV string
+    csv_string = df.to_csv(index=False)
 
+    # Create an empty list to store dictionaries
+    data_list = []
+
+    # Create a StringIO object to treat the string as a file
+    csv_file = StringIO(csv_string)
+
+    # Read the CSV file
+    csv_reader = csv.DictReader(csv_file)
+
+    # Iterate over rows in the CSV file
+    for row in csv_reader:
+        data_list.append(row)
+
+    return data_list
 
 
 def read_csv_file(csv_file_path):
@@ -76,51 +94,99 @@ def replace_substrings_with_keys(input_str, substitution_dict):
     if input_str == None:
         return None
     for key, value in substitution_dict.items():
-        if value != None:
+        if value != None or value != '':
             input_str = input_str.replace(value, f'{{{key}}}')
     return input_str
     
-def mappColumn(Sourcedata, TargetData):
-    outputString="Maping Doc\n-------------------\n"
-    output_file_path="mappingLog.txt"
+def mappColumn(src, trg, source_key_column, target_key_column):
+    Sourcedata=df_to_list_of_dicts(src)
+    TargetData=df_to_list_of_dicts(trg)
+    
+    outputString = "Mapping Doc\n-------------------\n"
+    output_file_path = "mappingLog.txt"
+    mappingDoc = {}  # Dictionary to store mapping results
+    
     with open(output_file_path, 'w') as output_file:
         for key in TargetData[0].keys():
             outlist = []
             mappingResult = None
 
-            for i in range(len(Sourcedata)):
-                if TargetData[i][key] == "":
+            for source_row in Sourcedata:
+                # Fetch the corresponding row from the target data based on the primary key
+                target_row = next((row for row in TargetData if row[target_key_column] == source_row[source_key_column]), None)
+
+                if target_row is None or target_row[key] == "" :
                     continue
-                output_string = replace_substrings_with_keys(TargetData[i][key], Sourcedata[i])
-                if output_string == None:
+
+                output_string = replace_substrings_with_keys(target_row[key], source_row)
+
+                if output_string is None:
                     continue
+
                 outlist.append(output_string)
                 mappingResult = find_repeated_element(outlist, 5)
-                if(mappingResult != None):
+
+                if mappingResult is not None:
+                    # Update the mapping dictionary
+                    mappingDoc[key] = mappingResult
+                    
                     output_file.write(
-                        f"Original String: {TargetData[i][key]}   Output String: {output_string}\n"
+                        f"Original String: {target_row[key]}   Output String: {output_string}\n"
                         "-------------------------------------------------------------\n"
                         f"{key}: {mappingResult}\n"
                         "-------------------------------------------------------------\n"
                     )
+                    
+                    # Add to mappingDoc immediately after writing to outputString
+                    outputString += f"{key}: {mappingResult}\n"
+                    # print("Data in target: ", target_row[key])
+                    # print(key, ": ", mappingResult)
+                    
                     break
 
                 # Write the line to the file
-                output_line = f"Original String: {TargetData[i][key]}   Output String: {output_string}\n"
+                output_line = f"Original String: {target_row[key]}   Output String: {output_string}\n"
                 output_file.write(output_line)
 
-            print("-------------------------------------------------------------")
-        
-            outputString += f"{key}: {mappingResult}\n"
-            print("Data in target: ", TargetData[i][key])
-            print(key, ": ", mappingResult)
-    return outputString
+            # print("-------------------------------------------------------------")
 
-# Sourcedata=read_csv_file('studentsData.csv')
-# TargetData=read_csv_file('targetStudent.csv')
-def mapColumnstring(SourcedataString, TargetDataString):
+    # Return the output string and mapping dictionary
+    if len(mappingDoc) == 0:
+        return "No mapping found", mappingDoc
+    return outputString, mappingDoc
+
+
+# Example usage:
+
+# src=get_file()
+# trgt=get_file()
+
+# SourcedataString = read_csv_file('A1.csv')
+# TargetDataString = read_csv_file('A2.csv')
+
+
+# Sourcedata=read_csv_String_to_dic(SourcedataString);
+# Targetdata=read_csv_String_to_dic(TargetDataString);
+# pks=get_two_keys(Sourcedata,Targetdata)
+# printKeys(pks)
+
+# if(len(pks)==2):
+#     source_key_column = pks[0]  # Replace with the actual primary key column in source data
+#     target_key_column = pks[1]  # Replace with the actual primary key column in target data
+# elif(len(pks)>2):
+#     source_key_column=input("Enter Pk for Source")
+#     target_key_column=input("Enter Pk for target")
+    
+    
+
+# mappColumn(SourcedataString, TargetDataString, source_key_column, target_key_column)
+
+
+
+
+def mapColumnstring(SourcedataString, TargetDataString, source_key_column, target_key_column):
     Sourcedata=read_csv_String_to_dic(SourcedataString);
     Targetdata=read_csv_String_to_dic(TargetDataString);
-    return mappColumn(Sourcedata,Targetdata)
+    return mappColumn(Sourcedata,Targetdata, source_key_column, target_key_column)
     
         

@@ -31,3 +31,12 @@ Original String: +91 7592816941   Output String: +91 {Phone Number}
 -------------------------------------------------------------
 Contact no: +91 {Phone Number}
 -------------------------------------------------------------
+Original String: DID55565   Output String: {Dumpid}
+Original String: DID55566   Output String: {Dumpid}
+Original String: DID55567   Output String: {Dumpid}
+Original String: DID55568   Output String: {Dumpid}
+Original String: DID55569   Output String: DID{Roll No.}{Roll No.}{Roll No.}69
+Original String: DID55570   Output String: {Dumpid}
+-------------------------------------------------------------
+Dumpid: {Dumpid}
+-------------------------------------------------------------
