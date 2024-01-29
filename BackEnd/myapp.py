@@ -7,7 +7,7 @@ import pandas as pd
 
 from readSouce import *
 from tokenfinder import *
-
+from dbconncomplete import *
 from comonPk import *
 from validation3 import *
 import uuid  # for generating unique request IDs
@@ -34,6 +34,50 @@ class DataRecord(db.Model):
 # Create tables within the application context
 with app.app_context():
     db.create_all()
+
+@app.route('/getfromdb',methods=['POST'])
+def get_from_db():
+    print("[⌄]getting from DB...")
+    try:
+        request_id = str(uuid.uuid4())
+        source_database_type = request.form.get('source_database_type')
+        source_hostname = request.form.get('source_hostname')
+        source_username = request.form.get('source_username')
+        source_database = request.form.get('source_database')
+        source_password = request.form.get('source_password')
+        source_table = request.form.get('source_table')
+        target_database_type = request.form.get('target_database_type')
+        target_hostname = request.form.get('target_hostname')
+        target_username = request.form.get('target_username')
+        target_database = request.form.get('target_database')
+        target_password = request.form.get('target_password')
+        target_table = request.form.get('target_table')
+
+        sourcedata = gbtodf(source_database_type,source_hostname,source_username,source_password,source_database,source_table)
+        targetdata = gbtodf(target_database_type,target_hostname,target_username,target_password,target_database,target_table)
+
+        # Convert DataFrames to JSON strings for storage
+        source_json = sourcedata.to_json()
+        target_json = targetdata.to_json()
+
+        # Store data in the database with the associated request ID
+        record = DataRecord(
+            request_id=request_id,
+            source_data=source_json,
+            target_data=target_json,
+           
+            )
+        db.session.add(record)
+        db.session.commit()
+
+        message = '[+] Files Received successfully'
+        print(message , "with request_id:", request_id)
+        return jsonify({'message': message, 'request_id': request_id})
+
+    except Exception as e:
+        print(f"An error occurred on get_from_db: {e}")
+
+
 
 @app.route('/upload', methods=['POST'])
 def upload_files():
