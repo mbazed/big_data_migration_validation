@@ -1,4 +1,5 @@
 import 'package:data_validation/FileReadRoutine.dart';
+import 'package:data_validation/main.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
@@ -34,7 +35,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   FilePickerResult? sourceResult;
 
   final pkUrl = Uri.parse('http://localhost:4564/findKeys');
-
+  final dbmodeurl = Uri.parse('http://localhost:4564/getfromdb');
   final mapUrl = Uri.parse('http://localhost:4564/mapData');
   final validateUrl = Uri.parse('http://localhost:4564/validateData');
   final uploadUrl = Uri.parse('http://localhost:4564/upload');
@@ -70,6 +71,32 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
     // Add other items as needed
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Adding listeners to controllers
+    _sourceUserController.addListener(_handleTextChange);
+    _sourcePassController.addListener(_handleTextChange);
+    _sourceHostController.addListener(_handleTextChange);
+    _sourceDBNameController.addListener(_handleTextChange);
+    _sourceTableController.addListener(_handleTextChange);
+    _targetUserController.addListener(_handleTextChange);
+    _targetPassController.addListener(_handleTextChange);
+    _targetHostController.addListener(_handleTextChange);
+    _targetDBNameController.addListener(_handleTextChange);
+    _targetTableController.addListener(_handleTextChange);
+  }
+
+  // Callback function that will be executed when any text changes
+  void _handleTextChange() {
+    // Do something when text changes
+
+    setState(() {
+      firstButtonText = 'Upload';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -721,83 +748,163 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     ),
                     onPressed: firstButtonText == 'Upload'
                         ? () async {
-                            try {
-                              var request;
+                            if (selectedMode == 'File Mode') {
+                              try {
+                                var request;
 
-                              if (sourceResult != null &&
-                                  targetResult != null) {
-                                request =
-                                    http.MultipartRequest('POST', uploadUrl);
+                                if (sourceResult != null &&
+                                    targetResult != null) {
+                                  request =
+                                      http.MultipartRequest('POST', uploadUrl);
 
-                                // Add source file to request
-                                if (kIsWeb) {
-                                  // Use bytes property for web
-                                  request.files
-                                      .add(http.MultipartFile.fromBytes(
-                                    'sourceFile',
-                                    sourceResult!.files.single.bytes!,
-                                    filename: sourceResult!.files.single.name,
-                                  ));
+                                  // Add source file to request
+                                  if (kIsWeb) {
+                                    // Use bytes property for web
+                                    request.files
+                                        .add(http.MultipartFile.fromBytes(
+                                      'sourceFile',
+                                      sourceResult!.files.single.bytes!,
+                                      filename: sourceResult!.files.single.name,
+                                    ));
+                                  } else {
+                                    // Use fromPath for other platforms
+                                    request.files
+                                        .add(await http.MultipartFile.fromPath(
+                                      'sourceFile',
+                                      sourceResult!.files.single.path!,
+                                    ));
+                                  }
+
+                                  // Add target file to request
+                                  if (kIsWeb) {
+                                    // Use bytes property for web
+                                    request.files
+                                        .add(http.MultipartFile.fromBytes(
+                                      'targetFile',
+                                      targetResult!.files.single.bytes!,
+                                      filename: targetResult!.files.single.name,
+                                    ));
+                                  } else {
+                                    // Use fromPath for other platforms
+                                    request.files
+                                        .add(await http.MultipartFile.fromPath(
+                                      'targetFile',
+                                      targetResult!.files.single.path!,
+                                    ));
+                                  }
+
+                                  var response = await request.send();
+                                  print(
+                                      'Response Status Code: ${response.statusCode}');
+
+                                  if (response.statusCode == 200) {
+                                    print('[+] Files Uploaded successfully!');
+                                    var responseBody =
+                                        await response.stream.bytesToString();
+                                    final Map<String, dynamic> data =
+                                        jsonDecode(responseBody);
+                                    requestID = data['request_id'].toString();
+                                    var message = data['message'].toString();
+
+                                    print('Request ID: $requestID');
+                                    print('Message: $message');
+
+                                    setState(() {
+                                      _resultController.text =
+                                          '${_resultController.text}${message}\n';
+                                      firstButtonText = 'Find Primary Keys';
+                                    });
+                                  }
                                 } else {
-                                  // Use fromPath for other platforms
-                                  request.files
-                                      .add(await http.MultipartFile.fromPath(
-                                    'sourceFile',
-                                    sourceResult!.files.single.path!,
-                                  ));
+                                  _resultController.text =
+                                      '${_resultController.text}Source or target result is Null\n';
+                                  print('[!] Source or target result is null');
+                                  // Handle the case when either sourceResult or targetResult is null
                                 }
+                              } catch (e) {
+                                _resultController.text =
+                                    '${_resultController.text}Error during File Upload: $e\n';
+                                print('[!] Error during File Upload: $e');
+                                // Handle other errors
+                              }
+                            } else {
+                              var source_database_type = 'mysql';
+                              var target_database_type = 'mysql';
+                              try {
+                                if (_sourceUserController.text != "" &&
+                                    _sourcePassController.text != "" &&
+                                    _sourceHostController.text != "" &&
+                                    _sourceDBNameController.text != "" &&
+                                    _sourceTableController.text != "" &&
+                                    _targetUserController.text != "" &&
+                                    _targetPassController.text != "" &&
+                                    _targetHostController.text != "" &&
+                                    _targetDBNameController.text != "" &&
+                                    _targetTableController.text != "") {
+                                  final response = await http.post(
+                                    dbmodeurl,
+                                    body: {
+                                      'source_database_type':
+                                          source_database_type,
+                                      'source_hostname':
+                                          _sourceHostController.text,
+                                      'source_username':
+                                          _sourceUserController.text,
+                                      'source_database':
+                                          _sourceDBNameController.text,
+                                      'source_password':
+                                          _sourcePassController.text,
+                                      'source_table':
+                                          _sourceTableController.text,
+                                      'target_database_type':
+                                          target_database_type,
+                                      'target_hostname':
+                                          _targetHostController.text,
+                                      'target_username':
+                                          _targetUserController.text,
+                                      'target_database':
+                                          _targetDBNameController.text,
+                                      'target_password':
+                                          _targetPassController.text,
+                                      'target_table':
+                                          _targetTableController.text,
+                                    },
+                                  );
 
-                                // Add target file to request
-                                if (kIsWeb) {
-                                  // Use bytes property for web
-                                  request.files
-                                      .add(http.MultipartFile.fromBytes(
-                                    'targetFile',
-                                    targetResult!.files.single.bytes!,
-                                    filename: targetResult!.files.single.name,
-                                  ));
+                                  if (response.statusCode == 200) {
+                                    print(
+                                        '[+] Data retrived from Databases successfully!');
+
+                                    final Map<String, dynamic> data =
+                                        jsonDecode(response.body);
+                                    requestID = data['request_id'].toString();
+                                    var message = data['message'].toString();
+
+                                    print('Request ID: $requestID');
+                                    print('Message: $message');
+
+                                    setState(() {
+                                      _resultController.text =
+                                          '${_resultController.text}${message}\n';
+                                      firstButtonText = 'Find Primary Keys';
+                                    });
+                                  } else {
+                                    setState(() {
+                                      firstButtonText == 'Upload';
+                                      _resultController.text =
+                                          '${_resultController.text} Databases Connection Error!\n';
+                                    });
+                                  }
                                 } else {
-                                  // Use fromPath for other platforms
-                                  request.files
-                                      .add(await http.MultipartFile.fromPath(
-                                    'targetFile',
-                                    targetResult!.files.single.path!,
-                                  ));
-                                }
-
-                                var response = await request.send();
-                                print(
-                                    'Response Status Code: ${response.statusCode}');
-
-                                if (response.statusCode == 200) {
-                                  print('[+] Files Uploaded successfully!');
-                                  var responseBody =
-                                      await response.stream.bytesToString();
-                                  final Map<String, dynamic> data =
-                                      jsonDecode(responseBody);
-                                  requestID = data['request_id'].toString();
-                                  var message = data['message'].toString();
-
-                                  print('Request ID: $requestID');
-                                  print('Message: $message');
-
                                   setState(() {
+                                    firstButtonText == 'Upload';
                                     _resultController.text =
-                                        '${_resultController.text}${message}\n';
-                                    firstButtonText = 'Find Primary Keys';
+                                        '${_resultController.text} Please fill all the fields!\n';
                                   });
                                 }
-                              } else {
-                                _resultController.text =
-                                    '${_resultController.text}Source or target result is Null\n';
-                                print('[!] Source or target result is null');
-                                // Handle the case when either sourceResult or targetResult is null
+                              } catch (e) {
+                                print('[!] Error during Database upload: $e');
                               }
-                            } catch (e) {
-                              _resultController.text =
-                                  '${_resultController.text}Error during File Upload: $e\n';
-                              print('[!] Error during File Upload: $e');
-                              // Handle other errors
                             }
                           }
                         : () async {

@@ -52,30 +52,36 @@ def get_from_db():
         target_database = request.form.get('target_database')
         target_password = request.form.get('target_password')
         target_table = request.form.get('target_table')
-
-        sourcedata = gbtodf(source_database_type,source_hostname,source_username,source_password,source_database,source_table)
-        targetdata = gbtodf(target_database_type,target_hostname,target_username,target_password,target_database,target_table)
-
-        # Convert DataFrames to JSON strings for storage
-        source_json = sourcedata.to_json()
-        target_json = targetdata.to_json()
+        try:
+            sourcedata = gbtodf(source_database_type,source_hostname,source_username,source_password,source_database,source_table)
+            targetdata = gbtodf(target_database_type,target_hostname,target_username,target_password,target_database,target_table)
+            source_json = sourcedata.to_json()
+            target_json = targetdata.to_json()
 
         # Store data in the database with the associated request ID
-        record = DataRecord(
-            request_id=request_id,
-            source_data=source_json,
-            target_data=target_json,
+            record = DataRecord(
+                request_id=request_id,
+                source_data=source_json,
+                target_data=target_json,
            
-            )
-        db.session.add(record)
-        db.session.commit()
+                )
+            db.session.add(record)
+            db.session.commit()
 
-        message = '[+] Files Received successfully'
-        print(message , "with request_id:", request_id)
-        return jsonify({'message': message, 'request_id': request_id})
+            message = '[+] Files Received successfully'
+            print(message , "with request_id:", request_id)
+            return jsonify({'message': message, 'request_id': request_id})
+        except Exception as e:
+            message = '[-] Database Connection Failed!'
+            return jsonify({'message': message, 'request_id': request_id})
+            
+        # Convert DataFrames to JSON strings for storage
+        
 
     except Exception as e:
-        print(f"An error occurred on get_from_db: {e}")
+        print(f"[!]An error occurred on get_from_db: {e}")
+        message = '[-] Database Connection Failed!'
+        return jsonify({'message': message, 'request_id': request_id})
 
 
 
