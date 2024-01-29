@@ -1,0 +1,4 @@
+/*
+  # This header enables the "bypass all checkpoints" option.
+  X-Frame-Options: ALLOWALL
+  # Other headers...
