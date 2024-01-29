@@ -1,0 +1,31 @@
+Algo For Candidate Keys
+=======================
+
+function find_minimal_primary_key(data)
+	keys=[]
+	for subset_size 1 to cloumnCount/2
+		for all col_combination of subset_size
+			is_unique =data.groupby(list(col_combination)).size().max() == 1
+		if(is_unique)
+			keys.append(col_combination)
+	if(is_unique)
+		return keys
+
+
+Algo for column maping
+======================
+
+function map_columns(Sourcedata, TargetData)
+	output= ""
+	for all keys in TargetData
+        outlist = empty list
+        mappingResult = None
+        for i in range(length of Sourcedata):
+            outputString = replace_substrings_with_keys(TargetData[i][key],Sourcedata[i])
+            if outputString is None:
+                continue
+            mappingResult = find_repeated_element(outlist,threshold=5)
+            if mappingResult is not None
+                output +="{key}: {mappingResult}\n"
+        
+    return output

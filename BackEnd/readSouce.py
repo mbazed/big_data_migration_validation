@@ -1,7 +1,25 @@
 import csv
+import json
 import pandas as pd
 from io import StringIO
 from io import StringIO
+
+def dynamic_cast(reference_variable, variable_to_cast):
+    reference_type = type(reference_variable)
+
+    if reference_type == int:
+        casted_variable = int(variable_to_cast)
+    elif reference_type == float:
+        casted_variable = float(variable_to_cast)
+    elif reference_type == str:
+        casted_variable = str(variable_to_cast)
+    elif reference_type == bool:
+        casted_variable = bool(variable_to_cast)
+    else:
+        # Handle other data types if needed
+        casted_variable = variable_to_cast
+
+    return casted_variable
 
 
 # Use StringIO to simulate a file-like object from the string
@@ -15,6 +33,34 @@ def read_csv_string(csv_string):
 
 # Print the result
     return data_df
+
+def json_to_df(json_string):
+    data_dict = json.loads(json_string)
+    dfdata = pd.DataFrame(data_dict)
+    return dfdata
+def read_file_content_df(file):
+    """
+    Reads the content of a CSV or Excel file and returns a Pandas DataFrame.
+
+    Parameters:
+        file (werkzeug.datastructures.FileStorage): The uploaded file.
+
+    Returns:
+        pd.DataFrame: The DataFrame containing the file data.
+    """
+    # Check the file extension
+    file_extension = file.filename.split('.')[-1].lower()
+
+    if file_extension == 'csv':
+        # Read CSV file
+        df = pd.read_csv(file)
+    elif file_extension in ['xls', 'xlsx']:
+        # Read Excel file
+        df = pd.read_excel(file)
+    else:
+        raise ValueError(f"Unsupported file format: {file_extension}. Supported formats are CSV and Excel.")
+
+    return df
 
 def read_csv_file(csv_file_path):
     # Create an empty list to store dictionaries

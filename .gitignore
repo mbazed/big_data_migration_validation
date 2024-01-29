@@ -4,6 +4,8 @@
 *.log
 *.pyc
 *.swp
+*.txt
+*.db
 .DS_Store
 .atom/
 .buildlog/
@@ -133,3 +135,4 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+*.txt

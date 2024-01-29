@@ -1,108 +1,83 @@
-Original String: Middle East and North Africa   Output String: {Region}
-Original String: Central America and the Caribbean   Output String: {Region}
-Original String: Sub-Saharan Africa   Output String: {Region}
-Original String: Sub-Saharan Africa   Output String: {Region}
-Original String: Central America and the Caribbean   Output String: {Region}
+Original String: 1   Output String: {Index}
+Original String: 2   Output String: {Index}
+Original String: 3   Output String: {Index}
+Original String: 4   Output String: {Index}
+Original String: 5   Output String: {Index}
 -------------------------------------------------------------
-Region: {Region}
+Index: {Index}
 -------------------------------------------------------------
-Original String: Azerbaijan   Output String: {{Order Priority}ountry}
-Original String: Panama   Output String: {Country}
-Original String: Sao Tome and Principe   Output String: {Country}
-Original String: Sao Tome and Principe   Output String: {Country}
-Original String: Belize   Output String: {Country}
-Original String: Denmark   Output String: {{Order Priority}ountry}
-Original String: Germany   Output String: {Country}
+Original String: 8717bbf45cCDbEe   Output String: 87{Index}7bbf45cCDbEe
+Original String: 3d5AD30A4cD38ed   Output String: {User_id}
+Original String: 810Ce0F276Badec   Output String: {User_id}
+Original String: BF2a889C00f0cE1   Output String: {User_id}
+Original String: 9afFEafAe1CBBB9   Output String: {User_id}
+Original String: aF75e6dDEBC5b66   Output String: aF75e{Index}dDEBC5b{Index}{Index}
+Original String: efeb05c7Cc94EA3   Output String: efeb05c{Index}Cc94EA3
+Original String: fb1BF3FED57E9d7   Output String: {User_id}
 -------------------------------------------------------------
-Country: {Country}
+User_id: {User_id}
 -------------------------------------------------------------
-Original String: Online   Output String: {Sales {Order Priority}hannel}
-Original String: Offline   Output String: {Sales Channel}
-Original String: Offline   Output String: {Sales Channel}
-Original String: Online   Output String: {Sales Channel}
-Original String: Offline   Output String: {Sales Channel}
-Original String: Online   Output String: {Sales {Order Priority}hannel}
-Original String: Offline   Output String: {Sales Channel}
+Original String: Shelia   Output String: {Fname}
+Original String: Jo   Output String: {Fname}
+Original String: Sheryl   Output String: {Fname}
+Original String: Whitney   Output String: {Fname}
+Original String: Lindsey   Output String: {Fname}
 -------------------------------------------------------------
-Sales Channel: {Sales Channel}
+Fname: {Fname}
 -------------------------------------------------------------
-Original String: C   Output String: {Order Priority}
-Original String: L   Output String: {Order Priority}
-Original String: M   Output String: {Order Priority}
-Original String: M   Output String: {Order Priority}
-Original String: H   Output String: {Order Priority}
+Original String: Mahoney   Output String: {Lname}
+Original String: Rivers   Output String: {Lname}
+Original String: Lowery   Output String: {Lname}
+Original String: Hooper   Output String: {Lname}
+Original String: Rice   Output String: {Lname}
 -------------------------------------------------------------
-Order Priority: {Order Priority}
+Lname: {Lname}
 -------------------------------------------------------------
-Original String: 10/23/2014   Output String: {Ship Date}
-Original String: 2/27/2015   Output String: {Ship Date}
-Original String: 1/18/2016   Output String: {Ship Date}
-Original String: 10/12/2014   Output String: {Ship Date}
-Original String: 3/5/2010   Output String: {Ship Date}
+Original String: Male   Output String: {Sex}
+Original String: Female   Output String: {Sex}
+Original String: Female   Output String: {Sex}
+Original String: Male   Output String: {Sex}
+Original String: Female   Output String: {Sex}
 -------------------------------------------------------------
-Ship Date: {Ship Date}
+Sex: {Sex}
 -------------------------------------------------------------
-Original String: 934   Output String: {Units Sold}
-Original String: 4551   Output String: {Units Sold}
-Original String: 9986   Output String: {Units Sold}
-Original String: 9118   Output String: {Units Sold}
-Original String: 5858   Output String: {Units Sold}
+Original String: pwarner@example.org   Output String: {Email}
+Original String: fergusonkatherine@example.net   Output String: {Email}
+Original String: fhoward@example.org   Output String: {Email}
+Original String: zjohnston@example.com   Output String: {Email}
+Original String: elin@example.net   Output String: {Email}
 -------------------------------------------------------------
-Units Sold: {Units Sold}
+Email: {Email}
 -------------------------------------------------------------
-Original String: 152.58   Output String: {Unit Price}
-Original String: 437.2   Output String: {Unit Price}
-Original String: 9.33   Output String: {Unit Price}
-Original String: 81.73   Output String: {Unit Price}
-Original String: 668.27   Output String: {Unit Price}
+Original String: 857.139.8239   Output String: 857.{Index}39.8239
+Original String: -10395   Output String: {Phone Number}
+Original String: (599)782-0605   Output String: {Phone Number}
+Original String: -7326   Output String: {Phone Number}
+Original String: (390)417-1635x3010   Output String: (390)417-163{Index}x3010
+Original String: 8537800927   Output String: {Phone Number}
+Original String: 093.655.7480x7895   Output String: 093.655.{Index}480x{Index}895
+Original String: 4709522945   Output String: {Phone Number}
 -------------------------------------------------------------
-Unit Price: {Unit Price}
+Phone_Number: {Phone Number}
 -------------------------------------------------------------
-Original String: 97.44   Output String: {Unit Cost}
-Original String: 263.33   Output String: {Unit Cost}
-Original String: 6.92   Output String: {Unit Cost}
-Original String: 56.67   Output String: {Unit Cost}
-Original String: 502.54   Output String: {Unit Cost}
+Original String: 1/27/2014   Output String: {Index}/27/20{Index}4
+Original String: 7/26/1931   Output String: 7/{Index}6/1931
+Original String: 11/25/2013   Output String: 11/25/201{Index}
+Original String: 11/17/2012   Output String: {Date Of Birth}
+Original String: 4/15/1923   Output String: 4/1{Index}/1923
+Original String: 8/6/1917   Output String: 8/{Index}/1917
+Original String: 12/22/1984   Output String: {Date Of Birth}
+Original String: 12/2/2016   Output String: {Date Of Birth}
+Original String: 12/16/2012   Output String: {Date Of Birth}
+Original String: 6/29/1953   Output String: {Date Of Birth}
 -------------------------------------------------------------
-Unit Cost: {Unit Cost}
+Date_Of_Birth: {Date Of Birth}
 -------------------------------------------------------------
-Original String: 142509.72   Output String: {Total Revenue}
-Original String: 857960.14   Output String: {Total Revenue}
-Original String: 70251.36   Output String: {Total Revenue}
-Original String: 2300073.72   Output String: {Total Revenue}
-Original String: 3260637.6   Output String: {Total Revenue}
+Original String: Probation officer   Output String: {Job Title}
+Original String: Dancer   Output String: {Job Title}
+Original String: Copy   Output String: {Job Title}
+Original String: Counselling psychologist   Output String: {Job Title}
+Original String: Biomedical engineer   Output String: {Job Title}
 -------------------------------------------------------------
-Total Revenue: {Total Revenue}
--------------------------------------------------------------
-Original String: 91008.96   Output String: {Total Cost}
-Original String: 1198414.83   Output String: {Total Cost}
-Original String: 69103.12   Output String: {Total Cost}
-Original String: 516717.06   Output String: {Total Cost}
-Original String: 2943879.32   Output String: {Total Cost}
--------------------------------------------------------------
-Total Cost: {Total Cost}
--------------------------------------------------------------
-Original String: 51500.76   Output String: {Total Profit}
-Original String: 791282.37   Output String: {Total Profit}
-Original String: 24066.26   Output String: {Total Profit}
-Original String: 228497.08   Output String: {Total Profit}
-Original String: 970846.34   Output String: {Total Profit}
--------------------------------------------------------------
-Total Profit: {Total Profit}
--------------------------------------------------------------
-Original String: Snacks   Output String: {Item Type}
-Original String: Cosmetics   Output String: {Item Type}
-Original String: Fruits   Output String: {Item Type}
-Original String: Personal Care   Output String: {Item Type}
-Original String: Household   Output String: {Item Type}
--------------------------------------------------------------
-Type of item: {Item Type}
--------------------------------------------------------------
-Original String: 10/8/2014   Output String: {Order Date}
-Original String: 2/22/2015   Output String: {Order Date}
-Original String: 12/9/2015   Output String: {Order Date}
-Original String: 9/17/2014   Output String: {Order Date}
-Original String: 2/4/2010   Output String: {Order Date}
--------------------------------------------------------------
-Date of order: {Order Date}
+Job_Title: {Job Title}
 -------------------------------------------------------------
