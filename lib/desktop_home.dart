@@ -522,38 +522,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       children: [
                                         Column(
                                           children: [
-                                            Container(
-                                              alignment:
-                                                  AlignmentDirectional.topStart,
-                                              width: width100,
-                                              padding:
-                                                  EdgeInsets.only(bottom: 2),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                        text: 'Source ',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontFamily: "Inter",
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: '*',
-                                                        style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 16,
-                                                          fontFamily: "Inter",
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 4),
@@ -589,7 +557,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                 style: TextStyle(),
                                                 decoration: InputDecoration(
                                                   suffixIcon: Padding(
-                                                    padding: const EdgeInsets.only(right: 10.0),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10.0),
                                                     child: InkWell(
                                                       onTap: () async {
                                                         sourceResult =
@@ -611,14 +581,15 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                             firstButtonText =
                                                                 'Upload';
                                                             // sourceData = readFile(sourceResult);
-                                                  
-                                                            source = sourceResult!
-                                                                .files
-                                                                .single
-                                                                .name;
+
+                                                            source =
+                                                                sourceResult!
+                                                                    .files
+                                                                    .single
+                                                                    .name;
                                                             _sourceController
                                                                 .text = source;
-                                                  
+
                                                             _resultController
                                                                     .text =
                                                                 '\nSource selected: $source\n';
@@ -638,7 +609,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                       child: Icon(
                                                           Icons
                                                               .drive_folder_upload_rounded,
-                                                          size: width100 * 0.06),
+                                                          size:
+                                                              width100 * 0.06),
                                                     ),
                                                   ),
                                                   border: OutlineInputBorder(
@@ -957,35 +929,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                     children: [
                                       Column(
                                         children: [
-                                          Container(
-                                            alignment:
-                                                AlignmentDirectional.topStart,
-                                            width: width100,
-                                            padding: EdgeInsets.only(bottom: 3),
-                                            child: RichText(
-                                              text:
-                                                  TextSpan(children: <TextSpan>[
-                                                TextSpan(
-                                                  text: 'Target ',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontFamily: "Inter",
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: '*',
-                                                  style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontSize: 16,
-                                                    fontFamily: "Inter",
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              ]),
-                                            ),
-                                          ),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 4),
@@ -1020,7 +963,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                               style: TextStyle(),
                                               decoration: InputDecoration(
                                                 suffixIcon: Padding(
-                                                  padding: const EdgeInsets.only(right: 10.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 10.0),
                                                   child: InkWell(
                                                     onTap: () async {
                                                       // Open file picker
@@ -1037,18 +982,21 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                         ],
                                                       );
                                                       // Check if a file was selected
-                                                      if (targetResult != null) {
+                                                      if (targetResult !=
+                                                          null) {
                                                         setState(() {
                                                           // Update the 'source' variable with the selected file path
-                                                
+
                                                           // targetData = readFile(result);
                                                           firstButtonText =
                                                               'Upload';
-                                                
+
                                                           target = targetResult!
-                                                              .files.single.name;
-                                                          _targetController.text =
-                                                              target;
+                                                              .files
+                                                              .single
+                                                              .name;
+                                                          _targetController
+                                                              .text = target;
                                                           if (_resultController
                                                                   .text !=
                                                               '') {
@@ -1065,9 +1013,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                         setState(() {
                                                           target =
                                                               'No file selected';
-                                                          _targetController.text =
-                                                              target;
-                                                          _resultController.text =
+                                                          _targetController
+                                                              .text = target;
+                                                          _resultController
+                                                                  .text =
                                                               '${_resultController.text}No file selected\n';
                                                         });
                                                       }
