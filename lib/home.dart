@@ -83,16 +83,18 @@ class _DataValidatorPageState extends State<DataValidatorPage> {
           ),
         ],
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            // Desktop layout
-            return DesktopDataValidatorPage();
-          } else {
-            // Mobile layout
-            return MobileDataValidatorPage();
-          }
-        },
+      body: SingleChildScrollView(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth > 600) {
+              // Desktop layout
+              return DesktopDataValidatorPage();
+            } else {
+              // Mobile layout
+              return MobileDataValidatorPage();
+            }
+          },
+        ),
       ),
     );
   }

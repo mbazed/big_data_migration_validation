@@ -19,7 +19,8 @@ class DesktopDataValidatorPage extends StatefulWidget {
 }
 
 class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
-  String selectedMode = 'File Mode';
+  String sourceselectedMode = 'File Mode';
+  String targetselectedMode = 'File Mode';
   String source = '';
   String target = '';
   String message = '';
@@ -162,7 +163,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
   Future<void> handleUpload() async {
     try {
-      if (selectedMode == 'File Mode') {
+      if (sourceselectedMode == 'File Mode') {
         var request;
 
         if (sourceResult != null && targetResult != null) {
@@ -221,7 +222,69 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           // Handle the case when either sourceResult or targetResult is null
         }
       } else {
-        // ... (Your existing database connection code)
+        var source_database_type = 'mysql';
+        var target_database_type = 'mysql';
+        try {
+          if (_sourceUserController.text != "" &&
+              _sourcePassController.text != "" &&
+              _sourceHostController.text != "" &&
+              _sourceDBNameController.text != "" &&
+              _sourceTableController.text != "" &&
+              _targetUserController.text != "" &&
+              _targetPassController.text != "" &&
+              _targetHostController.text != "" &&
+              _targetDBNameController.text != "" &&
+              _targetTableController.text != "") {
+            final response = await http.post(
+              dbmodeurl,
+              body: {
+                'source_database_type': source_database_type,
+                'source_hostname': _sourceHostController.text,
+                'source_username': _sourceUserController.text,
+                'source_database': _sourceDBNameController.text,
+                'source_password': _sourcePassController.text,
+                'source_table': _sourceTableController.text,
+                'target_database_type': target_database_type,
+                'target_hostname': _targetHostController.text,
+                'target_username': _targetUserController.text,
+                'target_database': _targetDBNameController.text,
+                'target_password': _targetPassController.text,
+                'target_table': _targetTableController.text,
+              },
+            );
+
+            if (response.statusCode == 200) {
+              print('[+] Data retrived from Databases successfully!');
+
+              final Map<String, dynamic> data = jsonDecode(response.body);
+              requestID = data['request_id'].toString();
+              var message = data['message'].toString();
+
+              print('Request ID: $requestID');
+              print('Message: $message');
+
+              setState(() {
+                _resultController.text =
+                    '${_resultController.text}${message}\n';
+                firstButtonText = 'Find Primary Keys';
+              });
+            } else {
+              setState(() {
+                firstButtonText == 'Upload';
+                _resultController.text =
+                    '${_resultController.text} Databases Connection Error!\n';
+              });
+            }
+          } else {
+            setState(() {
+              firstButtonText == 'Upload';
+              _resultController.text =
+                  '${_resultController.text} Please fill all the fields!\n';
+            });
+          }
+        } catch (e) {
+          print('[!] Error during Database upload: $e');
+        }
       }
     } catch (e) {
       _resultController.text =
@@ -320,611 +383,881 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: width100,
-                  height: MediaQuery.of(context).size.height * 0.105,
-                  child: CustomDropdown<String>(
-                    canCloseOutsideBounds: true,
-                    errorStyle: TextStyle(
-                      color: Colors.red,
-                      fontSize: 14,
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.w600,
-                    ),
-                    expandedBorderRadius: BorderRadius.circular(8.0),
-                    expandedBorder: Border.all(
-                      color: Colors.grey.withOpacity(0.7),
-                      width: 1,
-                    ),
-                    closedBorderRadius: BorderRadius.circular(8.0),
-                    closedBorder: Border.all(
-                      color: Colors.grey.withOpacity(0.7),
-                      width: 1,
-                    ),
-                    listItemBuilder: (BuildContext context, String item) {
-                      Widget iconOrImage = getIconOrImage(item);
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              iconOrImage,
-                              SizedBox(width: 8),
-                              Text(
-                                item,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    },
-                    headerBuilder:
-                        (BuildContext context, String? selectedItem) {
-                      Widget iconOrImage = getIconOrImage(selectedItem);
-
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              iconOrImage,
-                              SizedBox(width: 8),
-                              Text(
-                                selectedItem ?? '',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    },
-                    hintText: "Select Mode",
-                    hintBuilder: (BuildContext context, String hint) {
-                      return Row(
-                        children: [
-                          // Icon(Icons.mode, size: 18), // Add your icon
-                          // SizedBox(width: 8),
-                          Text(
-                            hint,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "Montserrat",
-                              fontWeight:
-                                  FontWeight.w600, // Set the desired font size
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                    items: _list,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedMode = newValue!;
-                      });
-                    },
-                    // ... (Your existing code for dropdown)
-                  ),
-                ),
                 SizedBox(height: 16.0),
-                selectedMode == 'File Mode'
-                    ? Container(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                // ... (Your existing code for source)
-                                Column(
-                                  children: [
-                                    Container(
-                                      alignment: AlignmentDirectional.topStart,
-                                      width: width100,
-                                      padding: EdgeInsets.only(bottom: 2),
-                                      child: RichText(
-                                        text: TextSpan(children: <TextSpan>[
-                                          TextSpan(
-                                            text: 'Source ',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontFamily: "Inter",
-                                              fontWeight: FontWeight.w600,
+                Container(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                width: width100,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.105,
+                                child: CustomDropdown<String>(
+                                  canCloseOutsideBounds: true,
+                                  errorStyle: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontFamily: "Inter",
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  expandedBorderRadius:
+                                      BorderRadius.circular(8.0),
+                                  expandedBorder: Border.all(
+                                    color: Colors.grey.withOpacity(0.7),
+                                    width: 1,
+                                  ),
+                                  closedBorderRadius:
+                                      BorderRadius.circular(8.0),
+                                  closedBorder: Border.all(
+                                    color: Colors.grey.withOpacity(0.7),
+                                    width: 1,
+                                  ),
+                                  listItemBuilder:
+                                      (BuildContext context, String item) {
+                                    Widget iconOrImage = getIconOrImage(item);
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            iconOrImage,
+                                            SizedBox(width: 8),
+                                            Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
-                                          ),
-                                          TextSpan(
-                                            text: '*',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 16,
-                                              fontFamily: "Inter",
-                                              fontWeight: FontWeight.w600,
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  headerBuilder: (BuildContext context,
+                                      String? selectedItem) {
+                                    Widget iconOrImage =
+                                        getIconOrImage(selectedItem);
+
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            iconOrImage,
+                                            SizedBox(width: 8),
+                                            Text(
+                                              selectedItem ?? '',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                        ]),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 4),
-                                      child: Container(
-                                        width: width100,
-                                        alignment:
-                                            AlignmentDirectional.topStart,
-                                        child: Text(
-                                            'Supported file types: .csv, .xlsx',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 12,
-                                              fontFamily: "Inter",
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                        border: Border.all(
-                                          color: Colors.grey.withOpacity(0.7),
+                                          ],
                                         ),
-                                      ),
-                                      width: width100,
-                                      child: TextField(
-                                        controller: _sourceController,
-                                        onChanged: (_) {},
-                                        onSubmitted: (_) {},
-                                        style: TextStyle(),
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
+                                        Text(
+                                          'Source',
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight
+                                                .w600, // Set the desired font size
                                           ),
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          hintText: '--',
-                                          hintStyle: TextStyle(),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                  hintText: "Select Mode",
+                                  hintBuilder:
+                                      (BuildContext context, String hint) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          hint,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight
+                                                .w600, // Set the desired font size
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ],
+                                        Text(
+                                          'Source',
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight
+                                                .w600, // Set the desired font size
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                  items: _list,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      sourceselectedMode = newValue!;
+                                    });
+                                  },
+                                  // ... (Your existing code for dropdown)
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 40),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      sourceResult =
-                                          await FilePicker.platform.pickFiles(
-                                        allowMultiple: false,
-                                        type: FileType.custom,
-                                        allowedExtensions: [
-                                          'csv',
-                                          'xlsx',
-                                          'xls'
-                                        ],
-                                      );
-                                      // Check if a file was selected
-                                      if (sourceResult != null) {
-                                        setState(() {
-                                          firstButtonText = 'Upload';
-                                          // sourceData = readFile(sourceResult);
-
-                                          source =
-                                              sourceResult!.files.single.name;
-                                          _sourceController.text = source;
-
-                                          _resultController.text =
-                                              '\nSource selected: $source\n';
-                                        });
-                                      } else {
-                                        setState(() {
-                                          source = 'No file selected';
-                                          _sourceController.text = source;
-                                          _resultController.text =
-                                              '${_resultController.text}No file selected\n';
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                        border: Border.all(
-                                          color: Colors.grey.withOpacity(0.7),
-                                        ),
-                                      ),
-                                      child: Icon(
-                                          Icons.drive_folder_upload_rounded,
-                                          size: 35),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 16.0),
-                            Row(
-                              children: [
-                                // ... (Your existing code for target)
-                                Column(
-                                  children: [
-                                    Container(
-                                      alignment: AlignmentDirectional.topStart,
-                                      width: width100,
-                                      padding: EdgeInsets.only(bottom: 3),
-                                      child: RichText(
-                                        text: TextSpan(children: <TextSpan>[
-                                          TextSpan(
-                                            text: 'Target ',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontFamily: "Inter",
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: '*',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 16,
-                                              fontFamily: "Inter",
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ]),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 4),
-                                      child: Container(
-                                        width: width100,
-                                        alignment:
-                                            AlignmentDirectional.topStart,
-                                        child: Text(
-                                            'Supported file types: .csv, .xlsx',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 12,
-                                              fontFamily: "Inter",
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                        border: Border.all(
-                                          color: Colors.grey.withOpacity(0.7),
-                                        ),
-                                      ),
-                                      width: width100,
-                                      child: TextField(
-                                        controller: _targetController,
-                                        onChanged: (_) {},
-                                        onSubmitted: (_) {},
-                                        style: TextStyle(),
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          hintText: '--',
-                                          hintStyle: TextStyle(),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 42),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      // Open file picker
-                                      targetResult =
-                                          await FilePicker.platform.pickFiles(
-                                        allowMultiple: false,
-                                        type: FileType.custom,
-                                        allowedExtensions: [
-                                          'csv',
-                                          'xlsx',
-                                          'xls'
-                                        ],
-                                      );
-                                      // Check if a file was selected
-                                      if (targetResult != null) {
-                                        setState(() {
-                                          // Update the 'source' variable with the selected file path
-
-                                          // targetData = readFile(result);
-                                          firstButtonText = 'Upload';
-
-                                          target =
-                                              targetResult!.files.single.name;
-                                          _targetController.text = target;
-                                          if (_resultController.text != '') {
-                                            _resultController.text =
-                                                '${_resultController.text}Target selected: $target\n';
-                                          } else {
-                                            _resultController.text =
-                                                '\n${_resultController.text}Target selected: $target\n';
-                                          }
-                                        });
-                                      } else {
-                                        setState(() {
-                                          target = 'No file selected';
-                                          _targetController.text = target;
-                                          _resultController.text =
-                                              '${_resultController.text}No file selected\n';
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                        border: Border.all(
-                                          color: Colors.grey.withOpacity(0.7),
-                                        ),
-                                      ),
-                                      child: Icon(
-                                        Icons.drive_folder_upload_rounded,
-                                        size: 35,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Username TextField
-                            Container(
-                              width: width100,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _sourceUserController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Source Username',
-                                          border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _targetUserController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Target Username',
-                                          border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
                               ),
-                            ),
-                            // Password TextField
-                            Container(
-                              width: width100,
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: width100 * 0.475,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0),
-                                        child: TextField(
-                                          controller: _sourcePassController,
-                                          onChanged: (value) {
-                                            setState(() {});
-                                          },
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            suffixIcon:
-                                                Icon(Icons.visibility_off),
-                                            labelText: 'Source Password',
-                                            border: OutlineInputBorder(),
-                                          ),
+                              sourceselectedMode == 'File Mode'
+                                  ? Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              alignment:
+                                                  AlignmentDirectional.topStart,
+                                              width: width100,
+                                              padding:
+                                                  EdgeInsets.only(bottom: 2),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: 'Source ',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontFamily: "Inter",
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text: '*',
+                                                        style: TextStyle(
+                                                          color: Colors.red,
+                                                          fontSize: 16,
+                                                          fontFamily: "Inter",
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ]),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 4),
+                                              child: Container(
+                                                width: width100,
+                                                alignment: AlignmentDirectional
+                                                    .topStart,
+                                                child: Text(
+                                                    'Supported file types: .csv, .xlsx',
+                                                    style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 12,
+                                                      fontFamily: "Inter",
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    )),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5)),
+                                                border: Border.all(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.7),
+                                                ),
+                                              ),
+                                              width: width100,
+                                              child: TextField(
+                                                controller: _sourceController,
+                                                onChanged: (_) {},
+                                                onSubmitted: (_) {},
+                                                style: TextStyle(),
+                                                decoration: InputDecoration(
+                                                  suffixIcon: Padding(
+                                                    padding: const EdgeInsets.only(right: 10.0),
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        sourceResult =
+                                                            await FilePicker
+                                                                .platform
+                                                                .pickFiles(
+                                                          allowMultiple: false,
+                                                          type: FileType.custom,
+                                                          allowedExtensions: [
+                                                            'csv',
+                                                            'xlsx',
+                                                            'xls'
+                                                          ],
+                                                        );
+                                                        // Check if a file was selected
+                                                        if (sourceResult !=
+                                                            null) {
+                                                          setState(() {
+                                                            firstButtonText =
+                                                                'Upload';
+                                                            // sourceData = readFile(sourceResult);
+                                                  
+                                                            source = sourceResult!
+                                                                .files
+                                                                .single
+                                                                .name;
+                                                            _sourceController
+                                                                .text = source;
+                                                  
+                                                            _resultController
+                                                                    .text =
+                                                                '\nSource selected: $source\n';
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            source =
+                                                                'No file selected';
+                                                            _sourceController
+                                                                .text = source;
+                                                            _resultController
+                                                                    .text =
+                                                                '${_resultController.text}No file selected\n';
+                                                          });
+                                                        }
+                                                      },
+                                                      child: Icon(
+                                                          Icons
+                                                              .drive_folder_upload_rounded,
+                                                          size: width100 * 0.06),
+                                                    ),
+                                                  ),
+                                                  border: OutlineInputBorder(
+                                                    borderSide: BorderSide.none,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  contentPadding:
+                                                      EdgeInsets.only(left: 10),
+                                                  hintText: '--',
+                                                  hintStyle: TextStyle(),
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: width100 * 0.475,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0),
-                                        child: TextField(
-                                          controller: _targetPassController,
-                                          onChanged: (value) {
-                                            setState(() {});
-                                          },
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            suffixIcon:
-                                                Icon(Icons.visibility_off),
-                                            labelText: 'Target Password',
-                                            border: OutlineInputBorder(),
-                                          ),
-                                        ),
-                                      ),
+                                      ],
                                     )
-                                  ]),
-                            ),
-                            // Connection String TextField
-                            Container(
-                              width: width100,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _sourceDBNameController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Source Database Name',
-                                          border: OutlineInputBorder(),
+                                  : Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: width100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    width: width100,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: TextField(
+                                                        controller:
+                                                            _sourceHostController,
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'Source Host',
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            // Password TextField
+                                            Container(
+                                              width: width100,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      width: width100 * 0.475,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 8.0),
+                                                        child: TextField(
+                                                          controller:
+                                                              _sourceUserController,
+                                                          onChanged: (value) {
+                                                            setState(() {});
+                                                          },
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText:
+                                                                'Source Username',
+                                                            border:
+                                                                OutlineInputBorder(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: width100 * 0.475,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 8.0),
+                                                        child: TextField(
+                                                          controller:
+                                                              _sourcePassController,
+                                                          onChanged: (value) {
+                                                            setState(() {});
+                                                          },
+                                                          obscureText: true,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            suffixIcon: Icon(Icons
+                                                                .visibility_off),
+                                                            labelText:
+                                                                'Source Password',
+                                                            border:
+                                                                OutlineInputBorder(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            // Connection String TextField
+                                            Container(
+                                              width: width100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    width: width100 * 0.475,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: TextField(
+                                                        controller:
+                                                            _sourceDBNameController,
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'Source Database Name',
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: width100 * 0.475,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: TextField(
+                                                        controller:
+                                                            _sourceTableController,
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'Source Table Name',
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16.0),
+                      Container(
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                width: width100,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.105,
+                                child: CustomDropdown<String>(
+                                  canCloseOutsideBounds: true,
+                                  errorStyle: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontFamily: "Inter",
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _targetDBNameController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Target Database Name',
-                                          border: OutlineInputBorder(),
+                                  expandedBorderRadius:
+                                      BorderRadius.circular(8.0),
+                                  expandedBorder: Border.all(
+                                    color: Colors.grey.withOpacity(0.7),
+                                    width: 1,
+                                  ),
+                                  closedBorderRadius:
+                                      BorderRadius.circular(8.0),
+                                  closedBorder: Border.all(
+                                    color: Colors.grey.withOpacity(0.7),
+                                    width: 1,
+                                  ),
+                                  listItemBuilder:
+                                      (BuildContext context, String item) {
+                                    Widget iconOrImage = getIconOrImage(item);
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            iconOrImage,
+                                            SizedBox(width: 8),
+                                            Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ],
                                         ),
+                                      ],
+                                    );
+                                  },
+                                  headerBuilder: (BuildContext context,
+                                      String? selectedItem) {
+                                    Widget iconOrImage =
+                                        getIconOrImage(selectedItem);
+
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            iconOrImage,
+                                            SizedBox(width: 8),
+                                            Text(
+                                              selectedItem ?? '',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          'Target',
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight
+                                                .w600, // Set the desired font size
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                  hintText: "Select Mode",
+                                  hintBuilder:
+                                      (BuildContext context, String hint) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          hint,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight
+                                                .w600, // Set the desired font size
+                                          ),
+                                        ),
+                                        Text(
+                                          'Target',
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight
+                                                .w600, // Set the desired font size
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                  items: _list,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      targetselectedMode = newValue!;
+                                    });
+                                  },
+                                  // ... (Your existing code for dropdown)
+                                ),
+                              ),
+                            ),
+                            targetselectedMode == 'File Mode'
+                                ? Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                            alignment:
+                                                AlignmentDirectional.topStart,
+                                            width: width100,
+                                            padding: EdgeInsets.only(bottom: 3),
+                                            child: RichText(
+                                              text:
+                                                  TextSpan(children: <TextSpan>[
+                                                TextSpan(
+                                                  text: 'Target ',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontFamily: "Inter",
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: '*',
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 16,
+                                                    fontFamily: "Inter",
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ]),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 4),
+                                            child: Container(
+                                              width: width100,
+                                              alignment:
+                                                  AlignmentDirectional.topStart,
+                                              child: Text(
+                                                  'Supported file types: .csv, .xlsx',
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 12,
+                                                    fontFamily: "Inter",
+                                                    fontWeight: FontWeight.w400,
+                                                  )),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              border: Border.all(
+                                                color: Colors.grey
+                                                    .withOpacity(0.7),
+                                              ),
+                                            ),
+                                            width: width100,
+                                            child: TextField(
+                                              controller: _targetController,
+                                              onChanged: (_) {},
+                                              onSubmitted: (_) {},
+                                              style: TextStyle(),
+                                              decoration: InputDecoration(
+                                                suffixIcon: Padding(
+                                                  padding: const EdgeInsets.only(right: 10.0),
+                                                  child: InkWell(
+                                                    onTap: () async {
+                                                      // Open file picker
+                                                      targetResult =
+                                                          await FilePicker
+                                                              .platform
+                                                              .pickFiles(
+                                                        allowMultiple: false,
+                                                        type: FileType.custom,
+                                                        allowedExtensions: [
+                                                          'csv',
+                                                          'xlsx',
+                                                          'xls'
+                                                        ],
+                                                      );
+                                                      // Check if a file was selected
+                                                      if (targetResult != null) {
+                                                        setState(() {
+                                                          // Update the 'source' variable with the selected file path
+                                                
+                                                          // targetData = readFile(result);
+                                                          firstButtonText =
+                                                              'Upload';
+                                                
+                                                          target = targetResult!
+                                                              .files.single.name;
+                                                          _targetController.text =
+                                                              target;
+                                                          if (_resultController
+                                                                  .text !=
+                                                              '') {
+                                                            _resultController
+                                                                    .text =
+                                                                '${_resultController.text}Target selected: $target\n';
+                                                          } else {
+                                                            _resultController
+                                                                    .text =
+                                                                '\n${_resultController.text}Target selected: $target\n';
+                                                          }
+                                                        });
+                                                      } else {
+                                                        setState(() {
+                                                          target =
+                                                              'No file selected';
+                                                          _targetController.text =
+                                                              target;
+                                                          _resultController.text =
+                                                              '${_resultController.text}No file selected\n';
+                                                        });
+                                                      }
+                                                    },
+                                                    child: Icon(
+                                                      Icons
+                                                          .drive_folder_upload_rounded,
+                                                      size: width100 * 0.06,
+                                                    ),
+                                                  ),
+                                                ),
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                contentPadding:
+                                                    EdgeInsets.only(left: 10),
+                                                hintText: '--',
+                                                hintStyle: TextStyle(),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                : Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Container(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          // Username TextField
+                                          Container(
+                                            width: width100,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  width: width100,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 8.0),
+                                                    child: TextField(
+                                                      controller:
+                                                          _sourceUserController,
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            'Target Hostname',
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          // Password TextField
+                                          Container(
+                                            width: width100,
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    width: width100 * 0.475,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: TextField(
+                                                        controller:
+                                                            _targetUserController,
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'Target Username',
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: width100 * 0.475,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: TextField(
+                                                        controller:
+                                                            _targetPassController,
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                        obscureText: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          suffixIcon: Icon(Icons
+                                                              .visibility_off),
+                                                          labelText:
+                                                              'Target Password',
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ]),
+                                          ),
+                                          // Connection String TextField
+                                          Container(
+                                            width: width100,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  width: width100 * 0.475,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 8.0),
+                                                    child: TextField(
+                                                      controller:
+                                                          _targetDBNameController,
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            'Target Database Name',
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: width100 * 0.475,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 8.0),
+                                                    child: TextField(
+                                                      controller:
+                                                          _targetTableController,
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            'Target Table Name',
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: width100,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _sourceHostController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Source Host',
-                                          border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _targetHostController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Target Host',
-                                          border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: width100,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _sourceTableController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Source Table Name',
-                                          border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: width100 * 0.475,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: TextField(
-                                        controller: _targetTableController,
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Target Table Name',
-                                          border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),
+                    ],
+                  ),
+                ),
                 SizedBox(height: 32.0),
                 Container(
                   width: width100,
