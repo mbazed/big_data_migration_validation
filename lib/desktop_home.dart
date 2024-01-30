@@ -1,3 +1,5 @@
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
@@ -36,6 +38,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final mapUrl = Uri.parse('http://localhost:4564/mapData');
   final validateUrl = Uri.parse('http://localhost:4564/validateData');
   final uploadUrl = Uri.parse('http://localhost:4564/upload');
+  final downloadUrl = Uri.parse('http://localhost:4564/download');
 
   var srcpk = "";
   var trgpk = "";
@@ -273,6 +276,16 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       setState(() {
         firstButtonText = 'Upload';
       });
+    }
+  }
+
+  Future<void> downloadReport(String content) async {
+    print("Pressed Download Report");
+    try {
+      html.window.localStorage['output$requestID.txt'] = content;
+      print('File created successfully: ${'output$requestID.txt'}');
+    } catch (e) {
+      print('Error creating file: $e');
     }
   }
 
@@ -1192,13 +1205,19 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onPressed: secondButtonText == "Map Data"
-                        ? () async {
-                            handleMapData();
-                          }
-                        : () async {
-                            handleValidateData();
-                          },
+                    onPressed: () async {
+                      switch (secondButtonText) {
+                        case 'Map Data':
+                          handleMapData();
+                          break;
+                        case 'Validate Data':
+                          handleValidateData();
+                          break;
+                        case 'Download Report':
+                          downloadReport(_resultController.text);
+                          break;
+                      }
+                    },
                     child: Text(secondButtonText),
                   ),
                 ),

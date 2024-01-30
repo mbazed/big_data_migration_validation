@@ -1,5 +1,8 @@
 import json
-from flask import Flask, request, jsonify
+
+from flask import Flask, request, jsonify, send_file
+import os
+from reportlab.pdfgen import canvas
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, create_engine
@@ -29,6 +32,7 @@ class DataRecord(db.Model):
     source_primary_key = Column(String)
     target_primary_key = Column(String)
     mapping_document = Column(String)
+    validation_document = Column(String)
     
 
 # Create tables within the application context
@@ -322,13 +326,47 @@ def validateData():
     
     # resultString = driver(sourcedata,targetdata)
     # return resultString
+    record.validation_document = resultString
+    db.session.add(record)
+    db.session.commit()
     print("[^] returning response...")
 
     return jsonify({'validationDoc': resultString, 'message': 'Validation Complete!'}) 
 
 
+@app.route('/download', methods=['POST'])
+def download_report():
+    print("[⌄] Download request received...")
+    request_id = request.form.get('request_id')
+    record = DataRecord.query.filter_by(request_id=request_id).first()
+
+    # Combine mapping and validation documents
+    data = record.mapping_document + record.validation_document
+
+    # If the documents are already JSON strings, no need to load and dump them again
+    formatted_content = data
+    
+    # Create a PDF file
+    pdf_path = f'{request_id}_output.pdf'
+    create_pdf(formatted_content, pdf_path)
+
+    # Send the PDF file to the client
+    response = send_file(pdf_path, as_attachment=True)
+
+    # Clean up the temporary PDF file after sending
+    # os.remove(pdf_path)
+    print("[^] returning response...")
+    return response
+
+def create_pdf(content, pdf_path):
+    pdf_canvas = canvas.Canvas(pdf_path)
+    
+    # Customize your PDF content here:
+    pdf_canvas.drawString(100, 800, content)
+
+    pdf_canvas.save()
+
+
 
 if __name__ == '__main__':
-    # Create the database tables before running the app
-    
     app.run(host='127.0.0.1', port=4564, debug=False)

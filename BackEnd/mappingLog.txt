@@ -1,88 +1,42 @@
-Original String: JOSE T K   Output String: {pat_name}
-Original String: JOMON GEORGE   Output String: {pat_name}
-Original String: SREEKALA P   Output String: {pat_name}
-Original String: GIRIJA PRAKASH   Output String: {pat_name}
-Original String: JAYASANKAR R   Output String: {pat_name}
+Original String: TVE-S4_CS2-1   Output String: TVE-{Class}-{Roll No.}
+Original String: TVE-S4_CS2-2   Output String: TVE-S4_CS{Roll No.}-{Roll No.}
+Original String: TVE-S4_CS2-3   Output String: TVE-{Class}-{Roll No.}
+Original String: TVE-S4_CS2-4   Output String: TVE-S{Roll No.}_CS2-{Roll No.}
+Original String: TVE-S4_CS2-5   Output String: TVE-{Class}-{Roll No.}
+Original String: TVE-S4_CS2-6   Output String: TVE-{Class}-{Roll No.}
+Original String: TVE-S4_CS2-7   Output String: TVE-{Class}-{Roll No.}
 -------------------------------------------------------------
-pat_name: {pat_name}
+College id: TVE-{Class}-{Roll No.}
 -------------------------------------------------------------
-Original String: PAT601   Output String: {pat_id}
-Original String: PAT607   Output String: {pat_id}
-Original String: PAT609   Output String: {pat_id}
-Original String: PAT611   Output String: {pat_id}
-Original String: PAT618   Output String: {pat_id}
+Original String: ABHAY O   Output String: {Name}
+Original String: ABHINAND J NAMBIAR   Output String: {Name}
+Original String: ABHIRAM S MENON   Output String: {Name}
+Original String: ADARSH MENON   Output String: {Name}
+Original String: AISWARYA M S   Output String: {Name}
 -------------------------------------------------------------
-pat_id: {pat_id}
+Student Name: {Name}
 -------------------------------------------------------------
-Original String: +91 7754330010   Output String: {pat_phno}
-Original String: +91 8899771231   Output String: {pat_phno}
-Original String: +91 9244341322   Output String: {pat_phno}
-Original String: +91 7665343421   Output String: {pat_phno}
-Original String: +91 9980706011   Output String: {pat_phno}
+Original String: +91 8547960839   Output String: +9{Roll No.} {Phone Number}
+Original String: +91 8921347402   Output String: +91 89{Roll No.}134740{Roll No.}
+Original String: +91 9778138706   Output String: +91 97781{Roll No.}8706
+Original String: +91 9061676796   Output String: +91 {Phone Number}
+Original String: +91 8590199574   Output String: +91 8{Roll No.}90199{Roll No.}74
+Original String: +91 7736957108   Output String: +91 773{Roll No.}957108
+Original String: +91 9544049564   Output String: +91 {Phone Number}
+Original String: +91 7025734481   Output String: +91 70257344{Roll No.}1
+Original String: +91 9895537625   Output String: +{Roll No.}1 {Roll No.}8{Roll No.}5537625
+Original String: +91 8281479453   Output String: +91 {Phone Number}
+Original String: +91 9496960369   Output String: +91 {Phone Number}
+Original String: +91 7592816941   Output String: +91 {Phone Number}
 -------------------------------------------------------------
-pat_phno: {pat_phno}
+Contact no: +91 {Phone Number}
 -------------------------------------------------------------
-Original String: PAT.png   Output String: {pat_dp}
-Original String: PAT.png   Output String: {pat_dp}
-Original String: PAT.png   Output String: {pat_dp}
-Original String: PAT.png   Output String: {pat_dp}
-Original String: PAT.png   Output String: {pat_dp}
+Original String: 55565   Output String: {Dumpid}
+Original String: 55566   Output String: {Dumpid}
+Original String: 55567   Output String: {Dumpid}
+Original String: 55568   Output String: {Dumpid}
+Original String: 55569   Output String: {Roll No.}{Roll No.}{Roll No.}69
+Original String: 55570   Output String: {Dumpid}
 -------------------------------------------------------------
-pat_dp: {pat_dp}
--------------------------------------------------------------
-Original String: MALE   Output String: {pat_gen}
-Original String: MALE   Output String: {pat_gen}
-Original String: FEMALE   Output String: {pat_gen}
-Original String: FEMALE   Output String: {pat_gen}
-Original String: MALE   Output String: {pat_gen}
--------------------------------------------------------------
-pat_gen: {pat_gen}
--------------------------------------------------------------
-Original String: A+   Output String: {pat_bg}
-Original String: AB+   Output String: {pat_bg}
-Original String: B+   Output String: {pat_bg}
-Original String: B+   Output String: {pat_bg}
-Original String: O+   Output String: {pat_bg}
--------------------------------------------------------------
-pat_bg: {pat_bg}
--------------------------------------------------------------
-Original String: 160 cm   Output String: {pat_ht}
-Original String: 180 cm   Output String: {pat_ht}
-Original String: 165 cm   Output String: {pat_ht}
-Original String: 159 cm   Output String: {pat_ht}
-Original String: 172 cm   Output String: {pat_ht}
--------------------------------------------------------------
-pat_ht: {pat_ht}
--------------------------------------------------------------
-Original String: 66 kg   Output String: {pat_wt}
-Original String: 78 kg   Output String: {pat_wt}
-Original String: 69 kg   Output String: {pat_wt}
-Original String: 66 kg   Output String: {pat_wt}
-Original String: 70 kg   Output String: {pat_wt}
--------------------------------------------------------------
-pat_wt: {pat_wt}
--------------------------------------------------------------
-Original String: 26   Output String: {pat_age}
-Original String: 34   Output String: {pat_age}
-Original String: 52   Output String: {pat_age}
-Original String: 54   Output String: {pat_age}
-Original String: 50   Output String: {pat_age}
--------------------------------------------------------------
-pat_age: {pat_age}
--------------------------------------------------------------
-Original String: REC201   Output String: {recep_id}
-Original String: REC201   Output String: {recep_id}
-Original String: REC202   Output String: {recep_id}
-Original String: REC202   Output String: {recep_id}
-Original String: REC202   Output String: {recep_id}
--------------------------------------------------------------
-recep_id: {recep_id}
--------------------------------------------------------------
-Original String: LC45761424   Output String: {pat_insu}
-Original String: LC55678751   Output String: {pat_insu}
-Original String: TC66771818   Output String: {pat_insu}
-Original String: MC88712321   Output String: {pat_insu}
-Original String: LC44338911   Output String: {pat_insu}
--------------------------------------------------------------
-pat_insu: {pat_insu}
+Dumpid: {Dumpid}
 -------------------------------------------------------------
