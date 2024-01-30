@@ -35,6 +35,58 @@ class DataRecord(db.Model):
 with app.app_context():
     db.create_all()
 
+@app.route('/getdata',methods=['POST'])
+def get_data():
+    request_id = str(uuid.uuid4())
+    print("[⌄] getting data...")
+    try:
+        source_type= request.form.get('source_type')
+        target_type= request.form.get('target_type')
+        
+        if(source_type == 'file'):
+            source_file = request.files['sourceFile']
+            sourcedata = read_file_content_df(source_file)
+            source_json = sourcedata.to_json()
+        else:
+            source_hostname = request.form.get('source_hostname')
+            source_username = request.form.get('source_username')
+            source_database = request.form.get('source_database')
+            source_password = request.form.get('source_password')
+            source_table = request.form.get('source_table')
+            sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
+            source_json = sourcedata.to_json()
+            
+        if(target_type == 'file'):
+            target_file = request.files['targetFile']
+            targetdata = read_file_content_df(target_file)
+            target_json = targetdata.to_json()
+        else:
+            target_hostname = request.form.get('target_hostname')
+            target_username = request.form.get('target_username')
+            target_database = request.form.get('target_database')
+            target_password = request.form.get('target_password')
+            target_table = request.form.get('target_table')
+            targetdata = gbtodf(target_type,target_hostname,target_username,target_password,target_database,target_table)
+            target_json = targetdata.to_json()
+            
+        record = DataRecord(
+                request_id=request_id,
+                source_data=source_json,
+                target_data=target_json,
+           
+            )
+        db.session.add(record)
+        db.session.commit()
+        message = '[-] Data Received'
+        
+        
+    except Exception as e:
+        print(f"[!]An error occurred on get_data: {e}")
+        message = '[-] Data not Received'
+    print(message)
+    print("[^] returning response...")
+    return jsonify({'message': message, 'request_id': request_id})
+
 @app.route('/getfromdb',methods=['POST'])
 def get_from_db():
     print("[⌄]getting from DB...")
