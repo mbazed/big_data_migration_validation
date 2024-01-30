@@ -98,6 +98,68 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     });
   }
 
+  void handleMapData() async {
+    try {
+      final responseMap = await http.post(
+        mapUrl,
+        body: {
+          'sourcePk': srcpk,
+          'targetPk': trgpk,
+          'request_id': requestID,
+        },
+      );
+
+      if (responseMap.statusCode == 200) {
+        print('[+] Mapping Response Received ');
+
+        final Map<String, dynamic> data = jsonDecode(responseMap.body);
+
+        var mapingDoc = data['MapingDoc'].toString();
+        var mapingStatus = data['message'].toString();
+
+        _resultController.text =
+            '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
+        if (mapingStatus[1] == '+')
+          secondButtonText = 'Validate Data';
+        else if (mapingStatus[1] == '-') secondButtonText = 'Map Data';
+
+        setState(() {});
+      } else {
+        print('[-] Mapping failed: ${responseMap.statusCode}');
+      }
+    } catch (e) {
+      print('[!] Error during mapping: $e');
+    }
+  }
+
+  void handleValidateData() async {
+    try {
+      final responseValidation = await http.post(
+        validateUrl,
+        body: {
+          'request_id': requestID,
+        },
+      );
+
+      if (responseValidation.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(responseValidation.body);
+        var validationDoc = data['validationDoc'].toString();
+        var validationStatus = data['message'].toString();
+        print('[+] Validation successful!  \n' + validationStatus);
+
+        _resultController.text =
+            '\n Validation Status: $validationStatus\nValidation Doc:\n$validationDoc\n';
+        secondButtonText = 'Download Report';
+
+        setState(() {});
+      } else {
+        print('[-] Validation failed: ${responseValidation.statusCode}');
+      }
+    } catch (e) {
+      print('[!] Error during validation: $e');
+    }
+  }
+
   Widget getIconOrImage(String? selectedItem) {
     if (selectedItem == 'File Mode') {
       return Icon(Icons.file_copy_outlined, size: 14);
@@ -1227,76 +1289,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     ),
                     onPressed: secondButtonText == "Map Data"
                         ? () async {
-                            try {
-                              final responseMap = await http.post(
-                                mapUrl,
-                                body: {
-                                  'sourcePk': srcpk,
-                                  'targetPk': trgpk,
-                                  'request_id': requestID,
-                                },
-                              );
-
-                              if (responseMap.statusCode == 200) {
-                                print('[+] Mapping Response Received ');
-
-                                final Map<String, dynamic> data =
-                                    jsonDecode(responseMap.body);
-
-                                var mapingDoc = data['MapingDoc'].toString();
-                                var mapingStatus = data['message'].toString();
-
-                                // Move the setState outside and update the state synchronously
-                                _resultController.text =
-                                    '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
-                                if (mapingStatus[1] == '+')
-                                  secondButtonText = 'Validate Data';
-                                else if (mapingStatus[1] == '-')
-                                  secondButtonText = 'Map Data';
-
-                                // Update the widget state
-                                setState(() {});
-                              } else {
-                                print(
-                                    '[-] Mapping failed: ${responseMap.statusCode}');
-                              }
-                            } catch (e) {
-                              print('[!] Error during mapping: $e');
-                            }
+                            handleMapData();
                           }
                         : () async {
-                            try {
-                              final responseValidation = await http.post(
-                                validateUrl,
-                                body: {
-                                  'request_id': requestID,
-                                },
-                              );
-
-                              if (responseValidation.statusCode == 200) {
-                                final Map<String, dynamic> data =
-                                    jsonDecode(responseValidation.body);
-                                var validationDoc =
-                                    data['validationDoc'].toString();
-                                var validationStatus =
-                                    data['message'].toString();
-                                print('[+] Validation successful!  \n' +
-                                    validationStatus);
-
-                                // Move the setState outside and update the state synchronously
-                                _resultController.text =
-                                    '\n Validation Status: $validationStatus\nValidation Doc:\n$validationDoc\n';
-                                secondButtonText = 'Download Report';
-
-                                // Update the widget state
-                                setState(() {});
-                              } else {
-                                print(
-                                    '[-] Validation failed: ${responseValidation.statusCode}');
-                              }
-                            } catch (e) {
-                              print('[!] Error during validation: $e');
-                            }
+                            handleValidateData();
                           },
                     child: Text(secondButtonText),
                   ),
