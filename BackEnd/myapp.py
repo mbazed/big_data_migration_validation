@@ -82,7 +82,8 @@ def get_data():
             )
         db.session.add(record)
         db.session.commit()
-        message = '[-] Data Received'
+        message = '[+] Data Received'
+        
         
         
     except Exception as e:

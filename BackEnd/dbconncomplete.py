@@ -12,7 +12,8 @@ def connect_mysql(host, user, password, database):
         host=host,
         user=user,
         password=password,
-        database=database
+        database=database,
+        port=3306
     )
     return connection
 
