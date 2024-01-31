@@ -74,6 +74,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     // Add other items as needed
   ];
 
+  List <String> getModifiedList(){
+    return sourceselectedMode == 'File Mode' ? _list.sublist(1) : _list;
+  }
+
+  List <String> target_getModifiedList(){
+    return targetselectedMode == 'File Mode'? _list.sublist(1) : _list;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -514,6 +522,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   Widget build(BuildContext context) {
     double width100 = MediaQuery.of(context).size.width * 0.35;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Left side (Input)
         Expanded(
@@ -546,19 +556,19 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                   expandedBorderRadius:
                                       BorderRadius.circular(8.0),
                                   expandedBorder: Border.all(
-                                    color: Colors.grey.withOpacity(0.7),
-                                    width: 1,
+                                    color: Color(0xFF3A4F39),
+                                    width: 2,
                                   ),
                                   closedBorderRadius:
                                       BorderRadius.circular(8.0),
                                   closedBorder: Border.all(
-                                    color: Colors.grey.withOpacity(0.7),
-                                    width: 1,
+                                    color: Color(0xFF3A4F39),
+                                    width: 2,
                                   ),
                                   listItemBuilder:
                                       (BuildContext context, String item) {
                                     Widget iconOrImage = getIconOrImage(item);
-                                    return Row(
+                                     return Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -618,7 +628,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       ],
                                     );
                                   },
-                                  hintText: "Select Mode",
+                                  hintText: sourceselectedMode,
                                   hintBuilder:
                                       (BuildContext context, String hint) {
                                     return Row(
@@ -648,7 +658,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       ],
                                     );
                                   },
-                                  items: _list,
+                                  items: getModifiedList(),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       sourceselectedMode = newValue!;
@@ -732,7 +742,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
                                                             _resultController
                                                                     .text =
-                                                                '\nSource selected: $source\n';
+                                                                'Source selected: $source\n';
                                                           });
                                                         } else {
                                                           setState(() {
@@ -952,14 +962,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                   expandedBorderRadius:
                                       BorderRadius.circular(8.0),
                                   expandedBorder: Border.all(
-                                    color: Colors.grey.withOpacity(0.7),
-                                    width: 1,
+                                    color: Color(0xFF3A4F39),
+                                    width: 2,
                                   ),
                                   closedBorderRadius:
                                       BorderRadius.circular(8.0),
                                   closedBorder: Border.all(
-                                    color: Colors.grey.withOpacity(0.7),
-                                    width: 1,
+                                    color: Color(0xFF3A4F39),
+                                    width: 2,
                                   ),
                                   listItemBuilder:
                                       (BuildContext context, String item) {
@@ -1024,7 +1034,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       ],
                                     );
                                   },
-                                  hintText: "Select Mode",
+                                  hintText: targetselectedMode,
                                   hintBuilder:
                                       (BuildContext context, String hint) {
                                     return Row(
@@ -1054,7 +1064,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       ],
                                     );
                                   },
-                                  items: _list,
+                                  items: target_getModifiedList(),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       targetselectedMode = newValue!;
@@ -1146,7 +1156,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                           } else {
                                                             _resultController
                                                                     .text =
-                                                                '\n${_resultController.text}Target selected: $target\n';
+                                                                '${_resultController.text}Target selected: $target\n';
                                                           }
                                                         });
                                                       } else {
@@ -1535,6 +1545,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                     AutocompleteOnSelected<String> onSelected,
                                     Iterable<String> options) {
                                   return Material(
+                                    color: Colors.amber,
                                     elevation: 4.0,
                                     child: ListView(
                                       children: options
@@ -1560,7 +1571,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 Container(
                   alignment: AlignmentDirectional.topStart,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  padding: EdgeInsets.only(bottom: 11, top: 15),
+                  padding: EdgeInsets.only(
+                    bottom: 25,
+                  ),
                   child: RichText(
                     text: TextSpan(children: <TextSpan>[
                       TextSpan(
@@ -1597,6 +1610,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.height * 0.215,
                     child: TextField(
+                      
                       controller: _resultController,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -1604,11 +1618,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       onSubmitted: (_) {},
                       style: TextStyle(),
                       decoration: InputDecoration(
+                        
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        contentPadding: EdgeInsets.only(left: 10),
+                        contentPadding: EdgeInsets.all(15),
                         hintText: '--',
                         hintStyle: TextStyle(),
                       ),
