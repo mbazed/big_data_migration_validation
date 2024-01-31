@@ -39,6 +39,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final mapUrl = Uri.parse('http://localhost:4564/mapData');
   final validateUrl = Uri.parse('http://localhost:4564/validateData');
   final uploadUrl = Uri.parse('http://localhost:4564/upload');
+  final uploadDataUrl = Uri.parse('http://localhost:4564/getdata');
   final downloadUrl = Uri.parse('http://localhost:4564/download');
 
   var srcpk = "";
@@ -162,6 +163,145 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   }
 
   Future<void> handleUpload() async {
+    var request;
+    request = http.MultipartRequest('POST', uploadDataUrl);
+
+    var requestBody = {
+      'source_type': sourceselectedMode,
+      'target_type': targetselectedMode,
+    };
+
+    if (sourceselectedMode == 'File Mode') {
+      //file mode source
+      try {
+        if (sourceResult != null) {
+          // Add source file to request
+          if (kIsWeb) {
+            request.files.add(http.MultipartFile.fromBytes(
+              'sourceFile',
+              sourceResult!.files.single.bytes!,
+              filename: sourceResult!.files.single.name,
+            ));
+          } else {
+            request.files.add(await http.MultipartFile.fromPath(
+              'sourceFile',
+              sourceResult!.files.single.path!,
+            ));
+          }
+        } else {
+          _resultController.text =
+              '${_resultController.text}Source result is Null\n';
+          print('[!] Source result is null');
+          // Handle the case when either sourceResult or targetResult is null
+          return;
+        }
+      } catch (e) {
+        print('[!] Error during Source File Upload: $e');
+      }
+    } else {
+      //db mode source
+      try {
+        if (_sourceUserController.text != "" &&
+            _sourcePassController.text != "" &&
+            _sourceHostController.text != "" &&
+            _sourceDBNameController.text != "" &&
+            _sourceTableController.text != "") {
+          requestBody['source_hostname'] = _sourceHostController.text;
+          requestBody['source_username'] = _sourceUserController.text;
+          requestBody['source_database'] = _sourceDBNameController.text;
+          requestBody['source_password'] = _sourcePassController.text;
+          requestBody['source_table'] = _sourceTableController.text;
+        } else {
+          _resultController.text =
+              '${_resultController.text}Please fill all the fields!\n';
+          return;
+        }
+      } catch (e) {
+        print('[!] Error during Source Database upload: $e');
+      }
+    }
+
+    if (targetselectedMode == 'File Mode') {
+      //file mode target
+      try {
+        if (targetResult != null) {
+          // Add target file to request
+          if (kIsWeb) {
+            request.files.add(http.MultipartFile.fromBytes(
+              'targetFile',
+              targetResult!.files.single.bytes!,
+              filename: targetResult!.files.single.name,
+            ));
+          } else {
+            request.files.add(await http.MultipartFile.fromPath(
+              'targetFile',
+              targetResult!.files.single.path!,
+            ));
+          }
+        } else {
+          _resultController.text =
+              '${_resultController.text}Target result is Null\n';
+          print('[!] Target result is null');
+          // Handle the case when either sourceResult or targetResult is null
+          return;
+        }
+      } catch (e) {
+        print('[!] Error during Target File Upload: $e');
+      }
+    } else {
+      //db mode target
+      try {
+        if (_targetUserController.text != "" &&
+            _targetPassController.text != "" &&
+            _targetHostController.text != "" &&
+            _targetDBNameController.text != "" &&
+            _targetTableController.text != "") {
+          requestBody['target_hostname'] = _targetHostController.text;
+          requestBody['target_username'] = _targetUserController.text;
+          requestBody['target_database'] = _targetDBNameController.text;
+          requestBody['target_password'] = _targetPassController.text;
+          requestBody['target_table'] = _targetTableController.text;
+        } else {
+          _resultController.text =
+              '${_resultController.text}Please fill all the fields!\n';
+          return;
+        }
+      } catch (e) {
+        print('[!] Error during target Database upload: $e');
+      }
+    }
+
+    print(requestBody);
+    request.fields.addAll(requestBody);
+
+    try {
+      var response = await request.send();
+      print('Response Status Code: ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        print('[+] Files Uploaded successfully!');
+        var responseBody = await response.stream.bytesToString();
+        final Map<String, dynamic> data = jsonDecode(responseBody);
+        requestID = data['request_id'].toString();
+        var message = data['message'].toString();
+
+        print('Request ID: $requestID');
+        print('Message: $message');
+
+        setState(() {
+          _resultController.text = '${_resultController.text}${message}\n';
+          firstButtonText = 'Find Primary Keys';
+        });
+      }
+    } catch (e) {
+      _resultController.text =
+          '${_resultController.text}Error during File Upload: $e\n';
+      print('[!] Error during File Upload: $e');
+      // Handle other errors
+    }
+  }
+
+  Future<void> handleUpload2() async {
     try {
       if (sourceselectedMode == 'File Mode') {
         var request;
@@ -1068,7 +1208,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
-                                                          _sourceUserController,
+                                                          _targetHostController,
                                                       onChanged: (value) {
                                                         setState(() {});
                                                       },

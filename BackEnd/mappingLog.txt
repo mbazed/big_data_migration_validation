@@ -1,12 +1,10 @@
-Original String: TVE-S4_CS2-1   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-2   Output String: TVE-S4_CS{Roll No.}-{Roll No.}
-Original String: TVE-S4_CS2-3   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-4   Output String: TVE-S{Roll No.}_CS2-{Roll No.}
-Original String: TVE-S4_CS2-5   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-6   Output String: TVE-{Class}-{Roll No.}
-Original String: TVE-S4_CS2-7   Output String: TVE-{Class}-{Roll No.}
+Original String: 1   Output String: {Roll no}
+Original String: 2   Output String: {Roll no}
+Original String: 3   Output String: {Roll no}
+Original String: 4   Output String: {Roll no}
+Original String: 5   Output String: {Roll no}
 -------------------------------------------------------------
-College id: TVE-{Class}-{Roll No.}
+ROLL NO: {Roll no}
 -------------------------------------------------------------
 Original String: ABHAY O   Output String: {Name}
 Original String: ABHINAND J NAMBIAR   Output String: {Name}
@@ -14,29 +12,38 @@ Original String: ABHIRAM S MENON   Output String: {Name}
 Original String: ADARSH MENON   Output String: {Name}
 Original String: AISWARYA M S   Output String: {Name}
 -------------------------------------------------------------
-Student Name: {Name}
+Name: {Name}
 -------------------------------------------------------------
-Original String: +91 8547960839   Output String: +9{Roll No.} {Phone Number}
-Original String: +91 8921347402   Output String: +91 89{Roll No.}134740{Roll No.}
-Original String: +91 9778138706   Output String: +91 97781{Roll No.}8706
-Original String: +91 9061676796   Output String: +91 {Phone Number}
-Original String: +91 8590199574   Output String: +91 8{Roll No.}90199{Roll No.}74
-Original String: +91 7736957108   Output String: +91 773{Roll No.}957108
-Original String: +91 9544049564   Output String: +91 {Phone Number}
-Original String: +91 7025734481   Output String: +91 70257344{Roll No.}1
-Original String: +91 9895537625   Output String: +{Roll No.}1 {Roll No.}8{Roll No.}5537625
-Original String: +91 8281479453   Output String: +91 {Phone Number}
-Original String: +91 9496960369   Output String: +91 {Phone Number}
-Original String: +91 7592816941   Output String: +91 {Phone Number}
+Original String: 8547960839   Output String: {Contact}
+Original String: 8921347402   Output String: 89{Roll no}134740{Roll no}
+Original String: 9778138706   Output String: 97781{Roll no}8706
+Original String: 9061676796   Output String: {Contact}
+Original String: 8590199574   Output String: 8{Roll no}90199{Roll no}74
+Original String: 7736957108   Output String: 773{Roll no}957108
+Original String: 9544049564   Output String: {Contact}
+Original String: 7025734481   Output String: 70257344{Roll no}1
+Original String: 9895537625   Output String: {Roll no}8{Roll no}5537625
+Original String: 8281479453   Output String: {Contact}
+Original String: 9496960369   Output String: {Contact}
 -------------------------------------------------------------
-Contact no: +91 {Phone Number}
+Phone No: {Contact}
 -------------------------------------------------------------
-Original String: 55565   Output String: {Dumpid}
-Original String: 55566   Output String: {Dumpid}
-Original String: 55567   Output String: {Dumpid}
-Original String: 55568   Output String: {Dumpid}
-Original String: 55569   Output String: {Roll No.}{Roll No.}{Roll No.}69
-Original String: 55570   Output String: {Dumpid}
+Original String: S4_CS2   Output String: {Class}
+Original String: S4_CS2   Output String: S4_CS{Roll no}
+Original String: S4_CS2   Output String: {Class}
+Original String: S4_CS2   Output String: S{Roll no}_CS2
+Original String: S4_CS2   Output String: {Class}
+Original String: S4_CS2   Output String: {Class}
+Original String: S4_CS2   Output String: {Class}
 -------------------------------------------------------------
-Dumpid: {Dumpid}
+CLASS: {Class}
+-------------------------------------------------------------
+Original String: 55565   Output String: {dumpid}
+Original String: 55566   Output String: {dumpid}
+Original String: 55567   Output String: {dumpid}
+Original String: 55568   Output String: {dumpid}
+Original String: 55569   Output String: {Roll no}{Roll no}{Roll no}69
+Original String: 55570   Output String: {dumpid}
+-------------------------------------------------------------
+DUMPID: {dumpid}
 -------------------------------------------------------------

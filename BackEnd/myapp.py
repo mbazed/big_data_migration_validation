@@ -46,8 +46,9 @@ def get_data():
     try:
         source_type= request.form.get('source_type')
         target_type= request.form.get('target_type')
+        print(source_type,target_type)
         
-        if(source_type == 'file'):
+        if(source_type == 'File Mode'):
             source_file = request.files['sourceFile']
             sourcedata = read_file_content_df(source_file)
             source_json = sourcedata.to_json()
@@ -60,7 +61,7 @@ def get_data():
             sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
             source_json = sourcedata.to_json()
             
-        if(target_type == 'file'):
+        if(target_type == 'File Mode'):
             target_file = request.files['targetFile']
             targetdata = read_file_content_df(target_file)
             target_json = targetdata.to_json()
@@ -369,4 +370,4 @@ def create_pdf(content, pdf_path):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=4564, debug=False)
+    app.run(host='127.0.0.1', port=4564, debug=True)
