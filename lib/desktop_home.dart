@@ -6,8 +6,8 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter/foundation.dart'
-    show kIsWeb; // Import kIsWeb from flutter/foundation
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:searchfield/searchfield.dart'; // Import kIsWeb from flutter/foundation
 
 class DesktopDataValidatorPage extends StatefulWidget {
   const DesktopDataValidatorPage({Key? key}) : super(key: key);
@@ -74,12 +74,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     // Add other items as needed
   ];
 
-  List <String> getModifiedList(){
+  List<String> getModifiedList() {
     return sourceselectedMode == 'File Mode' ? _list.sublist(1) : _list;
   }
 
-  List <String> target_getModifiedList(){
-    return targetselectedMode == 'File Mode'? _list.sublist(1) : _list;
+  List<String> target_getModifiedList() {
+    return targetselectedMode == 'File Mode' ? _list.sublist(1) : _list;
   }
 
   @override
@@ -568,7 +568,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                   listItemBuilder:
                                       (BuildContext context, String item) {
                                     Widget iconOrImage = getIconOrImage(item);
-                                     return Row(
+                                    return Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -1398,86 +1398,74 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     children: multiKey == true
                         ? [
                             //Aswin: key sugessions
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                border: Border.all(
-                                  color: Colors.grey.withOpacity(0.7),
+                            LayoutBuilder(builder: (BuildContext context,
+                                BoxConstraints constraints) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  border: Border.all(
+                                    color: Colors.grey.withOpacity(0.7),
+                                  ),
                                 ),
-                              ),
-                              width: width100 * 0.5,
-                              child: Autocomplete<String>(
-                                optionsBuilder:
-                                    (TextEditingValue textEditingValue) {
-                                  return srcCandidateKeys
-                                      .where(
-                                        (String suggestion) =>
-                                            suggestion.toLowerCase().contains(
-                                                  textEditingValue.text
-                                                      .toLowerCase(),
-                                                ),
-                                      )
-                                      .where(
-                                        (String suggestion) =>
-                                            suggestion.toLowerCase().contains(
-                                                  textEditingValue.text
-                                                      .toLowerCase(),
-                                                ),
-                                      )
-                                      .toList();
-                                },
-                                onSelected: (String selectedValue) {
-                                  _keyController1.text = selectedValue;
-                                },
-                                fieldViewBuilder: (BuildContext context,
-                                    TextEditingController textEditingController,
-                                    FocusNode focusNode,
-                                    VoidCallback onFieldSubmitted) {
-                                  _keyController1 = textEditingController;
-                                  return TextField(
-                                    controller: textEditingController,
-                                    focusNode: focusNode,
-                                    onTapOutside: (_) {
-                                      srcpk = _keyController1.text;
-                                      print("src-pk: $srcpk");
-                                      onFieldSubmitted();
-                                    },
-                                    onSubmitted: (_) {},
-                                    style: TextStyle(),
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      contentPadding: EdgeInsets.only(left: 10),
-                                      hintText: 'Select Source Primary Key',
-                                      hintStyle: TextStyle(),
-                                    ),
-                                  );
-                                },
-                                optionsViewBuilder: (BuildContext context,
-                                    AutocompleteOnSelected<String> onSelected,
-                                    Iterable<String> options) {
-                                  return Material(
-                                    elevation: 4.0,
-                                    child: ListView(
-                                      children: options
-                                          .map(
-                                            (String option) => ListTile(
-                                              title: Text(option),
-                                              onTap: () {
-                                                onSelected(option);
-                                              },
+                                width: MediaQuery.of(context).size.width * 0.15,
+                                child: SearchField(
+                                  key: const Key('searchfield'),
+                                  onSearchTextChanged: (query) {
+                                    return srcCandidateKeys
+                                        .where((option) => option
+                                            .toLowerCase()
+                                            .contains(query.toLowerCase()))
+                                        .map(
+                                          (option) =>
+                                              SearchFieldListItem<String>(
+                                            option,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(option),
                                             ),
-                                          )
-                                          .toList(),
+                                          ),
+                                        )
+                                        .toList();
+                                  },
+                                  onTap: () {
+                                    srcpk = _keyController1.text;
+                                    print("src-pk: $srcpk");
+                                  },
+                                  itemHeight: 50,
+                                  suggestionStyle: const TextStyle(
+                                      fontSize: 16, color: Colors.black),
+                                  searchInputDecoration: InputDecoration(
+                                    hoverColor:
+                                        Color.fromARGB(255, 187, 202, 186),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                  );
-                                },
-                              ),
-                            ),
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: 'Select Source Primary Key',
+                                  ),
+                                  suggestionsDecoration: SuggestionDecoration(
+                                      color: Colors.lightGreen.shade300,
+                                      borderRadius: BorderRadius.circular(2.0),
+                                      border: Border.all(
+                                          color: Color(0xFF3A4F39), width: 2)),
+                                  suggestions: srcCandidateKeys
+                                      .map(
+                                        (option) => SearchFieldListItem<String>(
+                                          option,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(option),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              );
+                            }),
 
                             //Aswin: end 1st key sugessions
                             Container(
@@ -1488,79 +1476,56 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                   color: Colors.grey.withOpacity(0.7),
                                 ),
                               ),
-                              width: width100 * 0.5,
-                              child: Autocomplete<String>(
-                                optionsBuilder:
-                                    (TextEditingValue textEditingValue) {
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              child: SearchField(
+                                key: const Key('searchfield'),
+                                onSearchTextChanged: (query) {
                                   return trgCandidateKeys
-                                      .where(
-                                        (String suggestion) =>
-                                            suggestion.toLowerCase().contains(
-                                                  textEditingValue.text
-                                                      .toLowerCase(),
-                                                ),
-                                      )
-                                      .where(
-                                        (String suggestion) =>
-                                            suggestion.toLowerCase().contains(
-                                                  textEditingValue.text
-                                                      .toLowerCase(),
-                                                ),
+                                      .where((option) => option
+                                          .toLowerCase()
+                                          .contains(query.toLowerCase()))
+                                      .map(
+                                        (option) => SearchFieldListItem<String>(
+                                          option,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(option),
+                                          ),
+                                        ),
                                       )
                                       .toList();
                                 },
-                                onSelected: (String selectedValue) {
-                                  _keyController2.text = selectedValue;
+                                onTap: () {
+                                  trgpk = _keyController2.text;
+                                  print("trg-pk: $trgpk");
                                 },
-                                fieldViewBuilder: (BuildContext context,
-                                    TextEditingController textEditingController,
-                                    FocusNode focusNode,
-                                    VoidCallback onFieldSubmitted) {
-                                  _keyController2 = textEditingController;
-                                  return TextField(
-                                    controller: textEditingController,
-                                    focusNode: focusNode,
-                                    onTapOutside: (_) {
-                                      trgpk = _keyController2.text;
-                                      print("trg-pk: $trgpk");
-                                      onFieldSubmitted();
-                                    },
-                                    onSubmitted: (_) {
-                                      onFieldSubmitted();
-                                    },
-                                    style: TextStyle(),
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                itemHeight: 50,
+                                suggestionStyle: const TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                                searchInputDecoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 10),
+                                  hintText: 'Select Target Primary Key',
+                                ),
+                                suggestionsDecoration: SuggestionDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                suggestions: trgCandidateKeys
+                                    .map(
+                                      (option) => SearchFieldListItem<String>(
+                                        option,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(option),
+                                        ),
                                       ),
-                                      contentPadding: EdgeInsets.only(left: 10),
-                                      hintText: 'Select Target Primary Key',
-                                      hintStyle: TextStyle(),
-                                    ),
-                                  );
-                                },
-                                optionsViewBuilder: (BuildContext context,
-                                    AutocompleteOnSelected<String> onSelected,
-                                    Iterable<String> options) {
-                                  return Material(
-                                    color: Colors.amber,
-                                    elevation: 4.0,
-                                    child: ListView(
-                                      children: options
-                                          .map(
-                                            (String option) => ListTile(
-                                              title: Text(option),
-                                              onTap: () {
-                                                onSelected(option);
-                                              },
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-                                  );
-                                },
+                                    )
+                                    .toList(),
                               ),
                             ),
                             //Aswin: end 1st key sugessions
@@ -1610,7 +1575,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.height * 0.215,
                     child: TextField(
-                      
                       controller: _resultController,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -1618,7 +1582,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       onSubmitted: (_) {},
                       style: TextStyle(),
                       decoration: InputDecoration(
-                        
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(8.0),
