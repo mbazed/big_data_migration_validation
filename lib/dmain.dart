@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
             leftItems: ['looooooong Name', 'Item B', 'Item C', 'Item D'],
             rightItems: ['Item 1', 'Item 2', 'Long Item'],
             connections: [
-              ['Item A', 'Long Item'],
               ['Item B', 'Item 1'],
               ['Item C', 'Item 2'],
               ['Item D', 'Item 1'],
@@ -136,10 +135,7 @@ class ConnectionLinesPainter extends CustomPainter {
     this.leftItemCount,
     this.rightItemCount,
     this.connections,
-  ) {
-    print(connections);
-  }
-
+  );
   @override
   void paint(Canvas canvas, Size size) {
     Paint linePaint = Paint()

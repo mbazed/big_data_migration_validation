@@ -48,7 +48,7 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
   void initState() {
     super.initState();
     textControllers = List.generate(
-      widget.rightItems.length,
+      50,
       (index) => TextEditingController(),
     );
     List<List<String>> connections = [];
@@ -65,6 +65,7 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
     List<TextEditingController> controllers,
   ) {
     List<Container> buttons = [];
+
     for (int i = 0; i < items.length; i++) {
       buttons.add(Container(
         width: MediaQuery.of(context).size.width * .10,
@@ -74,7 +75,8 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
           onPressed: () {
             setState(() {
               if (selectedTextFieldIndex != -1) {
-                controllers[selectedTextFieldIndex].text += items[i];
+                controllers[selectedTextFieldIndex].text +=
+                    '{' + items[i].trim() + '}';
               }
             });
           },
@@ -91,6 +93,7 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
     BuildContext context,
   ) {
     List<SizedBox> textFields = [];
+
     for (int i = 0; i < items.length; i++) {
       textFields.add(
         SizedBox(
@@ -208,14 +211,11 @@ class ConnectionLinesPainter extends CustomPainter {
         var leftitem = leftItems[i];
         var rightitem = rightItems[j];
 
-        // Assume rightY is initialized to a default value outside the loop
         double rightY = (j + 1) * rightSpacing;
 
         for (var connection in connections) {
           if (connection[0].trim() == rightitem.trim() &&
               connection[1].trim() == leftitem.trim()) {
-            // Update rightY if a connection is found
-
             drawConnectionPath(canvas, leftX, leftY, rightX, rightY, linePaint);
           } else {}
         }

@@ -125,7 +125,7 @@ def replace_substrings_with_keys(target_column, input_str, substitution_dict):
 
             
             if hash_map[input_str] >= 5:
-                logging.info(f"Repeated string found: {input_str} :  {hash_map[input_str]} times")
+                # logging.info(f"Repeated string found: {input_str} :  {hash_map[input_str]} times")
                 connectionsList.append([key, target_column])
 
         
@@ -196,7 +196,7 @@ def mappColumn(src, trg, source_key_column, target_key_column):
     # Return the output string and mapping dictionary
     if len(mappingDoc) == 0:
         return "No mapping found", mappingDoc
-    print(connectionsList)
+    
     return outputString, mappingDoc, connectionsList
 
 

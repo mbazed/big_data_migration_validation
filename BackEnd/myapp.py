@@ -46,7 +46,7 @@ def get_data():
     try:
         source_type= request.form.get('source_type')
         target_type= request.form.get('target_type')
-        print(source_type,target_type)
+        # print(source_type,target_type)
         
         if(source_type == 'File Mode'):
             source_file = request.files['sourceFile']
