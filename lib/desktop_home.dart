@@ -528,7 +528,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         // Left side (Input)
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(top: 16.0,left: 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -536,37 +536,43 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 SizedBox(height: 16.0),
                 Container(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
                                 width: width100,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.105,
+                                height: MediaQuery.of(context).size.height * 0.065,
                                 child: CustomDropdown<String>(
                                   canCloseOutsideBounds: true,
-                                  errorStyle: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                    fontFamily: "Inter",
-                                    fontWeight: FontWeight.w600,
+                                  decoration: CustomDropdownDecoration(
+                                    errorStyle: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 14,
+                                      fontFamily: "Inter",
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    expandedBorderRadius:
+                                        BorderRadius.circular(8.0),
+                                    expandedBorder: Border.all(
+                                      color: Color(0xFF3A4F39),
+                                      width: 2,
+                                    ),
+                                    closedBorderRadius:
+                                        BorderRadius.circular(8.0),
+                                    closedBorder: Border.all(
+                                      color: Color(0xFF3A4F39),
+                                      width: 2,
+                                    ),
                                   ),
-                                  expandedBorderRadius:
-                                      BorderRadius.circular(8.0),
-                                  expandedBorder: Border.all(
-                                    color: Color(0xFF3A4F39),
-                                    width: 2,
-                                  ),
-                                  closedBorderRadius:
-                                      BorderRadius.circular(8.0),
-                                  closedBorder: Border.all(
-                                    color: Color(0xFF3A4F39),
-                                    width: 2,
-                                  ),
-                                  listItemBuilder:
-                                      (BuildContext context, String item) {
+                                  listItemBuilder: (BuildContext context,
+                                      dynamic item,
+                                      bool isSelected,
+                                      Function() onItemSelect) {
                                     Widget iconOrImage = getIconOrImage(item);
                                     return Row(
                                       mainAxisAlignment:
@@ -577,7 +583,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                             iconOrImage,
                                             SizedBox(width: 8),
                                             Text(
-                                              item,
+                                              item.toString(),
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 fontFamily: "Montserrat",
@@ -586,6 +592,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                             ),
                                           ],
                                         ),
+                                        // Additional UI or logic based on isSelected
                                       ],
                                     );
                                   },
@@ -798,7 +805,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -832,7 +839,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .symmetric(
+                                                                .symmetric(
                                                                 vertical: 8.0),
                                                         child: TextField(
                                                           controller:
@@ -855,7 +862,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .symmetric(
+                                                                .symmetric(
                                                                 vertical: 8.0),
                                                         child: TextField(
                                                           controller:
@@ -890,7 +897,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -912,7 +919,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -941,7 +948,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16.0),
+                      SizedBox(height: 40.0),
                       Container(
                         child: Column(
                           children: [
@@ -950,29 +957,32 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                               child: Container(
                                 width: width100,
                                 height:
-                                    MediaQuery.of(context).size.height * 0.105,
+                                    MediaQuery.of(context).size.height * 0.065,
                                 child: CustomDropdown<String>(
                                   canCloseOutsideBounds: true,
-                                  errorStyle: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                    fontFamily: "Inter",
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  expandedBorderRadius:
-                                      BorderRadius.circular(8.0),
-                                  expandedBorder: Border.all(
-                                    color: Color(0xFF3A4F39),
-                                    width: 2,
-                                  ),
-                                  closedBorderRadius:
-                                      BorderRadius.circular(8.0),
-                                  closedBorder: Border.all(
-                                    color: Color(0xFF3A4F39),
-                                    width: 2,
-                                  ),
-                                  listItemBuilder:
-                                      (BuildContext context, String item) {
+                                  decoration: CustomDropdownDecoration(
+                                      errorStyle: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                        fontFamily: "Inter",
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      expandedBorderRadius:
+                                          BorderRadius.circular(8.0),
+                                      expandedBorder: Border.all(
+                                        color: Color(0xFF3A4F39),
+                                        width: 2,
+                                      ),
+                                      closedBorderRadius:
+                                          BorderRadius.circular(8.0),
+                                      closedBorder: Border.all(
+                                        color: Color(0xFF3A4F39),
+                                        width: 2,
+                                      )),
+                                  listItemBuilder: (BuildContext context,
+                                      dynamic item,
+                                      bool isSelected,
+                                      Function() onItemSelect) {
                                     Widget iconOrImage = getIconOrImage(item);
                                     return Row(
                                       mainAxisAlignment:
@@ -983,7 +993,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                             iconOrImage,
                                             SizedBox(width: 8),
                                             Text(
-                                              item,
+                                              item.toString(),
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 fontFamily: "Montserrat",
@@ -992,6 +1002,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                             ),
                                           ],
                                         ),
+                                        // Additional UI or logic based on isSelected
                                       ],
                                     );
                                   },
@@ -1214,7 +1225,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                   width: width100,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1247,7 +1258,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1269,7 +1280,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1304,7 +1315,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                   width: width100 * 0.475,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1326,7 +1337,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                   width: width100 * 0.475,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
