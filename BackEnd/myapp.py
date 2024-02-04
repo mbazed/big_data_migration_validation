@@ -209,6 +209,9 @@ def findKeys():
     sourcedata = json_to_df(record.source_data)
     targetdata = json_to_df(record.target_data)
     
+    sourceColumns =(',').join( sourcedata.columns.tolist())
+    targetColumns=(',').join( targetdata.columns.tolist())
+    
     try:
         print("[⌄] Primary key request received...")
         
@@ -244,10 +247,11 @@ def findKeys():
         
     print(message)
     print("[^] returning response...")    
-    return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
+    print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
+    return jsonify({  'source-columns':sourceColumns.split(','),'target-columns':targetColumns.split(','), 'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():
-    
+    connectionsList=[]
     
     
     
@@ -256,6 +260,7 @@ def mapData():
     
     sourcePrimaryKey = request.form.get('sourcePk').strip()
     targetPrimaryKey = request.form.get('targetPk').strip()
+    connectionsList.append([sourcePrimaryKey,targetPrimaryKey])
     
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
@@ -277,7 +282,7 @@ def mapData():
     try:
         
         
-        mapingStr,mapingDoc = mappColumn(sourcedata,targetdata,sourcePrimaryKey,targetPrimaryKey)
+        mapingStr,mapingDoc,connectionsList = mappColumn(sourcedata,targetdata,sourcePrimaryKey,targetPrimaryKey)
         if(mapingDoc == {}):
             message =  '[-] Data maping Failed!'
         else:
@@ -296,7 +301,7 @@ def mapData():
         
     print(message)
     print("[^] returning response...")
-    return jsonify({'MapingDoc': mapingStr, 'message': message}) 
+    return jsonify({'MapingDoc': mapingStr,'connections':connectionsList, 'message': message}) 
 
 
 @app.route('/validateData', methods=['POST'])

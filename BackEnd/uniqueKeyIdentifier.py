@@ -22,6 +22,8 @@ def read_data(file_path):
     return data
 
 
+
+
 def find_minimal_primary_key(data):
     columns = data.columns
     min_key = None

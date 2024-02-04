@@ -1,10 +1,11 @@
 import 'dart:html' as html;
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'diagram.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:searchfield/searchfield.dart'; // Import kIsWeb from flutter/foundation
@@ -34,6 +35,21 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   FilePickerResult? targetResult;
   FilePickerResult? sourceResult;
 
+  List<String> sourceColumnList = [
+    'Roll No',
+    'Name',
+    'Contact',
+    'Class',
+    'Dumpid'
+  ];
+  List<String> targetColumnList = [
+    'College Id',
+    'Student Name',
+    'Contact',
+    'Dumpid'
+  ];
+  List<List<String>> connections = [];
+
   final pkUrl = Uri.parse('http://localhost:4564/findKeys');
   final dbmodeurl = Uri.parse('http://localhost:4564/getfromdb');
   final mapUrl = Uri.parse('http://localhost:4564/mapData');
@@ -41,7 +57,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final uploadUrl = Uri.parse('http://localhost:4564/upload');
   final uploadDataUrl = Uri.parse('http://localhost:4564/getdata');
   final downloadUrl = Uri.parse('http://localhost:4564/download');
-
+  bool showDiagram = false;
   var srcpk = "";
   var trgpk = "";
   final TextEditingController _sourceController = TextEditingController();
@@ -62,6 +78,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   TextEditingController _keyController2 = TextEditingController();
   List<String> srcCandidateKeys = [];
   List<String> trgCandidateKeys = [];
+  List<List<String>> rules = [];
+  Map<String, List<String>> rulesDictionary = {};
 
   String fileName = 'No file selected';
   // Use your _list here
@@ -109,6 +127,15 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   }
 
   void handleMapData() async {
+    if (multiKey) {
+      srcpk = _keyController1.text;
+      trgpk = _keyController2.text;
+    }
+    setState(() {
+      connections = [];
+      rules = [];
+    });
+
     try {
       final responseMap = await http.post(
         mapUrl,
@@ -121,11 +148,19 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
       if (responseMap.statusCode == 200) {
         print('[+] Mapping Response Received ');
+        showDiagram = true;
 
         final Map<String, dynamic> data = jsonDecode(responseMap.body);
 
         var mapingDoc = data['MapingDoc'].toString();
         var mapingStatus = data['message'].toString();
+
+        connections = List<List<String>>.from(
+          data['connections']
+              .map((dynamic innerList) => List<String>.from(innerList)),
+        );
+
+        String ruleinput = data['MapingDoc'].toString();
 
         _resultController.text =
             '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
@@ -133,7 +168,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           secondButtonText = 'Validate Data';
         else if (mapingStatus[1] == '-') secondButtonText = 'Map Data';
 
-        setState(() {});
+        setState(() {
+          rulesDictionary = createDictionary(ruleinput);
+        });
       } else {
         print('[-] Mapping failed: ${responseMap.statusCode}');
       }
@@ -171,9 +208,13 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   }
 
   Future<void> handleUpload() async {
+    setState(() {
+      connections = [];
+      rules = [];
+    });
     var request;
     request = http.MultipartRequest('POST', uploadDataUrl);
-
+    showDiagram = false;
     var requestBody = {
       'source_type': sourceselectedMode,
       'target_type': targetselectedMode,
@@ -443,6 +484,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   }
 
   Future<void> handleFindPrimaryKeys() async {
+    setState(() {
+      connections = [];
+      rules = [];
+    });
+    showDiagram = true;
     try {
       final response = await http.post(
         pkUrl,
@@ -461,12 +507,27 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         setState(() {
           _keyController1.text = "";
           _keyController2.text = "";
+
+          sourceColumnList = data['source-columns']
+              .toString()
+              .replaceAll('[', '')
+              .replaceAll(']', '')
+              .split(',')
+              .cast<String>();
+          targetColumnList = data['target-columns']
+              .toString()
+              .replaceAll('[', '')
+              .replaceAll(']', '')
+              .split(',')
+              .cast<String>();
           srcCandidateKeys = data['sourcePrimaryKey'].toString().split(',');
           trgCandidateKeys = data['targetPrimaryKey'].toString().split(',');
           var srcCandidateKeysStr = data['sourcePrimaryKey'].toString();
           var trgCandidateKeysStr = data['targetPrimaryKey'].toString();
           if (srcCandidateKeys.length > 1 || trgCandidateKeys.length > 1) {
             multiKey = true;
+            _keyController1.text = srcCandidateKeys[0];
+            _keyController2.text = trgCandidateKeys[0];
           } else {
             multiKey = false;
           }
@@ -1411,6 +1472,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: SearchField(
                                   key: const Key('searchfield'),
+                                  controller: _keyController1,
                                   onSearchTextChanged: (query) {
                                     return srcCandidateKeys
                                         .where((option) => option
@@ -1478,6 +1540,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                               ),
                               width: MediaQuery.of(context).size.width * 0.15,
                               child: SearchField(
+                                controller: _keyController2,
                                 key: const Key('searchfield'),
                                 onSearchTextChanged: (query) {
                                   return trgCandidateKeys
@@ -1621,6 +1684,47 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     child: Text(secondButtonText),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "Source Columns",
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "Target Column Rule",
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  color: Color.fromARGB(255, 235, 244, 255),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.height *
+                          0.1 *
+                          max(sourceColumnList.length,
+                              targetColumnList.length) +
+                      2,
+                  margin: EdgeInsets.only(top: 20),
+                  child: showDiagram == true
+                      ? ConnectionLinesWidget(
+                          leftItems: sourceColumnList,
+                          rightItems: targetColumnList,
+                          rulesDictionary: rulesDictionary,
+                          widgetWidth: MediaQuery.of(context).size.width * 0.5,
+                          widgetHeight:
+                              MediaQuery.of(context).size.height * 0.4,
+                        )
+                      : Text("Hi"),
+                )
               ],
             ),
           ),

@@ -136,3 +136,4 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 BackEnd/instance/data.db
+BackEnd/instance/data.db

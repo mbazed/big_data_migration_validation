@@ -13,7 +13,7 @@ def connect_mysql(host, user, password, database):
         user=user,
         password=password,
         database=database,
-        port=3306
+        
     )
     return connection
 
@@ -24,14 +24,7 @@ def connect_oracle(host, user, password, database):
 
 def fetch_table_to_dataframe(connection, table_name):
     cursor = connection.cursor()
-    if ',' in table_name:
-    # If it's a list of values, split them and join tables in the query
-      table_names = table_name.split(',')
-      join_condition = ' NATURAL JOIN '.join(table_names)
-      query = f"SELECT * FROM {join_condition}"
-    else:
-    # If it's a single value, use the simple SELECT * FROM table_name query
-      query = f"SELECT * FROM {table_name}"
+    query = f"SELECT * FROM {table_name}"
     cursor.execute(query)
     data = cursor.fetchall()
     columns = [desc[0] for desc in cursor.description]
