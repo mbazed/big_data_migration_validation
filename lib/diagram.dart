@@ -181,6 +181,21 @@ class ConnectionLinesPainter extends CustomPainter {
       ..color = Colors.black
       ..strokeWidth = 3.0;
 
+    TextSpan textSpan = TextSpan(
+      text: '>',
+      style: TextStyle(
+        color: Colors.green,
+        fontSize: 24.0,
+      ),
+    );
+
+    TextPainter textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+    );
+
+    textPainter.layout(minWidth: 0, maxWidth: size.width);
+
     List<List<String>> connections = [];
     rulesDictionary.forEach((key, values) {
       if (values.length > 1) {
@@ -196,7 +211,6 @@ class ConnectionLinesPainter extends CustomPainter {
       }
     });
 
-    print(connections);
     double leftSpacing = size.height / (leftItemCount + 1);
     double rightSpacing = size.height / (rightItemCount + 1);
     double leftX = size.width / 100 * 23;
@@ -216,6 +230,8 @@ class ConnectionLinesPainter extends CustomPainter {
         for (var connection in connections) {
           if (connection[0].trim() == rightitem.trim() &&
               connection[1].trim() == leftitem.trim()) {
+            textPainter.paint(canvas, Offset(rightX - 4, rightY - 14));
+
             drawConnectionPath(canvas, leftX, leftY, rightX, rightY, linePaint);
           } else {}
         }
