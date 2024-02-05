@@ -79,7 +79,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   List<String> srcCandidateKeys = [];
   List<String> trgCandidateKeys = [];
   List<List<String>> rules = [];
-  Map<String, List<String>> rulesDictionary = {};
+
+  String inputRuleString = '';
 
   String fileName = 'No file selected';
   // Use your _list here
@@ -155,21 +156,18 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         var mapingDoc = data['MapingDoc'].toString();
         var mapingStatus = data['message'].toString();
 
-        connections = List<List<String>>.from(
-          data['connections']
-              .map((dynamic innerList) => List<String>.from(innerList)),
-        );
+        // connections = List<List<String>>.from(
+        //   data['connections']
+        //       .map((dynamic innerList) => List<String>.from(innerList)),
+        // );
 
-        String ruleinput = data['MapingDoc'].toString();
-
+        inputRuleString = data['MapingDoc'].toString();
         _resultController.text =
             '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
-        if (mapingStatus[1] == '+')
-          secondButtonText = 'Validate Data';
-        else if (mapingStatus[1] == '-') secondButtonText = 'Map Data';
-
         setState(() {
-          rulesDictionary = createDictionary(ruleinput);
+          if (mapingStatus[1] == '+') {
+            secondButtonText = 'Validate Data';
+          } else if (mapingStatus[1] == '-') secondButtonText = 'Map Data';
         });
       } else {
         print('[-] Mapping failed: ${responseMap.statusCode}');
@@ -589,7 +587,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         // Left side (Input)
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(top: 16.0,left: 16),
+            padding: const EdgeInsets.only(top: 16.0, left: 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -607,7 +605,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                             children: [
                               Container(
                                 width: width100,
-                                height: MediaQuery.of(context).size.height * 0.065,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.065,
                                 child: CustomDropdown<String>(
                                   canCloseOutsideBounds: true,
                                   decoration: CustomDropdownDecoration(
@@ -1720,16 +1719,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   color: Color.fromARGB(255, 235, 244, 255),
                   width: MediaQuery.of(context).size.width * 0.5,
                   height: MediaQuery.of(context).size.height *
-                          0.1 *
-                          max(sourceColumnList.length,
-                              targetColumnList.length) +
-                      2,
+                      0.1 *
+                      max(sourceColumnList.length, targetColumnList.length),
                   margin: EdgeInsets.only(top: 20),
                   child: showDiagram == true
                       ? ConnectionLinesWidget(
                           leftItems: sourceColumnList,
                           rightItems: targetColumnList,
-                          rulesDictionary: rulesDictionary,
+                          inputRuleString: inputRuleString,
                           widgetWidth: MediaQuery.of(context).size.width * 0.5,
                           widgetHeight:
                               MediaQuery.of(context).size.height * 0.4,
