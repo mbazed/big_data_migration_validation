@@ -1694,45 +1694,77 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     child: Text(secondButtonText),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Source Columns",
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Target Column Rule",
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  color: Color.fromARGB(255, 235, 244, 255),
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height *
-                      0.1 *
-                      max(sourceColumnList.length, targetColumnList.length),
-                  margin: EdgeInsets.only(top: 20),
-                  child: showDiagram == true
-                      ? ConnectionLinesWidget(
-                          leftItems: sourceColumnList,
-                          rightItems: targetColumnList,
-                          inputRuleString: inputRuleString,
-                          widgetWidth: MediaQuery.of(context).size.width * 0.5,
-                          widgetHeight:
-                              MediaQuery.of(context).size.height * 0.4,
-                        )
-                      : Text("Hi"),
-                )
+                showDiagram == true
+                    ? Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 235, 244, 255),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5)),
+                              border: Border(
+                                  bottom: BorderSide(color: Colors.grey)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Text(
+                                    "Source Columns",
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 60,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Text(
+                                    "Target Column Rule",
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            color: Color.fromARGB(255, 235, 244, 255),
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            height: MediaQuery.of(context).size.height *
+                                0.1 *
+                                max(sourceColumnList.length,
+                                    targetColumnList.length),
+                            child: sourceColumnList != [] &&
+                                    targetColumnList != []
+                                ? ConnectionLinesWidget(
+                                    leftItems: sourceColumnList,
+                                    rightItems: targetColumnList,
+                                    inputRuleString: inputRuleString,
+                                    widgetWidth:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    widgetHeight:
+                                        MediaQuery.of(context).size.height *
+                                            0.4,
+                                  )
+                                : Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'No data available',
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.grey),
+                                    ),
+                                  ),
+                          )
+                        ],
+                      )
+                    : Text(""),
               ],
             ),
           ),

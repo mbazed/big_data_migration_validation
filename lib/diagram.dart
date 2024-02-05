@@ -45,16 +45,16 @@ class ConnectionLinesWidget extends StatefulWidget {
 class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
   late List<TextEditingController> textControllers;
   int selectedTextFieldIndex = -1; // Initialize to an invalid index
-  Map<String, List<String>> rulesCopy = {};
+  Map<String, String> rulesCopy = {};
   Map<String, List<String>> rulesDictionary = {};
 
   @override
   void initState() {
     super.initState();
-    textControllers = List.generate(
-      50,
-      (index) => TextEditingController(),
-    );
+    rulesDictionary = {};
+    rulesCopy = {};
+    rulesDictionary = createConnectionDictionary(widget.inputRuleString);
+    rulesCopy = createRuleDictionary(widget.inputRuleString);
     List<List<String>> connections = [];
 
     rulesDictionary.forEach((key, values) {
@@ -105,6 +105,11 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
     BuildContext context,
     String inputString,
   ) {
+    for (int i = 0; i < items.length; i++) {
+      setState(() {
+        controllers[i].text = '';
+      });
+    }
     List<SizedBox> textFields = [];
 
     for (int i = 0; i < items.length; i++) {
@@ -122,7 +127,7 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
                 });
               },
               onChanged: (value) => {},
-              onTapOutside: (value) => {},
+              onEditingComplete: () => {selectedTextFieldIndex = -1},
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: items[i],
@@ -165,8 +170,32 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    textControllers = List.generate(
+      50,
+      (index) => TextEditingController(),
+    );
+    setState(() {
+      rulesDictionary = {};
+      rulesCopy = {};
+    });
+
     setState(() {
       rulesDictionary = createConnectionDictionary(widget.inputRuleString);
+    });
+    List<List<String>> connections = [];
+
+    rulesDictionary.forEach((key, values) {
+      if (values.length > 1) {
+        // If there are multiple values for a key, create separate lists
+        for (var value in values) {
+          List<String> connection = [key, value];
+          connections.add(connection);
+        }
+      } else {
+        // If there's only one value for a key, create a single list
+        List<String> connection = [key, ...values];
+        connections.add(connection);
+      }
     });
 
     return CustomPaint(
@@ -175,8 +204,7 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
         widget.rightItems,
         widget.leftItems.length,
         widget.rightItems.length,
-        widget.inputRuleString,
-        rulesDictionary,
+        connections,
       ),
       child: Container(
         padding: EdgeInsets.all(16),
@@ -211,16 +239,14 @@ class ConnectionLinesPainter extends CustomPainter {
   final List<String> rightItems;
   final int leftItemCount;
   final int rightItemCount;
-  final String inputRuleString;
-  final Map<String, List<String>> rulesDictionary;
+  final List<List<String>> connections;
 
   ConnectionLinesPainter(
     this.leftItems,
     this.rightItems,
     this.leftItemCount,
     this.rightItemCount,
-    this.inputRuleString,
-    this.rulesDictionary,
+    this.connections,
   );
 
   @override
@@ -243,24 +269,6 @@ class ConnectionLinesPainter extends CustomPainter {
     );
 
     textPainter.layout(minWidth: 0, maxWidth: size.width);
-
-    List<List<String>> connections = [];
-
-    Map<String, List<String>> rulesDictionary =
-        createConnectionDictionary(inputRuleString);
-    rulesDictionary.forEach((key, values) {
-      if (values.length > 1) {
-        // If there are multiple values for a key, create separate lists
-        for (var value in values) {
-          List<String> connection = [key, value];
-          connections.add(connection);
-        }
-      } else {
-        // If there's only one value for a key, create a single list
-        List<String> connection = [key, ...values];
-        connections.add(connection);
-      }
-    });
 
     double leftSpacing = (size.height + 8) / (leftItemCount + 1);
     double rightSpacing = (size.height + 8) / (rightItemCount + 1);

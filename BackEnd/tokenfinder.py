@@ -106,37 +106,30 @@ def clean(my_list):
 hash_map = {}
 connectionsList = []
 def replace_substrings_with_keys(target_column, input_str, substitution_dict):
-    global connectionsList
-    global hash_map
+    
 
     if input_str is None:
         return None
-
+    i=0
+    keys=[]
     for key, value in substitution_dict.items():
         if value is not None and value != '':
-            input_str = input_str.replace(value, f'{{{key}}}')
-        
-        if key in input_str:
-            # Check if input_str is already in the hash_map
-            if input_str in hash_map:
-                hash_map[input_str] += 1
-            else:
-                hash_map[input_str] = 1
-
-            
-            if hash_map[input_str] >= 5:
-                # logging.info(f"Repeated string found: {input_str} :  {hash_map[input_str]} times")
-                connectionsList.append([key, target_column])
-
-        
-            
+            input_str = input_str.replace(value, f'{{{i}}}')
+            keys.append(key)
+            i+=1   
+             
+    for j in range(i):
+        input_str = input_str.replace(f'{{{j}}}', f'{{{keys[j]}}}')
+                  
     return input_str
     
 def mappColumn(src, trg, source_key_column, target_key_column):
+    
     global hash_map 
     global connectionsList
     Sourcedata=df_to_list_of_dicts(src)
     TargetData=df_to_list_of_dicts(trg)
+    threshold = TargetData.__len__() * 0.05
     
     connectionsList = []
     hash_map={}
@@ -164,7 +157,7 @@ def mappColumn(src, trg, source_key_column, target_key_column):
                     continue
 
                 outlist.append(output_string)
-                mappingResult = find_repeated_element(outlist, 5)
+                mappingResult = find_repeated_element(outlist,threshold)
 
                 if mappingResult is not None:
                     # Update the mapping dictionary
