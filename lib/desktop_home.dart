@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html' as html;
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String message = '';
   String sourceData = '';
   String targetData = '';
-  String secondButtonText = 'Map Data';
+
   String firstButtonText = 'Upload';
   bool multiKey = false;
   String requestID = "";
@@ -36,17 +37,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   FilePickerResult? sourceResult;
 
   List<String> sourceColumnList = [
-    'Roll No',
-    'Name',
-    'Contact',
-    'Class',
-    'Dumpid'
+
   ];
   List<String> targetColumnList = [
-    'College Id',
-    'Student Name',
-    'Contact',
-    'Dumpid'
+ 
   ];
   List<List<String>> connections = [];
 
@@ -133,8 +127,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       trgpk = _keyController2.text;
     }
     setState(() {
-      connections = [];
-      rules = [];
+     inputRuleString="";
     });
 
     try {
@@ -166,8 +159,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
         setState(() {
           if (mapingStatus[1] == '+') {
-            secondButtonText = 'Validate Data';
-          } else if (mapingStatus[1] == '-') secondButtonText = 'Map Data';
+            firstButtonText = 'Validate Data';
+          } else if (mapingStatus[1] == '-') firstButtonText = 'Map Data';
         });
       } else {
         print('[-] Mapping failed: ${responseMap.statusCode}');
@@ -177,38 +170,48 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  void handleValidateData() async {
-    try {
-      final responseValidation = await http.post(
-        validateUrl,
-        body: {
-          'request_id': requestID,
-        },
-      );
 
-      if (responseValidation.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(responseValidation.body);
-        var validationDoc = data['validationDoc'].toString();
-        var validationStatus = data['message'].toString();
-        print('[+] Validation successful!  \n' + validationStatus);
 
-        _resultController.text =
-            '\n Validation Status: $validationStatus\nValidation Doc:\n$validationDoc\n';
-        secondButtonText = 'Download Report';
+void handleValidateData() async {
+  try {
+    final responseValidation = await http.post(
+      validateUrl,
+      body: {
+        'request_id': requestID,
+      },
+    );
 
-        setState(() {});
-      } else {
-        print('[-] Validation failed: ${responseValidation.statusCode}');
-      }
-    } catch (e) {
-      print('[!] Error during validation: $e');
+    if (responseValidation.statusCode == 200) {
+      var responseData = responseValidation.body;
+      var data = jsonDecode(responseData);
+      var validationDoc = data['validationDoc'].toString();
+      var validationStatus = data['message'].toString();
+      print('[+] Validation successful!  \n' + validationStatus);
+
+      // Display response in ListView
+      _resultController.text =
+          '\n Validation Status: $validationStatus\n';
+
+      // Add validationDoc to a list for ListView
+      List<String> responseLines = validationDoc.split('\n');
+      setState(() {
+        responseLines.forEach((line) {
+          _resultController.text += line + '\n';
+        });
+      });
+    } else {
+      print('[-] Validation failed: ${responseValidation.statusCode}');
     }
+  } catch (e) {
+    print('[!] Error during validation: $e');
   }
+}
+
+
 
   Future<void> handleUpload() async {
     setState(() {
-      connections = [];
-      rules = [];
+      inputRuleString = "";
     });
     var request;
     request = http.MultipartRequest('POST', uploadDataUrl);
@@ -348,143 +351,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  Future<void> handleUpload2() async {
-    try {
-      if (sourceselectedMode == 'File Mode') {
-        var request;
-
-        if (sourceResult != null && targetResult != null) {
-          request = http.MultipartRequest('POST', uploadUrl);
-
-          // Add source file to request
-          if (kIsWeb) {
-            request.files.add(http.MultipartFile.fromBytes(
-              'sourceFile',
-              sourceResult!.files.single.bytes!,
-              filename: sourceResult!.files.single.name,
-            ));
-          } else {
-            request.files.add(await http.MultipartFile.fromPath(
-              'sourceFile',
-              sourceResult!.files.single.path!,
-            ));
-          }
-
-          // Add target file to request
-          if (kIsWeb) {
-            request.files.add(http.MultipartFile.fromBytes(
-              'targetFile',
-              targetResult!.files.single.bytes!,
-              filename: targetResult!.files.single.name,
-            ));
-          } else {
-            request.files.add(await http.MultipartFile.fromPath(
-              'targetFile',
-              targetResult!.files.single.path!,
-            ));
-          }
-
-          var response = await request.send();
-          print('Response Status Code: ${response.statusCode}');
-
-          if (response.statusCode == 200) {
-            print('[+] Files Uploaded successfully!');
-            var responseBody = await response.stream.bytesToString();
-            final Map<String, dynamic> data = jsonDecode(responseBody);
-            requestID = data['request_id'].toString();
-            var message = data['message'].toString();
-
-            print('Request ID: $requestID');
-            print('Message: $message');
-
-            setState(() {
-              _resultController.text = '${_resultController.text}${message}\n';
-              firstButtonText = 'Find Primary Keys';
-            });
-          }
-        } else {
-          _resultController.text =
-              '${_resultController.text}Source or target result is Null\n';
-          print('[!] Source or target result is null');
-          // Handle the case when either sourceResult or targetResult is null
-        }
-      } else {
-        var source_database_type = 'mysql';
-        var target_database_type = 'mysql';
-        try {
-          if (_sourceUserController.text != "" &&
-              _sourcePassController.text != "" &&
-              _sourceHostController.text != "" &&
-              _sourceDBNameController.text != "" &&
-              _sourceTableController.text != "" &&
-              _targetUserController.text != "" &&
-              _targetPassController.text != "" &&
-              _targetHostController.text != "" &&
-              _targetDBNameController.text != "" &&
-              _targetTableController.text != "") {
-            final response = await http.post(
-              dbmodeurl,
-              body: {
-                'source_database_type': source_database_type,
-                'source_hostname': _sourceHostController.text,
-                'source_username': _sourceUserController.text,
-                'source_database': _sourceDBNameController.text,
-                'source_password': _sourcePassController.text,
-                'source_table': _sourceTableController.text,
-                'target_database_type': target_database_type,
-                'target_hostname': _targetHostController.text,
-                'target_username': _targetUserController.text,
-                'target_database': _targetDBNameController.text,
-                'target_password': _targetPassController.text,
-                'target_table': _targetTableController.text,
-              },
-            );
-
-            if (response.statusCode == 200) {
-              print('[+] Data retrived from Databases successfully!');
-
-              final Map<String, dynamic> data = jsonDecode(response.body);
-              requestID = data['request_id'].toString();
-              var message = data['message'].toString();
-
-              print('Request ID: $requestID');
-              print('Message: $message');
-
-              setState(() {
-                _resultController.text =
-                    '${_resultController.text}${message}\n';
-                firstButtonText = 'Find Primary Keys';
-              });
-            } else {
-              setState(() {
-                firstButtonText == 'Upload';
-                _resultController.text =
-                    '${_resultController.text} Databases Connection Error!\n';
-              });
-            }
-          } else {
-            setState(() {
-              firstButtonText == 'Upload';
-              _resultController.text =
-                  '${_resultController.text} Please fill all the fields!\n';
-            });
-          }
-        } catch (e) {
-          print('[!] Error during Database upload: $e');
-        }
-      }
-    } catch (e) {
-      _resultController.text =
-          '${_resultController.text}Error during File Upload: $e\n';
-      print('[!] Error during File Upload: $e');
-      // Handle other errors
-    }
-  }
+  
 
   Future<void> handleFindPrimaryKeys() async {
     setState(() {
-      connections = [];
-      rules = [];
+      inputRuleString="";
     });
     showDiagram = true;
     try {
@@ -497,7 +368,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
       if (response.statusCode == 200) {
         print('[+] Primary Key Fetch successful! ');
-        secondButtonText = 'Map Data';
+        firstButtonText = 'Map Data';
 
         final Map<String, dynamic> data = jsonDecode(response.body);
 
@@ -527,6 +398,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             _keyController1.text = srcCandidateKeys[0];
             _keyController2.text = trgCandidateKeys[0];
           } else {
+            _keyController1.text = srcCandidateKeys[0];
+            _keyController2.text = trgCandidateKeys[0];
             multiKey = false;
           }
 
@@ -575,6 +448,27 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
   Widget iconOrImageWidget(Widget iconOrImage) {
     return iconOrImage;
+  }
+
+  void chooseHandler(String firstButtonText) {
+    switch (firstButtonText) {
+      case 'Upload':
+        handleUpload();
+        break;
+      case 'Find Primary Keys':
+        handleFindPrimaryKeys();
+        break;
+      case 'Map Data':
+        handleMapData();
+        break;
+      case 'Validate Data':
+        handleValidateData();
+        break;
+      case 'Download Report':
+        downloadReport(_resultController.text);
+        break;
+      default:
+    }
   }
 
   @override
@@ -865,7 +759,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -899,7 +793,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .symmetric(
+                                                                    .symmetric(
                                                                 vertical: 8.0),
                                                         child: TextField(
                                                           controller:
@@ -922,7 +816,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .symmetric(
+                                                                    .symmetric(
                                                                 vertical: 8.0),
                                                         child: TextField(
                                                           controller:
@@ -957,7 +851,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -979,7 +873,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1285,7 +1179,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                   width: width100,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1318,7 +1212,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1340,7 +1234,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1375,7 +1269,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                   width: width100 * 0.475,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1397,7 +1291,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                   width: width100 * 0.475,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1440,18 +1334,48 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onPressed: firstButtonText == 'Upload'
-                        ? () async {
-                            await handleUpload();
-                          }
-                        : () async {
-                            await handleFindPrimaryKeys();
-                          },
+                    onPressed: () {
+                      chooseHandler(firstButtonText);
+                    },
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(firstButtonText)),
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  reverse: true,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(0.7),
+                      ),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    height: MediaQuery.of(context).size.height * 0.215,
+                    child: TextField(
+                      controller: _resultController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      onChanged: (_) {},
+                      onSubmitted: (_) {},
+                      style: TextStyle(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: '--',
+                        hintStyle: TextStyle(),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -1606,94 +1530,63 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         : [],
                   ),
                 ),
-                Container(
-                  alignment: AlignmentDirectional.topStart,
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  padding: EdgeInsets.only(
-                    bottom: 25,
-                  ),
-                  child: RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                        text: 'Results ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '*',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 16,
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ]),
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  reverse: true,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(
-                        color: Colors.grey.withOpacity(0.7),
-                      ),
-                    ),
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.height * 0.215,
-                    child: TextField(
-                      controller: _resultController,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      onChanged: (_) {},
-                      onSubmitted: (_) {},
-                      style: TextStyle(),
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: '--',
-                        hintStyle: TextStyle(),
-                      ),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   alignment: AlignmentDirectional.topStart,
+                //   width: MediaQuery.of(context).size.width * 0.5,
+                //   padding: EdgeInsets.only(
+                //     bottom: 25,
+                //   ),
+                //   child: RichText(
+                //     text: TextSpan(children: <TextSpan>[
+                //       TextSpan(
+                //         text: 'Results ',
+                //         style: TextStyle(
+                //           color: Colors.black,
+                //           fontSize: 16,
+                //           fontFamily: "Inter",
+                //           fontWeight: FontWeight.w600,
+                //         ),
+                //       ),
+                //       TextSpan(
+                //         text: '*',
+                //         style: TextStyle(
+                //           color: Colors.red,
+                //           fontSize: 16,
+                //           fontFamily: "Inter",
+                //           fontWeight: FontWeight.w600,
+                //         ),
+                //       ),
+                //     ]),
+                //   ),
+                // ),
                 SizedBox(height: 32.0),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height * 0.075,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Color(0xFF3A4F39),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    onPressed: () async {
-                      switch (secondButtonText) {
-                        case 'Map Data':
-                          handleMapData();
-                          break;
-                        case 'Validate Data':
-                          handleValidateData();
-                          break;
-                        case 'Download Report':
-                          downloadReport(_resultController.text);
-                          break;
-                      }
-                    },
-                    child: Text(secondButtonText),
-                  ),
-                ),
+                // Container(
+                //   width: MediaQuery.of(context).size.width * 0.5,
+                //   height: MediaQuery.of(context).size.height * 0.075,
+                //   child: ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //       foregroundColor: Colors.white,
+                //       backgroundColor: Color(0xFF3A4F39),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(8.0),
+                //       ),
+                //     ),
+                //     onPressed: () async {
+                //       switch (firstButtonText) {
+                //         case 'Map Data':
+                //           handleMapData();
+                //           break;
+                //         case 'Validate Data':
+                //           handleValidateData();
+                //           break;
+                //         case 'Download Report':
+                //           downloadReport(_resultController.text);
+                //           break;
+                //       }
+                //     },
+                //     child: Text(firstButtonText),
+                //   ),
+                // ),
                 showDiagram == true
                     ? Column(
                         children: [
@@ -1751,7 +1644,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                         MediaQuery.of(context).size.width * 0.5,
                                     widgetHeight:
                                         MediaQuery.of(context).size.height *
-                                            0.4,
+                                            0.1 *
+                                            max(sourceColumnList.length,
+                                                targetColumnList.length),
                                   )
                                 : Container(
                                     alignment: Alignment.center,

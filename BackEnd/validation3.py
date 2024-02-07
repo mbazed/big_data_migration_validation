@@ -80,7 +80,9 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
                 outputString.append(f">> Primary key {primary_key_value} not found in target_df")
             
         errorCount = ''.join(outputString).count(">>")
-        outputString.append(f"\nTotal errors found: {errorCount}")
+        errornos=[f"Total errors found: {errorCount}\n"]
+        errornos.extend(outputString)
+        outputString=errornos
         logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
 
     elif source_df.shape[0] < target_df.shape[0]:
@@ -89,4 +91,3 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nValues are missing in the target DataFrame.")
 
     return ''.join(outputString)
-

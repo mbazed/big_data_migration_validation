@@ -103,8 +103,7 @@ def clean(my_list):
             result.append(thelist)
             
     return result
-hash_map = {}
-connectionsList = []
+
 def replace_substrings_with_keys(target_column, input_str, substitution_dict):
     
 
