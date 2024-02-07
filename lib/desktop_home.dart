@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'dart:html' as html;
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -195,9 +196,9 @@ void handleValidateData() async {
       // Add validationDoc to a list for ListView
       List<String> responseLines = validationDoc.split('\n');
       setState(() {
-        responseLines.forEach((line) {
-          _resultController.text += line + '\n';
-        });
+        
+          _resultController.text += responseLines.first + '\n';
+        
       });
     } else {
       print('[-] Validation failed: ${responseValidation.statusCode}');
