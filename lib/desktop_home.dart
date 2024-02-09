@@ -34,15 +34,13 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   bool multiKey = false;
   String requestID = "";
 
+  bool showerrbtn = true;
+
   FilePickerResult? targetResult;
   FilePickerResult? sourceResult;
 
-  List<String> sourceColumnList = [
-
-  ];
-  List<String> targetColumnList = [
- 
-  ];
+  List<String> sourceColumnList = [];
+  List<String> targetColumnList = [];
   List<List<String>> connections = [];
 
   final pkUrl = Uri.parse('http://localhost:4564/findKeys');
@@ -53,7 +51,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final uploadDataUrl = Uri.parse('http://localhost:4564/getdata');
   final downloadUrl = Uri.parse('http://localhost:4564/download');
   bool showDiagram = false;
-  bool showErrors =false;
+  bool showErrors = false;
   var srcpk = "";
   var trgpk = "";
   final TextEditingController _sourceController = TextEditingController();
@@ -74,9 +72,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   TextEditingController _keyController2 = TextEditingController();
   List<String> srcCandidateKeys = [];
   List<String> trgCandidateKeys = [];
-  
-  List<String> responseLines =[];
-  int lineNumber =0;
+
+  List<String> responseLines = [];
+  int lineNumber = 0;
   String inputRuleString = '';
 
   String fileName = 'No file selected';
@@ -130,7 +128,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       trgpk = _keyController2.text;
     }
     setState(() {
-     inputRuleString="";
+      inputRuleString = "";
     });
 
     try {
@@ -173,46 +171,40 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
+  void handleValidateData() async {
+    try {
+      final responseValidation = await http.post(
+        validateUrl,
+        body: {
+          'request_id': requestID,
+        },
+      );
 
+      if (responseValidation.statusCode == 200) {
+        var responseData = responseValidation.body;
+        var data = jsonDecode(responseData);
+        var validationDoc = data['validationDoc'].toString();
+        var validationStatus = data['message'].toString();
+        print('[+] Validation successful!  \n' + validationStatus);
 
-void handleValidateData() async {
-  try {
-    final responseValidation = await http.post(
-      validateUrl,
-      body: {
-        'request_id': requestID,
-      },
-    );
+        // Display response in ListView
+        _resultController.text = '\n Validation Status: $validationStatus\n';
 
-    if (responseValidation.statusCode == 200) {
-      var responseData = responseValidation.body;
-      var data = jsonDecode(responseData);
-      var validationDoc = data['validationDoc'].toString();
-      var validationStatus = data['message'].toString();
-      print('[+] Validation successful!  \n' + validationStatus);
-
-      // Display response in ListView
-      _resultController.text =
-          '\n Validation Status: $validationStatus\n';
-
-      // Add validationDoc to a list for ListView
-      lineNumber=0;
-       responseLines = validationDoc.split('\n');
-      setState(() {
-          showDiagram=false;
+        // Add validationDoc to a list for ListView
+        lineNumber = 0;
+        responseLines = validationDoc.split('\n');
+        setState(() {
+          showDiagram = false;
           _resultController.text += responseLines.first + '\n';
           showErrors = true;
-        
-      });
-    } else {
-      print('[-] Validation failed: ${responseValidation.statusCode}');
+        });
+      } else {
+        print('[-] Validation failed: ${responseValidation.statusCode}');
+      }
+    } catch (e) {
+      print('[!] Error during validation: $e');
     }
-  } catch (e) {
-    print('[!] Error during validation: $e');
   }
-}
-
-
 
   Future<void> handleUpload() async {
     setState(() {
@@ -356,11 +348,9 @@ void handleValidateData() async {
     }
   }
 
-  
-
   Future<void> handleFindPrimaryKeys() async {
     setState(() {
-      inputRuleString="";
+      inputRuleString = "";
     });
     showDiagram = true;
     try {
@@ -478,6 +468,76 @@ void handleValidateData() async {
 
   @override
   Widget build(BuildContext context) {
+    Widget scrollableTopContainer = Container(
+      decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+          border: Border.all(color: Theme.of(context).colorScheme.error)),
+      width: MediaQuery.of(context).size.width * 0.5,
+      height: MediaQuery.of(context).size.height * 0.5,
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Text(
+            responseLines
+                .join("\n")
+                .replaceAllMapped(">>", (match) => "${++lineNumber}. "),
+            style: TextStyle(
+                fontSize: 15, color: Theme.of(context).colorScheme.error),
+            maxLines: 25,
+          ),
+        ),
+      ),
+    );
+
+    Widget errorButton = Align(
+      alignment: Alignment.topLeft,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey.shade300,
+            border: Border.all(color: Colors.black45),
+            borderRadius: BorderRadius.circular(2)),
+        width: MediaQuery.of(context).size.width * 0.055,
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              showerrbtn = !showerrbtn; // Toggle showerrbtn state
+            });
+          },
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 5.0, right: 3),
+                  child: Text(
+                    'Errors',
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ),
+                SizedBox(
+                    child: VerticalDivider(
+                  thickness: 1,
+                  color: Colors.black45,
+                  width: 2,
+                )),
+                showerrbtn
+                    ? Icon(
+                        Icons.arrow_right,
+                        color: Colors.black54,
+                      )
+                    : Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black54,
+                      )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
     double width100 = MediaQuery.of(context).size.width * 0.35;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -640,7 +700,7 @@ void handleValidateData() async {
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  bottom: 4),
+                                                  bottom: 4, top: 10),
                                               child: Container(
                                                 width: width100,
                                                 alignment: AlignmentDirectional
@@ -764,7 +824,7 @@ void handleValidateData() async {
                                                     width: width100,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -798,7 +858,7 @@ void handleValidateData() async {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .symmetric(
+                                                                .symmetric(
                                                                 vertical: 8.0),
                                                         child: TextField(
                                                           controller:
@@ -821,7 +881,7 @@ void handleValidateData() async {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .symmetric(
+                                                                .symmetric(
                                                                 vertical: 8.0),
                                                         child: TextField(
                                                           controller:
@@ -856,7 +916,7 @@ void handleValidateData() async {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -878,7 +938,7 @@ void handleValidateData() async {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1051,7 +1111,7 @@ void handleValidateData() async {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                bottom: 4),
+                                                bottom: 4, top: 10),
                                             child: Container(
                                               width: width100,
                                               alignment:
@@ -1184,7 +1244,7 @@ void handleValidateData() async {
                                                   width: width100,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1217,7 +1277,7 @@ void handleValidateData() async {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1239,7 +1299,7 @@ void handleValidateData() async {
                                                     width: width100 * 0.475,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           vertical: 8.0),
                                                       child: TextField(
                                                         controller:
@@ -1274,7 +1334,7 @@ void handleValidateData() async {
                                                   width: width100 * 0.475,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1296,7 +1356,7 @@ void handleValidateData() async {
                                                   width: width100 * 0.475,
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 8.0),
                                                     child: TextField(
                                                       controller:
@@ -1665,36 +1725,23 @@ void handleValidateData() async {
                         ],
                       )
                     : Text(""),
-                    showErrors == true ? Container(
-                      
-  decoration: BoxDecoration(
-    color: Colors.amber[100],
-    borderRadius: BorderRadius.only(
-      topRight: Radius.circular(50),
-    ),
-  ),
-  width: MediaQuery.of(context).size.width * 0.5,
-  height: MediaQuery.of(context).size.width * 0.7,
-  child: SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(50.0),
-      child: Text(
-        style: TextStyle(fontSize: 15),
-        responseLines.join("\n").replaceAllMapped(">>", (match) => "${++lineNumber}. "),
-        maxLines: 25,
-      ),
-    ),
-  ),
-)
-
-                      :Container(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'No data available',
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.grey),
-                                    ),
-                                  ),
+                showErrors == true
+                    ? Column(
+                        children: [
+                          errorButton,
+                          SizedBox(
+                            height: 4,
+                          ),
+                          if (!showerrbtn) scrollableTopContainer
+                        ],
+                      )
+                    : Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'No data available',
+                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                        ),
+                      ),
               ],
             ),
           ),
