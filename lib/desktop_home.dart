@@ -53,6 +53,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final uploadDataUrl = Uri.parse('http://localhost:4564/getdata');
   final downloadUrl = Uri.parse('http://localhost:4564/download');
   bool showDiagram = false;
+  bool showErrors =false;
   var srcpk = "";
   var trgpk = "";
   final TextEditingController _sourceController = TextEditingController();
@@ -73,8 +74,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   TextEditingController _keyController2 = TextEditingController();
   List<String> srcCandidateKeys = [];
   List<String> trgCandidateKeys = [];
-  List<List<String>> rules = [];
-
+  
+  List<String> responseLines =[];
+  int lineNumber =0;
   String inputRuleString = '';
 
   String fileName = 'No file selected';
@@ -194,10 +196,12 @@ void handleValidateData() async {
           '\n Validation Status: $validationStatus\n';
 
       // Add validationDoc to a list for ListView
-      List<String> responseLines = validationDoc.split('\n');
+      lineNumber=0;
+       responseLines = validationDoc.split('\n');
       setState(() {
-        
+          showDiagram=false;
           _resultController.text += responseLines.first + '\n';
+          showErrors = true;
         
       });
     } else {
@@ -1657,10 +1661,40 @@ void handleValidateData() async {
                                           fontSize: 18, color: Colors.grey),
                                     ),
                                   ),
-                          )
+                          ),
                         ],
                       )
                     : Text(""),
+                    showErrors == true ? Container(
+                      
+  decoration: BoxDecoration(
+    color: Colors.amber[100],
+    borderRadius: BorderRadius.only(
+      topRight: Radius.circular(50),
+    ),
+  ),
+  width: MediaQuery.of(context).size.width * 0.5,
+  height: MediaQuery.of(context).size.width * 0.7,
+  child: SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(50.0),
+      child: Text(
+        style: TextStyle(fontSize: 15),
+        responseLines.join("\n").replaceAllMapped(">>", (match) => "${++lineNumber}. "),
+        maxLines: 25,
+      ),
+    ),
+  ),
+)
+
+                      :Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'No data available',
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.grey),
+                                    ),
+                                  ),
               ],
             ),
           ),
