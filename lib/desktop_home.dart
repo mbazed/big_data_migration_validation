@@ -468,6 +468,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    lineNumber = 0;
     Widget scrollableTopContainer = Container(
       decoration: BoxDecoration(
           color: Colors.grey.shade100,
@@ -485,7 +486,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 .replaceAllMapped(">>", (match) => "${++lineNumber}. "),
             style: TextStyle(
                 fontSize: 15, color: Theme.of(context).colorScheme.error),
-            maxLines: 25,
           ),
         ),
       ),
@@ -1726,15 +1726,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       )
                     : Text(""),
                 showErrors == true
-                    ? Column(
-                        children: [
-                          errorButton,
-                          SizedBox(
-                            height: 4,
-                          ),
-                          if (!showerrbtn) scrollableTopContainer
-                        ],
-                      )
+                    ? scrollableTopContainer
                     : Container(
                         alignment: Alignment.center,
                         child: Text(
