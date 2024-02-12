@@ -403,3 +403,69 @@ Map<String, String> createRuleDictionary(String inputString) {
   }
   return dictionary;
 }
+
+bool is1DList(List<dynamic> list) {
+  for (var element in list) {
+    if (element is List) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool is2DList(List<dynamic> list) {
+  for (var element in list) {
+    if (element is! List) {
+      return false;
+    }
+  }
+  return true;
+}
+
+List<List<String>> convertStringToListOfLists(String input) {
+  List<List<String>> result = [];
+  List<String> currentList = [];
+  bool insideList = false;
+
+  // Iterate through each character in the input string
+  for (int i = 0; i < input.length; i++) {
+    String currentChar = input[i];
+
+    // If the current character is '[', mark that we're inside a list
+    if (currentChar == '[') {
+      insideList = true;
+      currentList = [];
+    }
+    // If the current character is ']', mark that we're outside a list
+    else if (currentChar == ']') {
+      insideList = false;
+      result.add(currentList);
+    }
+    // If the current character is a letter or digit and we're inside a list, add it to the current list
+    else if (RegExp(r'[a-zA-Z0-9]').hasMatch(currentChar) && insideList) {
+      int endIndex = input.indexOf(RegExp(r'[\],]'), i);
+      String item = input.substring(i, endIndex);
+      currentList.add(item);
+      i = endIndex - 1; // Move the index to the end of the current item
+    }
+  }
+  result.removeLast();
+  return result;
+}
+
+bool is2DListFromString(String input) {
+  // Remove leading and trailing square brackets
+  String trimmedInput = input.substring(1, input.length - 1);
+
+  // Check if the input is empty
+  if (trimmedInput.isEmpty) {
+    return false;
+  }
+
+  // Split by comma
+  List<String> items = trimmedInput.split(', ');
+
+  // Check if any item starts and ends with '[' and ']'
+  return items
+      .every((element) => element.startsWith('[') && element.endsWith(']'));
+}
