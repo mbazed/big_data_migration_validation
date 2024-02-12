@@ -100,7 +100,7 @@ def find_same_columns_by_value(df_src, df_tgt, ck_set1, ck_set2):
                 
                 # Compare with half of the total number of unique values
                 if len(common_values) >= len(set(src_values)) / 2:
-                    duplicate_columns.append((col1, col2))
+                    duplicate_columns.append([col1, col2])
             except KeyError as e:
                 logging.warning(f"KeyError: {e}. Skipping comparison for {col1} and {col2}")
 
@@ -143,10 +143,7 @@ def get_two_keys(data1, data2):
             result = find_same_columns_by_value(data1, data2, ck_name_set1, ck_name_set2)
        
             if result is not None:
-                if len(result) == 1:
-                    logging.info(f"Single common column found by value: {result}")
-                    return result[0]  # Return the single common column as a tuple
-                elif len(result) > 1:
+                if len(result) > 0:
                     if result[0]==None:
                         return ck_name_set1,ck_name_set2
                     logging.info(f"Common columns found by value: {result}")
