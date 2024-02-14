@@ -2,7 +2,6 @@ import json
 
 from flask import Flask, request, jsonify, send_file
 import os
-
 from reportlab.pdfgen import canvas
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -12,8 +11,7 @@ import pandas as pd
 from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
-# from comonPk import *
-from commonCompositePk import get_two_keys
+from comonPk import *
 from validation3 import *
 import uuid  # for generating unique request IDs
 
@@ -235,21 +233,21 @@ def findKeys():
         targetPrimaryKey=None
         message = '[-] Primary key identification Failed!'
     
-    # record.source_primary_key = sourcePrimaryKey
-    # record.target_primary_key = targetPrimaryKey
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
 
-    #         # Commit the changes to the database
-    # db.session.add(record)
+            # Commit the changes to the database
+    db.session.add(record)
     
     db.session.commit()
 
-    
+    message = '[+] Primary keys updated successfully'
         
     
         
     print(message)
     print("[^] returning response...")    
-    # print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
+    print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
     return jsonify({  'source-columns':sourceColumns.split(','),'target-columns':targetColumns.split(','), 'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 @app.route('/mapData', methods=['POST'])
 def mapData():

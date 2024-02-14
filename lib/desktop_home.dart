@@ -70,9 +70,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
   TextEditingController _keyController1 = TextEditingController();
   TextEditingController _keyController2 = TextEditingController();
-  List<List<String>> src2dKeys = [];
-
-  List<List<String>> trg2dKeys = [];
   List<String> srcCandidateKeys = [];
   List<String> trgCandidateKeys = [];
 
@@ -131,7 +128,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       trgpk = _keyController2.text;
     }
     setState(() {
-      responseLines = [];
       inputRuleString = "";
     });
 
@@ -175,14 +171,44 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
+  void handleValidateData() async {
+    try {
+      final responseValidation = await http.post(
+        validateUrl,
+        body: {
+          'request_id': requestID,
+        },
+      );
+
+      if (responseValidation.statusCode == 200) {
+        var responseData = responseValidation.body;
+        var data = jsonDecode(responseData);
+        var validationDoc = data['validationDoc'].toString();
+        var validationStatus = data['message'].toString();
+        print('[+] Validation successful!  \n' + validationStatus);
+
+        // Display response in ListView
+        _resultController.text = '\n Validation Status: $validationStatus\n';
+
+        // Add validationDoc to a list for ListView
+        lineNumber = 0;
+        responseLines = validationDoc.split('\n');
+        setState(() {
+          showDiagram = false;
+          _resultController.text += responseLines.first + '\n';
+          showErrors = true;
+        });
+      } else {
+        print('[-] Validation failed: ${responseValidation.statusCode}');
+      }
+    } catch (e) {
+      print('[!] Error during validation: $e');
+    }
+  }
+
   Future<void> handleUpload() async {
     setState(() {
-      responseLines = [];
       inputRuleString = "";
-
-      showDiagram = true;
-      showErrors = false;
-      showerrbtn = false;
     });
     var request;
     request = http.MultipartRequest('POST', uploadDataUrl);
@@ -322,51 +348,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  void handleValidateData() async {
-    setState(() {
-      lineNumber = 0;
-    });
-    try {
-      final responseValidation = await http.post(
-        validateUrl,
-        body: {
-          'request_id': requestID,
-        },
-      );
-
-      if (responseValidation.statusCode == 200) {
-        var responseData = responseValidation.body;
-        var data = jsonDecode(responseData);
-        var validationDoc = data['validationDoc'].toString();
-        var validationStatus = data['message'].toString();
-        print('[+] Validation successful!  \n' + validationStatus);
-
-        // Display response in ListView
-        _resultController.text = '\n Validation Status: $validationStatus\n';
-
-        // Add validationDoc to a list for ListView
-        lineNumber = 0;
-        responseLines = validationDoc.split('\n');
-        setState(() {
-          showDiagram = false;
-          _resultController.text += responseLines.first + '\n';
-          showErrors = true;
-        });
-      } else {
-        print('[-] Validation failed: ${responseValidation.statusCode}');
-      }
-    } catch (e) {
-      print('[!] Error during validation: $e');
-    }
-  }
-
   Future<void> handleFindPrimaryKeys() async {
     setState(() {
       inputRuleString = "";
-      showDiagram = true;
-      showErrors = false;
-      showerrbtn = false;
     });
+    showDiagram = true;
     try {
       final response = await http.post(
         pkUrl,
@@ -398,65 +384,22 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
               .replaceAll(']', '')
               .split(',')
               .cast<String>();
+          srcCandidateKeys = data['sourcePrimaryKey'].toString().split(',');
+          trgCandidateKeys = data['targetPrimaryKey'].toString().split(',');
           var srcCandidateKeysStr = data['sourcePrimaryKey'].toString();
           var trgCandidateKeysStr = data['targetPrimaryKey'].toString();
-          print(srcCandidateKeysStr);
-
-          src2dKeys = convertStringToListOfLists(srcCandidateKeysStr);
-          trg2dKeys = convertStringToListOfLists(trgCandidateKeysStr);
-
-          if (src2dKeys.length > 0) {
-            if (src2dKeys[0].length > 1) {
-              print("src composite pk");
-
-              srcCandidateKeys = src2dKeys
-                  .map((e) =>
-                      e.toString().replaceAll('[', '').replaceAll(']', ''))
-                  .toList();
-
-              _keyController1.text = srcCandidateKeys[0];
-              srcpk = srcCandidateKeys[0];
-            } else {
-              print("src single pk ");
-              srcCandidateKeys = srcCandidateKeysStr
-                  .replaceAll('[', '')
-                  .replaceAll(']', '')
-                  .split(',');
-              _keyController1.text = srcCandidateKeys[0];
-              srcpk = srcCandidateKeys[0];
-            }
-          } else {
-            print("src2dKeys is empty");
-          }
-
-          if (trg2dKeys.length > 0) {
-            if (trg2dKeys[0].length > 1) {
-              print("tar composite pk");
-              trgCandidateKeys = trg2dKeys
-                  .map((e) =>
-                      e.toString().replaceAll('[', '').replaceAll(']', ''))
-                  .toList();
-              _keyController2.text = trgCandidateKeys[0];
-              trgpk = trgCandidateKeys[0];
-            } else {
-              print("tar single pk ");
-              trgCandidateKeys = trgCandidateKeysStr
-                  .replaceAll('[', '')
-                  .replaceAll(']', '')
-                  .split(',');
-              _keyController2.text = trgCandidateKeys[0];
-              trgpk = trgCandidateKeys[0];
-            }
-          } else {
-            print("trg2dKeys is empty");
-          }
-
           if (srcCandidateKeys.length > 1 || trgCandidateKeys.length > 1) {
             multiKey = true;
+            _keyController1.text = srcCandidateKeys[0];
+            _keyController2.text = trgCandidateKeys[0];
           } else {
+            _keyController1.text = srcCandidateKeys[0];
+            _keyController2.text = trgCandidateKeys[0];
             multiKey = false;
           }
 
+          srcpk = srcCandidateKeys[0];
+          trgpk = trgCandidateKeys[0];
           _resultController.text =
               '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
         });
@@ -525,7 +468,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    lineNumber = 0;
     Widget scrollableTopContainer = Container(
       decoration: BoxDecoration(
           color: Colors.grey.shade100,
@@ -543,6 +485,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 .replaceAllMapped(">>", (match) => "${++lineNumber}. "),
             style: TextStyle(
                 fontSize: 15, color: Theme.of(context).colorScheme.error),
+            maxLines: 25,
           ),
         ),
       ),
@@ -1566,7 +1509,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                     hintText: 'Select Source Primary Key',
                                   ),
                                   suggestionsDecoration: SuggestionDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
+                                      color: Colors.lightGreen.shade300,
+                                      borderRadius: BorderRadius.circular(2.0),
                                       border: Border.all(
                                           color: Color(0xFF3A4F39), width: 2)),
                                   suggestions: srcCandidateKeys
@@ -1630,9 +1574,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                   hintText: 'Select Target Primary Key',
                                 ),
                                 suggestionsDecoration: SuggestionDecoration(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    border: Border.all(
-                                        color: Color(0xFF3A4F39), width: 2)),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
                                 suggestions: trgCandidateKeys
                                     .map(
                                       (option) => SearchFieldListItem<String>(
@@ -1782,7 +1726,15 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       )
                     : Text(""),
                 showErrors == true
-                    ? scrollableTopContainer
+                    ? Column(
+                        children: [
+                          errorButton,
+                          SizedBox(
+                            height: 4,
+                          ),
+                          if (!showerrbtn) scrollableTopContainer
+                        ],
+                      )
                     : Container(
                         alignment: Alignment.center,
                         child: Text(

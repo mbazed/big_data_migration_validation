@@ -1,6 +1,6 @@
 from itertools import combinations
 import logging
-from  readSouce import *
+
 from tabulate import tabulate
 
 
@@ -39,38 +39,7 @@ def find_same_columns_by_value(df_src, df_tgt, ck_set1, ck_set2):
     if duplicate_columns == []:
         return None, None
     return duplicate_columns
-def find_candidtae_keys(data):
-    columns = data.columns
-    min_key = None
-    min_key_size = float('inf')
-    key = []
-    is_unique = False
-    foundKey=0
-    
-    # print("All Columns: ", columns)
-    for subset_size in range(1, len(columns)//2 + 1):
-        
-        for column_combination in combinations(columns, subset_size):
-            if len(column_combination) >2 and foundKey==1:
-                return  key
-            if len(column_combination) > min_key_size:
-                return key
-                
-           
-            # print(" " *150, end='\r')
-            # print(f"Current Combination: {column_combination}", end='\r')
-            
-            is_unique = data.groupby(list(column_combination)).size().max() == 1
-            if is_unique and len(column_combination) < min_key_size:
-                key = []
-                min_key = column_combination
-                min_key_size = len(column_combination)
-                foundKey=1
-            if is_unique and len(column_combination) == min_key_size:
-                key.append(column_combination)
-                foundKey=1
-                
-    return key
+
 def get_two_keys(data1, data2):
     try:
         logging.info("Getting candidate keys for Data 1")
@@ -92,8 +61,6 @@ def get_two_keys(data1, data2):
                 logging.info(f"Single common column found by value: {result}")
                 return result[0]  # Return the single common column as a tuple
             elif len(result) > 1:
-                if result[0]==None:
-                    return ck_name_set1,ck_name_set2
                 logging.info(f"Common columns found by value: {result}")
                 list_1 = []
                 list_2 = []
@@ -146,3 +113,35 @@ def comonPkDriverFunction(data1,data2):
     result = get_two_keys(data1, data2)
     printKeys(result)
     return result
+def find_candidtae_keys(data):
+    columns = data.columns
+    min_key = None
+    min_key_size = float('inf')
+    key = []
+    is_unique = False
+    foundKey=0
+    
+    # print("All Columns: ", columns)
+    for subset_size in range(1, len(columns)//2 + 1):
+        
+        for column_combination in combinations(columns, subset_size):
+            if len(column_combination) >2 and foundKey==1:
+                return  key
+            if len(column_combination) > min_key_size:
+                return key
+                
+           
+            # print(" " *150, end='\r')
+            # print(f"Current Combination: {column_combination}", end='\r')
+            
+            is_unique = data.groupby(list(column_combination)).size().max() == 1
+            if is_unique and len(column_combination) < min_key_size:
+                key = []
+                min_key = column_combination
+                min_key_size = len(column_combination)
+                foundKey=1
+            if is_unique and len(column_combination) == min_key_size:
+                key.append(column_combination)
+                foundKey=1
+                
+    return key
