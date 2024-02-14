@@ -1,8 +1,52 @@
 import csv
 import json
+import tkinter as tk
+from tkinter import filedialog
 import pandas as pd
 from io import StringIO
 from io import StringIO
+
+
+def read_data(file_path):
+    
+    if file_path.endswith('.xlsx'):
+        
+        try:
+            data = pd.read_excel(file_path, engine='openpyxl')
+        except Exception:
+            data = pd.read_excel(file_path, engine='xlrd')
+    elif file_path.endswith('.csv'):
+        data = pd.read_csv(file_path)
+    else:
+        print("Unsupported file format. Please provide an Excel (XLSX) or CSV file.")
+        return None
+        
+
+  
+    data.columns = [str(col) for col in data.columns]
+    return data
+# Configure logging to write to a file
+
+def get_file():
+        try:
+            root = tk.Tk()
+            root.withdraw()
+            file_path = filedialog.askopenfilename(title="Select a file")
+        except Exception as e:
+            print(e)
+            file_path = input("Enter the path of the file: ")
+
+        if not file_path:
+            print("No file selected")
+    
+
+        print(f"Selected file: {file_path}")
+        data = read_data(file_path)
+        
+        if data is None:
+            print("No data found")
+        return data
+
 
 def dynamic_cast(reference_variable, variable_to_cast):
     reference_type = type(reference_variable)
