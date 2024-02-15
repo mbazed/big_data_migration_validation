@@ -125,6 +125,50 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     });
   }
 
+  void clearState() {
+    setState(() {
+      sourceselectedMode = 'File Mode';
+      targetselectedMode = 'File Mode';
+      source = '';
+      target = '';
+      message = '';
+      sourceData = '';
+      targetData = '';
+      firstButtonText = 'Upload';
+      multiKey = false;
+      requestID = "";
+      showerrbtn = true;
+      targetResult = null;
+      sourceResult = null;
+      sourceColumnList = [];
+      targetColumnList = [];
+      connections = [];
+      _sourceController.clear();
+      _targetController.clear();
+      _resultController.clear();
+      _sourceUserController.clear();
+      _sourcePassController.clear();
+      _sourceHostController.clear();
+      _sourceDBNameController.clear();
+      _sourceTableController.clear();
+      _targetUserController.clear();
+      _targetPassController.clear();
+      _targetHostController.clear();
+      _targetDBNameController.clear();
+      _targetTableController.clear();
+      _keyController1.clear();
+      _keyController2.clear();
+      src2dKeys = [];
+      trg2dKeys = [];
+      srcCandidateKeys = [];
+      trgCandidateKeys = [];
+      responseLines = [];
+      lineNumber = 0;
+      inputRuleString = '';
+      fileName = 'No file selected';
+    });
+  }
+
   void handleMapData() async {
     if (multiKey) {
       srcpk = _keyController1.text;
@@ -179,8 +223,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     setState(() {
       responseLines = [];
       inputRuleString = "";
-
-      showDiagram = true;
+      multiKey = false;
+      showDiagram = false;
       showErrors = false;
       showerrbtn = false;
     });
