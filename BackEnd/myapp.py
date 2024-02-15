@@ -1,5 +1,9 @@
 import json
-from flask import Flask, request, jsonify
+
+from flask import Flask, request, jsonify, send_file
+import os
+
+from reportlab.pdfgen import canvas
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, create_engine
@@ -8,7 +12,8 @@ import pandas as pd
 from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
-from comonPk import *
+# from comonPk import *
+from commonCompositePk import get_two_keys
 from validation3 import *
 import uuid  # for generating unique request IDs
 
@@ -29,6 +34,7 @@ class DataRecord(db.Model):
     source_primary_key = Column(String)
     target_primary_key = Column(String)
     mapping_document = Column(String)
+    validation_document = Column(String)
     
 
 # Create tables within the application context
@@ -42,8 +48,9 @@ def get_data():
     try:
         source_type= request.form.get('source_type')
         target_type= request.form.get('target_type')
+        # print(source_type,target_type)
         
-        if(source_type == 'file'):
+        if(source_type == 'File Mode'):
             source_file = request.files['sourceFile']
             sourcedata = read_file_content_df(source_file)
             source_json = sourcedata.to_json()
@@ -56,7 +63,7 @@ def get_data():
             sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
             source_json = sourcedata.to_json()
             
-        if(target_type == 'file'):
+        if(target_type == 'File Mode'):
             target_file = request.files['targetFile']
             targetdata = read_file_content_df(target_file)
             target_json = targetdata.to_json()
@@ -77,7 +84,8 @@ def get_data():
             )
         db.session.add(record)
         db.session.commit()
-        message = '[-] Data Received'
+        message = '[+] Data Received'
+        
         
         
     except Exception as e:
@@ -203,6 +211,9 @@ def findKeys():
     sourcedata = json_to_df(record.source_data)
     targetdata = json_to_df(record.target_data)
     
+    sourceColumns =(',').join( sourcedata.columns.tolist())
+    targetColumns=(',').join( targetdata.columns.tolist())
+    
     try:
         print("[⌄] Primary key request received...")
         
@@ -224,24 +235,30 @@ def findKeys():
         targetPrimaryKey=None
         message = '[-] Primary key identification Failed!'
     
-    record.source_primary_key = sourcePrimaryKey
-    record.target_primary_key = targetPrimaryKey
+    # record.source_primary_key = sourcePrimaryKey
+    # record.target_primary_key = targetPrimaryKey
 
-            # Commit the changes to the database
-    db.session.add(record)
+    #         # Commit the changes to the database
+    # db.session.add(record)
     
     db.session.commit()
 
-    message = '[+] Primary keys updated successfully'
+    
         
     
         
     print(message)
     print("[^] returning response...")    
-    return jsonify({'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
+    # print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
+    return jsonify({  'source-columns':sourceColumns.split(','),'target-columns':targetColumns.split(','), 'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
+
+
+def combine_columns(row,col_list):
+    return ''.join(str(row[col.strip()]) for col in col_list)
+
 @app.route('/mapData', methods=['POST'])
 def mapData():
-    
+    connectionsList=[]
     
     
     
@@ -250,11 +267,33 @@ def mapData():
     
     sourcePrimaryKey = request.form.get('sourcePk').strip()
     targetPrimaryKey = request.form.get('targetPk').strip()
+    connectionsList.append([sourcePrimaryKey,targetPrimaryKey])
     
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
     sourcedata = json_to_df(record.source_data)
     targetdata= json_to_df(record.target_data)
+    
+    
+    srcpkList = sourcePrimaryKey.strip().split(',')
+    tarpkList = targetPrimaryKey.strip().split(',')
+    
+    if len(srcpkList) > 1:
+        print("composite pk for src")
+        sourcedata[sourcePrimaryKey]= sourcedata.apply(combine_columns,args=(srcpkList,), axis=1)
+        record.source_data= sourcedata.to_json()
+    if len(tarpkList) > 1:
+        print("composite pk for tar")
+        targetdata[targetPrimaryKey]= targetdata.apply(combine_columns,args=(tarpkList,), axis=1)
+        record.target_data=targetdata.to_json()
+        
+    print("[⌄] Data map request received...")
+    print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
+    
+    
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
+
     
     
     print("[⌄] Data map request received...")
@@ -271,7 +310,7 @@ def mapData():
     try:
         
         
-        mapingStr,mapingDoc = mappColumn(sourcedata,targetdata,sourcePrimaryKey,targetPrimaryKey)
+        mapingStr,mapingDoc,connectionsList = mappColumn(sourcedata,targetdata,sourcePrimaryKey,targetPrimaryKey)
         if(mapingDoc == {}):
             message =  '[-] Data maping Failed!'
         else:
@@ -290,7 +329,7 @@ def mapData():
         
     print(message)
     print("[^] returning response...")
-    return jsonify({'MapingDoc': mapingStr, 'message': message}) 
+    return jsonify({'MapingDoc': mapingStr,'connections':connectionsList, 'message': message}) 
 
 
 @app.route('/validateData', methods=['POST'])
@@ -322,13 +361,47 @@ def validateData():
     
     # resultString = driver(sourcedata,targetdata)
     # return resultString
+    record.validation_document = resultString
+    db.session.add(record)
+    db.session.commit()
     print("[^] returning response...")
 
     return jsonify({'validationDoc': resultString, 'message': 'Validation Complete!'}) 
 
 
+@app.route('/download', methods=['POST'])
+def download_report():
+    print("[⌄] Download request received...")
+    request_id = request.form.get('request_id')
+    record = DataRecord.query.filter_by(request_id=request_id).first()
+
+    # Combine mapping and validation documents
+    data = record.mapping_document + record.validation_document
+
+    # If the documents are already JSON strings, no need to load and dump them again
+    formatted_content = data
+    
+    # Create a PDF file
+    pdf_path = f'{request_id}_output.pdf'
+    create_pdf(formatted_content, pdf_path)
+
+    # Send the PDF file to the client
+    response = send_file(pdf_path, as_attachment=True)
+
+    # Clean up the temporary PDF file after sending
+    # os.remove(pdf_path)
+    print("[^] returning response...")
+    return response
+
+def create_pdf(content, pdf_path):
+    pdf_canvas = canvas.Canvas(pdf_path)
+    
+    # Customize your PDF content here:
+    pdf_canvas.drawString(100, 800, content)
+
+    pdf_canvas.save()
+
+
 
 if __name__ == '__main__':
-    # Create the database tables before running the app
-    
-    app.run(host='127.0.0.1', port=4564, debug=False)
+    app.run(host='127.0.0.1', port=4564, debug=True)

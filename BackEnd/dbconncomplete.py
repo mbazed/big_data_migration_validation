@@ -12,7 +12,8 @@ def connect_mysql(host, user, password, database):
         host=host,
         user=user,
         password=password,
-        database=database
+        database=database,
+        
     )
     return connection
 
@@ -42,11 +43,11 @@ def gbtodf(db_type,host,user,password,database,table_name):
 
 
     # Connect to the selected database
-    if db_type == 'mongodb':
+    if db_type == 'MongoDB':
         connection = connect_mongodb(host, 27017, user, password, database)
-    elif db_type == 'mysql':
+    elif db_type == 'MySQL':
         connection = connect_mysql(host, user, password, database)
-    elif db_type == 'oracle':
+    elif db_type == 'Oracle DB':
         connection = connect_oracle(host, user, password, database)
     else:
         print("Invalid database type. Exiting.")

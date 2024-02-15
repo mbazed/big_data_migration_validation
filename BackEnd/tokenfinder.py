@@ -89,25 +89,57 @@ def find_majority_element(nums):
         return candidate
     else:
         return None
+def remove_duplicates(lst):
+    unique_tuples = set(tuple(inner_list) for inner_list in lst)
+    return [list(unique_tuple) for unique_tuple in unique_tuples]
 
-def replace_substrings_with_keys(input_str, substitution_dict):
-    if input_str == None:
+def clean(my_list):
+    result = []
+    unique_tuples = set(tuple(inner_list) for inner_list in my_list)
+    unique_list =[list(unique_tuple) for unique_tuple in unique_tuples]
+    
+    for thelist in unique_list:
+        if( my_list.count(thelist)>5):
+            result.append(thelist)
+            
+    return result
+
+def replace_substrings_with_keys(target_column, input_str, substitution_dict):
+    
+
+    if input_str is None:
         return None
+    i=0
+    keys=[]
     for key, value in substitution_dict.items():
-        if value != None or value != '':
-            input_str = input_str.replace(value, f'{{{key}}}')
+        if value is not None and value != '':
+            input_str = input_str.replace(value, f'{{{i}}}')
+            keys.append(key)
+            i+=1   
+             
+    for j in range(i):
+        input_str = input_str.replace(f'{{{j}}}', f'{{{keys[j]}}}')
+                  
     return input_str
     
 def mappColumn(src, trg, source_key_column, target_key_column):
+    
+    global hash_map 
+    global connectionsList
     Sourcedata=df_to_list_of_dicts(src)
     TargetData=df_to_list_of_dicts(trg)
+    threshold = TargetData.__len__() * 0.05
     
-    outputString = "Mapping Doc\n-------------------\n"
+    connectionsList = []
+    hash_map={}
+    
+    outputString = ""
     output_file_path = "mappingLog.txt"
     mappingDoc = {}  # Dictionary to store mapping results
     
     with open(output_file_path, 'w') as output_file:
         for key in TargetData[0].keys():
+            
             outlist = []
             mappingResult = None
 
@@ -118,13 +150,13 @@ def mappColumn(src, trg, source_key_column, target_key_column):
                 if target_row is None or target_row[key] == "" :
                     continue
 
-                output_string = replace_substrings_with_keys(target_row[key], source_row)
+                output_string = replace_substrings_with_keys(key, target_row[key], source_row)
 
                 if output_string is None:
                     continue
 
                 outlist.append(output_string)
-                mappingResult = find_repeated_element(outlist, 5)
+                mappingResult = find_repeated_element(outlist,threshold)
 
                 if mappingResult is not None:
                     # Update the mapping dictionary
@@ -149,11 +181,15 @@ def mappColumn(src, trg, source_key_column, target_key_column):
                 output_file.write(output_line)
 
             # print("-------------------------------------------------------------")
-
+            
+            
+            
+    connectionsList = remove_duplicates(connectionsList)
     # Return the output string and mapping dictionary
     if len(mappingDoc) == 0:
         return "No mapping found", mappingDoc
-    return outputString, mappingDoc
+    
+    return outputString, mappingDoc, connectionsList
 
 
 # Example usage:
