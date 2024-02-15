@@ -1,1527 +1,797 @@
-Original String: 1   Output String: {{{SibSp}}}
-Original String: 2   Output String: {{Parch}}
-Original String: 3   Output String: {{SibSp}}
-Original String: 4   Output String: {{Parch}}
-Original String: 5   Output String: {{Survived}}
-Original String: 6   Output String: {{Survived}}
-Original String: 7   Output String: {{{Pclass}}}
-Original String: 8   Output String: {{{Parch}}}
-Original String: 9   Output String: {{SibSp}}
-Original String: 10   Output String: {{Parch}}
-Original String: 11   Output String: {PassengerId}
-Original String: 12   Output String: {{SibSp}}
-Original String: 13   Output String: {{Survived}}
-Original String: 14   Output String: {{{SibSp}}}
-Original String: 15   Output String: {{Survived}}
-Original String: 16   Output String: {{SibSp}}
-Original String: 17   Output String: {{{Parch}}}
-Original String: 18   Output String: {{SibSp}}
-Original String: 19   Output String: {{{SibSp}}}
-Original String: 20   Output String: {{SibSp}}
-Original String: 21   Output String: {{Survived}}
-Original String: 22   Output String: {{SibSp}}
-Original String: 23   Output String: {{SibSp}}
-Original String: 24   Output String: {{SibSp}}
-Original String: 25   Output String: {{{Parch}}}
-Original String: 26   Output String: {PassengerId}
-Original String: 27   Output String: {{Survived}}
-Original String: 28   Output String: {{{{Parch}}}}
-Original String: 29   Output String: {{SibSp}}
-Original String: 30   Output String: {{Survived}}
-Original String: 31   Output String: {{{Pclass}}}
-Original String: 32   Output String: {{Parch}}
-Original String: 33   Output String: {{SibSp}}
-Original String: 34   Output String: {{Survived}}
-Original String: 35   Output String: {{{Pclass}}}
-Original String: 36   Output String: {{{Pclass}}}
-Original String: 37   Output String: {{SibSp}}
-Original String: 38   Output String: {{Survived}}
-Original String: 39   Output String: {{Survived}}
-Original String: 40   Output String: {{Parch}}
-Original String: 41   Output String: {{{SibSp}}}
-Original String: 42   Output String: {{{SibSp}}}
-Original String: 43   Output String: {{Survived}}
-Original String: 44   Output String: {PassengerId}
-Original String: 45   Output String: {{SibSp}}
-Original String: 46   Output String: {{Survived}}
-Original String: 47   Output String: {{{SibSp}}}
-Original String: 48   Output String: {{SibSp}}
-Original String: 49   Output String: {{Survived}}
-Original String: 50   Output String: {{{SibSp}}}
-Original String: 51   Output String: {{{Parch}}}
-Original String: 52   Output String: {{Survived}}
-Original String: 53   Output String: {{Parch}}
-Original String: 54   Output String: {{Parch}}
-Original String: 55   Output String: {{{Pclass}}}
-Original String: 56   Output String: {{SibSp}}
-Original String: 57   Output String: {{SibSp}}
-Original String: 58   Output String: {{Survived}}
-Original String: 59   Output String: {PassengerId}
-Original String: 60   Output String: {{Survived}}
-Original String: 61   Output String: {{Survived}}
-Original String: 62   Output String: {{SibSp}}
-Original String: 63   Output String: {{{Pclass}}}
-Original String: 64   Output String: {{Survived}}
-Original String: 65   Output String: {{{Pclass}}}
-Original String: 66   Output String: {PassengerId}
-Original String: 67   Output String: {{SibSp}}
-Original String: 68   Output String: {{Survived}}
-Original String: 69   Output String: {PassengerId}
-Original String: 70   Output String: {{Survived}}
-Original String: 71   Output String: {{Survived}}
-Original String: 72   Output String: {{Survived}}
-Original String: 73   Output String: {{Survived}}
-Original String: 74   Output String: {{{SibSp}}}
-Original String: 75   Output String: {{SibSp}}
-Original String: 76   Output String: {{Survived}}
-Original String: 77   Output String: {{Survived}}
-Original String: 78   Output String: {{Survived}}
-Original String: 79   Output String: {{SibSp}}
-Original String: 80   Output String: {{SibSp}}
-Original String: 81   Output String: {{Survived}}
-Original String: 82   Output String: {{SibSp}}
-Original String: 83   Output String: {{SibSp}}
-Original String: 84   Output String: {{{Pclass}}}
-Original String: 85   Output String: {{SibSp}}
-Original String: 86   Output String: {{Parch}}
-Original String: 87   Output String: {{{SibSp}}}
-Original String: 88   Output String: {{Survived}}
-Original String: 89   Output String: {PassengerId}
-Original String: 90   Output String: {{Survived}}
-Original String: 91   Output String: {{Survived}}
-Original String: 92   Output String: {{Survived}}
-Original String: 93   Output String: {{{Pclass}}}
-Original String: 94   Output String: {{{SibSp}}}
-Original String: 95   Output String: {{Survived}}
-Original String: 96   Output String: {{Survived}}
-Original String: 97   Output String: {{{Pclass}}}
-Original String: 98   Output String: {{SibSp}}
-Original String: 99   Output String: {{SibSp}}
-Original String: 100   Output String: {{{SibSp}}}
-Original String: 101   Output String: {{Survived}}
-Original String: 102   Output String: {{Survived}}
-Original String: 103   Output String: {{{Pclass}}}
-Original String: 104   Output String: {{Survived}}
-Original String: 105   Output String: {{Survived}}
-Original String: 106   Output String: {{Survived}}
-Original String: 107   Output String: {{SibSp}}
-Original String: 108   Output String: {{SibSp}}
-Original String: 109   Output String: {{Survived}}
-Original String: 110   Output String: {{Parch}}
-Original String: 111   Output String: {{{Pclass}}}
-Original String: 112   Output String: {{{SibSp}}}
-Original String: 113   Output String: {{Survived}}
-Original String: 114   Output String: {{{SibSp}}}
-Original String: 115   Output String: {{Survived}}
-Original String: 116   Output String: {{Survived}}
-Original String: 117   Output String: {{Survived}}
-Original String: 118   Output String: {{{SibSp}}}
-Original String: 119   Output String: {{{Pclass}}}
-Original String: 120   Output String: {{Survived}}
-Original String: 121   Output String: {{Survived}}
+Original String: E02387   Output String: {EEID}
+Original String: E04105   Output String: {EEID}
+Original String: E02572   Output String: {EEID}
+Original String: E02832   Output String: {EEID}
+Original String: E01639   Output String: {EEID}
+Original String: E00644   Output String: {EEID}
+Original String: E01550   Output String: {EEID}
+Original String: E04332   Output String: {EEID}
+Original String: E04533   Output String: {EEID}
+Original String: E03838   Output String: {EEID}
+Original String: E00591   Output String: {EEID}
+Original String: E03344   Output String: {EEID}
+Original String: E00530   Output String: {EEID}
+Original String: E04239   Output String: {EEID}
+Original String: E03496   Output String: {EEID}
+Original String: E00549   Output String: {EEID}
+Original String: E00163   Output String: {EEID}
+Original String: E00884   Output String: {EEID}
+Original String: E04116   Output String: {EEID}
+Original String: E04625   Output String: {EEID}
+Original String: E03680   Output String: {EEID}
+Original String: E04732   Output String: {EEID}
+Original String: E03484   Output String: {EEID}
+Original String: E00671   Output String: {EEID}
+Original String: E02071   Output String: {EEID}
+Original String: E02206   Output String: {EEID}
+Original String: E04545   Output String: {EEID}
+Original String: E00154   Output String: {EEID}
+Original String: E03343   Output String: {EEID}
+Original String: E00304   Output String: {EEID}
+Original String: E02594   Output String: {EEID}
+Original String: E00402   Output String: {EEID}
+Original String: E01994   Output String: {EEID}
+Original String: E03549   Output String: {EEID}
+Original String: E03247   Output String: {EEID}
+Original String: E02074   Output String: {EEID}
+Original String: E04152   Output String: {EEID}
+Original String: E01628   Output String: {EEID}
+Original String: E04285   Output String: {EEID}
+Original String: E01417   Output String: {EEID}
+Original String: E01754   Output String: {EEID}
+Original String: E03749   Output String: {EEID}
+Original String: E03574   Output String: {EEID}
+Original String: E04600   Output String: {EEID}
+Original String: E00586   Output String: {EEID}
+Original String: E03538   Output String: {EEID}
+Original String: E02185   Output String: {EEID}
+Original String: E03830   Output String: {EEID}
+Original String: E03720   Output String: {EEID}
+Original String: E03025   Output String: {EEID}
 -------------------------------------------------------------
-PassengerId: {{Survived}}
+EEID: {EEID}
 -------------------------------------------------------------
-Original String: 0   Output String: {{SibSp}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 1   Output String: {Survived}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {{Parch}}
-Original String: 1   Output String: {Survived}
-Original String: 1   Output String: {{SibSp}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {{Parch}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Survived}
-Original String: 1   Output String: {Survived}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {{Parch}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{{Parch}}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{SibSp}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {{Parch}}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{Pclass}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Survived}
-Original String: 1   Output String: {Survived}
-Original String: 0   Output String: {Survived}
+Original String: Emily Davis   Output String: {Full Name}
+Original String: Theodore Dinh   Output String: {Full Name}
+Original String: Luna Sanders   Output String: {Full Name}
+Original String: Penelope Jordan   Output String: {Full Name}
+Original String: Austin Vo   Output String: {Full Name}
+Original String: Joshua Gupta   Output String: {Full Name}
+Original String: Ruby Barnes   Output String: {Full Name}
+Original String: Luke Martin   Output String: {Full Name}
+Original String: Easton Bailey   Output String: {Full Name}
+Original String: Madeline Walker   Output String: {Full Name}
+Original String: Savannah Ali   Output String: {Full Name}
+Original String: Camila Rogers   Output String: {Full Name}
+Original String: Eli Jones   Output String: {Full Name}
+Original String: Everleigh Ng   Output String: {Full Name}
+Original String: Robert Yang   Output String: {Full Name}
+Original String: Isabella Xi   Output String: {Full Name}
+Original String: Bella Powell   Output String: {Full Name}
+Original String: Camila Silva   Output String: {Full Name}
+Original String: David Barnes   Output String: {Full Name}
+Original String: Adam Dang   Output String: {Full Name}
+Original String: Elias Alvarado   Output String: {Full Name}
+Original String: Eva Rivera   Output String: {Full Name}
+Original String: Logan Rivera   Output String: {Full Name}
+Original String: Leonardo Dixon   Output String: {Full Name}
+Original String: Mateo Her   Output String: {Full Name}
+Original String: Jose Henderson   Output String: {Full Name}
+Original String: Abigail Mejia   Output String: {Full Name}
+Original String: Wyatt Chin   Output String: {Full Name}
+Original String: Carson Lu   Output String: {Full Name}
+Original String: Dylan Choi   Output String: {Full Name}
+Original String: Ezekiel Kumar   Output String: {Full Name}
+Original String: Dominic Guzman   Output String: {Full Name}
+Original String: Angel Powell   Output String: {Full Name}
+Original String: Mateo Vu   Output String: {Full Name}
+Original String: Caroline Jenkins   Output String: {Full Name}
+Original String: Nora Brown   Output String: {Full Name}
+Original String: Adeline Huang   Output String: {Full Name}
+Original String: Jackson Perry   Output String: {Full Name}
+Original String: Riley Padilla   Output String: {Full Name}
+Original String: Leah Pena   Output String: {Full Name}
+Original String: Owen Lam   Output String: {Full Name}
+Original String: Kennedy Foster   Output String: {Full Name}
+Original String: John Moore   Output String: {Full Name}
+Original String: William Vu   Output String: {Full Name}
+Original String: Sadie Washington   Output String: {Full Name}
+Original String: Gabriel Holmes   Output String: {Full Name}
+Original String: Wyatt Rojas   Output String: {Full Name}
+Original String: Eva Coleman   Output String: {Full Name}
+Original String: Dominic Clark   Output String: {Full Name}
+Original String: Lucy Alexander   Output String: {Full Name}
 -------------------------------------------------------------
-Survived: {Survived}
+Full Name: {Full Name}
 -------------------------------------------------------------
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {{Pclass}}
-Original String: 3   Output String: {{SibSp}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {{Parch}}
-Original String: 2   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {{Pclass}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 2   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 2   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 2   Output String: {Pclass}
-Original String: 2   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {{Pclass}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {{Parch}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {Pclass}
-Original String: 1   Output String: {{Pclass}}
-Original String: 3   Output String: {Pclass}
-Original String: 2   Output String: {Pclass}
-Original String: 1   Output String: {Pclass}
-Original String: 1   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {{SibSp}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 2   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 2   Output String: {{Parch}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {{SibSp}}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {{Pclass}}
-Original String: 2   Output String: {Pclass}
-Original String: 1   Output String: {Pclass}
-Original String: 1   Output String: {{Pclass}}
-Original String: 2   Output String: {Pclass}
-Original String: 3   Output String: {Pclass}
+Original String: Sr. Manger   Output String: {Job Title}
+Original String: Technical Architect   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Computer Systems Manager   Output String: {Job Title}
+Original String: Sr. Analyst   Output String: {Job Title}
+Original String: Account Representative   Output String: {Job Title}
+Original String: Manager   Output String: {Job Title}
+Original String: Analyst   Output String: {Job Title}
+Original String: Manager   Output String: {Job Title}
+Original String: Sr. Analyst   Output String: {Job Title}
+Original String: Sr. Manger   Output String: {Job Title}
+Original String: Controls Engineer   Output String: {Job Title}
+Original String: Manager   Output String: {Job Title}
+Original String: Sr. Manger   Output String: {Job Title}
+Original String: Sr. Analyst   Output String: {Job Title}
+Original String: Vice President   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Sr. Manger   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Sr. Manger   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Analyst   Output String: {Job Title}
+Original String: Vice President   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Quality Engineer   Output String: {Job Title}
+Original String: Vice President   Output String: {Job Title}
+Original String: Engineering Manager   Output String: {Job Title}
+Original String: Vice President   Output String: {Job Title}
+Original String: IT Coordinator   Output String: {Job Title}
+Original String: Analyst   Output String: {Job Title}
+Original String: Analyst II   Output String: {Job Title}
+Original String: Account Representative   Output String: {Job Title}
+Original String: Analyst   Output String: {Job Title}
+Original String: Enterprise Architect   Output String: {Job Title}
+Original String: Controls Engineer   Output String: {Job Title}
+Original String: Vice President   Output String: {Job Title}
+Original String: Technical Architect   Output String: {Job Title}
+Original String: Enterprise Architect   Output String: {Job Title}
+Original String: Sr. Business Partner   Output String: {Job Title}
+Original String: Manager   Output String: {Job Title}
+Original String: Vice President   Output String: {Job Title}
+Original String: Account Representative   Output String: {Job Title}
+Original String: Sr. Manger   Output String: {Job Title}
+Original String: Enterprise Architect   Output String: {Job Title}
+Original String: Computer Systems Manager   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
+Original String: Quality Engineer   Output String: {Job Title}
+Original String: Director   Output String: {Job Title}
 -------------------------------------------------------------
-Pclass: {Pclass}
+Job Title: {Job Title}
 -------------------------------------------------------------
-Original String: Braund, Mr. Owen Harris   Output String: {Name}
-Original String: Cumings, Mrs. John Bradley (Florence Briggs Thayer)   Output String: {Name}
-Original String: Heikkinen, Miss. Laina   Output String: {Name}
-Original String: Futrelle, Mrs. Jacques Heath (Lily May Peel)   Output String: {Name}
-Original String: Allen, Mr. William Henry   Output String: {Name}
-Original String: Moran, Mr. James   Output String: {Name}
-Original String: McCarthy, Mr. Timothy J   Output String: {Name}
-Original String: Palsson, Master. Gosta Leonard   Output String: {{SibSp}}
-Original String: Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)   Output String: {Name}
-Original String: Nasser, Mrs. Nicholas (Adele Achem)   Output String: {Name}
-Original String: Sandstrom, Miss. Marguerite Rut   Output String: {Name}
-Original String: Bonnell, Miss. Elizabeth   Output String: {Name}
-Original String: Saundercock, Mr. William Henry   Output String: {Name}
-Original String: Andersson, Mr. Anders Johan   Output String: {Name}
-Original String: Vestrom, Miss. Hulda Amanda Adolfina   Output String: {Name}
-Original String: Hewlett, Mrs. (Mary D Kingcome)    Output String: {Name}
-Original String: Rice, Master. Eugene   Output String: {Name}
-Original String: Williams, Mr. Charles Eugene   Output String: {Name}
-Original String: Vander Planke, Mrs. Julius (Emelia Maria Vandemoortele)   Output String: {Name}
-Original String: Masselmani, Mrs. Fatima   Output String: {Name}
-Original String: Fynney, Mr. Joseph J   Output String: {Name}
-Original String: Beesley, Mr. Lawrence   Output String: {Name}
-Original String: McGowan, Miss. Anna "Annie"   Output String: {Name}
-Original String: Sloper, Mr. William Thompson   Output String: {Name}
-Original String: Palsson, Miss. Torborg Danira   Output String: {{SibSp}}
-Original String: Asplund, Mrs. Carl Oscar (Selma Augusta Emilia Johansson)   Output String: {Name}
-Original String: Emir, Mr. Farred Chehab   Output String: {Name}
-Original String: Fortune, Mr. Charles Alexander   Output String: {{SibSp}}
-Original String: O'Dwyer, Miss. Ellen "Nellie"   Output String: {Name}
-Original String: Todoroff, Mr. Lalio   Output String: {Name}
-Original String: Uruchurtu, Don. Manuel E   Output String: {Name}
-Original String: Spencer, Mrs. William Augustus (Marie Eugenie)   Output String: {Name}
-Original String: Glynn, Miss. Mary Agatha   Output String: {Name}
-Original String: Wheadon, Mr. Edward H   Output String: {Name}
-Original String: Meyer, Mr. Edgar Joseph   Output String: {Name}
-Original String: Holverson, Mr. Alexander Oskar   Output String: {Name}
-Original String: Mamee, Mr. Hanna   Output String: {Name}
-Original String: Cann, Mr. Ernest Charles   Output String: {Name}
-Original String: Vander Planke, Miss. Augusta Maria   Output String: {Name}
-Original String: Nicola-Yarred, Miss. Jamila   Output String: {Name}
-Original String: Ahlin, Mrs. Johan (Johanna Persdotter Larsson)   Output String: {Name}
-Original String: Turpin, Mrs. William John Robert (Dorothy Ann Wonnacott)   Output String: {Name}
-Original String: Kraeff, Mr. Theodor   Output String: {Name}
-Original String: Laroche, Miss. Simonne Marie Anne Andree   Output String: {Name}
-Original String: Devaney, Miss. Margaret Delia   Output String: {Name}
-Original String: Rogers, Mr. William John   Output String: {Name}
-Original String: Lennon, Mr. Denis   Output String: {Name}
-Original String: O'Driscoll, Miss. Bridget   Output String: {Name}
+Original String: IT   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: Accounting   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: Human Resources   Output String: {Department}
+Original String: Engineering   Output String: {Department}
+Original String: Human Resources   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: Accounting   Output String: {Department}
+Original String: Marketing   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: Marketing   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: Human Resources   Output String: {Department}
+Original String: Engineering   Output String: {Department}
+Original String: Engineering   Output String: {Department}
+Original String: Engineering   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: Finance   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Engineering   Output String: {Department}
+Original String: Marketing   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Human Resources   Output String: {Department}
+Original String: Marketing   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Sales   Output String: {Department}
+Original String: Marketing   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: IT   Output String: {Department}
+Original String: Engineering   Output String: {Department}
+Original String: Engineering   Output String: {Department}
 -------------------------------------------------------------
-Name: {Name}
+Department: {Department}
 -------------------------------------------------------------
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {{SibSp}}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: female   Output String: {Sex}
-Original String: male   Output String: {Sex}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Speciality Products   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Corporate   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Research & Development   Output String: {Business Unit}
+Original String: Manufacturing   Output String: {Business Unit}
 -------------------------------------------------------------
-Sex: {Sex}
+Business Unit: {Business Unit}
 -------------------------------------------------------------
-Original String: 22.0   Output String: 22.{{SibSp}}
-Original String: 38.0   Output String: {Age}
-Original String: 26.0   Output String: {Age}
-Original String: 35.0   Output String: {Age}
-Original String: 35.0   Output String: {Pclass}{{Survived}}.{Survived}
-Original String: 54.0   Output String: 54.{{Pclass}}
-Original String: 2.0   Output String: 2.{{Parch}}
-Original String: 27.0   Output String: {Age}
-Original String: 14.0   Output String: {{SibSp}}4.{Parch}
-Original String: 4.0   Output String: {Age}
-Original String: 58.0   Output String: {Age}
-Original String: 20.0   Output String: 2{Survived}.{Survived}
-Original String: 39.0   Output String: {Pclass}9.{{SibSp}}
-Original String: 14.0   Output String: 14.{Survived}
-Original String: 55.0   Output String: {Age}
-Original String: 2.0   Output String: 2.{{Parch}}
-Original String: 31.0   Output String: {Pclass}{SibSp}.{{SibSp}}
-Original String: 35.0   Output String: 35.{Survived}
-Original String: 34.0   Output String: {Age}
-Original String: 15.0   Output String: {Survived}5.{SibSp}
-Original String: 28.0   Output String: {Age}
-Original String: 8.0   Output String: 8.{{Parch}}
-Original String: 38.0   Output String: {Pclass}8.0
-Original String: 19.0   Output String: {{Parch}}9.{{{Parch}}}
-Original String: 40.0   Output String: 4{{Pclass}}.{{Pclass}}
-Original String: 66.0   Output String: 66.{Survived}
-Original String: 28.0   Output String: 28.{{Pclass}}
-Original String: 42.0   Output String: 42.{{Pclass}}
-Original String: 21.0   Output String: 21.{Survived}
-Original String: 18.0   Output String: 18.{Survived}
-Original String: 14.0   Output String: {{SibSp}}4.{Parch}
-Original String: 40.0   Output String: 4{{SibSp}}.{{SibSp}}
-Original String: 27.0   Output String: {Pclass}7.{{SibSp}}
-Original String: 3.0   Output String: {Age}
-Original String: 19.0   Output String: {Survived}9.{SibSp}
-Original String: 18.0   Output String: {SibSp}8.{{SibSp}}
-Original String: 7.0   Output String: 7.{{Parch}}
-Original String: 21.0   Output String: 21.{Survived}
-Original String: 49.0   Output String: {Age}
-Original String: 29.0   Output String: {Pclass}9.{Parch}
-Original String: 65.0   Output String: 65.{{Pclass}}
-Original String: 21.0   Output String: {Pclass}{Survived}.{SibSp}
-Original String: 28.5   Output String: {Age}
-Original String: 5.0   Output String: {Age}
-Original String: 11.0   Output String: 11.{Survived}
-Original String: 22.0   Output String: 22.{Survived}
-Original String: 38.0   Output String: {Age}
-Original String: 45.0   Output String: 45.{{Pclass}}
-Original String: 4.0   Output String: 4.{Survived}
-Original String: 29.0   Output String: {Pclass}9.{SibSp}
-Original String: 19.0   Output String: 19.{Survived}
-Original String: 17.0   Output String: {Survived}7.0
-Original String: 26.0   Output String: {SibSp}6.{Survived}
-Original String: 32.0   Output String: 3{Pclass}.{Survived}
-Original String: 16.0   Output String: 16.{Survived}
-Original String: 21.0   Output String: {Pclass}1.{Survived}
-Original String: 26.0   Output String: 26.{{SibSp}}
-Original String: 32.0   Output String: {Pclass}2.{SibSp}
-Original String: 25.0   Output String: 25.{Survived}
-Original String: 0.83   Output String: {Age}
-Original String: 30.0   Output String: {Pclass}{SibSp}.{SibSp}
-Original String: 22.0   Output String: 22.{Survived}
-Original String: 29.0   Output String: {Age}
-Original String: 28.0   Output String: 28.{{Pclass}}
-Original String: 17.0   Output String: {Survived}7.{SibSp}
-Original String: 33.0   Output String: {Pclass}{Pclass}.{Parch}
-Original String: 16.0   Output String: {SibSp}6.{{SibSp}}
-Original String: 23.0   Output String: {Age}
-Original String: 24.0   Output String: 24.{Survived}
-Original String: 29.0   Output String: 29.{Survived}
-Original String: 20.0   Output String: 2{Survived}.{Survived}
-Original String: 46.0   Output String: 46.{{Pclass}}
-Original String: 26.0   Output String: {Parch}6.{{SibSp}}
-Original String: 59.0   Output String: 59.{Survived}
-Original String: 71.0   Output String: 7{Pclass}.{{Pclass}}
-Original String: 23.0   Output String: {Age}
-Original String: 34.0   Output String: {Age}
-Original String: 34.0   Output String: 34.{{SibSp}}
-Original String: 28.0   Output String: 28.{Survived}
-Original String: 21.0   Output String: 2{Pclass}.{{Pclass}}
-Original String: 33.0   Output String: {Pclass}{Pclass}.{Survived}
-Original String: 37.0   Output String: {{SibSp}}7.{Survived}
-Original String: 28.0   Output String: 28.{Survived}
-Original String: 21.0   Output String: 2{Survived}.{SibSp}
-Original String: 38.0   Output String: {Pclass}8.{Survived}
-Original String: 47.0   Output String: 47.{{Pclass}}
-Original String: 14.5   Output String: {Age}
-Original String: 22.0   Output String: 22.{Survived}
-Original String: 20.0   Output String: 2{{SibSp}}.{{SibSp}}
-Original String: 17.0   Output String: 17.{Survived}
-Original String: 21.0   Output String: 21.{Survived}
-Original String: 70.5   Output String: 7{Survived}.5
-Original String: 29.0   Output String: {Pclass}9.{{SibSp}}
-Original String: 24.0   Output String: 24.{{Pclass}}
-Original String: 2.0   Output String: {Parch}.{Survived}
-Original String: 21.0   Output String: {{SibSp}}1.{Survived}
-Original String: 32.5   Output String: 3{Pclass}.5
-Original String: 32.5   Output String: 3{Pclass}.5
-Original String: 54.0   Output String: 54.{{Pclass}}
-Original String: 12.0   Output String: {{SibSp}}2.{Parch}
-Original String: 24.0   Output String: {Age}
-Original String: 45.0   Output String: 45.{Survived}
-Original String: 33.0   Output String: {Pclass}{Pclass}.{Survived}
-Original String: 20.0   Output String: 2{Survived}.{Survived}
-Original String: 47.0   Output String: 47.{{SibSp}}
-Original String: 29.0   Output String: {Pclass}9.{Parch}
-Original String: 25.0   Output String: {Pclass}5.{Survived}
-Original String: 23.0   Output String: {Pclass}3.{Survived}
-Original String: 19.0   Output String: {{{Parch}}}9.{SibSp}
-Original String: 37.0   Output String: 37.{{Pclass}}
-Original String: 16.0   Output String: 16.{Survived}
-Original String: 24.0   Output String: 24.{{Pclass}}
-Original String: 22.0   Output String: {Age}
-Original String: 24.0   Output String: {Age}
-Original String: 19.0   Output String: 19.{Survived}
-Original String: 18.0   Output String: 18.{Survived}
-Original String: 19.0   Output String: {SibSp}9.{{SibSp}}
-Original String: 27.0   Output String: {Age}
-Original String: 9.0   Output String: 9.{Survived}
-Original String: 36.5   Output String: {Age}
-Original String: 42.0   Output String: 4{Pclass}.{Survived}
-Original String: 51.0   Output String: 51.{Survived}
-Original String: 22.0   Output String: {Age}
-Original String: 55.5   Output String: {Age}
-Original String: 40.5   Output String: 4{Survived}.5
-Original String: 51.0   Output String: 5{Pclass}.{{Pclass}}
-Original String: 16.0   Output String: {Survived}6.{SibSp}
-Original String: 30.0   Output String: {Pclass}{Survived}.{Survived}
-Original String: 44.0   Output String: 44.{{Parch}}
-Original String: 40.0   Output String: {Age}
-Original String: 26.0   Output String: 26.{Survived}
-Original String: 17.0   Output String: 17.{Survived}
-Original String: 1.0   Output String: {Parch}.{{Parch}}
-Original String: 9.0   Output String: {Age}
-Original String: 45.0   Output String: {Parch}5.{{SibSp}}
-Original String: 28.0   Output String: 28.{Survived}
-Original String: 61.0   Output String: 6{Pclass}.{{Pclass}}
-Original String: 4.0   Output String: {SibSp}.{{Parch}}
-Original String: 1.0   Output String: {{SibSp}}.0
-Original String: 21.0   Output String: 21.{Survived}
-Original String: 56.0   Output String: 56.{{Pclass}}
-Original String: 18.0   Output String: {SibSp}8.{{SibSp}}
-Original String: 50.0   Output String: 5{{Pclass}}.{{Pclass}}
-Original String: 30.0   Output String: 3{Survived}.{Survived}
-Original String: 36.0   Output String: {Pclass}6.{Survived}
-Original String: 9.0   Output String: 9.{Survived}
-Original String: 1.0   Output String: {{Parch}}.0
-Original String: 4.0   Output String: {Age}
-Original String: 45.0   Output String: {Age}
-Original String: 40.0   Output String: 4{{SibSp}}.{{SibSp}}
-Original String: 36.0   Output String: {Pclass}6.{Survived}
-Original String: 32.0   Output String: 3{Pclass}.{SibSp}
-Original String: 19.0   Output String: 19.{Survived}
-Original String: 19.0   Output String: {{SibSp}}9.{Parch}
-Original String: 3.0   Output String: {Age}
-Original String: 44.0   Output String: {Age}
-Original String: 58.0   Output String: {Age}
-Original String: 42.0   Output String: 42.{{Parch}}
-Original String: 24.0   Output String: {Pclass}4.{Survived}
-Original String: 28.0   Output String: 28.{Survived}
-Original String: 34.0   Output String: {Pclass}4.{Survived}
-Original String: 45.5   Output String: {Age}
-Original String: 18.0   Output String: {Survived}8.{SibSp}
-Original String: 2.0   Output String: 2.{{Parch}}
-Original String: 32.0   Output String: {Pclass}2.{{SibSp}}
-Original String: 26.0   Output String: {Age}
-Original String: 16.0   Output String: {Survived}6.{SibSp}
-Original String: 40.0   Output String: {Age}
-Original String: 24.0   Output String: 24.{Survived}
-Original String: 35.0   Output String: {Age}
-Original String: 22.0   Output String: 22.{Survived}
-Original String: 30.0   Output String: 3{Survived}.{Survived}
-Original String: 31.0   Output String: 3{{Pclass}}.{Parch}
-Original String: 27.0   Output String: {Age}
-Original String: 42.0   Output String: 4{Pclass}.{{SibSp}}
-Original String: 32.0   Output String: {Age}
-Original String: 30.0   Output String: 3{Survived}.{Survived}
-Original String: 16.0   Output String: {Survived}6.{SibSp}
-Original String: 27.0   Output String: {Pclass}7.{Survived}
-Original String: 51.0   Output String: 51.{Survived}
-Original String: 38.0   Output String: {Age}
-Original String: 22.0   Output String: 22.{Survived}
-Original String: 19.0   Output String: {Survived}9.{SibSp}
-Original String: 20.5   Output String: 2{Survived}.5
-Original String: 18.0   Output String: 18.{Survived}
-Original String: 35.0   Output String: {Age}
-Original String: 29.0   Output String: 29.{Survived}
-Original String: 59.0   Output String: 59.{Survived}
-Original String: 5.0   Output String: {Age}
-Original String: 24.0   Output String: {Pclass}4.{Survived}
-Original String: 44.0   Output String: 44.{{SibSp}}
-Original String: 8.0   Output String: {Age}
-Original String: 19.0   Output String: 19.{Survived}
-Original String: 33.0   Output String: 33.{Survived}
-Original String: 29.0   Output String: {Pclass}9.{Survived}
-Original String: 22.0   Output String: 22.{Survived}
-Original String: 30.0   Output String: {Pclass}{Survived}.{Survived}
-Original String: 44.0   Output String: 44.{{{SibSp}}}
-Original String: 25.0   Output String: 25.{Survived}
-Original String: 24.0   Output String: {{Parch}}4.{SibSp}
-Original String: 37.0   Output String: {Age}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+Original String: Male   Output String: {Gender}
+Original String: Female   Output String: {Gender}
+-------------------------------------------------------------
+Gender: {Gender}
+-------------------------------------------------------------
+Original String: Black   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Black   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Black   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Black   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Asian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Latino   Output String: {Ethnicity}
+Original String: Black   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+Original String: Caucasian   Output String: {Ethnicity}
+-------------------------------------------------------------
+Ethnicity: {Ethnicity}
+-------------------------------------------------------------
+Original String: 55   Output String: {Age}
+Original String: 59   Output String: {Age}
+Original String: 50   Output String: {Age}
+Original String: 26   Output String: {Age}
+Original String: 55   Output String: {Age}
+Original String: 57   Output String: {Age}
+Original String: 27   Output String: {Age}
+Original String: 25   Output String: {Age}
+Original String: 29   Output String: {Age}
+Original String: 34   Output String: {Age}
+Original String: 36   Output String: {Age}
+Original String: 27   Output String: {Age}
+Original String: 59   Output String: {Age}
+Original String: 51   Output String: {Age}
+Original String: 31   Output String: {Age}
+Original String: 41   Output String: {Age}
+Original String: 65   Output String: {Age}
+Original String: 64   Output String: {Age}
+Original String: 64   Output String: {Age}
+Original String: 45   Output String: {Age}
+Original String: 56   Output String: {Age}
+Original String: 36   Output String: {Age}
+Original String: 59   Output String: {Age}
+Original String: 37   Output String: {Age}
+Original String: 44   Output String: {Age}
+Original String: 41   Output String: {Age}
+Original String: 56   Output String: {Age}
+Original String: 43   Output String: {Age}
+Original String: 64   Output String: {Age}
+Original String: 63   Output String: {Age}
+Original String: 28   Output String: {Age}
+Original String: 65   Output String: {Age}
+Original String: 61   Output String: {Age}
+Original String: 30   Output String: {Age}
+Original String: 27   Output String: {Age}
+Original String: 32   Output String: {Age}
+Original String: 34   Output String: {Age}
+Original String: 27   Output String: {Age}
+Original String: 35   Output String: {Age}
+Original String: 57   Output String: {Age}
+Original String: 30   Output String: {Age}
+Original String: 53   Output String: {Age}
+Original String: 52   Output String: {Age}
+Original String: 37   Output String: {Age}
+Original String: 29   Output String: {Age}
+Original String: 40   Output String: {Age}
+Original String: 32   Output String: {Age}
+Original String: 37   Output String: {Age}
+Original String: 52   Output String: {Age}
+Original String: 45   Output String: {Age}
 -------------------------------------------------------------
 Age: {Age}
 -------------------------------------------------------------
-Original String: 1   Output String: {{{SibSp}}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 3   Output String: {Pclass}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {{SibSp}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 4   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 3   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Pclass}
-Original String: 1   Output String: {Pclass}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {SibSp}
-Original String: 1   Output String: {{SibSp}}
-Original String: 1   Output String: {SibSp}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 2   Output String: {SibSp}
-Original String: 1   Output String: {SibSp}
-Original String: 4   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{Pclass}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {{SibSp}}
-Original String: 5   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {Pclass}
-Original String: 3   Output String: {{Parch}}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 4   Output String: {SibSp}
-Original String: 2   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 5   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 3   Output String: {Pclass}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 3   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Pclass}
-Original String: 1   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
+Original String: 2016-04-08   Output String: {Hire Date}
+Original String: 1997-11-29   Output String: {Hire Date}
+Original String: 2006-10-26   Output String: {Hire Date}
+Original String: 2019-09-27   Output String: {Hire Date}
+Original String: 1995-11-20   Output String: {Hire Date}
+Original String: 2017-01-24   Output String: {Hire Date}
+Original String: 2020-07-01   Output String: {Hire Date}
+Original String: 2020-05-16   Output String: {Hire Date}
+Original String: 2019-01-25   Output String: {Hire Date}
+Original String: 2018-06-13   Output String: {Hire Date}
+Original String: 2009-02-11   Output String: {Hire Date}
+Original String: 2021-10-21   Output String: {Hire Date}
+Original String: 1999-03-14   Output String: {Hire Date}
+Original String: 2021-06-10   Output String: {Hire Date}
+Original String: 2017-11-04   Output String: {Hire Date}
+Original String: 2013-03-13   Output String: {Hire Date}
+Original String: 2002-03-04   Output String: {Hire Date}
+Original String: 2003-12-01   Output String: {Hire Date}
+Original String: 2013-11-03   Output String: {Hire Date}
+Original String: 2002-07-09   Output String: {Hire Date}
+Original String: 2012-01-09   Output String: {Hire Date}
+Original String: 2021-04-02   Output String: {Hire Date}
+Original String: 2002-05-24   Output String: {Hire Date}
+Original String: 2019-09-05   Output String: {Hire Date}
+Original String: 2014-03-02   Output String: {Hire Date}
+Original String: 2015-04-17   Output String: {Hire Date}
+Original String: 2005-02-05   Output String: {Hire Date}
+Original String: 2004-06-07   Output String: {Hire Date}
+Original String: 1996-12-04   Output String: {Hire Date}
+Original String: 2012-05-11   Output String: {Hire Date}
+Original String: 2017-06-25   Output String: {Hire Date}
+Original String: 2004-05-16   Output String: {Hire Date}
+Original String: 2008-07-11   Output String: {Hire Date}
+Original String: 2016-09-29   Output String: {Hire Date}
+Original String: 2018-05-06   Output String: {Hire Date}
+Original String: 2014-02-11   Output String: {Hire Date}
+Original String: 2019-12-16   Output String: {Hire Date}
+Original String: 2019-10-20   Output String: {Hire Date}
+Original String: 2013-05-15   Output String: {Hire Date}
+Original String: 1994-01-03   Output String: {Hire Date}
+Original String: 2017-05-29   Output String: {Hire Date}
+Original String: 2013-11-23   Output String: {Hire Date}
+Original String: 2005-11-08   Output String: {Hire Date}
+Original String: 2013-11-14   Output String: {Hire Date}
+Original String: 2019-05-24   Output String: {Hire Date}
+Original String: 2010-11-04   Output String: {Hire Date}
+Original String: 2013-03-20   Output String: {Hire Date}
+Original String: 2009-09-20   Output String: {Hire Date}
+Original String: 2012-10-17   Output String: {Hire Date}
+Original String: 2014-10-29   Output String: {Hire Date}
 -------------------------------------------------------------
-SibSp: {SibSp}
+Hire Date: {Hire Date}
 -------------------------------------------------------------
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {Parch}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Parch}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 5   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {Parch}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {Parch}
-Original String: 5   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {{Parch}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 1   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {Parch}
-Original String: 1   Output String: {Pclass}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {{Parch}}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {{Pclass}}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {{Parch}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Parch}
-Original String: 3   Output String: {Pclass}
-Original String: 0   Output String: {Survived}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{Pclass}}
-Original String: 1   Output String: {{Pclass}}
-Original String: 1   Output String: {{Parch}}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 1   Output String: {Pclass}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {SibSp}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {{Pclass}}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 1   Output String: {Pclass}
-Original String: 2   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {{SibSp}}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {Pclass}
-Original String: 0   Output String: {Parch}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {SibSp}
-Original String: 1   Output String: {{SibSp}}
-Original String: 0   Output String: {Survived}
-Original String: 0   Output String: {Survived}
+Original String: $141,604    Output String: {Annual Salary}
+Original String: $99,975    Output String: {Annual Salary}
+Original String: $163,099    Output String: {Annual Salary}
+Original String: $84,913    Output String: {Annual Salary}
+Original String: $95,409    Output String: {Annual Salary}
+Original String: $50,994    Output String: {Annual Salary}
+Original String: $119,746    Output String: {Annual Salary}
+Original String: $41,336    Output String: {Annual Salary}
+Original String: $113,527    Output String: {Annual Salary}
+Original String: $77,203    Output String: {Annual Salary}
+Original String: $157,333    Output String: {Annual Salary}
+Original String: $109,851    Output String: {Annual Salary}
+Original String: $105,086    Output String: {Annual Salary}
+Original String: $146,742    Output String: {Annual Salary}
+Original String: $97,078    Output String: {Annual Salary}
+Original String: $249,270    Output String: {Annual Salary}
+Original String: $175,837    Output String: {Annual Salary}
+Original String: $154,828    Output String: {Annual Salary}
+Original String: $186,503    Output String: {Annual Salary}
+Original String: $166,331    Output String: {Annual Salary}
+Original String: $146,140    Output String: {Annual Salary}
+Original String: $151,703    Output String: {Annual Salary}
+Original String: $172,787    Output String: {Annual Salary}
+Original String: $49,998    Output String: {Annual Salary}
+Original String: $207,172    Output String: {Annual Salary}
+Original String: $152,239    Output String: {Annual Salary}
+Original String: $98,581    Output String: {Annual Salary}
+Original String: $246,231    Output String: {Annual Salary}
+Original String: $99,354    Output String: {Annual Salary}
+Original String: $231,141    Output String: {Annual Salary}
+Original String: $54,775    Output String: {Annual Salary}
+Original String: $55,499    Output String: {Annual Salary}
+Original String: $66,521    Output String: {Annual Salary}
+Original String: $59,100    Output String: {Annual Salary}
+Original String: $49,011    Output String: {Annual Salary}
+Original String: $99,575    Output String: {Annual Salary}
+Original String: $99,989    Output String: {Annual Salary}
+Original String: $256,420    Output String: {Annual Salary}
+Original String: $78,940    Output String: {Annual Salary}
+Original String: $82,872    Output String: {Annual Salary}
+Original String: $86,317    Output String: {Annual Salary}
+Original String: $113,135    Output String: {Annual Salary}
+Original String: $199,808    Output String: {Annual Salary}
+Original String: $56,037    Output String: $56,0{Age} 
+Original String: $122,350    Output String: {Annual Salary}
+Original String: $92,952    Output String: {Annual Salary}
+Original String: $79,921    Output String: {Annual Salary}
+Original String: $167,199    Output String: {Annual Salary}
+Original String: $71,476    Output String: {Annual Salary}
+Original String: $189,420    Output String: {Annual Salary}
+Original String: $64,057    Output String: ${Age},057 
+Original String: $68,728    Output String: {Annual Salary}
 -------------------------------------------------------------
-Parch: {Survived}
+Annual Salary: {Annual Salary}
 -------------------------------------------------------------
-Original String: A/5 21171   Output String: A/5 2{{{SibSp}}}{{{SibSp}}}7{{{SibSp}}}
-Original String: PC 17599   Output String: P{Embarked} {{Pclass}}7599
-Original String: STON/O2. 3101282   Output String: {Embarked}TON/O2. {{SibSp}}{Survived}{SibSp}{Survived}282
-Original String: 113803   Output String: {{Pclass}}{{Pclass}}38{Parch}3
-Original String: 373450   Output String: {Pclass}7{Pclass}4{{Survived}}{Survived}
-Original String: 330877   Output String: {Pclass}{Pclass}{Survived}877
-Original String: 17463   Output String: {Pclass}{{{Pclass}}}463
-Original String: 349909   Output String: {Pclass}499{{Parch}}9
-Original String: 347742   Output String: {{Parch}}4774{Parch}
-Original String: 237736   Output String: {Pclass}37736
-Original String: PP 9549   Output String: {Ticket}
-Original String: 113783   Output String: {{Pclass}}{{Pclass}}3783
-Original String: A/5. 2151   Output String: {Ticket}
-Original String: 347082   Output String: {Pclass}47{{SibSp}}82
-Original String: 350406   Output String: {Pclass}5{Survived}4{Survived}6
-Original String: 248706   Output String: {Pclass}487{SibSp}6
-Original String: 382652   Output String: {Pclass}82652
-Original String: 244373   Output String: {Pclass}44373
-Original String: 345763   Output String: {Pclass}4576{Pclass}
-Original String: 2649   Output String: {Ticket}
-Original String: 239865   Output String: {Pclass}39865
-Original String: 248698   Output String: {Pclass}48698
-Original String: 330923   Output String: {Pclass}{Pclass}{SibSp}9{{SibSp}}
-Original String: 113788   Output String: {{Pclass}}{{Pclass}}3788
-Original String: 349909   Output String: {Pclass}499{{Parch}}9
-Original String: 347077   Output String: {Pclass}47077
-Original String: 2631   Output String: 26{Pclass}1
-Original String: 19950   Output String: {{Parch}}995{{{Parch}}}
-Original String: 330959   Output String: {Pclass}{Pclass}{SibSp}959
-Original String: 349216   Output String: {Pclass}49216
-Original String: PC 17601   Output String: P{Embarked} {Pclass}76{{Pclass}}{Pclass}
-Original String: PC 17569   Output String: P{Embarked} {{Pclass}}7569
-Original String: 335677   Output String: {{SibSp}}5677
-Original String: C.A. 24579   Output String: C.A. {Pclass}4579
-Original String: PC 17604   Output String: P{Embarked} {Pclass}76{{Pclass}}4
-Original String: 113789   Output String: {Pclass}{Pclass}3789
-Original String: 2677   Output String: {Ticket}
-Original String: A./5. 2152   Output String: {Ticket}
-Original String: 345764   Output String: {{SibSp}}45764
-Original String: 2651   Output String: 265{{SibSp}}
-Original String: 7546   Output String: {Ticket}
-Original String: 11668   Output String: {SibSp}{SibSp}668
-Original String: 349253   Output String: {Pclass}4925{Pclass}
-Original String: SC/Paris 2123   Output String: S{Embarked}/Paris {{Parch}}{{SibSp}}{{Parch}}3
-Original String: 330958   Output String: {Pclass}{Pclass}{SibSp}958
-Original String: S.C./A.4. 23567   Output String: {Embarked}.C./A.4. 2{Pclass}567
-Original String: 370371   Output String: {Pclass}7{{SibSp}}{Pclass}7{SibSp}
-Original String: 14311   Output String: {Survived}4{Pclass}{Survived}{Survived}
-Original String: 2662   Output String: {SibSp}66{SibSp}
-Original String: 349237   Output String: {Pclass}492{Pclass}7
-Original String: 3101295   Output String: {Pclass}{Parch}{{Parch}}{Parch}295
-Original String: A/4. 39886   Output String: A/4. {Pclass}9886
-Original String: PC 17572   Output String: P{Embarked} {{Pclass}}7572
-Original String: 2926   Output String: {Pclass}9{Pclass}6
-Original String: 113509   Output String: {Pclass}{Pclass}35{{Pclass}}9
-Original String: 19947   Output String: {{Pclass}}9947
-Original String: C.A. 31026   Output String: C.A. 3{Survived}{SibSp}{Pclass}6
-Original String: 2697   Output String: {Ticket}
-Original String: C.A. 34651   Output String: C.A. 3465{{SibSp}}
-Original String: CA 2144   Output String: CA {Parch}144
-Original String: 2669   Output String: {Ticket}
-Original String: 113572   Output String: {{Pclass}}{{Pclass}}3572
-Original String: 36973   Output String: {Ticket}
-Original String: 347088   Output String: {{Parch}}47{Survived}88
-Original String: PC 17605   Output String: P{Embarked} {Pclass}76{{Pclass}}5
-Original String: 2661   Output String: 2{PassengerId}{{SibSp}}
-Original String: C.A. 29395   Output String: C.A. {Pclass}9395
-Original String: S.P. 3464   Output String: {Embarked}.P. {Pclass}464
-Original String: 3101281   Output String: {{Parch}}{Survived}0{Survived}{Parch}8{Survived}
-Original String: 315151   Output String: {{SibSp}}15151
-Original String: C.A. 33111   Output String: {Ticket}
-Original String: CA 2144   Output String: CA {Parch}144
-Original String: S.O.C. 14879   Output String: {Ticket}
-Original String: 2680   Output String: 268{{SibSp}}
-Original String: 1601   Output String: {Survived}6{SibSp}{Survived}
-Original String: 348123   Output String: {Pclass}4812{Pclass}
-Original String: 349208   Output String: {Pclass}492{Survived}8
-Original String: 374746   Output String: {Pclass}74746
-Original String: 248738   Output String: {{Parch}}48738
-Original String: 364516   Output String: {Pclass}645{Survived}6
-Original String: 345767   Output String: {Pclass}45767
-Original String: 345779   Output String: {Pclass}45779
-Original String: 330932   Output String: {Pclass}{Pclass}{SibSp}9{Pclass}2
-Original String: 113059   Output String: {Pclass}{Pclass}3{{Pclass}}59
-Original String: SO/C 14885   Output String: {Embarked}O/C {Survived}48{{SibSp}}
-Original String: 3101278   Output String: {Pclass}{Survived}{Parch}{Survived}278
-Original String: W./C. 6608   Output String: W./C. 66{{SibSp}}8
-Original String: SOTON/OQ 392086   Output String: {Embarked}OTON/OQ {Pclass}92{Survived}86
-Original String: 19950   Output String: {{{Parch}}}9950
-Original String: 343275   Output String: {Pclass}4{Pclass}275
-Original String: 343276   Output String: {Pclass}4{Pclass}276
-Original String: 347466   Output String: {Pclass}47466
-Original String: W.E.P. 5734   Output String: {Ticket}
-Original String: C.A. 2315   Output String: C.A. {Parch}{{Parch}}{SibSp}5
-Original String: 364500   Output String: {Pclass}645{Survived}{Survived}
-Original String: 374910   Output String: {Pclass}7491{Survived}
-Original String: PC 17754   Output String: P{Embarked} {Pclass}7754
-Original String: PC 17759   Output String: P{Embarked} {{Pclass}}7759
-Original String: 231919   Output String: {Pclass}3{{Parch}}9{{Parch}}9
-Original String: 244367   Output String: {Pclass}44367
-Original String: 349245   Output String: {Pclass}49245
-Original String: 349215   Output String: {Pclass}49215
-Original String: 35281   Output String: 3528{Pclass}
-Original String: 7540   Output String: 754{Survived}
-Original String: 3101276   Output String: {{SibSp}}1{Survived}1{SibSp}76
-Original String: 349207   Output String: {Pclass}492{Survived}7
-Original String: 343120   Output String: {Pclass}4{Pclass}{Survived}2{SibSp}
-Original String: 312991   Output String: {Pclass}{Survived}299{Survived}
-Original String: 349249   Output String: {Pclass}49249
-Original String: 371110   Output String: {Pclass}7{{SibSp}}{{Parch}}
-Original String: 110465   Output String: {Pclass}{Pclass}{{Pclass}}465
-Original String: 2665   Output String: {Ticket}
-Original String: 324669   Output String: {Pclass}24669
-Original String: 4136   Output String: 4{SibSp}{Pclass}6
-Original String: 2627   Output String: {Ticket}
-Original String: STON/O 2. 3101294   Output String: {Embarked}TON/O 2. {Pclass}1{Survived}1294
-Original String: 370369   Output String: {Pclass}7{Survived}{Pclass}69
-Original String: 11668   Output String: {SibSp}{SibSp}668
-Original String: PC 17558   Output String: P{Embarked} {Pclass}7558
-Original String: 347082   Output String: {{Parch}}{SibSp}7{Survived}8{Parch}
-Original String: S.O.C. 14879   Output String: {Ticket}
-Original String: A4. 54510   Output String: A4. 5451{Survived}
-Original String: 237736   Output String: {Pclass}37736
-Original String: 27267   Output String: {Pclass}7{Pclass}67
-Original String: 35281   Output String: 3528{Pclass}
-Original String: 2651   Output String: 265{{SibSp}}
-Original String: 370372   Output String: {Pclass}7{Survived}{Pclass}72
-Original String: C 17369   Output String: C {Survived}7{Pclass}69
-Original String: 2668   Output String: {Ticket}
-Original String: 347061   Output String: {Pclass}47{Survived}61
-Original String: 349241   Output String: {Pclass}49241
-Original String: SOTON/O.Q. 3101307   Output String: {Embarked}OTON/O.Q. {Pclass}1{Survived}1{Pclass}{Survived}7
-Original String: A/5. 3337   Output String: A/5. {Pclass}{Pclass}{Pclass}7
-Original String: 228414   Output String: {Pclass}{Pclass}84{{SibSp}}4
-Original String: C.A. 29178   Output String: C.A. {Pclass}9178
-Original String: SC/PARIS 2133   Output String: S{Embarked}/PARIS {Pclass}133
-Original String: 11752   Output String: {{{Parch}}}{{{Parch}}}75{Parch}
-Original String: 113803   Output String: {Pclass}{{{Pclass}}}{{Pclass}}3
-Original String: 7534   Output String: 75{Pclass}4
-Original String: PC 17593   Output String: P{Embarked} {Pclass}7593
-Original String: 2678   Output String: {Parch}678
-Original String: 347081   Output String: {Pclass}47{SibSp}8{Survived}
-Original String: STON/O2. 3101279   Output String: {Embarked}TON/O2. {Pclass}{{SibSp}}{Parch}{{SibSp}}279
-Original String: 365222   Output String: {Pclass}65222
-Original String: 231945   Output String: {Pclass}31945
-Original String: C.A. 33112   Output String: C.A. 33{SibSp}{SibSp}{Pclass}
-Original String: 350043   Output String: {Pclass}5{SibSp}{SibSp}4{Pclass}
-Original String: W./C. 6608   Output String: W./C. 66{Survived}8
-Original String: 230080   Output String: {{Parch}}3{Survived}{Survived}8{Survived}
-Original String: 244310   Output String: {Pclass}4431{Survived}
-Original String: S.O.P. 1166   Output String: {Ticket}
-Original String: 113776   Output String: {{Pclass}}{{Pclass}}3776
-Original String: A.5. 11206   Output String: A.5. 112{Survived}6
-Original String: A/5. 851   Output String: {Ticket}
-Original String: Fa 265302   Output String: Fa 265{Pclass}{Survived}2
-Original String: PC 17597   Output String: P{Embarked} {Pclass}7597
-Original String: 35851   Output String: {Pclass}585{Survived}
-Original String: SOTON/OQ 392090   Output String: {Embarked}OTON/OQ {Pclass}92{Survived}9{Survived}
-Original String: 315037   Output String: {Pclass}15{Survived}{Pclass}7
-Original String: CA. 2343   Output String: CA. {Parch}{{Parch}}4{{Parch}}
-Original String: 371362   Output String: {Pclass}7{Parch}{Pclass}62
-Original String: C.A. 33595   Output String: {Ticket}
-Original String: 347068   Output String: {Pclass}47{Survived}68
-Original String: 315093   Output String: {Pclass}15{Survived}9{Pclass}
-Original String: 3101295   Output String: {Pclass}{Parch}{{Parch}}{Parch}295
-Original String: 363291   Output String: {{Parch}}6{{Parch}}{Parch}9{Survived}
-Original String: 113505   Output String: {{Pclass}}{{Pclass}}35{SibSp}5
-Original String: 347088   Output String: {Pclass}{Parch}7{{SibSp}}88
-Original String: PC 17318   Output String: PC {Pclass}73{Pclass}8
-Original String: 1601   Output String: 16{Survived}1
-Original String: 111240   Output String: {Pclass}{Pclass}{Pclass}24{{Pclass}}
-Original String: 382652   Output String: {Pclass}82652
-Original String: 347742   Output String: {Pclass}47742
-Original String: STON/O 2. 3101280   Output String: {Embarked}TON/O 2. {Pclass}1{Survived}128{Survived}
-Original String: 17764   Output String: {Pclass}7764
-Original String: 350404   Output String: {Pclass}5{{SibSp}}4{{SibSp}}4
-Original String: 4133   Output String: 4{Parch}{Pclass}{Pclass}
-Original String: PC 17595   Output String: P{Embarked} {Pclass}7595
-Original String: 250653   Output String: {Pclass}5{Survived}653
-Original String: LINE   Output String: {Ticket}
-Original String: CA. 2343   Output String: CA. {Parch}{{Parch}}4{{Parch}}
-Original String: SC/PARIS 2131   Output String: S{Embarked}/PARIS {Pclass}131
-Original String: 347077   Output String: {{Parch}}{SibSp}7{Survived}77
-Original String: 230136   Output String: {{SibSp}}30{{Parch}}36
-Original String: 315153   Output String: {{Parch}}{Survived}5{Survived}5{{Parch}}
-Original String: 113767   Output String: {Pclass}{Pclass}3767
-Original String: 370365   Output String: {Pclass}7{Parch}{Pclass}65
-Original String: 111428   Output String: {{Pclass}}{{Pclass}}{{Pclass}}428
-Original String: 364849   Output String: {Pclass}64849
-Original String: 349247   Output String: {Pclass}49247
-Original String: 234604   Output String: {Pclass}346{SibSp}4
-Original String: 28424   Output String: {Pclass}84{Pclass}4
-Original String: 350046   Output String: {Pclass}5{Parch}{Parch}46
-Original String: 230080   Output String: {Pclass}30080
-Original String: PC 17610   Output String: P{Embarked} {{Pclass}}76{{Pclass}}{SibSp}
-Original String: PC 17569   Output String: P{Embarked} {{Pclass}}7569
-Original String: 368703   Output String: {Pclass}687{Survived}{Pclass}
-Original String: 4579   Output String: {Ticket}
-Original String: 370370   Output String: {Pclass}7{SibSp}{Pclass}7{SibSp}
-Original String: 248747   Output String: {Pclass}48747
-Original String: 345770   Output String: {Pclass}4577{Survived}
-Original String: CA. 2343   Output String: CA. {Parch}{{Parch}}4{{Parch}}
-Original String: 3101264   Output String: {Pclass}1{Survived}1264
-Original String: 2628   Output String: {Ticket}
-Original String: A/5 3540   Output String: A/5 {Pclass}54{SibSp}
-Original String: 347054   Output String: {Pclass}47{{Parch}}54
-Original String: 3101278   Output String: {Pclass}{SibSp}{{SibSp}}{SibSp}278
-Original String: 2699   Output String: {Ticket}
-Original String: 367231   Output String: {Pclass}672{Pclass}{Survived}
-Original String: 112277   Output String: {{Pclass}}{{Pclass}}2277
-Original String: SOTON/O.Q. 3101311   Output String: {Embarked}OTON/O.Q. {Pclass}1{Survived}1{Pclass}11
-Original String: F.C.C. 13528   Output String: F.C.C. {Survived}35{Pclass}8
-Original String: A/5 21174   Output String: {Ticket}
-Original String: 250646   Output String: {Pclass}5{Survived}646
-Original String: 367229   Output String: {Pclass}67229
-Original String: 35273   Output String: {Ticket}
-Original String: STON/O2. 3101283   Output String: {Embarked}TON/O2. {Pclass}{Survived}{SibSp}{Survived}28{Pclass}
-Original String: 243847   Output String: {Pclass}43847
-Original String: 11813   Output String: {{Pclass}}{{Pclass}}8{{Pclass}}3
-Original String: W/C 14208   Output String: W/C 14{Pclass}{Survived}8
-Original String: SOTON/OQ 392089   Output String: {Embarked}OTON/OQ {Pclass}92{SibSp}89
-Original String: 220367   Output String: {Pclass}{Pclass}{Survived}367
-Original String: 21440   Output String: 2144{Survived}
-Original String: 349234   Output String: {Pclass}492{Pclass}4
-Original String: 19943   Output String: {{Pclass}}9943
-Original String: PP 4348   Output String: PP 4{Pclass}48
-Original String: SW/PP 751   Output String: {Embarked}W/PP 75{Survived}
-Original String: A/5 21173   Output String: A/5 2117{Pclass}
-Original String: 236171   Output String: {Pclass}36171
-Original String: 4133   Output String: 4{Parch}{Pclass}{Pclass}
-Original String: 36973   Output String: {Ticket}
-Original String: 347067   Output String: {Pclass}47{Survived}67
-Original String: 237442   Output String: {Pclass}3744{Pclass}
-Original String: 347077   Output String: {{Parch}}{SibSp}7077
-Original String: C.A. 29566   Output String: C.A. {Pclass}9566
-Original String: W./C. 6609   Output String: W./C. 66{Survived}9
-Original String: 26707   Output String: {Pclass}67{{SibSp}}7
-Original String: C.A. 31921   Output String: C.A. 3{Survived}9{{Parch}}{Survived}
-Original String: 28665   Output String: {Pclass}8665
-Original String: SCO/W 1585   Output String: {Ticket}
-Original String: 2665   Output String: {Ticket}
-Original String: 367230   Output String: {Pclass}672{Pclass}{Parch}
-Original String: W./C. 14263   Output String: W./C. 14{Pclass}63
-Original String: STON/O 2. 3101275   Output String: {Embarked}TON/O 2. {Pclass}1{Survived}1275
-Original String: 2694   Output String: {Ticket}
-Original String: 19928   Output String: {{SibSp}}99{SibSp}8
-Original String: 347071   Output String: {Pclass}47{Survived}71
-Original String: 250649   Output String: {{Parch}}5{SibSp}649
-Original String: 11751   Output String: {{Pclass}}{{Pclass}}75{{Pclass}}
-Original String: 244252   Output String: {Pclass}44{Pclass}5{Pclass}
-Original String: 362316   Output String: {Pclass}62{Pclass}16
-Original String: 347054   Output String: {Pclass}47{{SibSp}}54
-Original String: 113514   Output String: {Pclass}{Pclass}35{Pclass}4
-Original String: A/5. 3336   Output String: A/5. {Pclass}{Pclass}{Pclass}6
-Original String: 370129   Output String: {{Parch}}7{Survived}1{Parch}9
-Original String: 2650   Output String: {Parch}65{SibSp}
-Original String: PC 17585   Output String: P{Embarked} {{Pclass}}7585
-Original String: 110152   Output String: {{Pclass}}{{Pclass}}{SibSp}{{Pclass}}52
-Original String: PC 17755   Output String: P{Embarked} {{Pclass}}7755
-Original String: 230433   Output String: {Pclass}3{SibSp}433
-Original String: 384461   Output String: {Pclass}84461
-Original String: 347077   Output String: {{Parch}}{SibSp}7077
-Original String: 110413   Output String: {Pclass}{Pclass}{{Pclass}}4{Pclass}3
-Original String: 112059   Output String: {Pclass}{Pclass}2{{Pclass}}59
-Original String: 382649   Output String: {Pclass}82649
-Original String: C.A. 17248   Output String: C.A. 17{Pclass}48
-Original String: 3101295   Output String: {Pclass}{Parch}{{Parch}}{Parch}295
-Original String: 347083   Output String: {Pclass}47{Parch}8{Pclass}
-Original String: PC 17582   Output String: PC {{Pclass}}7582
-Original String: PC 17760   Output String: PC {{Pclass}}776{SibSp}
-Original String: 113798   Output String: {Pclass}{Pclass}3798
-Original String: LINE   Output String: {Ticket}
-Original String: 250644   Output String: {Pclass}5{SibSp}644
-Original String: PC 17596   Output String: P{Embarked} {Pclass}7596
-Original String: 370375   Output String: {Pclass}7{SibSp}{Pclass}75
-Original String: 13502   Output String: {{Pclass}}35{Parch}2
-Original String: 347073   Output String: {Pclass}47{Survived}7{Pclass}
-Original String: 239853   Output String: {Pclass}39853
-Original String: 382652   Output String: {Pclass}82652
-Original String: C.A. 2673   Output String: C.A. 267{Pclass}
-Original String: 336439   Output String: {Pclass}{Pclass}64{Pclass}9
-Original String: 347464   Output String: {Pclass}47464
-Original String: 345778   Output String: {Pclass}45778
-Original String: A/5. 10482   Output String: A/5. {Survived}{SibSp}482
-Original String: 113056   Output String: {Pclass}{Pclass}3{{Pclass}}56
-Original String: 349239   Output String: {Pclass}492{Pclass}9
-Original String: 345774   Output String: {Pclass}45774
-Original String: 349206   Output String: {Pclass}492{Survived}6
-Original String: 237798   Output String: {Pclass}37798
-Original String: 370373   Output String: {Pclass}7{SibSp}{Pclass}7{Pclass}
-Original String: 19877   Output String: {{Pclass}}9877
-Original String: 11967   Output String: {{Pclass}}{{Pclass}}967
-Original String: SC/Paris 2163   Output String: S{Embarked}/Paris {Pclass}163
-Original String: 349236   Output String: {Pclass}492{Pclass}6
-Original String: 349233   Output String: {Pclass}492{Pclass}{Pclass}
-Original String: PC 17612   Output String: P{Embarked} {Pclass}76{Pclass}2
-Original String: 2693   Output String: 269{Pclass}
-Original String: 113781   Output String: {{Parch}}{{Parch}}378{{Parch}}
-Original String: 19988   Output String: {{Pclass}}9988
-Original String: PC 17558   Output String: P{Embarked} {{Pclass}}7558
-Original String: 9234   Output String: 92{Pclass}4
-Original String: 367226   Output String: {{SibSp}}67{SibSp}{SibSp}6
-Original String: LINE   Output String: {Ticket}
-Original String: 226593   Output String: {Pclass}{Pclass}6593
-Original String: A/5 2466   Output String: {Ticket}
-Original String: 113781   Output String: {{{Parch}}}{{{Parch}}}378{{{Parch}}}
-Original String: 17421   Output String: {{Pclass}}742{{Pclass}}
-Original String: PC 17758   Output String: P{Embarked} {{Pclass}}7758
-Original String: P/PP 3381   Output String: P/PP 338{SibSp}
-Original String: PC 17485   Output String: P{Embarked} {{Pclass}}7485
-Original String: 11767   Output String: {{Pclass}}{{Pclass}}767
-Original String: PC 17608   Output String: P{Embarked} {{{SibSp}}}7608
-Original String: 250651   Output String: {Pclass}5{{SibSp}}65{SibSp}
-Original String: 349243   Output String: {Pclass}4924{Pclass}
-Original String: F.C.C. 13529   Output String: F.C.C. {SibSp}35{Pclass}9
-Original String: 347470   Output String: {Pclass}4747{SibSp}
-Original String: 244367   Output String: {Pclass}44367
-Original String: 29011   Output String: {Pclass}9{Survived}11
-Original String: 36928   Output String: 369{Parch}8
-Original String: 16966   Output String: {{Pclass}}6966
-Original String: A/5 21172   Output String: {Ticket}
-Original String: 349219   Output String: {Pclass}49219
-Original String: 234818   Output String: {Pclass}348{Survived}8
-Original String: 248738   Output String: {Pclass}48738
-Original String: CA. 2343   Output String: CA. {Parch}{{Parch}}4{{Parch}}
-Original String: PC 17760   Output String: P{Embarked} {{Pclass}}776{SibSp}
-Original String: 345364   Output String: {Pclass}45{Pclass}64
-Original String: 28551   Output String: {Pclass}855{Survived}
-Original String: 363291   Output String: {Pclass}6{PassengerId}{{SibSp}}
-Original String: 111361   Output String: {{Pclass}}{{Pclass}}{{Pclass}}36{{Pclass}}
-Original String: 367226   Output String: {{SibSp}}67{SibSp}{SibSp}6
-Original String: 113043   Output String: {Pclass}{Pclass}3{{Pclass}}43
-Original String: PC 17582   Output String: PC {Pclass}7582
-Original String: 345764   Output String: {{SibSp}}45764
-Original String: PC 17611   Output String: PC {{Pclass}}76{{Pclass}}{{Pclass}}
-Original String: 349225   Output String: {Pclass}49225
-Original String: 113776   Output String: {Pclass}{Pclass}3776
-Original String: 16966   Output String: {{Pclass}}6966
-Original String: 7598   Output String: {Ticket}
-Original String: 113784   Output String: {Pclass}{Pclass}3784
-Original String: 230080   Output String: {Pclass}30080
-Original String: 19950   Output String: {{{Parch}}}9950
-Original String: 248740   Output String: {Pclass}4874{Survived}
-Original String: 244361   Output String: {Pclass}44361
-Original String: 229236   Output String: {Pclass}{Pclass}9{Pclass}36
-Original String: 248733   Output String: {Pclass}48733
-Original String: 31418   Output String: 3{Survived}4{Survived}8
-Original String: 386525   Output String: {Pclass}86525
-Original String: C.A. 37671   Output String: C.A. {Pclass}767{{SibSp}}
-Original String: 315088   Output String: {Pclass}15{Survived}88
-Original String: 7267   Output String: {Ticket}
-Original String: 113510   Output String: {Pclass}{Pclass}35{Pclass}{{Pclass}}
-Original String: 2695   Output String: {Ticket}
-Original String: 349237   Output String: {Pclass}492{Pclass}7
-Original String: 2647   Output String: {Ticket}
-Original String: 345783   Output String: {Pclass}4578{Pclass}
-Original String: 113505   Output String: {{Pclass}}{{Pclass}}35{SibSp}5
-Original String: 237671   Output String: {Pclass}37671
-Original String: 330931   Output String: {Pclass}{Pclass}{SibSp}9{Pclass}{Survived}
-Original String: 330980   Output String: {Pclass}{Pclass}{SibSp}98{SibSp}
-Original String: 347088   Output String: {Pclass}{Parch}7{{SibSp}}88
-Original String: SC/PARIS 2167   Output String: S{Embarked}/PARIS {Pclass}{SibSp}67
-Original String: 2691   Output String: 269{Parch}
-Original String: SOTON/O.Q. 3101310   Output String: {Embarked}OTON/O.Q. {Pclass}1{Survived}1{Pclass}1{Survived}
-Original String: 370365   Output String: {Pclass}7{{SibSp}}{{{SibSp}}}
-Original String: C 7076   Output String: C 7{Survived}76
-Original String: 110813   Output String: {{Pclass}}{{Pclass}}{Parch}8{{Pclass}}3
-Original String: 2626   Output String: {Ticket}
-Original String: 14313   Output String: {Survived}4{Pclass}{Survived}{Pclass}
-Original String: PC 17477   Output String: P{Embarked} {{Pclass}}7477
-Original String: 11765   Output String: {{Pclass}}{{Pclass}}765
-Original String: 3101267   Output String: {Pclass}{SibSp}{{SibSp}}{SibSp}267
-Original String: 323951   Output String: {Pclass}2{Pclass}951
-Original String: PC 17760   Output String: P{Embarked} {Pclass}776{{Pclass}}
-Original String: 349909   Output String: {Pclass}499{{Parch}}9
-Original String: PC 17604   Output String: P{Embarked} {{Pclass}}76{Parch}4
-Original String: C 7077   Output String: C 7{SibSp}77
-Original String: 113503   Output String: {{Parch}}{{Parch}}35{{{Parch}}}3
-Original String: 2648   Output String: {Ticket}
-Original String: 347069   Output String: {Pclass}47{Survived}69
-Original String: PC 17757   Output String: P{Embarked} {{Pclass}}7757
-Original String: 2653   Output String: {Parch}65{{Parch}}
-Original String: STON/O 2. 3101293   Output String: {Embarked}TON/O 2. {Pclass}1{Survived}129{Pclass}
-Original String: 113789   Output String: {{Pclass}}{{Pclass}}3789
-Original String: 349227   Output String: {Pclass}49227
-Original String: S.O.C. 14879   Output String: {Ticket}
-Original String: CA 2144   Output String: CA {Parch}144
-Original String: 27849   Output String: {Pclass}7849
-Original String: 367655   Output String: {Pclass}67655
-Original String: SC 1748   Output String: S{Embarked} {Survived}748
-Original String: 113760   Output String: {{{Parch}}}{{{Parch}}}3760
-Original String: 350034   Output String: {Pclass}5{SibSp}{SibSp}{Pclass}4
-Original String: 3101277   Output String: {{SibSp}}1{Survived}1{SibSp}77
-Original String: 35273   Output String: {Ticket}
-Original String: PP 9549   Output String: {Ticket}
-Original String: 350052   Output String: {Pclass}5{Survived}{Survived}52
-Original String: 350407   Output String: {Pclass}5{Survived}4{Survived}7
-Original String: 28403   Output String: {Pclass}84{Survived}3
-Original String: 244278   Output String: {Pclass}44{Pclass}78
-Original String: 240929   Output String: {Pclass}4{SibSp}9{Pclass}9
-Original String: STON/O 2. 3101289   Output String: {Embarked}TON/O 2. {Pclass}{Survived}{SibSp}{Survived}289
-Original String: 341826   Output String: {Pclass}41826
-Original String: 4137   Output String: 4{SibSp}{Pclass}7
-Original String: STON/O2. 3101279   Output String: {Embarked}TON/O2. {Pclass}{SibSp}{{SibSp}}{SibSp}279
-Original String: 315096   Output String: {Pclass}15{Survived}96
-Original String: 28664   Output String: {Pclass}8664
-Original String: 347064   Output String: {Pclass}47{Survived}64
-Original String: 29106   Output String: {Pclass}9{{SibSp}}06
-Original String: 312992   Output String: {Pclass}12992
-Original String: 4133   Output String: 4{Parch}{Pclass}{Pclass}
-Original String: 349222   Output String: {Pclass}49222
-Original String: 394140   Output String: {Pclass}9414{Survived}
-Original String: 19928   Output String: {{Pclass}}9928
-Original String: 239853   Output String: {Pclass}39853
-Original String: STON/O 2. 3101269   Output String: {Embarked}TON/O 2. {Pclass}{Survived}{SibSp}{Survived}269
-Original String: 343095   Output String: {Pclass}4{Pclass}{Survived}95
-Original String: 28220   Output String: {Pclass}8{Pclass}{Pclass}0
-Original String: 250652   Output String: {{Parch}}5{SibSp}65{{Parch}}
-Original String: 28228   Output String: {Pclass}8{Pclass}{Pclass}8
-Original String: 345773   Output String: {{Parch}}4577{{Parch}}
-Original String: 349254   Output String: {Pclass}49254
-Original String: A/5. 13032   Output String: A/5. 1{Pclass}{Survived}{Pclass}2
-Original String: 315082   Output String: {Pclass}15{Survived}82
-Original String: 347080   Output String: {Pclass}47{{SibSp}}8{{SibSp}}
-Original String: 370129   Output String: {Pclass}7{{SibSp}}{SibSp}29
-Original String: A/4. 34244   Output String: A/4. {Pclass}4244
-Original String: 2003   Output String: {Pclass}{Parch}{Parch}3
-Original String: 250655   Output String: {Pclass}5{SibSp}655
-Original String: 364851   Output String: {Pclass}64851
-Original String: SOTON/O.Q. 392078   Output String: {Embarked}OTON/O.Q. {Pclass}92{SibSp}78
-Original String: 110564   Output String: {{Pclass}}{{Pclass}}{SibSp}564
-Original String: 376564   Output String: {Pclass}76564
-Original String: SC/AH 3085   Output String: {Embarked}C/AH 3{Parch}85
-Original String: STON/O 2. 3101274   Output String: {Embarked}TON/O 2. {Pclass}1{Survived}1274
-Original String: 13507   Output String: {Pclass}35{{Pclass}}7
-Original String: 113760   Output String: {{{Parch}}}{{{Parch}}}3760
-Original String: W./C. 6608   Output String: W./C. 66{Survived}8
-Original String: 29106   Output String: {{SibSp}}9{Survived}06
-Original String: 19950   Output String: {Pclass}995{{Pclass}}
-Original String: C.A. 18723   Output String: C.A. 187{Pclass}3
-Original String: F.C.C. 13529   Output String: F.C.C. {{SibSp}}35{Pclass}9
-Original String: 345769   Output String: {Pclass}45769
-Original String: 347076   Output String: {Pclass}47{{SibSp}}76
-Original String: 230434   Output String: {Pclass}3{SibSp}434
-Original String: 65306   Output String: 65{Pclass}{SibSp}6
-Original String: 33638   Output String: {Ticket}
-Original String: 250644   Output String: {Pclass}5{SibSp}644
-Original String: 113794   Output String: {{Pclass}}{{Pclass}}3794
-Original String: 2666   Output String: {SibSp}666
-Original String: 113786   Output String: {{Pclass}}{{Pclass}}3786
-Original String: C.A. 34651   Output String: C.A. 3465{SibSp}
-Original String: 65303   Output String: 65{Pclass}{{SibSp}}{Pclass}
-Original String: 113051   Output String: {Pclass}{Pclass}3{{Pclass}}5{Pclass}
-Original String: 17453   Output String: {{Pclass}}7453
-Original String: A/5 2817   Output String: {Ticket}
-Original String: 349240   Output String: {Pclass}4924{SibSp}
-Original String: 13509   Output String: {Pclass}35{{Pclass}}9
-Original String: 17464   Output String: {{Pclass}}7464
-Original String: F.C.C. 13531   Output String: F.C.C. {Survived}353{Survived}
-Original String: 371060   Output String: {Pclass}71{Survived}6{Survived}
-Original String: 19952   Output String: {{Pclass}}9952
-Original String: 364506   Output String: {Pclass}645{Survived}6
-Original String: 111320   Output String: {Pclass}{Pclass}{Pclass}32{{Pclass}}
-Original String: 234360   Output String: {Pclass}3436{Survived}
-Original String: A/S 2816   Output String: {Ticket}
+Original String: 15%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 20%    Output String: {Bonus %}
+Original String: 7%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 10%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 6%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 15%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 9%    Output String: {Bonus %}
+Original String: 10%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 30%    Output String: {Bonus %}
+Original String: 20%    Output String: {Bonus %}
+Original String: 13%    Output String: {Bonus %}
+Original String: 24%    Output String: {Bonus %}
+Original String: 18%    Output String: {Bonus %}
+Original String: 10%    Output String: {Bonus %}
+Original String: 21%    Output String: {Bonus %}
+Original String: 28%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 31%    Output String: {Bonus %}
+Original String: 23%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 31%    Output String: {Bonus %}
+Original String: 12%    Output String: {Bonus %}
+Original String: 34%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 30%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 5%    Output String: {Bonus %}
+Original String: 32%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 12%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 5%    Output String: {Bonus %}
+Original String: 20%    Output String: {Bonus %}
+Original String: 0%    Output String: {Bonus %}
+Original String: 20%    Output String: {Bonus %}
 -------------------------------------------------------------
-Ticket: {Ticket}
+Bonus %: {Bonus %}
 -------------------------------------------------------------
-Original String: 7.25   Output String: {Fare}
-Original String: 71.2833   Output String: 7{{Pclass}}.{{Parch}}833
-Original String: 7.925   Output String: {Fare}
-Original String: 53.1   Output String: 53.{{Pclass}}
-Original String: 8.05   Output String: 8.{Survived}{{Survived}}
-Original String: 8.4583   Output String: 8.458{Pclass}
-Original String: 51.8625   Output String: 5{Pclass}.8625
-Original String: 21.075   Output String: 2{Parch}.{{Parch}}75
-Original String: 11.1333   Output String: {Survived}{Survived}.{Survived}{{Parch}}{{Parch}}{{Parch}}
-Original String: 30.0708   Output String: 3{Parch}.{Parch}7{Parch}8
-Original String: 16.7   Output String: {{SibSp}}6.7
-Original String: 26.55   Output String: {Fare}
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 31.275   Output String: {Pclass}{SibSp}.27{Parch}
-Original String: 7.8542   Output String: {Fare}
-Original String: 16.0   Output String: {{SibSp}}.{SibSp}
-Original String: 29.125   Output String: 29.{Parch}25
-Original String: 13.0   Output String: {Survived}3.{SibSp}
-Original String: 18.0   Output String: {SibSp}8.{{SibSp}}
-Original String: 7.225   Output String: {Fare}
-Original String: 26.0   Output String: {Pclass}6.{Survived}
-Original String: 13.0   Output String: {Survived}3.{SibSp}
-Original String: 8.0292   Output String: 8.{SibSp}292
-Original String: 35.5   Output String: {Fare}
-Original String: 21.075   Output String: 2{Parch}.{{Parch}}75
-Original String: 31.3875   Output String: {Pclass}{{SibSp}}.{Pclass}87{Parch}
-Original String: 7.225   Output String: {Fare}
-Original String: 263.0   Output String: {Parch}6{SibSp}.{{{Parch}}}
-Original String: 7.8792   Output String: {Fare}
-Original String: 7.8958   Output String: {Fare}
-Original String: 27.7208   Output String: 27.72{{Pclass}}8
-Original String: 146.5208   Output String: {{Pclass}}46.52{Parch}8
-Original String: 7.75   Output String: {Fare}
-Original String: 10.5   Output String: 1{Survived}.5
-Original String: 82.1708   Output String: 82.{Pclass}7{{Pclass}}8
-Original String: 52.0   Output String: 52.{{Pclass}}
-Original String: 7.2292   Output String: {Fare}
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 18.0   Output String: 18.{Survived}
-Original String: 11.2417   Output String: {{SibSp}}{{SibSp}}.24{{SibSp}}7
-Original String: 9.475   Output String: {Fare}
-Original String: 21.0   Output String: {Pclass}{SibSp}.{{SibSp}}
-Original String: 7.8958   Output String: {Fare}
-Original String: 41.5792   Output String: 4{{SibSp}}.579{{Parch}}
-Original String: 7.8792   Output String: {Fare}
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 15.5   Output String: {SibSp}5.5
-Original String: 7.75   Output String: {Fare}
-Original String: 21.6792   Output String: {SibSp}1.679{SibSp}
-Original String: 17.8   Output String: {SibSp}7.8
-Original String: 39.6875   Output String: {Pclass}9.6875
-Original String: 7.8   Output String: {Fare}
-Original String: 76.7292   Output String: {Fare}
-Original String: 26.0   Output String: {Pclass}6.{Parch}
-Original String: 61.9792   Output String: 6{Pclass}.9792
-Original String: 35.5   Output String: {Fare}
-Original String: 10.5   Output String: {Survived}{SibSp}.5
-Original String: 7.2292   Output String: {Fare}
-Original String: 27.75   Output String: {{Parch}}7.75
-Original String: 46.9   Output String: {Fare}
-Original String: 7.2292   Output String: {Fare}
-Original String: 80.0   Output String: 8{SibSp}.{SibSp}
-Original String: 83.475   Output String: {Fare}
-Original String: 27.9   Output String: {Parch}7.9
-Original String: 27.7208   Output String: 27.72{{Pclass}}8
-Original String: 15.2458   Output String: {{SibSp}}5.2458
-Original String: 10.5   Output String: {Survived}{SibSp}.5
-Original String: 8.1583   Output String: 8.158{Pclass}
-Original String: 7.925   Output String: 7.9{Parch}5
-Original String: 8.6625   Output String: 8.66{SibSp}5
-Original String: 10.5   Output String: 1{Survived}.5
-Original String: 46.9   Output String: {Fare}
-Original String: 73.5   Output String: {{Survived}}.5
-Original String: 14.4542   Output String: {SibSp}4.4542
-Original String: 56.4958   Output String: {Fare}
-Original String: 7.65   Output String: {Fare}
-Original String: 7.8958   Output String: {Fare}
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 29.0   Output String: {{Parch}}9.{SibSp}
-Original String: 12.475   Output String: {Survived}2.475
-Original String: 9.0   Output String: 9.{Survived}
-Original String: 9.5   Output String: {Fare}
-Original String: 7.7875   Output String: {Fare}
-Original String: 47.1   Output String: 47.{Pclass}
-Original String: 10.5   Output String: {Survived}{SibSp}.5
-Original String: 15.85   Output String: {Survived}5.85
-Original String: 34.375   Output String: {Pclass}4.{Pclass}75
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 263.0   Output String: {Parch}6{SibSp}.0
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 7.8542   Output String: {Fare}
-Original String: 61.175   Output String: 6{Pclass}.{Pclass}75
-Original String: 20.575   Output String: {Parch}{{SibSp}}.575
-Original String: 7.25   Output String: {Fare}
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 34.6542   Output String: {Fare}
-Original String: 63.3583   Output String: {Fare}
-Original String: 23.0   Output String: {Pclass}3.{SibSp}
-Original String: 26.0   Output String: {Pclass}6.{{SibSp}}
-Original String: 7.8958   Output String: {Fare}
-Original String: 7.8958   Output String: {Fare}
-Original String: 77.2875   Output String: {Fare}
-Original String: 8.6542   Output String: {Fare}
-Original String: 7.925   Output String: 7.9{SibSp}5
-Original String: 7.8958   Output String: {Fare}
-Original String: 7.65   Output String: {Fare}
-Original String: 7.775   Output String: {Fare}
-Original String: 7.8958   Output String: {Fare}
-Original String: 24.15   Output String: 24.{{SibSp}}5
-Original String: 52.0   Output String: 52.{{Pclass}}
-Original String: 14.4542   Output String: {SibSp}4.4542
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 9.825   Output String: {Fare}
-Original String: 14.4583   Output String: 14.458{Pclass}
-Original String: 7.925   Output String: {Fare}
-Original String: 7.75   Output String: {Fare}
-Original String: 21.0   Output String: {Pclass}{SibSp}.{{SibSp}}
-Original String: 247.5208   Output String: 247.52{{Pclass}}8
-Original String: 31.275   Output String: {{Parch}}1.{Parch}75
-Original String: 73.5   Output String: {Fare}
-Original String: 8.05   Output String: 8.{Survived}5
-Original String: 30.0708   Output String: 3{{SibSp}}.{{SibSp}}7{{SibSp}}8
-Original String: 13.0   Output String: {Survived}3.{SibSp}
-Original String: 77.2875   Output String: {Fare}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: Brazil   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: Brazil   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: Brazil   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: Brazil   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: Brazil   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
+Original String: United States   Output String: {Country}
 -------------------------------------------------------------
-Fare: {Fare}
+Country: {Country}
 -------------------------------------------------------------
-Original String: C85   Output String: {Cabin}
-Original String: C123   Output String: C{{Pclass}}23
-Original String: E46   Output String: {Cabin}
-Original String: G6   Output String: {Cabin}
-Original String: C103   Output String: C{{Pclass}}{SibSp}3
-Original String: D56   Output String: {Cabin}
-Original String: A6   Output String: {Cabin}
-Original String: C23 C25 C27   Output String: C{Parch}{SibSp} C{Parch}5 C{Parch}7
-Original String: B78   Output String: {Cabin}
-Original String: D33   Output String: {Cabin}
-Original String: B30   Output String: B3{{Pclass}}
-Original String: C52   Output String: {Cabin}
-Original String: B28   Output String: {Cabin}
-Original String: C83   Output String: {Cabin}
-Original String: F33   Output String: {Cabin}
-Original String: F G73   Output String: F G7{Pclass}
-Original String: C23 C25 C27   Output String: C{Parch}{SibSp} C{Parch}5 C{Parch}7
-Original String: E31   Output String: E3{Pclass}
-Original String: A5   Output String: {Cabin}
-Original String: D10 D12   Output String: D{{Pclass}}{SibSp} D{{Pclass}}2
-Original String: D26   Output String: {Cabin}
-Original String: C110   Output String: C{Pclass}{Pclass}{{Pclass}}
-Original String: B58 B60   Output String: B58 B6{{Pclass}}
-Original String: E101   Output String: E{Survived}{SibSp}{Survived}
-Original String: D26   Output String: {Cabin}
-Original String: F E69   Output String: {Cabin}
-Original String: D47   Output String: {Cabin}
-Original String: C123   Output String: C{Pclass}23
-Original String: B86   Output String: {Cabin}
-Original String: F2   Output String: F{{Parch}}
-Original String: C2   Output String: {Cabin}
-Original String: E33   Output String: {Cabin}
-Original String: B19   Output String: B{Pclass}9
-Original String: A7   Output String: {Cabin}
-Original String: C49   Output String: {Cabin}
-Original String: F4   Output String: {Cabin}
-Original String: A32   Output String: {Cabin}
-Original String: F2   Output String: F{Pclass}
-Original String: B4   Output String: {Cabin}
-Original String: B80   Output String: B8{SibSp}
-Original String: G6   Output String: {Cabin}
-Original String: A31   Output String: A3{{Pclass}}
-Original String: D36   Output String: {Cabin}
-Original String: D15   Output String: D{{Pclass}}5
-Original String: C93   Output String: {Cabin}
-Original String: C83   Output String: {Cabin}
-Original String: C78   Output String: {Cabin}
-Original String: D35   Output String: {Cabin}
-Original String: G6   Output String: {Cabin}
-Original String: C87   Output String: {Cabin}
-Original String: B77   Output String: {Cabin}
-Original String: E67   Output String: {Cabin}
-Original String: B94   Output String: {Cabin}
-Original String: C125   Output String: C{{Pclass}}25
-Original String: C99   Output String: {Cabin}
-Original String: C118   Output String: {Embarked}{Pclass}{Pclass}8
-Original String: D7   Output String: {Cabin}
-Original String: A19   Output String: A{Pclass}9
-Original String: B49   Output String: {Cabin}
-Original String: D   Output String: {Cabin}
-Original String: C22 C26   Output String: C{Parch}{Parch} C{Parch}6
-Original String: C106   Output String: C{{Pclass}}{SibSp}6
-Original String: B58 B60   Output String: B58 B6{SibSp}
-Original String: E101   Output String: E{Survived}{SibSp}{Survived}
-Original String: C22 C26   Output String: C{Parch}{Parch} C{Parch}6
-Original String: C65   Output String: {Cabin}
-Original String: E36   Output String: {Cabin}
-Original String: C54   Output String: {Cabin}
-Original String: B57 B59 B63 B66   Output String: {Cabin}
-Original String: C7   Output String: {Cabin}
-Original String: E34   Output String: {Cabin}
+Original String: Seattle   Output String: {City}
+Original String: Chongqing   Output String: {City}
+Original String: Chicago   Output String: {City}
+Original String: Chicago   Output String: {City}
+Original String: Phoenix   Output String: {City}
+Original String: Chongqing   Output String: {City}
+Original String: Phoenix   Output String: {City}
+Original String: Miami   Output String: {City}
+Original String: Austin   Output String: {City}
+Original String: Chicago   Output String: {City}
+Original String: Miami   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Austin   Output String: {City}
+Original String: Shanghai   Output String: {City}
+Original String: Austin   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Phoenix   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Columbus   Output String: {City}
+Original String: Chongqing   Output String: {City}
+Original String: Manaus   Output String: {City}
+Original String: Miami   Output String: {City}
+Original String: Rio de Janerio   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Chongqing   Output String: {City}
+Original String: Columbus   Output String: {City}
+Original String: Rio de Janerio   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Beijing   Output String: {City}
+Original String: Beijing   Output String: {City}
+Original String: Columbus   Output String: {City}
+Original String: Manaus   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Chongqing   Output String: {City}
+Original String: Chicago   Output String: {City}
+Original String: Austin   Output String: {City}
+Original String: Chengdu   Output String: {City}
+Original String: Phoenix   Output String: {City}
+Original String: Miami   Output String: {City}
+Original String: Manaus   Output String: {City}
+Original String: Chengdu   Output String: {City}
+Original String: Austin   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Shanghai   Output String: {City}
+Original String: Phoenix   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Austin   Output String: {City}
+Original String: Seattle   Output String: {City}
+Original String: Phoenix   Output String: {City}
+Original String: Seattle   Output String: {City}
 -------------------------------------------------------------
-Cabin: {Cabin}
+City: {City}
 -------------------------------------------------------------
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: Q   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: Q   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: Q   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: Q   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: Q   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: S   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: C   Output String: {Embarked}
-Original String: Q   Output String: {Embarked}
+Original String: 2021-10-16   Output String: {Exit Date}
+Original String: 2021-05-20   Output String: {Exit Date}
+Original String: 2020-03-09   Output String: {Exit Date}
+Original String: 2017-07-16   Output String: {Exit Date}
+Original String: 2020-07-08   Output String: {Exit Date}
+Original String: 2021-06-24   Output String: {Exit Date}
+Original String: 2014-01-22   Output String: {Exit Date}
+Original String: 2021-09-26   Output String: {Exit Date}
+Original String: 2014-03-27   Output String: {Exit Date}
+Original String: 2017-10-08   Output String: {Exit Date}
+Original String: 2020-12-21   Output String: {Exit Date}
+Original String: 2019-12-22   Output String: {Exit Date}
+Original String: 2018-10-12   Output String: {Exit Date}
+Original String: 2021-05-01   Output String: {Exit Date}
+Original String: 2013-12-13   Output String: {Exit Date}
+Original String: 2017-09-25   Output String: {Exit Date}
+Original String: 2010-01-15   Output String: {Exit Date}
+Original String: 2013-06-05   Output String: {Exit Date}
+Original String: 2020-07-17   Output String: {Exit Date}
+Original String: 2020-09-25   Output String: {Exit Date}
+Original String: 2008-06-17   Output String: {Exit Date}
+Original String: 2021-11-10   Output String: {Exit Date}
+Original String: 2020-10-03   Output String: {Exit Date}
+Original String: 2021-07-27   Output String: {Exit Date}
+Original String: 2005-04-14   Output String: {Exit Date}
+Original String: 2020-04-24   Output String: {Exit Date}
+Original String: 2016-10-03   Output String: {Exit Date}
+Original String: 1998-10-11   Output String: {Exit Date}
+Original String: 2003-01-02   Output String: {Exit Date}
+Original String: 2007-08-16   Output String: {Exit Date}
+Original String: 2019-12-11   Output String: {Exit Date}
+Original String: 2019-08-04   Output String: {Exit Date}
+Original String: 2011-12-26   Output String: {Exit Date}
+Original String: 2015-08-08   Output String: {Exit Date}
+Original String: 2020-07-12   Output String: {Exit Date}
+Original String: 2004-05-15   Output String: {Exit Date}
+Original String: 2017-08-11   Output String: {Exit Date}
+Original String: 2022-04-11   Output String: {Exit Date}
+Original String: 2015-11-30   Output String: {Exit Date}
+Original String: 2022-05-18   Output String: {Exit Date}
+Original String: 2021-05-18   Output String: {Exit Date}
+Original String: 2022-04-10   Output String: {Exit Date}
+Original String: 2021-01-07   Output String: {Exit Date}
+Original String: 2019-05-09   Output String: {Exit Date}
+Original String: 2017-09-22   Output String: {Exit Date}
+Original String: 2021-02-02   Output String: {Exit Date}
+Original String: 2015-06-09   Output String: {Exit Date}
+Original String: 2022-06-20   Output String: {Exit Date}
+Original String: 2021-03-08   Output String: {Exit Date}
+Original String: 1994-12-18   Output String: {Exit Date}
 -------------------------------------------------------------
-Embarked: {Embarked}
+Exit Date: {Exit Date}
+-------------------------------------------------------------
+Original String: E02387Emily Davis   Output String: {EEID}{Full Name}
+Original String: E04105Theodore Dinh   Output String: {EEID}{Full Name}
+Original String: E02572Luna Sanders   Output String: {EEID}{Full Name}
+Original String: E02832Penelope Jordan   Output String: {EEID}{Full Name}
+Original String: E01639Austin Vo   Output String: {EEID}{Full Name}
+Original String: E00644Joshua Gupta   Output String: {EEID}{Full Name}
+Original String: E01550Ruby Barnes   Output String: {EEID}{Full Name}
+Original String: E04332Luke Martin   Output String: {EEID}{Full Name}
+Original String: E04533Easton Bailey   Output String: {EEID}{Full Name}
+Original String: E03838Madeline Walker   Output String: {EEID}{Full Name}
+Original String: E00591Savannah Ali   Output String: {EEID}{Full Name}
+Original String: E03344Camila Rogers   Output String: {EEID}{Full Name}
+Original String: E00530Eli Jones   Output String: {EEID}{Full Name}
+Original String: E04239Everleigh Ng   Output String: {EEID}{Full Name}
+Original String: E03496Robert Yang   Output String: {EEID}{Full Name}
+Original String: E00549Isabella Xi   Output String: {EEID}{Full Name}
+Original String: E00163Bella Powell   Output String: {EEID}{Full Name}
+Original String: E00884Camila Silva   Output String: {EEID}{Full Name}
+Original String: E04116David Barnes   Output String: {EEID}{Full Name}
+Original String: E04625Adam Dang   Output String: {EEID}{Full Name}
+Original String: E03680Elias Alvarado   Output String: {EEID}{Full Name}
+Original String: E04732Eva Rivera   Output String: {EEID}{Full Name}
+Original String: E03484Logan Rivera   Output String: {EEID}{Full Name}
+Original String: E00671Leonardo Dixon   Output String: {EEID}{Full Name}
+Original String: E02071Mateo Her   Output String: {EEID}{Full Name}
+Original String: E02206Jose Henderson   Output String: {EEID}{Full Name}
+Original String: E04545Abigail Mejia   Output String: {EEID}{Full Name}
+Original String: E00154Wyatt Chin   Output String: {EEID}{Full Name}
+Original String: E03343Carson Lu   Output String: {EEID}{Full Name}
+Original String: E00304Dylan Choi   Output String: {EEID}{Full Name}
+Original String: E02594Ezekiel Kumar   Output String: {EEID}{Full Name}
+Original String: E00402Dominic Guzman   Output String: {EEID}{Full Name}
+Original String: E01994Angel Powell   Output String: {EEID}{Full Name}
+Original String: E03549Mateo Vu   Output String: {EEID}{Full Name}
+Original String: E03247Caroline Jenkins   Output String: {EEID}{Full Name}
+Original String: E02074Nora Brown   Output String: {EEID}{Full Name}
+Original String: E04152Adeline Huang   Output String: {EEID}{Full Name}
+Original String: E01628Jackson Perry   Output String: {EEID}{Full Name}
+Original String: E04285Riley Padilla   Output String: {EEID}{Full Name}
+Original String: E01417Leah Pena   Output String: {EEID}{Full Name}
+Original String: E01754Owen Lam   Output String: {EEID}{Full Name}
+Original String: E03749Kennedy Foster   Output String: {EEID}{Full Name}
+Original String: E03574John Moore   Output String: {EEID}{Full Name}
+Original String: E04600William Vu   Output String: {EEID}{Full Name}
+Original String: E00586Sadie Washington   Output String: {EEID}{Full Name}
+Original String: E03538Gabriel Holmes   Output String: {EEID}{Full Name}
+Original String: E02185Wyatt Rojas   Output String: {EEID}{Full Name}
+Original String: E03830Eva Coleman   Output String: {EEID}{Full Name}
+Original String: E03720Dominic Clark   Output String: {EEID}{Full Name}
+Original String: E03025Lucy Alexander   Output String: {EEID}{Full Name}
+-------------------------------------------------------------
+EEID, Full Name: {EEID}{Full Name}
 -------------------------------------------------------------

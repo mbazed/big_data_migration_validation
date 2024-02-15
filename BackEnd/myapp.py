@@ -251,6 +251,11 @@ def findKeys():
     print("[^] returning response...")    
     # print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
     return jsonify({  'source-columns':sourceColumns.split(','),'target-columns':targetColumns.split(','), 'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
+
+
+def combine_columns(row,col_list):
+    return ''.join(str(row[col.strip()]) for col in col_list)
+
 @app.route('/mapData', methods=['POST'])
 def mapData():
     connectionsList=[]
@@ -268,6 +273,27 @@ def mapData():
     record = DataRecord.query.filter_by(request_id=request_id).first()
     sourcedata = json_to_df(record.source_data)
     targetdata= json_to_df(record.target_data)
+    
+    
+    srcpkList = sourcePrimaryKey.strip().split(',')
+    tarpkList = targetPrimaryKey.strip().split(',')
+    
+    if len(srcpkList) > 1:
+        print("composite pk for src")
+        sourcedata[sourcePrimaryKey]= sourcedata.apply(combine_columns,args=(srcpkList,), axis=1)
+        record.source_data= sourcedata.to_json()
+    if len(tarpkList) > 1:
+        print("composite pk for tar")
+        targetdata[targetPrimaryKey]= targetdata.apply(combine_columns,args=(tarpkList,), axis=1)
+        record.target_data=targetdata.to_json()
+        
+    print("[⌄] Data map request received...")
+    print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
+    
+    
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
+
     
     
     print("[⌄] Data map request received...")
