@@ -138,3 +138,4 @@ app.*.symbols
 BackEnd/instance/data.db
 *.txt
 *.db
+BackEnd/mappingLog.txt
