@@ -26,6 +26,7 @@ def generate_target_data(row, patterns):
 
 def rowByRowCompare(sourceRow, targetRow, primaryKey):
     outputString = ""
+    nullErrorString = ""
     errorCount = 0
 
     for column, sourceValue in sourceRow.items():
@@ -43,6 +44,9 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
                     outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
                     outputString += f"Expected: {sourceValue}\n"
                     outputString += f"Found: {targetValue}\n"
+                    nullErrorString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
+                    nullErrorString += f"Expected: {sourceValue}\n"
+                    nullErrorString += f"Found: {targetValue}\n"
 
             # Check for non-null values
             elif str(sourceValue) != str(targetValue):
@@ -62,6 +66,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     logging.info(f"dividedCompare: primary_key used - {primary_key}")
 
     outputString = []  
+    missingRows = []
+    duplicateRows = []
 
     if source_df.shape[0] == target_df.shape[0]:
         for _, srcRow in source_df.iterrows():
@@ -78,6 +84,7 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
                     outputString.append(result)
             else:
                 outputString.append(f">> Primary key {primary_key_value} not found in target_df")
+                outputString.append(srcRow)
             
         errorCount = ''.join(outputString).count(">>")
         errornos=[f"Total errors found: {errorCount}\n"]
@@ -86,8 +93,13 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
 
     elif source_df.shape[0] < target_df.shape[0]:
-        outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nTarget DataFrame contains duplicate values.")
+        outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
+        duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
+        print(duplicateRows)  # Collect duplicate rows
     else:
-        outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nValues are missing in the target DataFrame.")
+        outputString.append(f"\nValues are missing in the target DataFrame.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
+        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
+        print(missingRows)
+        outputString.append("\nMissing Rows:\n" + missingRows.to_string(index=False))  
 
     return ''.join(outputString)
