@@ -1,7 +1,8 @@
 import pandas as pd
+import numpy as np
 import logging
-from collections import Counter
-from myapp import *
+import concurrent.futures
+# from myapp import *
 from readSouce import *
 import time
 
@@ -9,7 +10,6 @@ import time
 # logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Global variables
-
 mappingDoc = {}  # Initialize mappingDoc as an empty dictionary
 
 def substitute_pattern(pattern, row):
@@ -50,47 +50,55 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
                 outputString += f"Expected: {sourceValue}\n"
                 outputString += f"Found: {targetValue}\n"
 
-    # logging.info(f"rowByRowCompare: primaryKey - {primaryKey}, sourceRow - {sourceRow}, targetRow - {targetRow}, outputString - {outputString}")
     return outputString
 
-def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
+def process_rows_dynamic(chunk, source_df, target_df, mappingDoc, primary_key):
+    local_output_string = []
+    for _, srcRow in chunk.iterrows():
+        transformed_source_row = generate_target_data(srcRow, mappingDoc)
+        primary_key_value = transformed_source_row[primary_key]
+
+        # Convert primary_key_value to the data type of target_df[primary_key].values
+        primary_key_value = target_df[primary_key].values.dtype.type(primary_key_value)
+
+        if primary_key_value in target_df[primary_key].values:
+            target_row = target_df[target_df[primary_key] == primary_key_value]
+            result = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
+            if result:
+                local_output_string.append(result)
+        else:
+            local_output_string.append(f">> Primary key {primary_key_value} not found in target_df")
+            local_output_string.append(srcRow)
+
+    return local_output_string
+
+def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
     source_df = sourceData
     target_df = targetData
-    
-    outputString = []  
+    # logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
+    # logging.info(f"dividedCompare: primary_key used - {primary_key}")
+
+    outputString = []
+    missingRows = []
+    duplicateRows = []
 
     start_time = time.time()
 
     if source_df.shape[0] == target_df.shape[0]:
-        for _, srcRow in source_df.iterrows():
-            transformed_source_row = generate_target_data(srcRow, mappingDoc)
-            primary_key_value = transformed_source_row[primary_key]
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            chunks = np.array_split(source_df, executor._max_workers)  # Split DataFrame into chunks
+            results = executor.map(lambda chunk: process_rows_dynamic(chunk, source_df, target_df, mappingDoc, primary_key), chunks)
 
-            # Convert primary_key_value to the data type of target_df[primary_key].values
-            primary_key_value = target_df[primary_key].values.dtype.type(primary_key_value)
+            for result in results:
+                outputString.extend(result)
 
-            if primary_key_value in target_df[primary_key].values:
-                target_row = target_df[target_df[primary_key] == primary_key_value]
-                result = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
-                if result:
-                    outputString.append(result)
-            else:
-                outputString.append(f">> Primary key {primary_key_value} not found in target_df")
-            
         errorCount = ''.join(outputString).count(">>")
-        errornos=[f"Total errors found: {errorCount}\n"]
+        errornos = [f"Total errors found: {errorCount}\n"]
         errornos.extend(outputString)
-        outputString=errornos
-        # logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
+        outputString = errornos
 
     elif source_df.shape[0] < target_df.shape[0]:
-<<<<<<< Updated upstream
-        outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nTarget DataFrame contains duplicate values.")
-    else:
-        outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nValues are missing in the target DataFrame.")
-
-=======
         outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
         duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
         # print(duplicateRows)  # Collect duplicate rows
@@ -103,5 +111,4 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
     print(processing_time)
->>>>>>> Stashed changes
     return ''.join(outputString)
