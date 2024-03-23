@@ -15,6 +15,7 @@ from dbconncomplete import *
 # from comonPk import *
 from commonCompositePk import get_two_keys
 from validation3 import *
+from validationThreading import *
 import uuid  # for generating unique request IDs
 
 app = Flask(__name__)
@@ -349,7 +350,12 @@ def validateData():
     
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
+        print("Rows:",sourcedata.shape[0])
+        print("Normal Processing time:")
         resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        print("Multi Processing time:")
+        resultString =dividedCompareParallel(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        
     except Exception as e:
     # Print the exception message
         

@@ -1,3 +1,4 @@
+import threading
 import pandas as pd
 import numpy as np
 import logging
@@ -10,7 +11,10 @@ import time
 # logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Global variables
-mappingDoc = {}  # Initialize mappingDoc as an empty dictionary
+mappingDoc = {}
+num_threads = 4
+
+global_ErrorString = [[] for _ in range(num_threads)]
 
 def substitute_pattern(pattern, row):
     for key, value in row.items():
@@ -52,7 +56,7 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
 
     return outputString
 
-def process_rows_dynamic(chunk, source_df, target_df, mappingDoc, primary_key):
+def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key,thread_id):
     local_output_string = []
     for _, srcRow in chunk.iterrows():
         transformed_source_row = generate_target_data(srcRow, mappingDoc)
@@ -69,8 +73,8 @@ def process_rows_dynamic(chunk, source_df, target_df, mappingDoc, primary_key):
         else:
             local_output_string.append(f">> Primary key {primary_key_value} not found in target_df")
             local_output_string.append(srcRow)
-
-    return local_output_string
+    # print(thread_id)
+    global_ErrorString[thread_id]= local_output_string
 
 def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
@@ -83,16 +87,26 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
     missingRows = []
     duplicateRows = []
 
+    # Create and start multiple threads
+    threads = []
+
     start_time = time.time()
 
     if source_df.shape[0] == target_df.shape[0]:
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            chunks = np.array_split(source_df, executor._max_workers)  # Split DataFrame into chunks
-            results = executor.map(lambda chunk: process_rows_dynamic(chunk, source_df, target_df, mappingDoc, primary_key), chunks)
+        
+        for i in range(num_threads):
+            chunk_size = source_df.shape[0] // num_threads
+            source_df_chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
+            thread = threading.Thread(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key,i))
+            thread.start()
+            threads.append(thread)
 
-            for result in results:
-                outputString.extend(result)
-
+# Wait for all threads to complete
+        # for thread in threads:
+        #     thread.join()
+        
+        for i in range(num_threads):
+            outputString.extend(global_ErrorString[i])
         errorCount = ''.join(outputString).count(">>")
         errornos = [f"Total errors found: {errorCount}\n"]
         errornos.extend(outputString)
