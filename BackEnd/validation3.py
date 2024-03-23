@@ -1,10 +1,9 @@
 import pandas as pd
-
-
 import logging
 from collections import Counter
 from myapp import *
 from readSouce import *
+import time
 
 # Configure the logging settings with a specific format
 # logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -62,12 +61,12 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
     source_df = sourceData
     target_df = targetData
-    # logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
-    # logging.info(f"dividedCompare: primary_key used - {primary_key}")
-
+    
     outputString = []  
     missingRows = []
     duplicateRows = []
+
+    start_time = time.time()
 
     if source_df.shape[0] == target_df.shape[0]:
         for _, srcRow in source_df.iterrows():
@@ -101,5 +100,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
         # print(missingRows)
         outputString.append("\nMissing Rows:\n" + missingRows.to_string(index=False))  
-
+    
+    end_time = time.time()  # Measure end time
+    processing_time = end_time - start_time
+    print(processing_time)
     return ''.join(outputString)
