@@ -12,7 +12,7 @@ import pandas as pd
 from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
-# from comonPk import *
+from comonPk import *
 from commonCompositePk import get_two_keys
 from validation3 import *
 import uuid  # for generating unique request IDs
@@ -404,4 +404,5 @@ def create_pdf(content, pdf_path):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=4564, debug=True)
+    app.run(host='127.0.0.1', port=80, debug=True)
+    # 4564
