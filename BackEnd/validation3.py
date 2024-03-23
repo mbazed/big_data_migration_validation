@@ -7,7 +7,7 @@ from myapp import *
 from readSouce import *
 
 # Configure the logging settings with a specific format
-logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Global variables
 
@@ -62,8 +62,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
     source_df = sourceData
     target_df = targetData
-    logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
-    logging.info(f"dividedCompare: primary_key used - {primary_key}")
+    # logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
+    # logging.info(f"dividedCompare: primary_key used - {primary_key}")
 
     outputString = []  
     missingRows = []
@@ -90,16 +90,16 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         errornos=[f"Total errors found: {errorCount}\n"]
         errornos.extend(outputString)
         outputString=errornos
-        logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
+        # logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
 
     elif source_df.shape[0] < target_df.shape[0]:
         outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
         duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
-        print(duplicateRows)  # Collect duplicate rows
+        # print(duplicateRows)  # Collect duplicate rows
     else:
         outputString.append(f"\nValues are missing in the target DataFrame.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
         missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
-        print(missingRows)
+        # print(missingRows)
         outputString.append("\nMissing Rows:\n" + missingRows.to_string(index=False))  
 
     return ''.join(outputString)
