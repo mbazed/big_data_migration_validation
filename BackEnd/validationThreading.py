@@ -1,20 +1,12 @@
-import threading
+import multiprocessing
+from multiprocessing import Manager
 import pandas as pd
 import numpy as np
-import logging
-import concurrent.futures
-# from myapp import *
-from readSouce import *
 import time
-
-# Configure the logging settings with a specific format
-# logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Global variables
 mappingDoc = {}
-num_threads = 4
 
-global_ErrorString = [[] for _ in range(num_threads)]
 
 def substitute_pattern(pattern, row):
     for key, value in row.items():
@@ -29,6 +21,7 @@ def generate_target_data(row, patterns):
 
 def rowByRowCompare(sourceRow, targetRow, primaryKey):
     outputString = ""
+    nullErrorString = ""
     errorCount = 0
 
     for column, sourceValue in sourceRow.items():
@@ -36,16 +29,15 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
             targetValue = targetRow[column] if column in targetRow.index else None
 
             # Check for null values
-            if pd.isnull(sourceValue) or sourceValue == '' or str(sourceValue).strip() == '':
-                if (pd.isnull(sourceValue) or sourceValue == '' or str(sourceValue).strip() == '') and \
-                   (pd.isnull(targetValue) or targetValue == '' or str(targetValue).strip() == ''):
+            if(pd.isnull(targetValue) or targetValue == '' or str(targetValue).strip() == ''):
+                if (pd.isnull(sourceValue) or sourceValue == '' or str(sourceValue).strip() == ''):
                     # Both values are null
                     continue
                 else:
                     errorCount += 1
-                    outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
-                    outputString += f"Expected: {sourceValue}\n"
-                    outputString += f"Found: {targetValue}\n"
+                    nullErrorString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
+                    nullErrorString += f"Expected: {sourceValue}\n"
+                    nullErrorString += f"Found: {targetValue}\n"
 
             # Check for non-null values
             elif str(sourceValue) != str(targetValue):
@@ -53,11 +45,12 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
                 outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
                 outputString += f"Expected: {sourceValue}\n"
                 outputString += f"Found: {targetValue}\n"
+    # print(outputString)  # Printing here
+    return outputString, nullErrorString
 
-    return outputString
-
-def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key,thread_id):
-    local_output_string = []
+def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key, queue):
+    local_output_string = []  # Local list to store errors
+    local_null_error_string = []  # Local list to store null errors
     for _, srcRow in chunk.iterrows():
         transformed_source_row = generate_target_data(srcRow, mappingDoc)
         primary_key_value = transformed_source_row[primary_key]
@@ -67,46 +60,53 @@ def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key,thread_id):
 
         if primary_key_value in target_df[primary_key].values:
             target_row = target_df[target_df[primary_key] == primary_key_value]
-            result = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
+            result, null_error = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
             if result:
-                local_output_string.append(result)
+                local_output_string.append(result)  # Append errors to local list
+            if null_error:
+                local_null_error_string.append(null_error)  # Append null errors to local list
         else:
             local_output_string.append(f">> Primary key {primary_key_value} not found in target_df")
             local_output_string.append(srcRow)
-    # print(thread_id)
-    global_ErrorString[thread_id]= local_output_string
 
-def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key):
+    queue.put((local_output_string, local_null_error_string))  # Put local lists in the queue
+
+def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key, num_processes):
     mappingDoc = mappingDoc_input
     source_df = sourceData
     target_df = targetData
-    # logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
-    # logging.info(f"dividedCompare: primary_key used - {primary_key}")
+    num_process = num_processes  
 
     outputString = []
     missingRows = []
     duplicateRows = []
 
-    # Create and start multiple threads
-    threads = []
+    # Create a multiprocessing Manager to manage the queue
+    manager = Manager()
+    queue = manager.Queue()
+
+    # Create and start multiple processes
+    processes = []
 
     start_time = time.time()
 
     if source_df.shape[0] == target_df.shape[0]:
-        
-        for i in range(num_threads):
-            chunk_size = source_df.shape[0] // num_threads
+        for i in range(num_processes):
+            chunk_size = source_df.shape[0] // num_processes
             source_df_chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
-            thread = threading.Thread(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key,i))
-            thread.start()
-            threads.append(thread)
+            process = multiprocessing.Process(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key, queue))
+            process.start()
+            processes.append(process)
 
-# Wait for all threads to complete
-        # for thread in threads:
-        #     thread.join()
-        
-        for i in range(num_threads):
-            outputString.extend(global_ErrorString[i])
+        for process in processes:
+            process.join()
+
+        # Collect errors from the queue
+        while not queue.empty():
+            local_output_string, local_null_error_string = queue.get()
+            outputString.extend(local_output_string) 
+            outputString.extend(local_null_error_string)
+
         errorCount = ''.join(outputString).count(">>")
         errornos = [f"Total errors found: {errorCount}\n"]
         errornos.extend(outputString)
@@ -121,8 +121,9 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
         missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
         # print(missingRows)
         outputString.append("\nMissing Rows:\n" + missingRows.to_string(index=False))  
-    
+
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
+
     print(processing_time)
     return ''.join(outputString)
