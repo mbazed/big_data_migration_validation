@@ -351,10 +351,11 @@ def validateData():
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
         print("Rows:",sourcedata.shape[0])
-        print("Normal Processing time:")
-        resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
-        print("Multi Processing time:")
-        resultString =dividedCompareParallel(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        # print("Normal Processing time:")
+        # resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        for i in range(10,15):
+            print(i,end=" :")
+            resultString =dividedCompareParallel(sourcedata,targetdata,mapingDoc,targetPrimaryKey,i)
         
     except Exception as e:
     # Print the exception message

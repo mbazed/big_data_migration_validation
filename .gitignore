@@ -139,3 +139,4 @@ BackEnd/instance/data.db
 *.txt
 *.db
 BackEnd/mappingLog.txt
+BackEnd/Data/scedule.xlsx

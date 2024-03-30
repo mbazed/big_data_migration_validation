@@ -116,5 +116,5 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         "nullErrorString": nullErrorString
     }
   
-    print(result_json)
+    # print(result_json)
     return json.dumps(result_json)  # Return the JSON object
