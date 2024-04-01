@@ -12,9 +12,10 @@ import pandas as pd
 from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
-# from comonPk import *
+from comonPk import *
 from commonCompositePk import get_two_keys
 from validation3 import *
+from cryptography.fernet import Fernet
 import uuid  # for generating unique request IDs
 
 app = Flask(__name__)
@@ -26,6 +27,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
 class DataRecord(db.Model):
     id = Column(Integer, primary_key=True)
     request_id = Column(String, unique=True)
@@ -35,7 +39,13 @@ class DataRecord(db.Model):
     target_primary_key = Column(String)
     mapping_document = Column(String)
     validation_document = Column(String)
-    
+def encrypt_data(data):
+    encrypted_data = cipher_suite.encrypt(data.encode())
+    return encrypted_data
+
+def decrypt_data(data):
+    decrypted_data = cipher_suite.decrypt(data.decode())
+    return decrypted_data
 
 # Create tables within the application context
 with app.app_context():
@@ -53,7 +63,7 @@ def get_data():
         if(source_type == 'File Mode'):
             source_file = request.files['sourceFile']
             sourcedata = read_file_content_df(source_file)
-            source_json = sourcedata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
         else:
             source_hostname = request.form.get('source_hostname')
             source_username = request.form.get('source_username')
@@ -61,12 +71,12 @@ def get_data():
             source_password = request.form.get('source_password')
             source_table = request.form.get('source_table')
             sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
-            source_json = sourcedata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
             
         if(target_type == 'File Mode'):
             target_file = request.files['targetFile']
             targetdata = read_file_content_df(target_file)
-            target_json = targetdata.to_json()
+            target_json = encrypt_data(targetdata.to_json())
         else:
             target_hostname = request.form.get('target_hostname')
             target_username = request.form.get('target_username')
@@ -74,12 +84,12 @@ def get_data():
             target_password = request.form.get('target_password')
             target_table = request.form.get('target_table')
             targetdata = gbtodf(target_type,target_hostname,target_username,target_password,target_database,target_table)
-            target_json = targetdata.to_json()
+            target_json = encrypt_data(targetdata.to_json())
             
         record = DataRecord(
                 request_id=request_id,
-                source_data=source_json,
-                target_data=target_json,
+                source_data=decrypt_data(source_json),
+                target_data=decrypt_data(target_json),
            
             )
         db.session.add(record)
@@ -115,14 +125,14 @@ def get_from_db():
         try:
             sourcedata = gbtodf(source_database_type,source_hostname,source_username,source_password,source_database,source_table)
             targetdata = gbtodf(target_database_type,target_hostname,target_username,target_password,target_database,target_table)
-            source_json = sourcedata.to_json()
-            target_json = targetdata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
+            target_json = encrypt_data(targetdata.to_json())
 
         # Store data in the database with the associated request ID
             record = DataRecord(
                 request_id=request_id,
-                source_data=source_json,
-                target_data=target_json,
+                source_data=decrypt_data(source_json),
+                target_data=decrypt_data(target_json),
            
                 )
             db.session.add(record)
@@ -166,14 +176,14 @@ def upload_files():
             targetdata = read_file_content_df(target_file)
 
         # Convert DataFrames to JSON strings for storage
-            source_json = sourcedata.to_json()
-            target_json = targetdata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
+            target_json = encrypt_data(targetdata.to_json())
 
         # Store data in the database with the associated request ID
             record = DataRecord(
                 request_id=request_id,
-                source_data=source_json,
-                target_data=target_json,
+                source_data=decrypt_data(source_json),
+                target_data=decrypt_data(target_json),
            
             )
             db.session.add(record)
@@ -379,11 +389,11 @@ def download_report():
     data = record.mapping_document + record.validation_document
 
     # If the documents are already JSON strings, no need to load and dump them again
-    formatted_content = data
+    formatted_content = encrypt_data(data)
     
     # Create a PDF file
     pdf_path = f'{request_id}_output.pdf'
-    create_pdf(formatted_content, pdf_path)
+    create_pdf(decrypt_data(formatted_content), pdf_path)
 
     # Send the PDF file to the client
     response = send_file(pdf_path, as_attachment=True)
@@ -405,3 +415,4 @@ def create_pdf(content, pdf_path):
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=4564, debug=True)
+    
