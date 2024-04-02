@@ -178,7 +178,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     print(inputRuleString);
     print("+++++++++++++");
     Map<String, String> rules = createRuleDictionary(inputRuleString);
-    rules[item] = value;
+    rules[item.trim()] = value;
 
     // Update the inputRuleString by joining the rules back
     setState(() {
@@ -394,6 +394,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         validateUrl,
         body: {
           'request_id': requestID,
+          'mappingDoc': inputRuleString,
         },
       );
 
