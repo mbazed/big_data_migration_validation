@@ -108,8 +108,10 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
 
         for i in range(num_processes):
             chunk_size = source_df.shape[0] // num_processes
-            source_df_chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
-            process = multiprocessing.Process(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key, output_queue, null_error_queue))
+            start_index = i * chunk_size
+            end_index = (i + 1) * chunk_size if i < num_processes - 1 else source_df.shape[0]
+            source_df_chunk = source_df[start_index:end_index ]
+            process = multiprocessing.Process(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key, queue))
             process.start()
             processes.append(process)
 

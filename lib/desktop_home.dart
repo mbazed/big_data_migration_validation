@@ -79,6 +79,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   List<String> responseLines = [];
   int lineNumber = 0;
   String inputRuleString = '';
+  String inputRuleString2 = '';
 
   String fileName = 'No file selected';
   // Use your _list here
@@ -166,6 +167,24 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       lineNumber = 0;
       inputRuleString = '';
       fileName = 'No file selected';
+    });
+  }
+
+// Define the inline function to update the inputRuleString
+  void updateInputRuleString(String item, String value) {
+    // Update the inputRuleString based on the changed text field value
+    // Assuming inputRuleString contains key-value pairs separated by '\n'
+    print("+++++++++++++");
+    print(inputRuleString);
+    print("+++++++++++++");
+    Map<String, String> rules = createRuleDictionary(inputRuleString);
+    rules[item.trim()] = value;
+
+    // Update the inputRuleString by joining the rules back
+    setState(() {
+      inputRuleString = rules.entries
+          .map((entry) => '${entry.key}: ${entry.value}')
+          .join('\n');
     });
   }
 
@@ -375,6 +394,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         validateUrl,
         body: {
           'request_id': requestID,
+          'mappingDoc': inputRuleString,
         },
       );
 
@@ -1812,6 +1832,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                             0.1 *
                                             max(sourceColumnList.length,
                                                 targetColumnList.length),
+                                    onTextFieldValueChanged: (item, value) {
+                                      // Update inputRuleString when a text field value changes
+                                      updateInputRuleString(item, value);
+                                    },
                                   )
                                 : Container(
                                     alignment: Alignment.center,
