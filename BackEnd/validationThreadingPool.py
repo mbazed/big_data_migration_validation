@@ -4,7 +4,7 @@ from multiprocessing import Pool, Manager
 import json
 
 # Global variables
-num_processes = 10
+num_processes = 6
 
 def substitute_pattern(pattern, row):
     for key, value in row.items():

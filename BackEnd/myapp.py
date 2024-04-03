@@ -16,6 +16,7 @@ from dbconncomplete import *
 from commonCompositePk import get_two_keys
 from validation3 import *
 from validationThreading import *
+from validationThreadingPool import *
 import uuid  # for generating unique request IDs
 
 app = Flask(__name__)
@@ -341,7 +342,11 @@ def validateData():
     
     sourcedata = json_to_df(record.source_data)
     targetdata= json_to_df(record.target_data)
-    mapingDoc = json.loads(record.mapping_document)
+    mapingDoc = request.form.get('mappingDoc') #new
+    print(mapingDoc)
+    
+    mapingDoc = json.loads(record.mapping_document)  #old
+    print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
     
     print("[⌄] validation request received...")
@@ -351,11 +356,15 @@ def validateData():
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
         print("Rows:",sourcedata.shape[0])
-        # print("Normal Processing time:")
-        # resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
-        for i in range(10,15):
-            print(i,end=" :")
-            resultString =dividedCompareParallel(sourcedata,targetdata,mapingDoc,targetPrimaryKey,i)
+        if(sourcedata.shape[0]<9000):
+            print("single processing")
+            
+            resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        # for i in range(10,15):
+        #     print(i,end=" :")
+        else:
+            print("multiprocessing")
+            resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
         
     except Exception as e:
     # Print the exception message
