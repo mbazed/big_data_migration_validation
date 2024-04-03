@@ -1,13 +1,10 @@
-import multiprocessing
-from multiprocessing import Manager
 import pandas as pd
-import numpy as np
 import time
+from multiprocessing import Pool, Manager
 import json
 
 # Global variables
-mappingDoc = {}
-num_processes = 4
+num_processes = 10
 
 def substitute_pattern(pattern, row):
     for key, value in row.items():
@@ -48,7 +45,8 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
                 outputString += f"Found: {targetValue}\n"
     return outputString, nullErrorString
 
-def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key, output_queue, null_error_queue):
+def process_rows_dynamic(args):
+    chunk, target_df, mappingDoc, primary_key = args
     local_output_string = []  # Local list to store errors
     local_null_error_string = []  # Local list to store null errors
     for _, srcRow in chunk.iterrows():
@@ -67,28 +65,19 @@ def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key, output_queue
                 local_null_error_string.append(null_error)  # Append null errors to local list
         else:
             local_output_string.append(f">> Primary key {primary_key_value} not found in target_df")
-            local_output_string.append(srcRow)
+            local_output_string.append(str(srcRow))
 
-    output_queue.put(local_output_string)  # Put local error list in the output queue
-    null_error_queue.put(local_null_error_string)  # Put local null error list in the null error queue
+    return local_output_string, local_null_error_string
 
-def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key):
+def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
     source_df = sourceData
-    target_df = targetData 
+    target_df = targetData
 
     outputString = []
     mainNullErrorString = []
     missingRows = []
     duplicateRows = []
-
-    # Create a multiprocessing Manager to manage the queues
-    manager = Manager()
-    output_queue = manager.Queue()
-    null_error_queue = manager.Queue()
-
-    # Create and start multiple processes
-    processes = []
 
     start_time = time.time()
 
@@ -106,30 +95,26 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
             else:
                 outputString.append(f">> Column '{column}' not found in target DataFrame")
 
+        # Split the source data into chunks for multiprocessing
+        chunks = []
+        chunk_size = source_df.shape[0] // num_processes
         for i in range(num_processes):
-            chunk_size = source_df.shape[0] // num_processes
-            source_df_chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
-            process = multiprocessing.Process(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key, output_queue, null_error_queue))
-            process.start()
-            processes.append(process)
+            chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
+            chunks.append((chunk, target_df, mappingDoc, primary_key))
 
-        for process in processes:
-            process.join()
+        # Create a multiprocessing Manager to manage the results
+        # manager = Manager()
+        # output_queue = manager.Queue()
+        # null_error_queue = manager.Queue()
 
-        # Collect errors from the output queue
-        while not output_queue.empty():
-            local_output_string = output_queue.get()
-            outputString.extend(local_output_string) 
+        # Create a Pool of processes and map the function
+        with Pool(processes=num_processes) as pool:
+            results = pool.map(process_rows_dynamic, chunks)
 
-        # Collect null errors from the null error queue
-        while not null_error_queue.empty():
-            local_null_error_string = null_error_queue.get()
+        # Collect results
+        for local_output_string, local_null_error_string in results:
+            outputString.extend(local_output_string)
             mainNullErrorString.extend(local_null_error_string)
-
-        errorCount = ''.join(outputString).count(">>")
-        errornos = [f"Total errors found: {errorCount}\n"]
-        errornos.extend(outputString)
-        outputString = errornos
 
     elif source_df.shape[0] < target_df.shape[0]:
         outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
@@ -144,7 +129,7 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
             outputString.append("\nMissing Rows:\n" + json.dumps(missingRows))
         else:
             outputString.append("\nNo Missing Rows Found")
-    
+
     end_time = time.time()
     processing_time = end_time - start_time
     print(processing_time)

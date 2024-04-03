@@ -65,6 +65,27 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     start_time = time.time()
 
     if source_df.shape[0] == target_df.shape[0]:
+        # Compare data types of source and target DataFrames
+        data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
+        data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
+        # print(data_types_source)
+        # print(data_types_target)
+        mismatched_data_types = []
+
+        # Compare data types for each column
+        for column in data_types_source:
+            if column in data_types_target:
+                if data_types_source[column] != data_types_target[column]:
+                    mismatched_data_types.append(column)
+            else:
+                outputString.append(f">> Column '{column}' not found in target DataFrame")
+        
+        # Append mismatched data types to outputString
+        if mismatched_data_types:
+            outputString.append("Mismatched Data Types:")
+            for column in mismatched_data_types:
+                outputString.append(f"Column '{column}': Source type - {data_types_source[column]}, Target type - {data_types_target.get(column, 'Not found')}")
+
         for _, srcRow in source_df.iterrows():
             transformed_source_row = generate_target_data(srcRow, mappingDoc)
             primary_key_value = transformed_source_row[primary_key]
@@ -82,7 +103,7 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
             else:
                 outputString.append(f">> Primary key {primary_key_value} not found in target_df")
                 outputString.append(str(srcRow))  # Convert srcRow to string
-            
+       
         errorCount = ''.join(outputString).count(">>")
         errornos=[f"Total errors found: {errorCount}\n"]
         errornos.extend(outputString)
@@ -108,13 +129,15 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
     print(processing_time)
+    
 
     # Construct JSON object
     result_json = {
-        "missingRows": missingRows,
-        "outputString": ''.join(outputString),
-        "nullErrorString": nullErrorString
-    }
+    "missingRows": missingRows,
+    "mismatchedDataTypes": mismatched_data_types,
+    "nullErrorString": nullErrorString.split(">>"),  # Split by '>>' symbol
+    "outputString": ''.join(outputString)
+   }
+
   
-    print(result_json)
     return json.dumps(result_json)  # Return the JSON object
