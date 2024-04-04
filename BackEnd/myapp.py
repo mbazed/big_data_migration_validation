@@ -343,8 +343,20 @@ def validateData():
     sourcedata = json_to_df(record.source_data)
     targetdata= json_to_df(record.target_data)
     mapingDoc = request.form.get('mappingDoc') #new
-    print(mapingDoc)
     
+    # if mapingDoc:
+    #  try:
+    mappingDoc_strip = {k.strip(): v.strip() for k, v in (item.split(':') for item in mapingDoc.split('\n') if ':' in item)}
+    dictionary_format = {}
+    for key, value in mappingDoc_strip.items():
+        dictionary_format[key] = value.strip()
+    mapingDoc = dictionary_format
+    print(mapingDoc)
+    #  except ValueError:
+    #     print("Invalid mappingDoc format")
+    # else:
+    #   print("No mappingDoc provided")
+
     mapingDoc = json.loads(record.mapping_document)  #old
     print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
