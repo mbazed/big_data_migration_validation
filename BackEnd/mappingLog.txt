@@ -1,518 +1,1459 @@
-Original String: 1   Output String: {Index}
-Original String: 2   Output String: {Index}
-Original String: 3   Output String: {Index}
-Original String: 4   Output String: {Index}
-Original String: 5   Output String: {Index}
-Original String: 6   Output String: {Index}
-Original String: 7   Output String: {Index}
-Original String: 8   Output String: {Index}
-Original String: 9   Output String: {Index}
-Original String: 10   Output String: {Index}
-Original String: 11   Output String: {Index}
-Original String: 12   Output String: {Index}
-Original String: 13   Output String: {Index}
-Original String: 14   Output String: {Index}
-Original String: 15   Output String: {Index}
-Original String: 16   Output String: {Index}
-Original String: 17   Output String: {Index}
-Original String: 18   Output String: {Index}
-Original String: 19   Output String: {Index}
-Original String: 20   Output String: {Index}
-Original String: 21   Output String: {Index}
-Original String: 22   Output String: {Index}
-Original String: 23   Output String: {Index}
-Original String: 24   Output String: {Index}
-Original String: 25   Output String: {Index}
-Original String: 26   Output String: {Index}
-Original String: 27   Output String: {Index}
-Original String: 28   Output String: {Index}
-Original String: 29   Output String: {Index}
-Original String: 30   Output String: {Index}
-Original String: 31   Output String: {Index}
-Original String: 32   Output String: {Index}
-Original String: 33   Output String: {Index}
-Original String: 34   Output String: {Index}
-Original String: 35   Output String: {Index}
-Original String: 36   Output String: {Index}
-Original String: 37   Output String: {Index}
-Original String: 38   Output String: {Index}
-Original String: 39   Output String: {Index}
-Original String: 40   Output String: {Index}
-Original String: 41   Output String: {Index}
-Original String: 42   Output String: {Index}
-Original String: 43   Output String: {Index}
-Original String: 44   Output String: {Index}
-Original String: 45   Output String: {Index}
-Original String: 46   Output String: {Index}
-Original String: 47   Output String: {Index}
-Original String: 48   Output String: {Index}
-Original String: 49   Output String: {Index}
-Original String: 50   Output String: {Index}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Australia and Oceania   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: North America   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Central America and the Caribbean   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Australia and Oceania   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: North America   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Europe   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Sub-Saharan Africa   Output String: {Region}
+Original String: North America   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Asia   Output String: {Region}
+Original String: Middle East and North Africa   Output String: {Region}
+Original String: Europe   Output String: {Region}
 -------------------------------------------------------------
-Index: {Index}
+Region: {Region}
 -------------------------------------------------------------
-Original String: 8717bbf45cCDbEe   Output String: 87{Index}7bbf45cCDbEe
-Original String: 3d5AD30A4cD38ed   Output String: {User_id}
-Original String: 810Ce0F276Badec   Output String: {User_id}
-Original String: BF2a889C00f0cE1   Output String: {User_id}
-Original String: 9afFEafAe1CBBB9   Output String: {User_id}
-Original String: aF75e6dDEBC5b66   Output String: aF75e{Index}dDEBC5b{Index}{Index}
-Original String: efeb05c7Cc94EA3   Output String: efeb05c{Index}Cc94EA3
-Original String: fb1BF3FED57E9d7   Output String: {User_id}
-Original String: 421fAB9a3b98F30   Output String: 421fAB{Index}a3b{Index}8F30
-Original String: 4A42Fe10dB717CB   Output String: 4A42Fe{Index}dB717CB
-Original String: 44FAA9C3CE8DB2B   Output String: {User_id}
-Original String: 86cCc6417942b4B   Output String: {User_id}
-Original String: CDA21B6e83Cafe3   Output String: {User_id}
-Original String: 1CC30c5F204332e   Output String: {User_id}
-Original String: b4bE3BfBfeBC29e   Output String: {User_id}
-Original String: bFCFDdE5491caE8   Output String: {User_id}
-Original String: cEfCEAB1306DbCb   Output String: {User_id}
-Original String: aCefF56E59aAf75   Output String: {User_id}
-Original String: CF091D6b9Dd4F9c   Output String: {User_id}
-Original String: 462EF46dcaab6EC   Output String: {User_id}
-Original String: 7B247Ca7BbA098d   Output String: {User_id}
-Original String: dCdadA2bCcFFEAE   Output String: {User_id}
-Original String: d62fFce33bbccAC   Output String: {User_id}
-Original String: 3Cb9Fe3aB463dba   Output String: {User_id}
-Original String: be6BBa9EBFeBFcc   Output String: {User_id}
-Original String: a902eE5EABd77DE   Output String: {User_id}
-Original String: EEA3bcfe1c7aEAf   Output String: {User_id}
-Original String: 2Ab20Ed8CfE2D71   Output String: {User_id}
-Original String: EC9BCcb3ccEAdE9   Output String: {User_id}
-Original String: d6203591c7BEB4F   Output String: {User_id}
-Original String: f67cb59Eea96a23   Output String: {User_id}
-Original String: 94c6aF7DEe2Ad7A   Output String: {User_id}
-Original String: b1DC89E2d73F0b4   Output String: {User_id}
-Original String: FECAedB175FD9f4   Output String: {User_id}
-Original String: CB41aabFbB8AdDa   Output String: {User_id}
-Original String: BcdffBD402E5A23   Output String: {User_id}
-Original String: b00f07E8F6Ecf6e   Output String: {User_id}
-Original String: 8b8Aab259B2a00D   Output String: {User_id}
-Original String: D060A3eacFBFAEE   Output String: {User_id}
-Original String: DFAB00C01CcF860   Output String: {User_id}
-Original String: aDB35cb99a88358   Output String: {User_id}
-Original String: 0269CdeD7B3C8B0   Output String: {User_id}
-Original String: ddd2B9CcEBEe00E   Output String: {User_id}
-Original String: 355e6511Fa0ff55   Output String: {User_id}
-Original String: F2f91586dA8f7f5   Output String: {User_id}
-Original String: 99A502C175C4EBd   Output String: {User_id}
-Original String: eEF6Cf6C10b1446   Output String: {User_id}
-Original String: 3eD5c0dDBD0a7DC   Output String: {User_id}
-Original String: EbD7AF6EDF4831e   Output String: {User_id}
-Original String: afF3018e9cdd1dA   Output String: {User_id}
-Original String: CccE5DAb6E288e5   Output String: {User_id}
-Original String: DfBDc3621D4bcec   Output String: {User_id}
-Original String: f55b0A249f5E44D   Output String: {User_id}
-Original String: Ed71DcfaBFd0beE   Output String: {User_id}
-Original String: FDaFD0c3f5387EC   Output String: {User_id}
+Original String: Azerbaijan   Output String: {{index-key}}
+Original String: Panama   Output String: {Country}
+Original String: Sao Tome and Principe   Output String: {Country}
+Original String: Sao Tome and Principe   Output String: {Country}
+Original String: Belize   Output String: {Country}
+Original String: Denmark   Output String: {Country}
+Original String: Germany   Output String: {Country}
+Original String: Turkey   Output String: {Country}
+Original String: United Kingdom   Output String: {Country}
+Original String: Kazakhstan   Output String: {Country}
+Original String: Haiti   Output String: {Country}
+Original String: Italy   Output String: {Country}
+Original String: Malta   Output String: {Country}
+Original String: Jordan   Output String: {Country}
+Original String: Cambodia   Output String: {Country}
+Original String: Saint Kitts and Nevis    Output String: {Country}
+Original String: Cameroon   Output String: {Country}
+Original String: Bahrain   Output String: {Country}
+Original String: Solomon Islands   Output String: {Country}
+Original String: Monaco   Output String: {Country}
+Original String: Comoros   Output String: {Country}
+Original String: Iceland   Output String: {Country}
+Original String: Zambia   Output String: {Country}
+Original String: Egypt   Output String: {Country}
+Original String: Togo   Output String: {Country}
+Original String: Saudi Arabia   Output String: {Country}
+Original String: Morocco   Output String: {Country}
+Original String: Tunisia    Output String: {Country}
+Original String: Angola   Output String: {Country}
+Original String: Vietnam   Output String: {Country}
+Original String: Belarus   Output String: {Country}
+Original String: Myanmar   Output String: {Country}
+Original String: Lithuania   Output String: {Country}
+Original String: Switzerland   Output String: {Country}
+Original String: Antigua and Barbuda    Output String: {Country}
+Original String: Mongolia   Output String: {Country}
+Original String: Greenland   Output String: {Country}
+Original String: Eritrea   Output String: {Country}
+Original String: Lithuania   Output String: {Country}
+Original String: Saint Vincent and the Grenadines   Output String: {Country}
+Original String: Portugal   Output String: {Country}
+Original String: Somalia   Output String: {Country}
+Original String: Turkey   Output String: {Country}
+Original String: Israel   Output String: {Country}
+Original String: Dominica   Output String: {Country}
+Original String: Luxembourg   Output String: {Country}
+Original String: Switzerland   Output String: {Country}
+Original String: Singapore   Output String: {Country}
+Original String: Cyprus   Output String: {Country}
+Original String: Botswana   Output String: {Country}
+Original String: Belize   Output String: {Country}
+Original String: Malawi   Output String: {Country}
+Original String: Kyrgyzstan   Output String: {Country}
+Original String: Macedonia   Output String: {Country}
+Original String: Rwanda   Output String: {Country}
+Original String: Cape Verde   Output String: {Country}
+Original String: Pakistan   Output String: {Country}
+Original String: Kyrgyzstan   Output String: {Country}
+Original String: Eritrea   Output String: {Country}
+Original String: Israel   Output String: {Country}
+Original String: Libya   Output String: {Country}
+Original String: Bangladesh   Output String: {Country}
+Original String: Benin   Output String: {Country}
+Original String: Burundi   Output String: {Country}
+Original String: Malta   Output String: {Country}
+Original String: Saint Vincent and the Grenadines   Output String: {Country}
+Original String: China   Output String: {Country}
+Original String: Dominica   Output String: {Country}
+Original String: Albania   Output String: {Country}
+Original String: Luxembourg   Output String: {Country}
+Original String: Pakistan   Output String: {Country}
+Original String: Bulgaria   Output String: {Country}
+Original String: Egypt   Output String: {Country}
+Original String: Central African Republic   Output String: {Country}
+Original String: Benin   Output String: {Country}
+Original String: Turkey   Output String: {Country}
+Original String: Ukraine   Output String: {Country}
+Original String: Uganda   Output String: {Country}
+Original String: Ghana   Output String: {Country}
+Original String: Namibia   Output String: {Country}
+Original String: Republic of the Congo   Output String: {Country}
+Original String: Netherlands   Output String: {Country}
+Original String: Australia   Output String: {Country}
+Original String: Montenegro   Output String: {Country}
+Original String: Iraq   Output String: {Country}
+Original String: Cote d'Ivoire   Output String: {Country}
+Original String: Mexico   Output String: {Country}
+Original String: Slovakia   Output String: {Country}
+Original String: Bulgaria   Output String: {Country}
+Original String: Afghanistan   Output String: {Country}
+Original String: Indonesia   Output String: {Country}
+Original String: Italy   Output String: {Country}
+Original String: Ukraine   Output String: {Country}
+Original String: Thailand   Output String: {Country}
+Original String: Mali   Output String: {Country}
+Original String: Mexico   Output String: {Country}
+Original String: Lebanon   Output String: {Country}
+Original String: South Korea   Output String: {Country}
+Original String: United Arab Emirates   Output String: {Country}
+Original String: Georgia   Output String: {Country}
+Original String: Guinea-Bissau   Output String: {Country}
 -------------------------------------------------------------
-User_id: {User_id}
+Country: {Country}
 -------------------------------------------------------------
-Original String: Shelia   Output String: {Fname}
-Original String: Jo   Output String: {Fname}
-Original String: Sheryl   Output String: {Fname}
-Original String: Whitney   Output String: {Fname}
-Original String: Lindsey   Output String: {Fname}
-Original String: Sherry   Output String: {Fname}
-Original String: Ernest   Output String: {Fname}
-Original String: Doris   Output String: {Fname}
-Original String: Cheryl   Output String: {Fname}
-Original String: Harry   Output String: {Fname}
-Original String: Casey   Output String: {Fname}
-Original String: Sara   Output String: {Fname}
-Original String: Eddie   Output String: {Fname}
-Original String: Ralph   Output String: {Fname}
-Original String: Priscilla   Output String: {Fname}
-Original String: Carly   Output String: {Fname}
-Original String: Nicolas   Output String: {Fname}
-Original String: Natasha   Output String: {Fname}
-Original String: Courtney   Output String: {Fname}
-Original String: Perry   Output String: {Fname}
-Original String: Emily   Output String: {Fname}
-Original String: Meghan   Output String: {Fname}
-Original String: Ernest   Output String: {Fname}
-Original String: Norman   Output String: {Fname}
-Original String: Roger   Output String: {Fname}
-Original String: Ethan   Output String: {Fname}
-Original String: Catherine   Output String: {Fname}
-Original String: Catherine   Output String: {Fname}
-Original String: Corey   Output String: {Fname}
-Original String: Hunter   Output String: {Fname}
-Original String: Dakota   Output String: {Fname}
-Original String: Nathaniel   Output String: {Fname}
-Original String: Marco   Output String: {Fname}
-Original String: Todd   Output String: {Fname}
-Original String: Bryan   Output String: {Fname}
-Original String: Adrienne   Output String: {Fname}
-Original String: Seth   Output String: {Fname}
-Original String: Stefanie   Output String: {Fname}
-Original String: Kent   Output String: {Fname}
-Original String: Angela   Output String: {Fname}
-Original String: Harry   Output String: {Fname}
-Original String: Kristopher   Output String: {Fname}
-Original String: Rachael   Output String: {Fname}
-Original String: Vincent   Output String: {Fname}
-Original String: Don   Output String: {Fname}
-Original String: Olivia   Output String: {Fname}
-Original String: Erik   Output String: {Fname}
-Original String: Judith   Output String: {Fname}
-Original String: Chloe   Output String: {Fname}
-Original String: George   Output String: {Fname}
+Original String: Snacks   Output String: {Item Type}
+Original String: Cosmetics   Output String: {{index-key}}
+Original String: Fruits   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Clothes   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Snacks   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Vegetables   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Cosmetics   Output String: {Item Type}
+Original String: Cereal   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Office Supplies   Output String: {Item Type}
+Original String: Personal Care   Output String: {Item Type}
+Original String: Baby Food   Output String: {Item Type}
+Original String: Beverages   Output String: {Item Type}
+Original String: Meat   Output String: {Item Type}
+Original String: Household   Output String: {Item Type}
+Original String: Fruits   Output String: {Item Type}
 -------------------------------------------------------------
-Fname: {Fname}
+Item Type: {Item Type}
 -------------------------------------------------------------
-Original String: Mahoney   Output String: {Lname}
-Original String: Rivers   Output String: {Lname}
-Original String: Lowery   Output String: {Lname}
-Original String: Hooper   Output String: {Lname}
-Original String: Rice   Output String: {Lname}
-Original String: Caldwell   Output String: {Lname}
-Original String: Hoffman   Output String: {Lname}
-Original String: Andersen   Output String: {Lname}
-Original String: Mays   Output String: {Lname}
-Original String: Mitchell   Output String: {Lname}
-Original String: Ayala   Output String: {Lname}
-Original String: Huff   Output String: {Lname}
-Original String: Barnes   Output String: {Lname}
-Original String: Lowe   Output String: {Lname}
-Original String: Davis   Output String: {Lname}
-Original String: Abbott   Output String: {Lname}
-Original String: Mckinney   Output String: {Lname}
-Original String: Macias   Output String: {Lname}
-Original String: Jenkins   Output String: {Lname}
-Original String: Mcmahon   Output String: {Lname}
-Original String: Travis   Output String: {Lname}
-Original String: Hawkins   Output String: {Lname}
-Original String: Oconnell   Output String: {Lname}
-Original String: Walton   Output String: {Lname}
-Original String: Sweeney   Output String: {Lname}
-Original String: Wu   Output String: {Lname}
-Original String: Myers   Output String: {Lname}
-Original String: Nash   Output String: {Lname}
-Original String: Delgado   Output String: {Lname}
-Original String: Hahn   Output String: {Lname}
-Original String: Gomez   Output String: {Lname}
-Original String: Clarke   Output String: {Lname}
-Original String: Reyes   Output String: {Lname}
-Original String: Weber   Output String: {Lname}
-Original String: Vaughn   Output String: {Lname}
-Original String: Lambert   Output String: {Lname}
-Original String: Hess   Output String: {Lname}
-Original String: Sherman   Output String: {Lname}
-Original String: Velez   Output String: {Lname}
-Original String: Huff   Output String: {Lname}
-Original String: Moore   Output String: {Lname}
-Original String: Barnes   Output String: {Lname}
-Original String: Herrera   Output String: {Lname}
-Original String: Berger   Output String: {Lname}
-Original String: Bolton   Output String: {Lname}
-Original String: Duke   Output String: {Lname}
-Original String: Rosales   Output String: {Lname}
-Original String: Wall   Output String: {Lname}
-Original String: Ramirez   Output String: {Lname}
-Original String: Mercer   Output String: {Lname}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {{index-key}}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Online   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
+Original String: Offline   Output String: {Sales Channel}
 -------------------------------------------------------------
-Lname: {Lname}
+Sales Channel: {Sales Channel}
 -------------------------------------------------------------
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Male   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
-Original String: Female   Output String: {Sex}
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {{index-key}}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: L   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: H   Output String: {Order Priority}
+Original String: M   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
+Original String: C   Output String: {Order Priority}
 -------------------------------------------------------------
-Sex: {Sex}
+Order Priority: {Order Priority}
 -------------------------------------------------------------
-Original String: pwarner@example.org   Output String: {Email}
-Original String: fergusonkatherine@example.net   Output String: {Email}
-Original String: fhoward@example.org   Output String: {Email}
-Original String: zjohnston@example.com   Output String: {Email}
-Original String: elin@example.net   Output String: {Email}
-Original String: kaitlin13@example.net   Output String: {Email}
-Original String: jeffharvey@example.com   Output String: {Email}
-Original String: alicia33@example.org   Output String: {Email}
-Original String: jake50@example.com   Output String: {Email}
-Original String: lanechristina@example.net   Output String: {Email}
-Original String: ncantu@example.com   Output String: {Email}
-Original String: kristy41@example.net   Output String: {Email}
-Original String: brandy23@example.com   Output String: {Email}
-Original String: dleon@example.org   Output String: {Email}
-Original String: latasha46@example.org   Output String: {Email}
-Original String: stricklandomar@example.org   Output String: {Email}
-Original String: twilkinson@example.com   Output String: {Email}
-Original String: dorothymeza@example.com   Output String: {Email}
-Original String: estesana@example.org   Output String: {Email}
-Original String: allison66@example.net   Output String: {Email}
-Original String: jordankelley@example.com   Output String: {Email}
-Original String: ehatfield@example.com   Output String: {Email}
-Original String: lanedarius@example.com   Output String: {Email}
-Original String: samanthasummers@example.org   Output String: {Email}
-Original String: leblancjohnathan@example.org   Output String: {Email}
-Original String: jay82@example.net   Output String: {Email}
-Original String: sara05@example.org   Output String: {Email}
-Original String: nelsonlori@example.org   Output String: {Email}
-Original String: phillip27@example.net   Output String: {Email}
-Original String: jimsellers@example.com   Output String: {Email}
-Original String: jadecollier@example.com   Output String: {Email}
-Original String: george75@example.org   Output String: {Email}
-Original String: ramosjonathon@example.org   Output String: {Email}
-Original String: hessrachel@example.com   Output String: {Email}
-Original String: fhughes@example.org   Output String: {Email}
-Original String: marilyn91@example.org   Output String: {Email}
-Original String: ebranch@example.net   Output String: {Email}
-Original String: rickeykelley@example.com   Output String: {Email}
-Original String: hammonddestiny@example.org   Output String: {Email}
-Original String: anitamckenzie@example.net   Output String: {Email}
-Original String: debbieturner@example.net   Output String: {Email}
-Original String: frederick54@example.org   Output String: {Email}
-Original String: msummers@example.net   Output String: {Email}
-Original String: shannonrandy@example.org   Output String: {Email}
-Original String: kkey@example.net   Output String: {Email}
-Original String: diana26@example.net   Output String: {Email}
-Original String: alejandro41@example.net   Output String: {Email}
-Original String: marvinmolina@example.org   Output String: {Email}
-Original String: tblack@example.net   Output String: {Email}
-Original String: douglascontreras@example.net   Output String: {Email}
+Original String: 10/8/2014   Output String: {Order Date}
+Original String: 2/22/2015   Output String: {Order Date}
+Original String: 12/9/2015   Output String: {Order Date}
+Original String: 9/17/2014   Output String: {Order Date}
+Original String: 2/4/2010   Output String: {{index-key}}
+Original String: 2/20/2013   Output String: {Order Date}
+Original String: 3/31/2013   Output String: {Order Date}
+Original String: 3/26/2012   Output String: {Order Date}
+Original String: 12/29/2012   Output String: {Order Date}
+Original String: 9/11/2015   Output String: {Order Date}
+Original String: 12/27/2013   Output String: {Order Date}
+Original String: 12/17/2013   Output String: {Order Date}
+Original String: 3/10/2015   Output String: {Order Date}
+Original String: 7/9/2014   Output String: {Order Date}
+Original String: 6/14/2017   Output String: {Order Date}
+Original String: 8/10/2011   Output String: {Order Date}
+Original String: 12/18/2015   Output String: {Order Date}
+Original String: 6/26/2016   Output String: {Order Date}
+Original String: 5/11/2015   Output String: {Order Date}
+Original String: 1/13/2012   Output String: {Order Date}
+Original String: 8/10/2014   Output String: {Order Date}
+Original String: 4/22/2013   Output String: {Order Date}
+Original String: 7/26/2014   Output String: {Order Date}
+Original String: 7/14/2014   Output String: {Order Date}
+Original String: 6/1/2010   Output String: {Order Date}
+Original String: 11/4/2011   Output String: {Order Date}
+Original String: 5/15/2014   Output String: {Order Date}
+Original String: 10/28/2010   Output String: {Order Date}
+Original String: 4/1/2010   Output String: {Order Date}
+Original String: 5/22/2011   Output String: {Order Date}
+Original String: 1/20/2014   Output String: {Order Date}
+Original String: 5/5/2015   Output String: {Order Date}
+Original String: 5/25/2013   Output String: {Order Date}
+Original String: 3/26/2011   Output String: {Order Date}
+Original String: 11/30/2012   Output String: {Order Date}
+Original String: 3/23/2012   Output String: {Order Date}
+Original String: 7/30/2011   Output String: {Order Date}
+Original String: 8/30/2010   Output String: {Order Date}
+Original String: 3/28/2010   Output String: {Order Date}
+Original String: 12/1/2015   Output String: {Order Date}
+Original String: 8/26/2011   Output String: {Order Date}
+Original String: 7/17/2016   Output String: {Order Date}
+Original String: 11/20/2012   Output String: {Order Date}
+Original String: 7/23/2010   Output String: {Order Date}
+Original String: 11/29/2012   Output String: {Order Date}
+Original String: 1/7/2013   Output String: {Order Date}
+Original String: 7/31/2012   Output String: {Order Date}
+Original String: 8/1/2010   Output String: {Order Date}
+Original String: 8/25/2014   Output String: {Order Date}
+Original String: 7/11/2014   Output String: {Order Date}
+Original String: 3/7/2016   Output String: {Order Date}
+Original String: 4/15/2015   Output String: {Order Date}
+Original String: 2/24/2016   Output String: {Order Date}
+Original String: 10/11/2012   Output String: {Order Date}
+Original String: 5/28/2015   Output String: {Order Date}
+Original String: 5/19/2016   Output String: {Order Date}
+Original String: 9/14/2016   Output String: {Order Date}
+Original String: 8/24/2014   Output String: {Order Date}
+Original String: 2/11/2017   Output String: {Order Date}
+Original String: 2/27/2013   Output String: {Order Date}
+Original String: 8/9/2015   Output String: {Order Date}
+Original String: 11/3/2011   Output String: {Order Date}
+Original String: 1/11/2013   Output String: {Order Date}
+Original String: 6/25/2012   Output String: {Order Date}
+Original String: 2/21/2012   Output String: {Order Date}
+Original String: 3/23/2011   Output String: {Order Date}
+Original String: 1/4/2010   Output String: {Order Date}
+Original String: 8/23/2013   Output String: {Order Date}
+Original String: 3/5/2013   Output String: {Order Date}
+Original String: 2/2/2012   Output String: {Order Date}
+Original String: 12/3/2014   Output String: {Order Date}
+Original String: 12/6/2015   Output String: {Order Date}
+Original String: 6/5/2010   Output String: {Order Date}
+Original String: 9/21/2013   Output String: {Order Date}
+Original String: 11/28/2011   Output String: {Order Date}
+Original String: 1/22/2011   Output String: {Order Date}
+Original String: 10/3/2010   Output String: {Order Date}
+Original String: 6/3/2015   Output String: {Order Date}
+Original String: 5/27/2015   Output String: {Order Date}
+Original String: 6/19/2013   Output String: {Order Date}
+Original String: 6/14/2013   Output String: {Order Date}
+Original String: 6/20/2016   Output String: {Order Date}
+Original String: 2/14/2017   Output String: {Order Date}
+Original String: 11/14/2014   Output String: {Order Date}
+Original String: 3/27/2010   Output String: {Order Date}
+Original String: 2/27/2016   Output String: {Order Date}
+Original String: 5/12/2016   Output String: {Order Date}
+Original String: 7/24/2014   Output String: {Order Date}
+Original String: 7/16/2015   Output String: {Order Date}
+Original String: 10/11/2013   Output String: {Order Date}
+Original String: 5/28/2012   Output String: {Order Date}
+Original String: 10/30/2011   Output String: {Order Date}
+Original String: 7/4/2013   Output String: {Order Date}
+Original String: 3/11/2016   Output String: {Order Date}
+Original String: 2/14/2012   Output String: {Order Date}
+Original String: 7/14/2013   Output String: {Order Date}
+Original String: 1/2/2011   Output String: {Order Date}
+Original String: 2/13/2015   Output String: {Order Date}
+Original String: 10/19/2014   Output String: {Order Date}
+Original String: 5/24/2011   Output String: {Order Date}
+Original String: 11/23/2014   Output String: {Order Date}
 -------------------------------------------------------------
-Email: {Email}
+Order Date: {Order Date}
 -------------------------------------------------------------
-Original String: 857.139.8239   Output String: 857.{Index}39.8239
-Original String: -10395   Output String: {Phone Number}
-Original String: (599)782-0605   Output String: {Phone Number}
-Original String: -7326   Output String: {Phone Number}
-Original String: (390)417-1635x3010   Output String: (390)417-163{Index}x3010
-Original String: 8537800927   Output String: {Phone Number}
-Original String: 093.655.7480x7895   Output String: 093.655.{Index}480x{Index}895
-Original String: 4709522945   Output String: {Phone Number}
-Original String: 013.820.4758   Output String: {Phone Number}
-Original String: (560)903-5068x4985   Output String: {Phone Number}
-Original String: 8629884096   Output String: {Phone Number}
-Original String: +1-041-859-3844x272   Output String: {Phone Number}
-Original String: 801.809.9181x37308   Output String: {Phone Number}
-Original String: +1-511-127-6660x230   Output String: {Phone Number}
-Original String: 903.545.8947   Output String: {Phone Number}
-Original String: (416)979-0633x058   Output String: (4{Index})979-0633x058
-Original String: 244-054-8521x1913   Output String: {Phone Number}
-Original String: (929)366-8549x3587   Output String: {Phone Number}
-Original String: (973)243-9193   Output String: (973)243-9{Index}3
-Original String: 060-611-9377x90160   Output String: {Phone Number}
-Original String: 601.838.8295x89942   Output String: {Phone Number}
-Original String: 668.063.9568x7257   Output String: {Phone Number}
-Original String: -2715   Output String: {Phone Number}
-Original String: (590)187-8007x273   Output String: {Phone Number}
-Original String: -8153   Output String: {Phone Number}
-Original String: 972.064.3833x5347   Output String: {Phone Number}
-Original String: (614)275-6966x22597   Output String: (614){Index}5-6966x22597
-Original String: (322)679-7824   Output String: {Phone Number}
-Original String: 989.482.6130x996   Output String: {Phone Number}
-Original String: 975-190-7875x3293   Output String: {Phone Number}
-Original String: (291)853-7982x0123   Output String: {Phone Number}
-Original String: (984)863-5741x7054   Output String: {Phone Number}
-Original String: (977)846-8023   Output String: {Phone Number}
-Original String: 526-208-4712x10329   Output String: {Phone Number}
-Original String: 5642635347   Output String: 56426{Index}347
-Original String: 157.425.5345   Output String: {Phone Number}
-Original String: 600-706-8696x839   Output String: {Phone Number}
-Original String: 557-620-5663   Output String: {Phone Number}
-Original String: 000-364-9407x55677   Output String: {Phone Number}
-Original String: (116)776-0713x4684   Output String: {Phone Number}
-Original String: +1-932-606-8425x22206   Output String: {Phone Number}
-Original String: 341.096.2708x237   Output String: {Phone Number}
-Original String: +1-833-716-3269x028   Output String: {Phone Number}
-Original String: -5558   Output String: {Phone Number}
-Original String: 001-313-023-3603x2485   Output String: {Phone Number}
-Original String: 001-366-475-8607x04350   Output String: {Phone Number}
-Original String: (412)388-9715   Output String: {Phone Number}
-Original String: 353.983.3416   Output String: {Phone Number}
-Original String: 355-371-5885x826   Output String: {Phone Number}
-Original String: +1-326-669-0118x4341   Output String: {Phone Number}
-Original String: 001-859-448-9935x54536   Output String: {Phone Number}
-Original String: 001-274-739-8470x814   Output String: {Phone Number}
-Original String: 241.179.9509x498   Output String: {Phone Number}
-Original String: 207.797.8345x6177   Output String: {Phone Number}
-Original String: 001-599-042-7428x143   Output String: {Phone Number}
-Original String: 663-280-5834   Output String: {Phone Number}
-Original String: 258287997   Output String: {Phone Number}
+Original String: 10/23/2014   Output String: {Ship Date}
+Original String: 2/27/2015   Output String: {Ship Date}
+Original String: 1/18/2016   Output String: {Ship Date}
+Original String: 10/12/2014   Output String: {Ship Date}
+Original String: 3/5/2010   Output String: {Ship Date}
+Original String: 2/28/2013   Output String: {{index-key}}
+Original String: 5/3/2013   Output String: {Ship Date}
+Original String: 4/7/2012   Output String: {Ship Date}
+Original String: 1/15/2013   Output String: {Ship Date}
+Original String: 9/18/2015   Output String: {Ship Date}
+Original String: 1/1/2014   Output String: {Ship Date}
+Original String: 1/10/2014   Output String: {Ship Date}
+Original String: 4/17/2015   Output String: {Ship Date}
+Original String: 7/18/2014   Output String: {Ship Date}
+Original String: 6/29/2017   Output String: {Ship Date}
+Original String: 8/29/2011   Output String: {Ship Date}
+Original String: 2/6/2016   Output String: {Ship Date}
+Original String: 7/19/2016   Output String: {Ship Date}
+Original String: 5/30/2015   Output String: {Ship Date}
+Original String: 1/17/2012   Output String: {Ship Date}
+Original String: 8/20/2014   Output String: {Ship Date}
+Original String: 4/28/2013   Output String: {Ship Date}
+Original String: 8/20/2014   Output String: {Ship Date}
+Original String: 8/20/2014   Output String: {Ship Date}
+Original String: 6/28/2010   Output String: {Ship Date}
+Original String: 11/20/2011   Output String: {Ship Date}
+Original String: 6/26/2014   Output String: {Ship Date}
+Original String: 11/23/2010   Output String: {Ship Date}
+Original String: 4/8/2010   Output String: {Ship Date}
+Original String: 6/2/2011   Output String: {Ship Date}
+Original String: 2/15/2014   Output String: {Ship Date}
+Original String: 6/3/2015   Output String: {Ship Date}
+Original String: 6/4/2013   Output String: {Ship Date}
+Original String: 5/15/2011   Output String: {Ship Date}
+Original String: 1/6/2013   Output String: {Ship Date}
+Original String: 3/26/2012   Output String: {Ship Date}
+Original String: 9/12/2011   Output String: {Ship Date}
+Original String: 10/7/2010   Output String: {Ship Date}
+Original String: 4/28/2010   Output String: {Ship Date}
+Original String: 12/8/2015   Output String: {Ship Date}
+Original String: 9/8/2011   Output String: {Ship Date}
+Original String: 8/20/2016   Output String: {Ship Date}
+Original String: 12/7/2012   Output String: {Ship Date}
+Original String: 9/10/2010   Output String: {Ship Date}
+Original String: 12/28/2012   Output String: {Ship Date}
+Original String: 2/23/2013   Output String: {Ship Date}
+Original String: 8/1/2012   Output String: {Ship Date}
+Original String: 9/5/2010   Output String: {Ship Date}
+Original String: 10/13/2014   Output String: {Ship Date}
+Original String: 8/13/2014   Output String: {Ship Date}
+Original String: 4/21/2016   Output String: {Ship Date}
+Original String: 5/9/2015   Output String: {Ship Date}
+Original String: 3/23/2016   Output String: {Ship Date}
+Original String: 10/12/2012   Output String: {Ship Date}
+Original String: 5/29/2015   Output String: {Ship Date}
+Original String: 6/11/2016   Output String: {Ship Date}
+Original String: 10/11/2016   Output String: {Ship Date}
+Original String: 9/2/2014   Output String: {Ship Date}
+Original String: 3/14/2017   Output String: {Ship Date}
+Original String: 4/10/2013   Output String: {Ship Date}
+Original String: 8/11/2015   Output String: {Ship Date}
+Original String: 11/18/2011   Output String: {Ship Date}
+Original String: 2/22/2013   Output String: {Ship Date}
+Original String: 7/31/2012   Output String: {Ship Date}
+Original String: 3/4/2012   Output String: {Ship Date}
+Original String: 4/17/2011   Output String: {Ship Date}
+Original String: 2/14/2010   Output String: {Ship Date}
+Original String: 9/6/2013   Output String: {Ship Date}
+Original String: 3/20/2013   Output String: {Ship Date}
+Original String: 3/22/2012   Output String: {Ship Date}
+Original String: 1/8/2015   Output String: {Ship Date}
+Original String: 1/10/2016   Output String: {Ship Date}
+Original String: 6/22/2010   Output String: {Ship Date}
+Original String: 11/3/2013   Output String: {Ship Date}
+Original String: 1/2/2012   Output String: {Ship Date}
+Original String: 1/27/2011   Output String: {Ship Date}
+Original String: 10/31/2010   Output String: {Ship Date}
+Original String: 6/19/2015   Output String: {Ship Date}
+Original String: 7/12/2015   Output String: {Ship Date}
+Original String: 7/22/2013   Output String: {Ship Date}
+Original String: 6/17/2013   Output String: {Ship Date}
+Original String: 7/15/2016   Output String: {Ship Date}
+Original String: 3/13/2017   Output String: {Ship Date}
+Original String: 12/10/2014   Output String: {Ship Date}
+Original String: 3/30/2010   Output String: {Ship Date}
+Original String: 3/27/2016   Output String: {Ship Date}
+Original String: 6/16/2016   Output String: {Ship Date}
+Original String: 9/4/2014   Output String: {Ship Date}
+Original String: 8/20/2015   Output String: {Ship Date}
+Original String: 11/15/2013   Output String: {Ship Date}
+Original String: 6/25/2012   Output String: {Ship Date}
+Original String: 12/8/2011   Output String: {Ship Date}
+Original String: 7/8/2013   Output String: {Ship Date}
+Original String: 3/11/2016   Output String: {Order Date}
+Original String: 2/28/2012   Output String: {Ship Date}
+Original String: 8/8/2013   Output String: {Ship Date}
+Original String: 1/24/2011   Output String: {Ship Date}
+Original String: 3/18/2015   Output String: {Ship Date}
+Original String: 10/20/2014   Output String: {Ship Date}
+Original String: 5/31/2011   Output String: {Ship Date}
+Original String: 1/6/2015   Output String: {Ship Date}
+Original String: 7/14/2017   Output String: {Ship Date}
 -------------------------------------------------------------
-Phone_Number: {Phone Number}
+Ship Date: {Ship Date}
 -------------------------------------------------------------
-Original String: 1/27/2014   Output String: {Index}/27/20{Index}4
-Original String: 7/26/1931   Output String: 7/{Index}6/1931
-Original String: 11/25/2013   Output String: 11/25/201{Index}
-Original String: 11/17/2012   Output String: {Date Of Birth}
-Original String: 4/15/1923   Output String: 4/1{Index}/1923
-Original String: 8/6/1917   Output String: 8/{Index}/1917
-Original String: 12/22/1984   Output String: {Date Of Birth}
-Original String: 12/2/2016   Output String: {Date Of Birth}
-Original String: 12/16/2012   Output String: {Date Of Birth}
-Original String: 6/29/1953   Output String: {Date Of Birth}
-Original String: 4/17/2020   Output String: {Date Of Birth}
-Original String: 5/21/1964   Output String: {Date Of Birth}
-Original String: 2/27/1975   Output String: {Date Of Birth}
-Original String: 4/10/1938   Output String: {Date Of Birth}
-Original String: 3/16/2014   Output String: {Date Of Birth}
-Original String: 10/27/2007   Output String: {Date Of Birth}
-Original String: 7/4/1951   Output String: {Date Of Birth}
-Original String: 10/31/1971   Output String: {Date Of Birth}
-Original String: 1/20/1948   Output String: 1/20/{Index}48
-Original String: 11/24/2006   Output String: 11/24/{Index}06
-Original String: 11/19/1933   Output String: {Date Of Birth}
-Original String: 8/21/1974   Output String: {Date Of Birth}
-Original String: 6/9/1943   Output String: {Date Of Birth}
-Original String: 6/19/1973   Output String: {Date Of Birth}
-Original String: 9/9/2008   Output String: {Date Of Birth}
-Original String: 7/17/2018   Output String: {Date Of Birth}
-Original String: 8/22/2007   Output String: {Date Of Birth}
-Original String: 8/3/1949   Output String: {Date Of Birth}
-Original String: 6/5/2014   Output String: {Date Of Birth}
-Original String: 2/22/1943   Output String: {Date Of Birth}
-Original String: 11/26/1914   Output String: {Date Of Birth}
-Original String: 11/23/1910   Output String: {Date Of Birth}
-Original String: 7/28/1965   Output String: {Date Of Birth}
-Original String: 11/30/2019   Output String: {Date Of Birth}
-Original String: 4/18/1964   Output String: {Date Of Birth}
-Original String: 6/16/2019   Output String: {Date Of Birth}
-Original String: 2/21/1910   Output String: {Date Of Birth}
-Original String: 10/26/1966   Output String: {Date Of Birth}
-Original String: 5/23/2004   Output String: {Date Of Birth}
-Original String: 9/16/1922   Output String: {Date Of Birth}
-Original String: 7/19/1951   Output String: {Date Of Birth}
-Original String: 2/23/1950   Output String: {Date Of Birth}
-Original String: 5/4/1927   Output String: {Date Of Birth}
-Original String: 12/16/1907   Output String: {Date Of Birth}
-Original String: 12/28/1985   Output String: {Date Of Birth}
-Original String: 10/13/1934   Output String: {Date Of Birth}
-Original String: 5/6/2019   Output String: {Date Of Birth}
-Original String: 12/25/1985   Output String: {Date Of Birth}
-Original String: 7/28/1907   Output String: {Date Of Birth}
-Original String: 9/11/1941   Output String: {Date Of Birth}
-Original String: 11/23/1992   Output String: {Date Of Birth}
-Original String: 1/7/1915   Output String: {Date Of Birth}
-Original String: 7/1/1910   Output String: {Date Of Birth}
-Original String: 7/27/1982   Output String: {Date Of Birth}
-Original String: 1/6/1998   Output String: {Date Of Birth}
-Original String: 8/18/1975   Output String: {Date Of Birth}
-Original String: 4/14/1935   Output String: {Date Of Birth}
+Original String: 934   Output String: {Units Sold}
+Original String: 4551   Output String: {Units Sold}
+Original String: 9986   Output String: {Units Sold}
+Original String: 9118   Output String: {Units Sold}
+Original String: 5858   Output String: {Units Sold}
+Original String: 1149   Output String: {Units Sold}
+Original String: 7964   Output String: {{index-key}}
+Original String: 6307   Output String: {Units Sold}
+Original String: 8217   Output String: {Units Sold}
+Original String: 2758   Output String: {Units Sold}
+Original String: 1031   Output String: {Units Sold}
+Original String: 1165   Output String: {Units Sold}
+Original String: 3322   Output String: {Units Sold}
+Original String: 4693   Output String: {Units Sold}
+Original String: 4502   Output String: {Units Sold}
+Original String: 9004   Output String: {Units Sold}
+Original String: 6486   Output String: {Units Sold}
+Original String: 2264   Output String: {Units Sold}
+Original String: 3688   Output String: {Units Sold}
+Original String: 5137   Output String: {Units Sold}
+Original String: 3022   Output String: {Units Sold}
+Original String: 786   Output String: {Units Sold}
+Original String: 3902   Output String: {Units Sold}
+Original String: 4875   Output String: {Units Sold}
+Original String: 8242   Output String: {Units Sold}
+Original String: 5569   Output String: {Units Sold}
+Original String: 456   Output String: {Units Sold}
+Original String: 3532   Output String: {Units Sold}
+Original String: 7458   Output String: {Units Sold}
+Original String: 1927   Output String: {Units Sold}
+Original String: 8663   Output String: {Units Sold}
+Original String: 6420   Output String: {Units Sold}
+Original String: 5984   Output String: {Units Sold}
+Original String: 5173   Output String: {Units Sold}
+Original String: 3835   Output String: {Units Sold}
+Original String: 8851   Output String: {Units Sold}
+Original String: 9131   Output String: {Units Sold}
+Original String: 618   Output String: {Units Sold}
+Original String: 1285   Output String: {Units Sold}
+Original String: 6138   Output String: {Units Sold}
+Original String: 2212   Output String: {Units Sold}
+Original String: 3575   Output String: {Units Sold}
+Original String: 6326   Output String: {Units Sold}
+Original String: 3594   Output String: {Units Sold}
+Original String: 540   Output String: {Units Sold}
+Original String: 9357   Output String: {Units Sold}
+Original String: 4269   Output String: {Units Sold}
+Original String: 6530   Output String: {Units Sold}
+Original String: 9427   Output String: {Units Sold}
+Original String: 3276   Output String: {Units Sold}
+Original String: 428   Output String: {Units Sold}
+Original String: 260   Output String: {Units Sold}
+Original String: 4185   Output String: {Units Sold}
+Original String: 645   Output String: {Units Sold}
+Original String: 114   Output String: {Units Sold}
+Original String: 96   Output String: {Units Sold}
+Original String: 128   Output String: {Units Sold}
+Original String: 6777   Output String: {Units Sold}
+Original String: 8641   Output String: {Units Sold}
+Original String: 1351   Output String: {Units Sold}
+Original String: 2567   Output String: {Units Sold}
+Original String: 6982   Output String: {Units Sold}
+Original String: 1320   Output String: {Units Sold}
+Original String: 9336   Output String: {Units Sold}
+Original String: 6815   Output String: {Units Sold}
+Original String: 6575   Output String: {Units Sold}
+Original String: 3465   Output String: {Units Sold}
+Original String: 9365   Output String: {Units Sold}
+Original String: 8185   Output String: {Units Sold}
+Original String: 868   Output String: {Units Sold}
+Original String: 388   Output String: {Units Sold}
+Original String: 6750   Output String: {Units Sold}
+Original String: 1989   Output String: {Units Sold}
+Original String: 5173   Output String: {Units Sold}
+Original String: 7401   Output String: {Units Sold}
+Original String: 6803   Output String: {Units Sold}
+Original String: 3539   Output String: {Units Sold}
+Original String: 4803   Output String: {Units Sold}
+Original String: 9817   Output String: {Units Sold}
+Original String: 4837   Output String: {Units Sold}
+Original String: 8149   Output String: {Units Sold}
+Original String: 5070   Output String: {Units Sold}
+Original String: 2948   Output String: {Units Sold}
+Original String: 6165   Output String: {Units Sold}
+Original String: 1130   Output String: {Units Sold}
+Original String: 1286   Output String: {Units Sold}
+Original String: 2108   Output String: {Units Sold}
+Original String: 6098   Output String: {Units Sold}
+Original String: 7795   Output String: {Units Sold}
+Original String: 8765   Output String: {Units Sold}
+Original String: 2607   Output String: {Units Sold}
+Original String: 9951   Output String: {Units Sold}
+Original String: 3457   Output String: {Units Sold}
+Original String: 2819   Output String: {Units Sold}
+Original String: 9759   Output String: {Units Sold}
+Original String: 3034   Output String: {Units Sold}
+Original String: 3428   Output String: {Units Sold}
+Original String: 8759   Output String: {Units Sold}
+Original String: 8877   Output String: {Units Sold}
+Original String: 660   Output String: {Units Sold}
+Original String: 3020   Output String: {Units Sold}
 -------------------------------------------------------------
-Date_Of_Birth: {Date Of Birth}
+Units Sold: {Units Sold}
 -------------------------------------------------------------
-Original String: Probation officer   Output String: {Job Title}
-Original String: Dancer   Output String: {Job Title}
-Original String: Copy   Output String: {Job Title}
-Original String: Counselling psychologist   Output String: {Job Title}
-Original String: Biomedical engineer   Output String: {Job Title}
-Original String: Higher education lecturer   Output String: {Job Title}
-Original String: Health visitor   Output String: {Job Title}
-Original String: Air broker   Output String: {Job Title}
-Original String: Designer   Output String: Designer
-Original String: Insurance account manager   Output String: {Job Title}
-Original String: Scientist   Output String: Scientist
-Original String: Metallurgist   Output String: {Job Title}
-Original String: Dramatherapist   Output String: {Job Title}
-Original String: Presenter   Output String: Presenter
-Original String: Nurse   Output String: Nurse
-Original String: Therapeutic radiographer   Output String: {Job Title}
-Original String: Land   Output String: {Job Title}
-Original String: Recruitment consultant   Output String: {Job Title}
-Original String: Accounting technician   Output String: {Job Title}
-Original String: Education officer   Output String: Education officer
-Original String: Tax inspector   Output String: {Job Title}
-Original String: Engineer   Output String: Engineer
-Original String: Printmaker   Output String: {Job Title}
-Original String: Personnel officer   Output String: {Job Title}
-Original String: Race relations officer   Output String: {Job Title}
-Original String: Microbiologist   Output String: {Job Title}
-Original String: Industrial buyer   Output String: {Job Title}
-Original String: Production assistant   Output String: Production assistant
-Original String: Agricultural consultant   Output String: {Job Title}
-Original String: Chief Financial Officer   Output String: {Job Title}
-Original String: Insurance broker   Output String: {Job Title}
-Original String: Information systems manager   Output String: {Job Title}
-Original String: Psychologist   Output String: Psychologist
-Original String: Ergonomist   Output String: {Job Title}
-Original String: Sports therapist   Output String: {Job Title}
-Original String: Comptroller   Output String: {Job Title}
-Original String: Claims inspector/assessor   Output String: {Job Title}
-Original String: Hospital doctor   Output String: {Job Title}
-Original String: Investment banker   Output String: Investment banker
-Original String: Pilot   Output String: Pilot
-Original String: Insurance underwriter   Output String: {Job Title}
-Original String: Engineer   Output String: Engineer
-Original String: Armed forces technical officer   Output String: {Job Title}
-Original String: Psychologist   Output String: Psychologist
-Original String: Housing manager/officer   Output String: {Job Title}
-Original String: Dentist   Output String: {Job Title}
-Original String: Prison officer   Output String: {Job Title}
-Original String: Restaurant manager   Output String: {Job Title}
-Original String: Psychotherapist   Output String: Psychotherapist
-Original String: Human resources officer   Output String: {Job Title}
-Original String: Nurse   Output String: Nurse
-Original String: Seismic interpreter   Output String: {Job Title}
-Original String: Barrister   Output String: {Job Title}
-Original String: Engineer   Output String: Engineer
-Original String: Producer   Output String: Producer
-Original String: Therapist   Output String: Therapist
-Original String: Paediatric nurse   Output String: {Job Title}
-Original String: Production engineer   Output String: {Job Title}
-Original String: Accountant   Output String: Accountant
-Original String: Administrator   Output String: {Job Title}
-Original String: Data scientist   Output String: {Job Title}
-Original String: Occupational hygienist   Output String: {Job Title}
-Original String: Nurse   Output String: Nurse
-Original String: Art therapist   Output String: {Job Title}
-Original String: Academic librarian   Output String: {Job Title}
-Original String: Musician   Output String: {Job Title}
-Original String: Engineer   Output String: Engineer
-Original String: Journalist   Output String: Journalist
-Original String: Surgeon   Output String: {Job Title}
-Original String: Building surveyor   Output String: {Job Title}
-Original String: Engineer   Output String: Engineer
-Original String: Veterinary surgeon   Output String: {Job Title}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 9.33   Output String: {{index-key}}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 109.28   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 152.58   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 154.06   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 437.2   Output String: {Unit Price}
+Original String: 205.7   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 651.21   Output String: {Unit Price}
+Original String: 81.73   Output String: {Unit Price}
+Original String: 255.28   Output String: {Unit Price}
+Original String: 47.45   Output String: {Unit Price}
+Original String: 421.89   Output String: {Unit Price}
+Original String: 668.27   Output String: {Unit Price}
+Original String: 9.33   Output String: {Unit Price}
 -------------------------------------------------------------
-Job_Title: {Job Title}
+Unit Price: {Unit Price}
+-------------------------------------------------------------
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 97.44   Output String: {{index-key}}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 35.84   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 97.44   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 90.93   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 263.33   Output String: {Unit Cost}
+Original String: 117.11   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 524.96   Output String: {Unit Cost}
+Original String: 56.67   Output String: {Unit Cost}
+Original String: 159.42   Output String: {Unit Cost}
+Original String: 31.79   Output String: {Unit Cost}
+Original String: 364.69   Output String: {Unit Cost}
+Original String: 502.54   Output String: {Unit Cost}
+Original String: 6.92   Output String: {Unit Cost}
+-------------------------------------------------------------
+Unit Cost: {Unit Cost}
+-------------------------------------------------------------
+Original String: 142509.72   Output String: {{index-key}0}
+Original String: 1989697.2   Output String: {Total Revenue}
+Original String: 93169.38   Output String: {Total Revenue}
+Original String: 745214.14   Output String: {Total Revenue}
+Original String: 3914725.66   Output String: {Total Revenue}
+Original String: 125562.72   Output String: {Total Revenue}
+Original String: 3481860.8   Output String: {Total Revenue}
+Original String: 58844.31   Output String: {Total Revenue}
+Original String: 1253749.86   Output String: {Total Revenue}
+Original String: 1205797.6   Output String: {{index-key}}
+Original String: 450753.2   Output String: {Total Revenue}
+Original String: 127311.2   Output String: {Total Revenue}
+Original String: 2219992.94   Output String: {Total Revenue}
+Original String: 3136191.11   Output String: {Total Revenue}
+Original String: 693578.12   Output String: {Total Revenue}
+Original String: 5863494.84   Output String: {Total Revenue}
+Original String: 60514.38   Output String: {Total Revenue}
+Original String: 348791.84   Output String: {Total Revenue}
+Original String: 174995.6   Output String: {Total Revenue}
+Original String: 3345265.77   Output String: {Total Revenue}
+Original String: 143393.9   Output String: {Total Revenue}
+Original String: 331605.54   Output String: {Total Revenue}
+Original String: 1705954.4   Output String: {Total Revenue}
+Original String: 1002787.5   Output String: {Total Revenue}
+Original String: 900685.76   Output String: {Total Revenue}
+Original String: 857960.14   Output String: {Total Revenue}
+Original String: 70251.36   Output String: {Total Revenue}
+Original String: 2300073.72   Output String: {Total Revenue}
+Original String: 3260637.6   Output String: {Total Revenue}
+Original String: 396383.9   Output String: {Total Revenue}
+Original String: 3654833.07   Output String: {Total Revenue}
+Original String: 979563.6   Output String: {Total Revenue}
+Original String: 55830.72   Output String: {Total Revenue}
+Original String: 1320563.44   Output String: {Total Revenue}
+Original String: 978998.8   Output String: {Total Revenue}
+Original String: 3734148.39   Output String: {Total Revenue}
+Original String: 85192.23   Output String: {Total Revenue}
+Original String: 270189.6   Output String: {Total Revenue}
+Original String: 328034.8   Output String: {Total Revenue}
+Original String: 501658.74   Output String: {Total Revenue}
+Original String: 340780.72   Output String: {Total Revenue}
+Original String: 169633.75   Output String: {Total Revenue}
+Original String: 691305.28   Output String: {Total Revenue}
+Original String: 553691.64   Output String: {Total Revenue}
+Original String: 59011.2   Output String: {Total Revenue}
+Original String: 3947624.73   Output String: {Total Revenue}
+Original String: 1801048.41   Output String: {Total Revenue}
+Original String: 1666978.4   Output String: {Total Revenue}
+Original String: 1438371.66   Output String: {Total Revenue}
+Original String: 836297.28   Output String: {Total Revenue}
+Original String: 278717.88   Output String: {Total Revenue}
+Original String: 28412.8   Output String: {Total Revenue}
+Original String: 342040.05   Output String: {Total Revenue}
+Original String: 98414.1   Output String: {Total Revenue}
+Original String: 76182.78   Output String: {Total Revenue}
+Original String: 14647.68   Output String: {Total Revenue}
+Original String: 83354.88   Output String: {Total Revenue}
+Original String: 1730032.56   Output String: {Total Revenue}
+Original String: 706228.93   Output String: {Total Revenue}
+Original String: 879784.71   Output String: {Total Revenue}
+Original String: 1082991.63   Output String: {Total Revenue}
+Original String: 1065313.56   Output String: {Total Revenue}
+Original String: 203359.2   Output String: {Total Revenue}
+Original String: 1424486.88   Output String: {Total Revenue}
+Original String: 323371.75   Output String: {Total Revenue}
+Original String: 537374.75   Output String: {Total Revenue}
+Original String: 712750.5   Output String: {Total Revenue}
+Original String: 4094378.0   Output String: {Total Revenue}
+Original String: 1683654.5   Output String: {Total Revenue}
+Original String: 133724.08   Output String: {Total Revenue}
+Original String: 169633.6   Output String: {Total Revenue}
+Original String: 737640.0   Output String: {Total Revenue}
+Original String: 409137.3   Output String: {Total Revenue}
+Original String: 2182436.97   Output String: {Total Revenue}
+Original String: 4945866.27   Output String: {Total Revenue}
+Original String: 4546240.81   Output String: {Total Revenue}
+Original String: 33018.87   Output String: {Total Revenue}
+Original String: 2099871.6   Output String: {Total Revenue}
+Original String: 465816.65   Output String: {Total Revenue}
+Original String: 745188.22   Output String: {Total Revenue}
+Original String: 5445732.23   Output String: {Total Revenue}
+Original String: 2138982.3   Output String: {Total Revenue}
+Original String: 606403.6   Output String: {Total Revenue}
+Original String: 940655.7   Output String: {Total Revenue}
+Original String: 755145.1   Output String: {Total Revenue}
+Original String: 61020.7   Output String: {Total Revenue}
+Original String: 1372750.68   Output String: {Total Revenue}
+Original String: 939457.88   Output String: {Total Revenue}
+Original String: 5076181.95   Output String: {Total Revenue}
+Original String: 5707855.65   Output String: {Total Revenue}
+Original String: 536259.9   Output String: {Total Revenue}
+Original String: 4350577.2   Output String: {Total Revenue}
+Original String: 711104.9   Output String: {Total Revenue}
+Original String: 1835760.99   Output String: {Total Revenue}
+Original String: 6355158.39   Output String: {Total Revenue}
+Original String: 247968.82   Output String: {Total Revenue}
+Original String: 875099.84   Output String: {Total Revenue}
+Original String: 415614.55   Output String: {Total Revenue}
+Original String: 3745117.53   Output String: {Total Revenue}
+Original String: 441058.2   Output String: {Total Revenue}
+Original String: 28176.6   Output String: {Total Revenue}
+Original String: 292714.0   Output String: {Total Revenue}
+-------------------------------------------------------------
+Total Revenue: {Total Revenue}
+-------------------------------------------------------------
+Original String: 91008.96   Output String: {{index-key}{index-key}}
+Original String: 1198414.83   Output String: {Total Cost}
+Original String: 69103.12   Output String: {Total Cost}
+Original String: 516717.06   Output String: {Total Cost}
+Original String: 2943879.32   Output String: {Total Cost}
+Original String: 41180.16   Output String: {Total Cost}
+Original String: 2097160.12   Output String: {Total Cost}
+Original String: 43644.44   Output String: {Total Cost}
+Original String: 800664.48   Output String: {Total Cost}
+Original String: 726264.14   Output String: {Total Cost}
+Original String: 271493.23   Output String: {{index-key}}
+Original String: 41753.6   Output String: {Total Cost}
+Original String: 1669437.88   Output String: {Total Cost}
+Original String: 2358420.22   Output String: {Total Cost}
+Original String: 409366.86   Output String: {Total Cost}
+Original String: 4726739.84   Output String: {Total Cost}
+Original String: 44883.12   Output String: {Total Cost}
+Original String: 205865.52   Output String: {Total Cost}
+Original String: 117241.52   Output String: {Total Cost}
+Original String: 2696719.52   Output String: {Total Cost}
+Original String: 96069.38   Output String: {Total Cost}
+Original String: 286646.34   Output String: {Total Cost}
+Original String: 1027513.66   Output String: {Total Cost}
+Original String: 570911.25   Output String: {Total Cost}
+Original String: 295393.28   Output String: {Total Cost}
+Original String: 506389.17   Output String: {Total Cost}
+Original String: 41464.08   Output String: {Total Cost}
+Original String: 1854158.72   Output String: {Total Cost}
+Original String: 1963915.14   Output String: {Total Cost}
+Original String: 225670.97   Output String: {Total Cost}
+Original String: 3159309.47   Output String: {Total Cost}
+Original String: 625564.8   Output String: {Total Cost}
+Original String: 41409.28   Output String: {Total Cost}
+Original String: 824679.66   Output String: {Total Cost}
+Original String: 611375.7   Output String: {Total Cost}
+Original String: 3227871.19   Output String: {Total Cost}
+Original String: 63186.52   Output String: {Total Cost}
+Original String: 162737.94   Output String: {Total Cost}
+Original String: 204854.7   Output String: {Total Cost}
+Original String: 347840.46   Output String: {Total Cost}
+Original String: 201137.16   Output String: {Total Cost}
+Original String: 113649.25   Output String: {Total Cost}
+Original String: 226723.84   Output String: {Total Cost}
+Original String: 326802.42   Output String: {Total Cost}
+Original String: 19353.6   Output String: {Total Cost}
+Original String: 3412404.33   Output String: {Total Cost}
+Original String: 1556861.61   Output String: {Total Cost}
+Original String: 1041012.6   Output String: {Total Cost}
+Original String: 918566.88   Output String: {Total Cost}
+Original String: 522259.92   Output String: {Total Cost}
+Original String: 224682.88   Output String: {Total Cost}
+Original String: 9318.4   Output String: {Total Cost}
+Original String: 237163.95   Output String: {Total Cost}
+Original String: 62848.8   Output String: {Total Cost}
+Original String: 57289.56   Output String: {Total Cost}
+Original String: 9354.24   Output String: {Total Cost}
+Original String: 67194.88   Output String: {Total Cost}
+Original String: 1080389.34   Output String: {Total Cost}
+Original String: 489685.47   Output String: {Total Cost}
+Original String: 709220.96   Output String: {Total Cost}
+Original String: 936159.23   Output String: {Total Cost}
+Original String: 680326.08   Output String: {Total Cost}
+Original String: 120027.6   Output String: {Total Cost}
+Original String: 909699.84   Output String: {Total Cost}
+Original String: 216648.85   Output String: {Total Cost}
+Original String: 372605.25   Output String: {Total Cost}
+Original String: 405786.15   Output String: {Total Cost}
+Original String: 2466085.45   Output String: {Total Cost}
+Original String: 958545.35   Output String: {Total Cost}
+Original String: 78927.24   Output String: {Total Cost}
+Original String: 102172.04   Output String: {Total Cost}
+Original String: 241920.0   Output String: {Total Cost}
+Original String: 232931.79   Output String: {Total Cost}
+Original String: 1886541.37   Output String: {Total Cost}
+Original String: 3719298.54   Output String: {Total Cost}
+Original String: 3418779.62   Output String: {Total Cost}
+Original String: 24489.88   Output String: {Total Cost}
+Original String: 1264773.99   Output String: {Total Cost}
+Original String: 312082.43   Output String: {Total Cost}
+Original String: 439828.41   Output String: {Total Cost}
+Original String: 4095198.46   Output String: {Total Cost}
+Original String: 1848978.3   Output String: {Total Cost}
+Original String: 345240.28   Output String: {Total Cost}
+Original String: 600717.6   Output String: {Total Cost}
+Original String: 567870.2   Output String: {Total Cost}
+Original String: 40881.94   Output String: {Total Cost}
+Original String: 1106615.68   Output String: {Total Cost}
+Original String: 554491.14   Output String: {Total Cost}
+Original String: 4092063.2   Output String: {Total Cost}
+Original String: 4601274.4   Output String: {Total Cost}
+Original String: 305305.77   Output String: {Total Cost}
+Original String: 2620396.83   Output String: {Total Cost}
+Original String: 404849.27   Output String: {Total Cost}
+Original String: 1479862.24   Output String: {Total Cost}
+Original String: 5123084.64   Output String: {Total Cost}
+Original String: 171936.78   Output String: {Total Cost}
+Original String: 546491.76   Output String: {Total Cost}
+Original String: 278448.61   Output String: {Total Cost}
+Original String: 3237353.13   Output String: {Total Cost}
+Original String: 331676.4   Output String: {Total Cost}
+Original String: 20898.4   Output String: {Total Cost}
+Original String: 172767.0   Output String: {Total Cost}
+-------------------------------------------------------------
+Total Cost: {Total Cost}
+-------------------------------------------------------------
+Original String: 51500.76   Output String: {{index-key}2}
+Original String: 791282.37   Output String: {1{index-key}}
+Original String: 24066.26   Output String: {Total Profit}
+Original String: 228497.08   Output String: {Total Profit}
+Original String: 970846.34   Output String: {Total Profit}
+Original String: 84382.56   Output String: {Total Profit}
+Original String: 1384700.68   Output String: {Total Profit}
+Original String: 15199.87   Output String: {Total Profit}
+Original String: 453085.38   Output String: {Total Profit}
+Original String: 479533.46   Output String: {Total Profit}
+Original String: 179259.97   Output String: {Total Profit}
+Original String: 85557.6   Output String: {{index-key}}
+Original String: 550555.06   Output String: {Total Profit}
+Original String: 777770.89   Output String: {Total Profit}
+Original String: 284211.26   Output String: {Total Profit}
+Original String: 1136755.0   Output String: {Total Profit}
+Original String: 15631.26   Output String: {Total Profit}
+Original String: 142926.32   Output String: {Total Profit}
+Original String: 57754.08   Output String: {Total Profit}
+Original String: 648546.25   Output String: {Total Profit}
+Original String: 47324.52   Output String: {Total Profit}
+Original String: 44959.2   Output String: {Total Profit}
+Original String: 678440.74   Output String: {Total Profit}
+Original String: 431876.25   Output String: {Total Profit}
+Original String: 605292.48   Output String: {Total Profit}
+Original String: 351570.97   Output String: {Total Profit}
+Original String: 28787.28   Output String: {Total Profit}
+Original String: 445915.0   Output String: {Total Profit}
+Original String: 1296722.46   Output String: {Total Profit}
+Original String: 170712.93   Output String: {Total Profit}
+Original String: 495523.6   Output String: {Total Profit}
+Original String: 353998.8   Output String: {Total Profit}
+Original String: 14421.44   Output String: {Total Profit}
+Original String: 495883.78   Output String: {Total Profit}
+Original String: 367623.1   Output String: {Total Profit}
+Original String: 506277.2   Output String: {Total Profit}
+Original String: 22005.71   Output String: {Total Profit}
+Original String: 107451.66   Output String: {Total Profit}
+Original String: 123180.1   Output String: {Total Profit}
+Original String: 153818.28   Output String: {Total Profit}
+Original String: 139643.56   Output String: {Total Profit}
+Original String: 55984.5   Output String: {Total Profit}
+Original String: 464581.44   Output String: {Total Profit}
+Original String: 226889.22   Output String: {Total Profit}
+Original String: 39657.6   Output String: {Total Profit}
+Original String: 535220.4   Output String: {Total Profit}
+Original String: 244186.8   Output String: {Total Profit}
+Original String: 625965.8   Output String: {Total Profit}
+Original String: 519804.78   Output String: {Total Profit}
+Original String: 314037.36   Output String: {Total Profit}
+Original String: 54035.0   Output String: {Total Profit}
+Original String: 19094.4   Output String: {Total Profit}
+Original String: 104876.1   Output String: {Total Profit}
+Original String: 35565.3   Output String: {Total Profit}
+Original String: 18893.22   Output String: {Total Profit}
+Original String: 5293.44   Output String: {Total Profit}
+Original String: 16160.0   Output String: {Total Profit}
+Original String: 649643.22   Output String: {Total Profit}
+Original String: 216543.46   Output String: {Total Profit}
+Original String: 170563.75   Output String: {Total Profit}
+Original String: 146832.4   Output String: {Total Profit}
+Original String: 384987.48   Output String: {Total Profit}
+Original String: 83331.6   Output String: {Total Profit}
+Original String: 514787.04   Output String: {Total Profit}
+Original String: 106722.9   Output String: {Total Profit}
+Original String: 164769.5   Output String: {Total Profit}
+Original String: 306964.35   Output String: {Total Profit}
+Original String: 1628292.55   Output String: {Total Profit}
+Original String: 725109.15   Output String: {Total Profit}
+Original String: 54796.84   Output String: {Total Profit}
+Original String: 67461.56   Output String: {Total Profit}
+Original String: 495720.0   Output String: {Total Profit}
+Original String: 176205.51   Output String: {Total Profit}
+Original String: 295895.6   Output String: {Total Profit}
+Original String: 1226567.73   Output String: {Total Profit}
+Original String: 1127461.19   Output String: {Total Profit}
+Original String: 8528.99   Output String: {Total Profit}
+Original String: 835097.61   Output String: {Total Profit}
+Original String: 153734.22   Output String: {Total Profit}
+Original String: 305359.81   Output String: {Total Profit}
+Original String: 1350533.77   Output String: {Total Profit}
+Original String: 290004.0   Output String: {Total Profit}
+Original String: 261163.32   Output String: {Total Profit}
+Original String: 339938.1   Output String: {Total Profit}
+Original String: 187274.9   Output String: {Total Profit}
+Original String: 20138.76   Output String: {Total Profit}
+Original String: 266135.0   Output String: {Total Profit}
+Original String: 384966.74   Output String: {Total Profit}
+Original String: 984118.75   Output String: {Total Profit}
+Original String: 1106581.25   Output String: {Total Profit}
+Original String: 230954.13   Output String: {Total Profit}
+Original String: 1730180.37   Output String: {Total Profit}
+Original String: 306255.63   Output String: {Total Profit}
+Original String: 355898.75   Output String: {Total Profit}
+Original String: 1232073.75   Output String: {Total Profit}
+Original String: 76032.04   Output String: {Total Profit}
+Original String: 328608.08   Output String: {Total Profit}
+Original String: 137165.94   Output String: {Total Profit}
+Original String: 507764.4   Output String: {Total Profit}
+Original String: 109381.8   Output String: {Total Profit}
+Original String: 7278.2   Output String: {Total Profit}
+Original String: 119947.0   Output String: {Total Profit}
+Original String: 132116.32   Output String: {Total Profit}
+-------------------------------------------------------------
+Total Profit: {Total Profit}
+-------------------------------------------------------------
+Original String: 1   Output String: {index-key}
+Original String: 2   Output String: {index-key}
+Original String: 3   Output String: {index-key}
+Original String: 4   Output String: {index-key}
+Original String: 5   Output String: {index-key}
+Original String: 6   Output String: {index-key}
+Original String: 7   Output String: {index-key}
+Original String: 8   Output String: {index-key}
+Original String: 9   Output String: {index-key}
+Original String: 10   Output String: {index-key}
+Original String: 11   Output String: {index-key}
+Original String: 12   Output String: {index-key}
+Original String: 13   Output String: {index-key}
+Original String: 14   Output String: {index-key}
+Original String: 15   Output String: {index-key}
+Original String: 16   Output String: {index-key}
+Original String: 17   Output String: {index-key}
+Original String: 18   Output String: {index-key}
+Original String: 19   Output String: {index-key}
+Original String: 20   Output String: {index-key}
+Original String: 21   Output String: {index-key}
+Original String: 22   Output String: {index-key}
+Original String: 23   Output String: {index-key}
+Original String: 24   Output String: {index-key}
+Original String: 25   Output String: {index-key}
+Original String: 26   Output String: {index-key}
+Original String: 27   Output String: {index-key}
+Original String: 28   Output String: {index-key}
+Original String: 29   Output String: {index-key}
+Original String: 30   Output String: {index-key}
+Original String: 31   Output String: {index-key}
+Original String: 32   Output String: {index-key}
+Original String: 33   Output String: {index-key}
+Original String: 34   Output String: {index-key}
+Original String: 35   Output String: {index-key}
+Original String: 36   Output String: {index-key}
+Original String: 37   Output String: {index-key}
+Original String: 38   Output String: {index-key}
+Original String: 39   Output String: {index-key}
+Original String: 40   Output String: {index-key}
+Original String: 41   Output String: {index-key}
+Original String: 42   Output String: {index-key}
+Original String: 43   Output String: {index-key}
+Original String: 44   Output String: {index-key}
+Original String: 45   Output String: {index-key}
+Original String: 46   Output String: {index-key}
+Original String: 47   Output String: {index-key}
+Original String: 48   Output String: {index-key}
+Original String: 49   Output String: {index-key}
+Original String: 50   Output String: {index-key}
+Original String: 51   Output String: {index-key}
+Original String: 52   Output String: {index-key}
+Original String: 53   Output String: {index-key}
+Original String: 54   Output String: {index-key}
+Original String: 55   Output String: {index-key}
+Original String: 56   Output String: {index-key}
+Original String: 57   Output String: {index-key}
+Original String: 58   Output String: {index-key}
+Original String: 59   Output String: {index-key}
+Original String: 60   Output String: {index-key}
+Original String: 61   Output String: {index-key}
+Original String: 62   Output String: {index-key}
+Original String: 63   Output String: {index-key}
+Original String: 64   Output String: {index-key}
+Original String: 65   Output String: {index-key}
+Original String: 66   Output String: {index-key}
+Original String: 67   Output String: {index-key}
+Original String: 68   Output String: {index-key}
+Original String: 69   Output String: {index-key}
+Original String: 70   Output String: {index-key}
+Original String: 71   Output String: {index-key}
+Original String: 72   Output String: {index-key}
+Original String: 73   Output String: {index-key}
+Original String: 74   Output String: {index-key}
+Original String: 75   Output String: {index-key}
+Original String: 76   Output String: {index-key}
+Original String: 77   Output String: {index-key}
+Original String: 78   Output String: {index-key}
+Original String: 79   Output String: {index-key}
+Original String: 80   Output String: {index-key}
+Original String: 81   Output String: {index-key}
+Original String: 82   Output String: {index-key}
+Original String: 83   Output String: {index-key}
+Original String: 84   Output String: {index-key}
+Original String: 85   Output String: {index-key}
+Original String: 86   Output String: {index-key}
+Original String: 87   Output String: {index-key}
+Original String: 88   Output String: {index-key}
+Original String: 89   Output String: {index-key}
+Original String: 90   Output String: {index-key}
+Original String: 91   Output String: {index-key}
+Original String: 92   Output String: {index-key}
+Original String: 93   Output String: {index-key}
+Original String: 94   Output String: {index-key}
+Original String: 95   Output String: {index-key}
+Original String: 96   Output String: {index-key}
+Original String: 97   Output String: {index-key}
+Original String: 98   Output String: {index-key}
+Original String: 99   Output String: {index-key}
+Original String: 100   Output String: {index-key}
+-------------------------------------------------------------
+index-key: {index-key}
 -------------------------------------------------------------

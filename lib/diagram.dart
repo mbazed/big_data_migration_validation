@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -107,10 +109,11 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
                   selectedTextFieldIndex = i;
                 });
               },
-              onChanged: (value) {
+              onChanged: (value) {},
+              onEditingComplete: () => {selectedTextFieldIndex = -1},
+              onSubmitted: (value) {
                 updateParentValue(i, value);
               },
-              onEditingComplete: () => {selectedTextFieldIndex = -1},
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: items[i],
@@ -271,9 +274,8 @@ class ConnectionLinesPainter extends CustomPainter {
         for (var connection in connections) {
           if (connection[0].trim() == rightitem.trim() &&
               connection[1].trim() == leftitem.trim()) {
-            textPainter.paint(canvas, Offset(rightX - 4, rightY - 14));
-
             drawConnectionPath(canvas, leftX, leftY, rightX, rightY, linePaint);
+            textPainter.paint(canvas, Offset(rightX - 4, rightY - 14));
           } else {}
         }
       }
