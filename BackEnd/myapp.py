@@ -12,6 +12,7 @@ from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
 from comonPk import *
+from validationThreading import *
 from validation3 import *
 import uuid  # for generating unique request IDs
 
@@ -317,15 +318,16 @@ def validateData():
     
     print("[⌄] validation request received...")
     
-    resultString = "Valiadation Failed!"
+    resultString = "Validation Failed!"
     
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
-        resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        resultString = dividedCompareParallel(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
     except Exception as e:
     # Print the exception message
         
         print(f"validateData/Exception occurred: {str(e)}")
+    
         
     
     

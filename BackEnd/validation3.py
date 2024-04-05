@@ -1,20 +1,18 @@
-import math
 import pandas as pd
-# from primary_key import find_primary_key
-from comonPk import get_two_keys
 import logging
 from collections import Counter
+from myapp import *
+from readSouce import *
 import time
-import threading
-from threading import local
+import json  # Import the json module
 
-thread_local = local()
 # Configure the logging settings with a specific format
-logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Global variables
-threadout = [""] * 4
+
 mappingDoc = {}  # Initialize mappingDoc as an empty dictionary
+
 def substitute_pattern(pattern, row):
     for key, value in row.items():
         pattern = pattern.replace(f"{{{key}}}", str(value))
@@ -27,85 +25,98 @@ def generate_target_data(row, patterns):
     return pd.Series(target_data)
 
 def rowByRowCompare(sourceRow, targetRow, primaryKey):
-    errorString = ""
+    outputString = ""
+    nullErrorString = ""
+    errorCount = 0
 
     for column, sourceValue in sourceRow.items():
         if column != primaryKey:
             targetValue = targetRow[column] if column in targetRow.index else None
-            if str(sourceValue) != str(targetValue):
-                errorString += f">>For {primaryKey}: {sourceRow[primaryKey]}, Column {column} values differ:\n"
-                errorString += f"Source: {sourceValue}\n"
-                errorString += f"Target: {targetValue}\n"
-    
-    # logging.info(f"rowByRowCompare: primaryKey - {primaryKey}, sourceRow - {sourceRow}, targetRow - {targetRow}, errorString - {errorString}")
-    return errorString
 
-def process_rows_dynamic(rows, target_df, mappingDoc, primary_key, thread_index):
-    global threadout
-    local_output_string = []
+            # Check for null values
+            if pd.isnull(targetValue) or targetValue == '' or str(targetValue).strip() == '':
+                if pd.isnull(sourceValue) or sourceValue == '' or str(sourceValue).strip() == '':
+                    # Both values are null
+                    continue
+                else:
+                    errorCount += 1
+                    nullErrorString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
+                    nullErrorString += f"Expected: {sourceValue}\n"
+                    nullErrorString += f"Found: {targetValue}\n"
+            else:
+                # Check for non-null values
+                if str(sourceValue) != str(targetValue):
+                    errorCount += 1
+                    outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
+                    outputString += f"Expected: {sourceValue}\n"
+                    outputString += f"Found: {targetValue}\n"
 
-    for _, srcRow in rows.iterrows():
-        transformed_source_row = generate_target_data(srcRow, mappingDoc)
-        primary_key_value = transformed_source_row[primary_key]
-            
-        primary_key_value = target_df[primary_key].values.dtype.type(primary_key_value)
-
-        if primary_key_value in target_df[primary_key].values:
-            target_row = target_df[target_df[primary_key] == primary_key_value]
-            result = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
-            if result:
-                local_output_string.append(result)
-        else:
-            local_output_string.append(f">> Primary key {primary_key_value} not found in target_df")
+    # logging.info(f"rowByRowCompare: primaryKey - {primaryKey}, sourceRow - {sourceRow}, targetRow - {targetRow}, outputString - {outputString}")
     
-    logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {local_output_string}")
-    # print(f"dividedCompare: primary_key - {primary_key}, outputString - {local_output_string}")
-    # setattr(thread_local, f'outputString_{thread_index}', local_output_string)
-    threadout[thread_index]=local_output_string
-    
+    return outputString, nullErrorString  # Return both outputString and nullErrorString
 
 def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
     source_df = sourceData
     target_df = targetData
-    errorCount=0
-    logging.info(f"dividedCompare: mappingDoc - {mappingDoc}")
-    start_time = time.time()  # Measure start time
-
-    num_threads = 4
-    chunk_size = math.floor(source_df.shape[0]/num_threads)  # Adjust this based on your requirements
     
+    outputString = []  
+    missingRows = []
+    duplicateRows = []
+    nullErrorString = []  # Initialize nullErrorString
 
-    threads = []
-    for i in range(num_threads):
-        start_idx = i * chunk_size
-        end_idx = min((i + 1) * chunk_size, len(source_df))
-        thread = threading.Thread(target=process_rows_dynamic, args=(source_df.iloc[start_idx:end_idx], target_df, mappingDoc, primary_key, i))
-        threads.append(thread)
-        thread.start()
+    start_time = time.time()
 
-    # Wait for all threads to finish
-    for thread in threads:
-        thread.join()
+    if source_df.shape[0] == target_df.shape[0]:
+        for _, srcRow in source_df.iterrows():
+            transformed_source_row = generate_target_data(srcRow, mappingDoc)
+            primary_key_value = transformed_source_row[primary_key]
 
-    # Flatten the list of lists
-    flattened_list = [item for sublist in threadout for item in sublist]
+            # Convert primary_key_value to the data type of target_df[primary_key].values
+            primary_key_value = target_df[primary_key].values.dtype.type(primary_key_value)
 
-    # Convert the characters to a string
-    outputString = ''.join(map(str, flattened_list))
+            if primary_key_value in target_df[primary_key].values:
+                target_row = target_df[target_df[primary_key] == primary_key_value]
+                result, nullErrors = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
+                if result:
+                    outputString.append(result)
+                if nullErrors:
+                    nullErrorString += nullErrors
+            else:
+                outputString.append(f">> Primary key {primary_key_value} not found in target_df")
+                outputString.append(str(srcRow))  # Convert srcRow to string
+            
+        errorCount = ''.join(outputString).count(">>")
+        errornos=[f"Total errors found: {errorCount}\n"]
+        errornos.extend(outputString)
+        outputString=errornos
+        # logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
 
-    # Count the occurrences of ">>"
-    errorCount = outputString.count(">>")
-    
-    errornos=f"Total errors found: {errorCount}\n"
-    errornos+= outputString
-    outputString=errornos
-
-# Update outputString with the corrected errornos
+    elif source_df.shape[0] < target_df.shape[0]:
+        outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
+        duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
+        # print(duplicateRows)  # Collect duplicate rows
+    else:
+        outputString.append(f"\nValues are missing in the target DataFrame.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
+        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
+        # print(missingRows)
+        if not missingRows.empty:
+            # Convert missingRows DataFrame to a dictionary
+            missingRows_dict = missingRows.to_dict(orient='records')
+            missingRows = missingRows_dict
+            outputString.append("\nMissing Rows:\n" + json.dumps(missingRows))  # Serialize to JSON format
+        else:
+            outputString.append("\nNo Missing Rows Found")  # If missingRows is empty
     
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
-    print(f"Processing time with parallel processing: {processing_time} seconds")
-    print(f"Output string :{outputString} ")
-    logging.info(f"dividedCompare_parallel_dynamic: primary_key - {primary_key}, outputString - {outputString}")
-    return outputString
+    print(processing_time)
+
+    # Construct JSON object
+    result_json = {
+        "missingRows": missingRows,
+        "outputString": ''.join(outputString),
+        "nullErrorString": nullErrorString
+    }
+
+    return json.dumps(result_json)  # Return the JSON object

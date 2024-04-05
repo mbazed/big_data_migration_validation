@@ -3,12 +3,11 @@ import 'dart:async';
 import 'dart:html' as html;
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'diagram.dart';
-
+import 'package:data_validation/widgets/widgetStyle.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:searchfield/searchfield.dart'; // Import kIsWeb from flutter/foundation
 
@@ -33,7 +32,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String firstButtonText = 'Upload';
   bool multiKey = false;
   String requestID = "";
-
+  bool isLoading = false;
   bool showerrbtn = true;
 
   FilePickerResult? targetResult;
@@ -78,23 +77,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String inputRuleString = '';
 
   String fileName = 'No file selected';
-  // Use your _list here
-  final List<String> _list = [
-    'File Mode',
-    'MySQL',
-    'Oracle DB',
-    'MongoDB'
+  List<bool> isExpandedList = [];
 
-    // Add other items as needed
-  ];
-
-  List<String> getModifiedList() {
-    return sourceselectedMode == 'File Mode' ? _list.sublist(1) : _list;
-  }
-
-  List<String> target_getModifiedList() {
-    return targetselectedMode == 'File Mode' ? _list.sublist(1) : _list;
-  }
+  var missingRows = [];
+  var outputString = [];
+  var nullErrorString = [];
 
   @override
   void initState() {
@@ -113,16 +100,84 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     _targetTableController.addListener(_handleTextChange);
   }
 
-  // Callback function that will be executed when any text changes
   void _handleTextChange() {
-    // Do something when text changes
-
     setState(() {
       firstButtonText = 'Upload';
     });
   }
 
-  void handleMapData() async {
+  void handleTap() async {
+    setState(() {
+      firstButtonText = 'Upload';
+      mapDataCompleted = false;
+      _mapDataProgress = 0.0;
+      validateDataCompleted = false;
+      showDiagram = false;
+      showErrors = false;
+      multiKey = false;
+      _resultController.text = '';
+      _keyController1.text = '';
+      _keyController2.text = '';
+      _sourceController.text = '';
+      _targetController.text = '';
+      srcpk = "";
+      trgpk = "";
+      sourceColumnList = [];
+      targetColumnList = [];
+      connections = [];
+      responseLines = [];
+      lineNumber = 0;
+      inputRuleString = '';
+      missingRows = [];
+      outputString = [];
+      nullErrorString = [];
+      downloadReportCompleted = false;
+      isExpandedList = [];
+    });
+
+    if (findPrimaryKeysCompleted) {
+      await Future.delayed(Duration(milliseconds: 800));
+      setState(() {
+        _findPrimaryKeysProgress = 0.0;
+      });
+    }
+
+    if (uploadCompleted) {
+      await Future.delayed(Duration(milliseconds: 800));
+      setState(() {
+        findPrimaryKeysCompleted = false;
+        _uploadProgress = 0.0;
+      });
+    }
+
+    await Future.delayed(Duration(milliseconds: 800));
+    setState(() {
+      uploadCompleted = false;
+    });
+  }
+
+  Future<void> handleFileSelection(FilePickerResult? result,
+      TextEditingController controller, String title) async {
+    if (result != null) {
+      setState(() {
+        title == 'Source' ? sourceResult = result : targetResult = result;
+        firstButtonText = 'Upload';
+        fileName = result.files.single.name;
+        controller.text = fileName;
+        _resultController.text +=
+            '$title selected: $fileName\n'; // Append to the existing text
+      });
+    } else {
+      setState(() {
+        fileName = 'No file selected';
+        controller.text = fileName;
+        _resultController.text +=
+            '$title: $fileName\n'; // Append to the existing text
+      });
+    }
+  }
+
+  Future<void> handleMapData() async {
     if (multiKey) {
       srcpk = _keyController1.text;
       trgpk = _keyController2.text;
@@ -161,6 +216,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         setState(() {
           if (mapingStatus[1] == '+') {
             firstButtonText = 'Validate Data';
+            mapDataCompleted = true;
+            _updateProgress();
           } else if (mapingStatus[1] == '-') firstButtonText = 'Map Data';
         });
       } else {
@@ -171,7 +228,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  void handleValidateData() async {
+  Future<void> handleValidateData() async {
     try {
       final responseValidation = await http.post(
         validateUrl,
@@ -182,21 +239,35 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
       if (responseValidation.statusCode == 200) {
         var responseData = responseValidation.body;
-        var data = jsonDecode(responseData);
-        var validationDoc = data['validationDoc'].toString();
+        var data = jsonDecode(responseData); // Parse JSON string
+        var validationDoc = data['validationDoc'];
         var validationStatus = data['message'].toString();
         print('[+] Validation successful!  \n' + validationStatus);
 
-        // Display response in ListView
-        _resultController.text = '\n Validation Status: $validationStatus\n';
+        var parsedValidationDoc = jsonDecode(validationDoc);
+        print(
+            'ParsedValidationDoc Datatype: ${parsedValidationDoc.runtimeType}');
+        print(
+            'Missing Rows Datatype: ${parsedValidationDoc['missingRows'].runtimeType}');
+        print(
+            'outputString Datatype: ${parsedValidationDoc['outputString'].runtimeType}');
+        print(
+            'nullErrorString: ${parsedValidationDoc['nullErrorString'].runtimeType}');
+        print('ValidationDoc Datatype: ${validationDoc.runtimeType}');
 
-        // Add validationDoc to a list for ListView
-        lineNumber = 0;
-        responseLines = validationDoc.split('\n');
+        missingRows = parsedValidationDoc['missingRows'] ?? [];
+        outputString = [parsedValidationDoc['outputString']];
+        nullErrorString = parsedValidationDoc['nullErrorString'] ?? [];
+
+        responseLines = validationDoc.toString().split('\n');
+        print('Parsed data: $parsedValidationDoc');
+        print('Missing Rows: $missingRows');
+        print('Output String: $outputString');
+        print('Null Error String: $nullErrorString');
         setState(() {
           showDiagram = false;
-          _resultController.text += responseLines.first + '\n';
           showErrors = true;
+          validateDataCompleted = true;
         });
       } else {
         print('[-] Validation failed: ${responseValidation.statusCode}');
@@ -338,6 +409,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         setState(() {
           _resultController.text = '${_resultController.text}${message}\n';
           firstButtonText = 'Find Primary Keys';
+          uploadCompleted = true;
+          _updateProgress();
         });
       }
     } catch (e) {
@@ -369,6 +442,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
         // Access the 'primarykey' value
         setState(() {
+          findPrimaryKeysCompleted = true;
+          _updateProgress();
           _keyController1.text = "";
           _keyController2.text = "";
 
@@ -427,114 +502,339 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  Widget getIconOrImage(String? selectedItem) {
-    if (selectedItem == 'File Mode') {
-      return Icon(Icons.file_copy_outlined, size: 14);
-    } else if (selectedItem == 'MySQL') {
-      return ImageIcon(AssetImage('assets/images/mysql.png'), size: 16);
-    } else if (selectedItem == 'Oracle DB') {
-      return ImageIcon(AssetImage('assets/images/oracle.png'), size: 16);
-    } else if (selectedItem == 'MongoDB') {
-      return ImageIcon(AssetImage('assets/images/mongodb.png'), size: 16);
-    } else {
-      return Icon(Icons.error, size: 14); // Default icon for unknown items
-    }
-  }
-
-  Widget iconOrImageWidget(Widget iconOrImage) {
-    return iconOrImage;
-  }
-
   void chooseHandler(String firstButtonText) {
-    switch (firstButtonText) {
-      case 'Upload':
-        handleUpload();
-        break;
-      case 'Find Primary Keys':
-        handleFindPrimaryKeys();
-        break;
-      case 'Map Data':
-        handleMapData();
-        break;
-      case 'Validate Data':
-        handleValidateData();
-        break;
-      case 'Download Report':
-        downloadReport(_resultController.text);
-        break;
-      default:
+    if (!isLoading) {
+      setState(() {
+        isLoading = true; // Set isLoading to true before starting the process
+      });
+
+      switch (firstButtonText) {
+        case 'Upload':
+          handleUpload().then((_) {
+            setState(() {
+              isLoading = false;
+              // uploadCompleted = true;
+            });
+          });
+          break;
+        case 'Find Primary Keys':
+          handleFindPrimaryKeys().then((_) {
+            setState(() {
+              isLoading = false;
+              // findPrimaryKeysCompleted = true;
+            });
+          });
+          break;
+        case 'Map Data':
+          handleMapData().then((_) {
+            setState(() {
+              isLoading = false;
+              // mapDataCompleted = true;
+            });
+          });
+          break;
+        case 'Validate Data':
+          handleValidateData().then((_) {
+            setState(() {
+              isLoading = false;
+              // validateDataCompleted = true;
+            });
+          });
+          break;
+        case 'Download Report':
+          downloadReport(_resultController.text);
+          setState(() {
+            downloadReportCompleted = true;
+          });
+          break;
+        default:
+      }
     }
+  }
+
+  void handleSourceModeChanged(String newMode) {
+    setState(() {
+      sourceselectedMode = newMode;
+    });
+  }
+
+  void handleTargetModeChanged(String newMode) {
+    setState(() {
+      targetselectedMode = newMode;
+    });
+  }
+
+  Widget buildErrorExpansionPanelList() {
+    List<MapEntry<String, List<String>>> nonEmptyCategories = [];
+    final Map<String, List<String>> categorizedErrors = {
+      if (missingRows.isNotEmpty)
+        "Missing Rows Errors":
+            missingRows.map((row) => row.toString()).toList(),
+      if (outputString.isNotEmpty)
+        "Output Errors": [outputString.toString()],
+      if (nullErrorString.isNotEmpty)
+        "Null String Errors":
+            nullErrorString.map((error) => error.toString()).toList(),
+    };
+
+    // Filter out empty categories
+    nonEmptyCategories = categorizedErrors.entries.where((entry) {
+      return entry.value.isNotEmpty;
+    }).toList();
+
+    return ExpansionPanelList(
+      expandIconColor: Colors.red.shade900,
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          isExpandedList[index] = !isExpandedList[index];
+        });
+      },
+      children: nonEmptyCategories.map<ExpansionPanel>((entry) {
+        final category = entry.key;
+        final errors = entry.value.cast<String>();
+        if (isExpandedList.isEmpty) {
+          isExpandedList = List<bool>.filled(nonEmptyCategories.length, false);
+        }
+        return ExpansionPanel(
+          backgroundColor: Colors.grey[350],
+          headerBuilder: (BuildContext context, bool isExpanded) {
+            return ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(50),
+                    bottomRight: Radius.circular(50)),
+              ),
+              tileColor: isExpandedList[nonEmptyCategories.indexOf(entry)]
+                  ? Colors.red.shade600
+                  : Colors.red.shade900,
+              textColor: Colors.red.shade100,
+              title: Text(category),
+            );
+          },
+          body: Column(
+            children: errors.map((error) {
+              return SizedBox(
+                width: double.infinity,
+                child: ListTile(
+                  textColor: Colors.red.shade900,
+                  tileColor: Colors.grey.shade200,
+                  title: SingleChildScrollView(
+                    child: Text(
+                        error.replaceAll(">> ", "").replaceAll("\\n", "\n")),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          isExpanded: isExpandedList[nonEmptyCategories.indexOf(entry)],
+        );
+      }).toList(),
+    );
+  }
+
+  double _uploadProgress = 0.0;
+  double _findPrimaryKeysProgress = 0.0;
+  double _mapDataProgress = 0.0;
+
+  void _updateProgress() {
+    setState(() {
+      if (_uploadProgress == 0.0) {
+        _uploadProgress = firstButtonText == "Find Primary Keys" ? 1.0 : 0.0;
+      }
+      if (_findPrimaryKeysProgress == 0.0) {
+        _findPrimaryKeysProgress = firstButtonText == "Map Data" ? 1.0 : 0.0;
+      }
+      if (_mapDataProgress == 0.0) {
+        _mapDataProgress = firstButtonText == "Validate Data" ? 1.0 : 0.0;
+      } // Update other progress indicators as needed
+    });
+  }
+
+  bool uploadCompleted = false;
+  bool findPrimaryKeysCompleted = false;
+  bool mapDataCompleted = false;
+  bool validateDataCompleted = false;
+  bool downloadReportCompleted = false;
+
+  Widget buildProgressIndicator(double progress, double containerWidth) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.0815,
+      // padding: EdgeInsets.only(left: containerWidth),
+      child: TweenAnimationBuilder<double>(
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeInOut,
+        tween: Tween<double>(
+          begin: 0,
+          end: progress,
+        ),
+        builder: (context, value, _) => Padding(
+          padding: const EdgeInsets.all(5),
+          child: LinearProgressIndicator(
+            minHeight: 2,
+            backgroundColor: Colors.grey,
+            value: value,
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3A4F39)),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildWorkflow() {
+    double widthw = MediaQuery.of(context).size.width;
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.35,
+        padding: EdgeInsets.only(bottom: 10),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  buildWorkflowStep(
+                    text: "Upload",
+                    isActive: firstButtonText == "Upload",
+                    isCompleted: uploadCompleted,
+                    progress: _uploadProgress,
+                    onTap: handleTap,
+                  ),
+                  buildWorkflowStep(
+                    text: "Find Primary Keys",
+                    isActive: firstButtonText == "Find Primary Keys",
+                    isCompleted: findPrimaryKeysCompleted,
+                    progress: _findPrimaryKeysProgress,
+                  ),
+                  buildWorkflowStep(
+                    text: "Map Data",
+                    isActive: firstButtonText == "Map Data",
+                    isCompleted: mapDataCompleted,
+                    progress: _mapDataProgress,
+                  ),
+                  buildWorkflowStep(
+                    text: "Validate Data",
+                    isActive: firstButtonText == "Validate Data",
+                    isCompleted: validateDataCompleted,
+                  ),
+                  // Add more steps as needed
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: buildTextWidget(
+                        'Upload', firstButtonText == "Upload", widthw),
+                  ),
+                  buildTextWidget('Find Primary Keys',
+                      firstButtonText == "Find Primary Keys", widthw),
+                  buildTextWidget(
+                      'Map Data', firstButtonText == "Map Data", widthw),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0, left: 8),
+                    child: buildTextWidget('Validate Data',
+                        firstButtonText == "Validate Data", widthw),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildWorkflowStep(
+      {required String text,
+      required bool isActive,
+      required bool isCompleted,
+      double? progress,
+      VoidCallback? onTap}) {
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isCompleted
+                            ? Color(0xFF3A4F39)
+                            : isActive
+                                ? Color(0xFF3A4F39)
+                                : Colors.grey,
+                        width: MediaQuery.of(context).size.width *
+                            0.001, // Adjust the width of the border as needed
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: onTap,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: MediaQuery.of(context).size.width * 0.009,
+                        child: Icon(
+                          isCompleted
+                              ? Icons.check // Checkmark for completed step
+                              : isActive
+                                  ? Icons.circle_rounded
+                                  : null, // Lock icon for active and uncompleted steps
+                          size: MediaQuery.of(context).size.width * 0.015,
+                          color: isCompleted
+                              ? Color(
+                                  0xFF3A4F39) // White color for completed step
+                              : isActive
+                                  ? Color(
+                                      0xFF3A4F39) // Green color for active step
+                                  : Colors
+                                      .grey, // Grey color for uncompleted step
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (progress != null)
+                    buildProgressIndicator(
+                        progress, MediaQuery.of(context).size.width * 0.014),
+                ],
+              ),
+              SizedBox(height: 5.0),
+              SizedBox(
+                  height: 10.0), // Adjust the vertical spacing between steps
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    lineNumber = 0;
     Widget scrollableTopContainer = Container(
       decoration: BoxDecoration(
-          color: Colors.grey.shade100,
-          borderRadius: BorderRadius.all(Radius.circular(3)),
-          border: Border.all(color: Theme.of(context).colorScheme.error)),
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.all(Radius.circular(3)),
+        border: Border.all(color: Theme.of(context).colorScheme.error),
+      ),
       width: MediaQuery.of(context).size.width * 0.5,
       height: MediaQuery.of(context).size.height * 0.5,
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Text(
-            responseLines
-                .join("\n")
-                .replaceAllMapped(">>", (match) => "${++lineNumber}. "),
-            style: TextStyle(
-                fontSize: 15, color: Theme.of(context).colorScheme.error),
-            maxLines: 25,
-          ),
-        ),
-      ),
-    );
-
-    Widget errorButton = Align(
-      alignment: Alignment.topLeft,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            border: Border.all(color: Colors.black45),
-            borderRadius: BorderRadius.circular(2)),
-        width: MediaQuery.of(context).size.width * 0.055,
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              showerrbtn = !showerrbtn; // Toggle showerrbtn state
-            });
-          },
-          child: IntrinsicHeight(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0, right: 3),
-                  child: Text(
-                    'Errors',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ),
-                SizedBox(
-                    child: VerticalDivider(
-                  thickness: 1,
-                  color: Colors.black45,
-                  width: 2,
-                )),
-                showerrbtn
-                    ? Icon(
-                        Icons.arrow_right,
-                        color: Colors.black54,
-                      )
-                    : Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black54,
-                      )
-              ],
-            ),
-          ),
-        ),
+            scrollDirection: Axis.vertical,
+            child: buildErrorExpansionPanelList()),
       ),
     );
 
@@ -555,7 +855,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      buildWorkflow(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -566,402 +868,30 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 width: width100,
                                 height:
                                     MediaQuery.of(context).size.height * 0.065,
-                                child: CustomDropdown<String>(
-                                  canCloseOutsideBounds: true,
-                                  decoration: CustomDropdownDecoration(
-                                    errorStyle: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 14,
-                                      fontFamily: "Inter",
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    expandedBorderRadius:
-                                        BorderRadius.circular(8.0),
-                                    expandedBorder: Border.all(
-                                      color: Color(0xFF3A4F39),
-                                      width: 2,
-                                    ),
-                                    closedBorderRadius:
-                                        BorderRadius.circular(8.0),
-                                    closedBorder: Border.all(
-                                      color: Color(0xFF3A4F39),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  listItemBuilder: (BuildContext context,
-                                      dynamic item,
-                                      bool isSelected,
-                                      Function() onItemSelect) {
-                                    Widget iconOrImage = getIconOrImage(item);
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            iconOrImage,
-                                            SizedBox(width: 8),
-                                            Text(
-                                              item.toString(),
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: "Montserrat",
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        // Additional UI or logic based on isSelected
-                                      ],
-                                    );
-                                  },
-                                  headerBuilder: (BuildContext context,
-                                      String? selectedItem) {
-                                    Widget iconOrImage =
-                                        getIconOrImage(selectedItem);
-
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            iconOrImage,
-                                            SizedBox(width: 8),
-                                            Text(
-                                              selectedItem ?? '',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: "Montserrat",
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          'Source',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 14,
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight
-                                                .w600, // Set the desired font size
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  },
-                                  hintText: sourceselectedMode,
-                                  hintBuilder:
-                                      (BuildContext context, String hint) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          hint,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight
-                                                .w600, // Set the desired font size
-                                          ),
-                                        ),
-                                        Text(
-                                          'Source',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 14,
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight
-                                                .w600, // Set the desired font size
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  },
-                                  items: getModifiedList(),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      sourceselectedMode = newValue!;
-                                    });
-                                  },
-                                  // ... (Your existing code for dropdown)
+                                child: MyCustomDropdown(
+                                  selectedMode: sourceselectedMode,
+                                  onModeChanged: handleSourceModeChanged,
                                 ),
                               ),
                               sourceselectedMode == 'File Mode'
-                                  ? Row(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 4, top: 10),
-                                              child: Container(
-                                                width: width100,
-                                                alignment: AlignmentDirectional
-                                                    .topStart,
-                                                child: Text(
-                                                    'Supported file types: .csv, .xlsx',
-                                                    style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 12,
-                                                      fontFamily: "Inter",
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    )),
-                                              ),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5)),
-                                                border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.7),
-                                                ),
-                                              ),
-                                              width: width100,
-                                              child: TextField(
-                                                controller: _sourceController,
-                                                onChanged: (_) {},
-                                                onSubmitted: (_) {},
-                                                style: TextStyle(),
-                                                decoration: InputDecoration(
-                                                  suffixIcon: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 10.0),
-                                                    child: InkWell(
-                                                      onTap: () async {
-                                                        sourceResult =
-                                                            await FilePicker
-                                                                .platform
-                                                                .pickFiles(
-                                                          allowMultiple: false,
-                                                          type: FileType.custom,
-                                                          allowedExtensions: [
-                                                            'csv',
-                                                            'xlsx',
-                                                            'xls'
-                                                          ],
-                                                        );
-                                                        // Check if a file was selected
-                                                        if (sourceResult !=
-                                                            null) {
-                                                          setState(() {
-                                                            firstButtonText =
-                                                                'Upload';
-                                                            // sourceData = readFile(sourceResult);
-
-                                                            source =
-                                                                sourceResult!
-                                                                    .files
-                                                                    .single
-                                                                    .name;
-                                                            _sourceController
-                                                                .text = source;
-
-                                                            _resultController
-                                                                    .text =
-                                                                'Source selected: $source\n';
-                                                          });
-                                                        } else {
-                                                          setState(() {
-                                                            source =
-                                                                'No file selected';
-                                                            _sourceController
-                                                                .text = source;
-                                                            _resultController
-                                                                    .text =
-                                                                '${_resultController.text}No file selected\n';
-                                                          });
-                                                        }
-                                                      },
-                                                      child: Icon(
-                                                          Icons
-                                                              .drive_folder_upload_rounded,
-                                                          size:
-                                                              width100 * 0.06),
-                                                    ),
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  contentPadding:
-                                                      EdgeInsets.only(left: 10),
-                                                  hintText: '--',
-                                                  hintStyle: TextStyle(),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                                  ? FileMode(
+                                      controller: _sourceController,
+                                      resultController: _resultController,
+                                      firstButtonText: firstButtonText,
+                                      title: 'Source',
+                                      width100: width100,
+                                      onFilePickerResult: (result) =>
+                                          handleFileSelection(result,
+                                              _sourceController, 'Source'),
                                     )
-                                  : Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: width100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    width: width100,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 8.0),
-                                                      child: TextField(
-                                                        controller:
-                                                            _sourceHostController,
-                                                        onChanged: (value) {
-                                                          setState(() {});
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText:
-                                                              'Source Host',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            // Password TextField
-                                            Container(
-                                              width: width100,
-                                              child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Container(
-                                                      width: width100 * 0.475,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                vertical: 8.0),
-                                                        child: TextField(
-                                                          controller:
-                                                              _sourceUserController,
-                                                          onChanged: (value) {
-                                                            setState(() {});
-                                                          },
-                                                          decoration:
-                                                              InputDecoration(
-                                                            labelText:
-                                                                'Source Username',
-                                                            border:
-                                                                OutlineInputBorder(),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: width100 * 0.475,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                vertical: 8.0),
-                                                        child: TextField(
-                                                          controller:
-                                                              _sourcePassController,
-                                                          onChanged: (value) {
-                                                            setState(() {});
-                                                          },
-                                                          obscureText: true,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            suffixIcon: Icon(Icons
-                                                                .visibility_off),
-                                                            labelText:
-                                                                'Source Password',
-                                                            border:
-                                                                OutlineInputBorder(),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
-                                            // Connection String TextField
-                                            Container(
-                                              width: width100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    width: width100 * 0.475,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 8.0),
-                                                      child: TextField(
-                                                        controller:
-                                                            _sourceDBNameController,
-                                                        onChanged: (value) {
-                                                          setState(() {});
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText:
-                                                              'Source Database Name',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: width100 * 0.475,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 8.0),
-                                                      child: TextField(
-                                                        controller:
-                                                            _sourceTableController,
-                                                        onChanged: (value) {
-                                                          setState(() {});
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText:
-                                                              'Source Table Name',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                  : ModeFields(
+                                      hostController: _sourceHostController,
+                                      userController: _sourceUserController,
+                                      passController: _sourcePassController,
+                                      dbNameController: _sourceDBNameController,
+                                      tableController: _sourceTableController,
+                                      width100: width100,
+                                      labelTextPrefix: 'Source',
                                     ),
                             ],
                           ),
@@ -977,410 +907,34 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 width: width100,
                                 height:
                                     MediaQuery.of(context).size.height * 0.065,
-                                child: CustomDropdown<String>(
-                                  canCloseOutsideBounds: true,
-                                  decoration: CustomDropdownDecoration(
-                                      errorStyle: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 14,
-                                        fontFamily: "Inter",
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      expandedBorderRadius:
-                                          BorderRadius.circular(8.0),
-                                      expandedBorder: Border.all(
-                                        color: Color(0xFF3A4F39),
-                                        width: 2,
-                                      ),
-                                      closedBorderRadius:
-                                          BorderRadius.circular(8.0),
-                                      closedBorder: Border.all(
-                                        color: Color(0xFF3A4F39),
-                                        width: 2,
-                                      )),
-                                  listItemBuilder: (BuildContext context,
-                                      dynamic item,
-                                      bool isSelected,
-                                      Function() onItemSelect) {
-                                    Widget iconOrImage = getIconOrImage(item);
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            iconOrImage,
-                                            SizedBox(width: 8),
-                                            Text(
-                                              item.toString(),
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: "Montserrat",
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        // Additional UI or logic based on isSelected
-                                      ],
-                                    );
-                                  },
-                                  headerBuilder: (BuildContext context,
-                                      String? selectedItem) {
-                                    Widget iconOrImage =
-                                        getIconOrImage(selectedItem);
-
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            iconOrImage,
-                                            SizedBox(width: 8),
-                                            Text(
-                                              selectedItem ?? '',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: "Montserrat",
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          'Target',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 14,
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight
-                                                .w600, // Set the desired font size
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  },
-                                  hintText: targetselectedMode,
-                                  hintBuilder:
-                                      (BuildContext context, String hint) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          hint,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight
-                                                .w600, // Set the desired font size
-                                          ),
-                                        ),
-                                        Text(
-                                          'Target',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 14,
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight
-                                                .w600, // Set the desired font size
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  },
-                                  items: target_getModifiedList(),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      targetselectedMode = newValue!;
-                                    });
-                                  },
-                                  // ... (Your existing code for dropdown)
-                                ),
+                                child: MyCustomDropdown(
+                                    selectedMode: targetselectedMode,
+                                    onModeChanged: handleTargetModeChanged),
                               ),
                             ),
                             targetselectedMode == 'File Mode'
-                                ? Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 4, top: 10),
-                                            child: Container(
-                                              width: width100,
-                                              alignment:
-                                                  AlignmentDirectional.topStart,
-                                              child: Text(
-                                                  'Supported file types: .csv, .xlsx',
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 12,
-                                                    fontFamily: "Inter",
-                                                    fontWeight: FontWeight.w400,
-                                                  )),
-                                            ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                              border: Border.all(
-                                                color: Colors.grey
-                                                    .withOpacity(0.7),
-                                              ),
-                                            ),
-                                            width: width100,
-                                            child: TextField(
-                                              controller: _targetController,
-                                              onChanged: (_) {},
-                                              onSubmitted: (_) {},
-                                              style: TextStyle(),
-                                              decoration: InputDecoration(
-                                                suffixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 10.0),
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      // Open file picker
-                                                      targetResult =
-                                                          await FilePicker
-                                                              .platform
-                                                              .pickFiles(
-                                                        allowMultiple: false,
-                                                        type: FileType.custom,
-                                                        allowedExtensions: [
-                                                          'csv',
-                                                          'xlsx',
-                                                          'xls'
-                                                        ],
-                                                      );
-                                                      // Check if a file was selected
-                                                      if (targetResult !=
-                                                          null) {
-                                                        setState(() {
-                                                          // Update the 'source' variable with the selected file path
-
-                                                          // targetData = readFile(result);
-                                                          firstButtonText =
-                                                              'Upload';
-
-                                                          target = targetResult!
-                                                              .files
-                                                              .single
-                                                              .name;
-                                                          _targetController
-                                                              .text = target;
-                                                          if (_resultController
-                                                                  .text !=
-                                                              '') {
-                                                            _resultController
-                                                                    .text =
-                                                                '${_resultController.text}Target selected: $target\n';
-                                                          } else {
-                                                            _resultController
-                                                                    .text =
-                                                                '${_resultController.text}Target selected: $target\n';
-                                                          }
-                                                        });
-                                                      } else {
-                                                        setState(() {
-                                                          target =
-                                                              'No file selected';
-                                                          _targetController
-                                                              .text = target;
-                                                          _resultController
-                                                                  .text =
-                                                              '${_resultController.text}No file selected\n';
-                                                        });
-                                                      }
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .drive_folder_upload_rounded,
-                                                      size: width100 * 0.06,
-                                                    ),
-                                                  ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                contentPadding:
-                                                    EdgeInsets.only(left: 10),
-                                                hintText: '--',
-                                                hintStyle: TextStyle(),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                ? FileMode(
+                                    controller: _targetController,
+                                    resultController: _resultController,
+                                    firstButtonText: firstButtonText,
+                                    title: 'Target',
+                                    width100: width100,
+                                    onFilePickerResult: (result) =>
+                                        handleFileSelection(result,
+                                            _targetController, 'Target'),
                                   )
                                 : Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // Username TextField
-                                          Container(
-                                            width: width100,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  width: width100,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        vertical: 8.0),
-                                                    child: TextField(
-                                                      controller:
-                                                          _targetHostController,
-                                                      onChanged: (value) {
-                                                        setState(() {});
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelText:
-                                                            'Target Hostname',
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          // Password TextField
-                                          Container(
-                                            width: width100,
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    width: width100 * 0.475,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 8.0),
-                                                      child: TextField(
-                                                        controller:
-                                                            _targetUserController,
-                                                        onChanged: (value) {
-                                                          setState(() {});
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText:
-                                                              'Target Username',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: width100 * 0.475,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 8.0),
-                                                      child: TextField(
-                                                        controller:
-                                                            _targetPassController,
-                                                        onChanged: (value) {
-                                                          setState(() {});
-                                                        },
-                                                        obscureText: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          suffixIcon: Icon(Icons
-                                                              .visibility_off),
-                                                          labelText:
-                                                              'Target Password',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ]),
-                                          ),
-                                          // Connection String TextField
-                                          Container(
-                                            width: width100,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  width: width100 * 0.475,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        vertical: 8.0),
-                                                    child: TextField(
-                                                      controller:
-                                                          _targetDBNameController,
-                                                      onChanged: (value) {
-                                                        setState(() {});
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelText:
-                                                            'Target Database Name',
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: width100 * 0.475,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        vertical: 8.0),
-                                                    child: TextField(
-                                                      controller:
-                                                          _targetTableController,
-                                                      onChanged: (value) {
-                                                        setState(() {});
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelText:
-                                                            'Target Table Name',
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    child: ModeFields(
+                                      hostController: _targetHostController,
+                                      userController: _targetUserController,
+                                      passController: _targetPassController,
+                                      dbNameController: _targetDBNameController,
+                                      tableController: _targetTableController,
+                                      width100: width100,
+                                      labelTextPrefix: 'Target',
                                     ),
-                                  )
+                                  ),
                           ],
                         ),
                       ),
@@ -1400,43 +954,46 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                       ),
                     ),
                     onPressed: () {
-                      chooseHandler(firstButtonText);
+                      if (!isLoading) {
+                        chooseHandler(firstButtonText);
+                      }
                     },
                     child: Align(
                         alignment: Alignment.center,
-                        child: Text(firstButtonText)),
+                        child: isLoading
+                            ? SizedBox(
+                                width: width100 * 0.03,
+                                height: width100 * 0.03,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(firstButtonText)),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  reverse: true,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(
-                        color: Colors.grey.withOpacity(0.7),
-                      ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.5),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(0.7),
                     ),
-                    width: MediaQuery.of(context).size.width * 0.35,
-                    height: MediaQuery.of(context).size.height * 0.215,
-                    child: TextField(
-                      controller: _resultController,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      onChanged: (_) {},
-                      onSubmitted: (_) {},
-                      style: TextStyle(),
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: '--',
-                        hintStyle: TextStyle(),
+                  ),
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  height: MediaQuery.of(context).size.height * 0.215,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Text(
+                        _resultController.text.isNotEmpty
+                            ? _resultController.text
+                            : '--',
+                        style: TextStyle(),
                       ),
                     ),
                   ),
@@ -1458,75 +1015,86 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     children: multiKey == true
                         ? [
                             //Aswin: key sugessions
-                            LayoutBuilder(builder: (BuildContext context,
-                                BoxConstraints constraints) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  border: Border.all(
-                                    color: Colors.grey.withOpacity(0.7),
-                                  ),
-                                ),
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: SearchField(
-                                  key: const Key('searchfield'),
-                                  controller: _keyController1,
-                                  onSearchTextChanged: (query) {
-                                    return srcCandidateKeys
-                                        .where((option) => option
-                                            .toLowerCase()
-                                            .contains(query.toLowerCase()))
-                                        .map(
-                                          (option) =>
-                                              SearchFieldListItem<String>(
-                                            option,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(option),
-                                            ),
-                                          ),
-                                        )
-                                        .toList();
-                                  },
-                                  onTap: () {
-                                    srcpk = _keyController1.text;
-                                    print("src-pk: $srcpk");
-                                  },
-                                  itemHeight: 50,
-                                  suggestionStyle: const TextStyle(
-                                      fontSize: 16, color: Colors.black),
-                                  searchInputDecoration: InputDecoration(
-                                    hoverColor:
-                                        Color.fromARGB(255, 187, 202, 186),
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    contentPadding:
-                                        const EdgeInsets.only(left: 10),
-                                    hintText: 'Select Source Primary Key',
-                                  ),
-                                  suggestionsDecoration: SuggestionDecoration(
-                                      color: Colors.lightGreen.shade300,
-                                      borderRadius: BorderRadius.circular(2.0),
+                            Row(
+                              children: [
+                                LayoutBuilder(builder: (BuildContext context,
+                                    BoxConstraints constraints) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
                                       border: Border.all(
-                                          color: Color(0xFF3A4F39), width: 2)),
-                                  suggestions: srcCandidateKeys
-                                      .map(
-                                        (option) => SearchFieldListItem<String>(
-                                          option,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(option),
-                                          ),
+                                        color: Colors.grey.withOpacity(0.7),
+                                      ),
+                                    ),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: SearchField(
+                                      key: const Key('searchfield'),
+                                      controller: _keyController1,
+                                      onSearchTextChanged: (query) {
+                                        return srcCandidateKeys
+                                            .where((option) => option
+                                                .toLowerCase()
+                                                .contains(query.toLowerCase()))
+                                            .map(
+                                              (option) =>
+                                                  SearchFieldListItem<String>(
+                                                option,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(option),
+                                                ),
+                                              ),
+                                            )
+                                            .toList();
+                                      },
+                                      onTap: () {
+                                        srcpk = _keyController1.text;
+                                        print("src-pk: $srcpk");
+                                      },
+                                      itemHeight: 50,
+                                      suggestionStyle: const TextStyle(
+                                          fontSize: 16, color: Colors.black),
+                                      searchInputDecoration: InputDecoration(
+                                        hoverColor:
+                                            Color.fromARGB(255, 187, 202, 186),
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide.none,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                      )
-                                      .toList(),
-                                ),
-                              );
-                            }),
+                                        contentPadding:
+                                            const EdgeInsets.only(left: 10),
+                                        hintText: 'Select Source Primary Key',
+                                      ),
+                                      suggestionsDecoration:
+                                          SuggestionDecoration(
+                                              color: Colors.lightGreen.shade300,
+                                              borderRadius:
+                                                  BorderRadius.circular(2.0),
+                                              border: Border.all(
+                                                  color: Color(0xFF3A4F39),
+                                                  width: 2)),
+                                      suggestions: srcCandidateKeys
+                                          .map(
+                                            (option) =>
+                                                SearchFieldListItem<String>(
+                                              option,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(option),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  );
+                                }),
+                              ],
+                            ),
 
                             //Aswin: end 1st key sugessions
                             Container(
@@ -1595,63 +1163,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         : [],
                   ),
                 ),
-                // Container(
-                //   alignment: AlignmentDirectional.topStart,
-                //   width: MediaQuery.of(context).size.width * 0.5,
-                //   padding: EdgeInsets.only(
-                //     bottom: 25,
-                //   ),
-                //   child: RichText(
-                //     text: TextSpan(children: <TextSpan>[
-                //       TextSpan(
-                //         text: 'Results ',
-                //         style: TextStyle(
-                //           color: Colors.black,
-                //           fontSize: 16,
-                //           fontFamily: "Inter",
-                //           fontWeight: FontWeight.w600,
-                //         ),
-                //       ),
-                //       TextSpan(
-                //         text: '*',
-                //         style: TextStyle(
-                //           color: Colors.red,
-                //           fontSize: 16,
-                //           fontFamily: "Inter",
-                //           fontWeight: FontWeight.w600,
-                //         ),
-                //       ),
-                //     ]),
-                //   ),
-                // ),
                 SizedBox(height: 32.0),
-                // Container(
-                //   width: MediaQuery.of(context).size.width * 0.5,
-                //   height: MediaQuery.of(context).size.height * 0.075,
-                //   child: ElevatedButton(
-                //     style: ElevatedButton.styleFrom(
-                //       foregroundColor: Colors.white,
-                //       backgroundColor: Color(0xFF3A4F39),
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(8.0),
-                //       ),
-                //     ),
-                //     onPressed: () async {
-                //       switch (firstButtonText) {
-                //         case 'Map Data':
-                //           handleMapData();
-                //           break;
-                //         case 'Validate Data':
-                //           handleValidateData();
-                //           break;
-                //         case 'Download Report':
-                //           downloadReport(_resultController.text);
-                //           break;
-                //       }
-                //     },
-                //     child: Text(firstButtonText),
-                //   ),
-                // ),
                 showDiagram == true
                     ? Column(
                         children: [
@@ -1728,11 +1240,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 showErrors == true
                     ? Column(
                         children: [
-                          errorButton,
+                          // errorButton,
+                          scrollableTopContainer,
                           SizedBox(
                             height: 4,
                           ),
-                          if (!showerrbtn) scrollableTopContainer
                         ],
                       )
                     : Container(
