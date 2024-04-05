@@ -1,49 +1,11 @@
 import pandas as pd
+from validation3 import *
 import time
 from multiprocessing import Pool, Manager
 import json
 
 # Global variables
 num_processes = 6
-
-def substitute_pattern(pattern, row):
-    for key, value in row.items():
-        pattern = pattern.replace(f"{{{key}}}", str(value))
-    return pattern
-
-def generate_target_data(row, patterns):
-    target_data = {}
-    for key, pattern in patterns.items():
-        target_data[key] = substitute_pattern(pattern, row)
-    return pd.Series(target_data)
-
-def rowByRowCompare(sourceRow, targetRow, primaryKey):
-    outputString = ""
-    nullErrorString = ""
-    errorCount = 0
-
-    for column, sourceValue in sourceRow.items():
-        if column != primaryKey:
-            targetValue = targetRow[column] if column in targetRow.index else None
-
-            # Check for null values
-            if(pd.isnull(targetValue) or targetValue == '' or str(targetValue).strip() == ''):
-                if (pd.isnull(sourceValue) or sourceValue == '' or str(sourceValue).strip() == ''):
-                    # Both values are null
-                    continue
-                else:
-                    errorCount += 1
-                    nullErrorString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
-                    nullErrorString += f"Expected: {sourceValue}\n"
-                    nullErrorString += f"Found: {targetValue}\n"
-
-            # Check for non-null values
-            elif str(sourceValue) != str(targetValue):
-                errorCount += 1
-                outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
-                outputString += f"Expected: {sourceValue}\n"
-                outputString += f"Found: {targetValue}\n"
-    return outputString, nullErrorString
 
 def process_rows_dynamic(args):
     chunk, target_df, mappingDoc, primary_key = args
