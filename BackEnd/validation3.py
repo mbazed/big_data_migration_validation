@@ -9,11 +9,17 @@ import json  # Import the json module
 # Global variables
 
 mappingDoc = {}  # Initialize mappingDoc as an empty dictionary
+import math
 
 def substitute_pattern(pattern, row):
     for key, value in row.items():
-        pattern = pattern.replace(f"{{{key}}}", str(value))
+        if value is None or (isinstance(value, float) and math.isnan(value)):
+            pattern = pattern.replace(f"{{{key}}}", "")
+        else:
+            pattern = pattern.replace(f"{{{key}}}", str(value))
+    
     return pattern
+
 
 def generate_target_data(row, patterns):
     target_data = {}

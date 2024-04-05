@@ -357,8 +357,8 @@ def validateData():
     # else:
     #   print("No mappingDoc provided")
 
-    mapingDoc = json.loads(record.mapping_document)  #old
-    print(mapingDoc)
+    # mapingDoc = json.loads(record.mapping_document)  #old
+    # print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
     
     print("[⌄] validation request received...")
