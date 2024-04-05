@@ -36,9 +36,10 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
     source_df = sourceData
     target_df = targetData
 
-    outputString = []
+    mismatched_data_types = []
     mainNullErrorString = []
     missingRows = []
+    corruptedData = []
     duplicateRows = []
 
     start_time = time.time()
@@ -47,7 +48,6 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
 
         data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
         data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
-        mismatched_data_types = []
 
         # Compare data types for each column
         for column in data_types_source:
@@ -55,7 +55,7 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
                 if data_types_source[column] != data_types_target[column]:
                     mismatched_data_types.append(column)
             else:
-                outputString.append(f">> Column '{column}' not found in target DataFrame")
+                corruptedData.append(f"Column '{column}' not found in target DataFrame")
 
         # Split the source data into chunks for multiprocessing
         chunks = []
@@ -75,22 +75,22 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
 
         # Collect results
         for local_output_string, local_null_error_string in results:
-            outputString.extend(local_output_string)
+            corruptedData.extend(local_output_string)
             mainNullErrorString.extend(local_null_error_string)
 
     elif source_df.shape[0] < target_df.shape[0]:
-        outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
+        corruptedData.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
         duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
 
     else:
-        outputString.append(f"\nValues are missing in the target DataFrame.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
+        corruptedData.append(f">> Values are missing in the target DataFrame.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
         missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]
         if not missingRows.empty:
             missingRows_dict = missingRows.to_dict(orient='records')
             missingRows = missingRows_dict
-            outputString.append("\nMissing Rows:\n" + json.dumps(missingRows))
+            corruptedData.append("Missing Rows:" + json.dumps(missingRows))
         else:
-            outputString.append("\nNo Missing Rows Found")
+            corruptedData.append("No Missing Rows Found")
 
     end_time = time.time()
     processing_time = end_time - start_time
@@ -98,9 +98,9 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
 
     result_json = {
         "mismatchedDataTypes": mismatched_data_types,
-        "missingRows": missingRows,
         "nullErrorString": mainNullErrorString,
-        "outputString": ''.join(outputString),
+        "missingRows": missingRows,
+        "corruptedData": ''.join(corruptedData),
     }
 
     return json.dumps(result_json)
