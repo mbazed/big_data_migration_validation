@@ -7,53 +7,6 @@ import json
 # Global variables
 num_processes = 6
 
-def substitute_pattern(pattern, row):
-    for key, value in row.items():
-        if value is None or (isinstance(value, float) and math.isnan(value)):
-            pattern = pattern.replace(f"{{{key}}}", "")
-        else:
-            pattern = pattern.replace(f"{{{key}}}", str(value))
-    return pattern
-
-
-def generate_target_data(row, patterns):
-    target_data = {}
-    for key, pattern in patterns.items():
-        target_data[key] = substitute_pattern(pattern, row)
-    return pd.Series(target_data)
-
-def rowByRowCompare(sourceRow, targetRow, primaryKey):
-    outputString = ""
-    nullErrorString = ""
-    errorCount = 0
-
-    for column, sourceValue in sourceRow.items():
-        if column != primaryKey:
-            targetValue = targetRow[column] if column in targetRow.index else None
-
-            # Check for null values
-            if pd.isnull(targetValue) or targetValue == '' or str(targetValue).strip() == '':
-                if pd.isnull(sourceValue) or sourceValue == '' or str(sourceValue).strip() == '':
-                    # Both values are null
-                    continue
-                else:
-                    errorCount += 1
-                    nullErrorString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}"
-                    nullErrorString += f"Expected: {sourceValue}"
-                    nullErrorString += f"Found: {targetValue}"
-            else:
-                # Check for non-null values
-                if str(sourceValue) != str(targetValue):
-                    errorCount += 1
-                    outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}"
-                    outputString += f"Expected: {sourceValue}"
-                    outputString += f"Found: {targetValue}"
-
-    # logging.info(f"rowByRowCompare: primaryKey - {primaryKey}, sourceRow - {sourceRow}, targetRow - {targetRow}, outputString - {outputString}")
-    
-    return outputString, nullErrorString  # Return both outputString and nullErrorString
-
-
 def process_batch(args):
     batch, target_df, mapping_doc, primary_key = args
     local_output_string = []  # Local list to store errors
@@ -80,7 +33,7 @@ def process_batch(args):
 
     return local_output_string, local_null_error_string
 
-def dividedCompareParallelbatch(source_data, target_data, mapping_doc, primary_key):
+def dividedCompareParallelBatch(source_data, target_data, mapping_doc, primary_key):
     source_df = source_data
     target_df = target_data
 
@@ -113,8 +66,6 @@ def dividedCompareParallelbatch(source_data, target_data, mapping_doc, primary_k
         for local_output_string, local_null_error_string in results:
             corrupted_data.extend(local_output_string)
             main_null_error_string.extend(local_null_error_string)
-
-    # Rest of the code remains the same
 
     elif source_df.shape[0] < target_df.shape[0]:
         duplicateRows.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
