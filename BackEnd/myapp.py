@@ -63,7 +63,11 @@ def get_data():
             source_password = request.form.get('source_password')
             source_table = request.form.get('source_table')
             sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
-            source_json = sourcedata.to_json()
+            if(source_type == 'MongoDB'):
+                source_json = sourcedata.to_json(orient='records', lines=True)
+            else:
+                source_json = json.dumps(sourcedata)
+
             
         if(target_type == 'File Mode'):
             target_file = request.files['targetFile']
@@ -76,7 +80,10 @@ def get_data():
             target_password = request.form.get('target_password')
             target_table = request.form.get('target_table')
             targetdata = gbtodf(target_type,target_hostname,target_username,target_password,target_database,target_table)
-            target_json = targetdata.to_json()
+            if(target_type == 'MongoDB'):
+                target_json = targetdata.to_json(orient='records', lines=True)
+            else:
+                target_json = json.dumps(sourcedata)
             
         record = DataRecord(
                 request_id=request_id,
@@ -117,6 +124,10 @@ def get_from_db():
         try:
             sourcedata = gbtodf(source_database_type,source_hostname,source_username,source_password,source_database,source_table)
             targetdata = gbtodf(target_database_type,target_hostname,target_username,target_password,target_database,target_table)
+            # if(source_database_type == 'MongoDB'):
+            #     source_json = sourcedata
+            #     target_json = targetdata
+            # else:
             source_json = sourcedata.to_json()
             target_json = targetdata.to_json()
 
