@@ -69,6 +69,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     duplicateRows = []
     nullErrorString = []  # Initialize nullErrorString
 
+    CerrorCount = 0
+
     start_time = time.time()
 
     if source_df.shape[0] == target_df.shape[0]:
@@ -140,12 +142,15 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
 
     # Construct JSON object
     result_json = {
+    "missingRowsCount": len(missingRows),
+    "mismatchedCount": len(mismatched_data_types),
+    "nullErrorCount": NerrorCount,
+    "corruptedCount": CerrorCount,
     "missingRows": missingRows,
     "mismatchedDataTypes": mismatched_data_types,
     "nullErrorString": nullErrorString,
     "corrupedData": ''.join(corrupedData)
    }
 
-  
     # print(result_json)
     return json.dumps(result_json)  # Return the JSON object
