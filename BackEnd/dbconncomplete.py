@@ -46,7 +46,7 @@ def connect_oracle(host, user, password, database):
     connection = cx_Oracle.connect(user=user, password=password, dsn=dsn)
     return connection
 
-def fetch_table_to_dataframe(connection, table_name):
+def fetch_table_to_dataframe_sql(connection, table_name):
     cursor = connection.cursor()
     query = f"SELECT * FROM {table_name}"
     cursor.execute(query)
@@ -85,7 +85,20 @@ def gbtodf(db_type,host,user,password,database,table_name):
     # database = input("Enter the database name: ")
     # table_name = input("Enter the table name: ")
 
+    # Fetch data from the collection
+    cursor = collection.find()
+    data = list(cursor)
 
+    # Convert data to Pandas DataFrame
+    df = pd.DataFrame(data)
+
+    # Close the MongoDB connection
+    # connection.close()
+    
+    return df
+
+def gbtodf(db_type,host,user,password,database,table_name):
+    
     # Connect to the selected database
     if db_type == 'MongoDB':
         connection = connect_mongodb(host)
@@ -104,8 +117,6 @@ def gbtodf(db_type,host,user,password,database,table_name):
     else:
         df = fetch_table_to_dataframe(connection, table_name)
 
-    # Close the connection
     connection.close()
+    print(df)
     return df
-
-
