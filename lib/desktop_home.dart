@@ -81,7 +81,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   List<bool> isExpandedList = [];
 
   var missingRows = [];
-  var outputString = [];
+  var outputString = "";
   var nullErrorString = [];
 
   @override
@@ -130,7 +130,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       lineNumber = 0;
       inputRuleString = '';
       missingRows = [];
-      outputString = [];
+      outputString = "";
       nullErrorString = [];
       downloadReportCompleted = false;
       isExpandedList = [];
@@ -297,6 +297,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         validateUrl,
         body: {
           'request_id': requestID,
+          'mappingDoc': inputRuleString,
         },
       );
 
@@ -319,7 +320,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         print('ValidationDoc Datatype: ${validationDoc.runtimeType}');
 
         missingRows = parsedValidationDoc['missingRows'] ?? [];
-        outputString = [parsedValidationDoc['outputString']];
+        outputString = parsedValidationDoc['corrupedData'] ?? "";
         nullErrorString = parsedValidationDoc['nullErrorString'] ?? [];
 
         responseLines = validationDoc.toString().split('\n');
@@ -487,45 +488,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       // Handle other errors
     }
   }
-
-  // void handleValidateData() async {
-  //   setState(() {
-  //     lineNumber = 0;
-  //   });
-  //   try {
-  //     final responseValidation = await http.post(
-  //       validateUrl,
-  //       body: {
-  //         'request_id': requestID,
-  //         'mappingDoc': inputRuleString,
-  //       },
-  //     );
-
-  //     if (responseValidation.statusCode == 200) {
-  //       var responseData = responseValidation.body;
-  //       var data = jsonDecode(responseData);
-  //       var validationDoc = data['validationDoc'].toString();
-  //       var validationStatus = data['message'].toString();
-  //       print('[+] Validation successful!  \n' + validationStatus);
-
-  //       // Display response in ListView
-  //       _resultController.text = '\n Validation Status: $validationStatus\n';
-
-  //       // Add validationDoc to a list for ListView
-  //       lineNumber = 0;
-  //       responseLines = validationDoc.split('\n');
-  //       setState(() {
-  //         showDiagram = false;
-  //         _resultController.text += responseLines.first + '\n';
-  //         showErrors = true;
-  //       });
-  //     } else {
-  //       print('[-] Validation failed: ${responseValidation.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     print('[!] Error during validation: $e');
-  //   }
-  // }
 
   Future<void> handleFindPrimaryKeys() async {
     setState(() {
