@@ -75,6 +75,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   List<String> responseLines = [];
   int lineNumber = 0;
   String inputRuleString = '';
+  String inputRuleString2 = '';
 
   String fileName = 'No file selected';
   List<bool> isExpandedList = [];
@@ -1227,6 +1228,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                             0.1 *
                                             max(sourceColumnList.length,
                                                 targetColumnList.length),
+                                    onTextFieldValueChanged: (item, value) {
+                                      // Update inputRuleString when a text field value changes
+                                      // updateInputRuleString(item, value);
+                                    },
                                   )
                                 : Container(
                                     alignment: Alignment.center,

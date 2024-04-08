@@ -14,6 +14,8 @@ from dbconncomplete import *
 from comonPk import *
 from validationThreading import *
 from validation3 import *
+from validationThreading import *
+from validationThreadingPool import *
 import uuid  # for generating unique request IDs
 
 app = Flask(__name__)
@@ -60,7 +62,11 @@ def get_data():
             source_password = request.form.get('source_password')
             source_table = request.form.get('source_table')
             sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
-            source_json = sourcedata.to_json()
+            if(source_type == 'MongoDB'):
+                source_json = sourcedata.to_json(orient='records', lines=True)
+            else:
+                source_json = sourcedata.to_json()
+
             
         if(target_type == 'File Mode'):
             target_file = request.files['targetFile']
@@ -73,7 +79,10 @@ def get_data():
             target_password = request.form.get('target_password')
             target_table = request.form.get('target_table')
             targetdata = gbtodf(target_type,target_hostname,target_username,target_password,target_database,target_table)
-            target_json = targetdata.to_json()
+            if(target_type == 'MongoDB'):
+                target_json = targetdata.to_json(orient='records', lines=True)
+            else:
+                target_json = targetdata.to_json()
             
         record = DataRecord(
                 request_id=request_id,
@@ -250,6 +259,11 @@ def findKeys():
     print("[^] returning response...")    
     print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
     return jsonify({  'source-columns':sourceColumns.split(','),'target-columns':targetColumns.split(','), 'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
+
+
+def combine_columns(row,col_list):
+    return ''.join(str(row[col.strip()]) for col in col_list)
+
 @app.route('/mapData', methods=['POST'])
 def mapData():
     connectionsList=[]
@@ -267,6 +281,27 @@ def mapData():
     record = DataRecord.query.filter_by(request_id=request_id).first()
     sourcedata = json_to_df(record.source_data)
     targetdata= json_to_df(record.target_data)
+    
+    
+    srcpkList = sourcePrimaryKey.strip().split(',')
+    tarpkList = targetPrimaryKey.strip().split(',')
+    
+    if len(srcpkList) > 1:
+        print("composite pk for src")
+        sourcedata[sourcePrimaryKey]= sourcedata.apply(combine_columns,args=(srcpkList,), axis=1)
+        record.source_data= sourcedata.to_json()
+    if len(tarpkList) > 1:
+        print("composite pk for tar")
+        targetdata[targetPrimaryKey]= targetdata.apply(combine_columns,args=(tarpkList,), axis=1)
+        record.target_data=targetdata.to_json()
+        
+    print("[⌄] Data map request received...")
+    print("with source-Primary-Key:",sourcePrimaryKey,"target-Primary-Key:",targetPrimaryKey)
+    
+    
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
+
     
     
     print("[⌄] Data map request received...")
@@ -313,7 +348,23 @@ def validateData():
     
     sourcedata = json_to_df(record.source_data)
     targetdata= json_to_df(record.target_data)
-    mapingDoc = json.loads(record.mapping_document)
+    mapingDoc = request.form.get('mappingDoc') #new
+    
+    # if mapingDoc:
+    #  try:
+    mappingDoc_strip = {k.strip(): v.strip() for k, v in (item.split(':') for item in mapingDoc.split('\n') if ':' in item)}
+    dictionary_format = {}
+    for key, value in mappingDoc_strip.items():
+        dictionary_format[key] = value.strip()
+    mapingDoc = dictionary_format
+    print(mapingDoc)
+    #  except ValueError:
+    #     print("Invalid mappingDoc format")
+    # else:
+    #   print("No mappingDoc provided")
+
+    # mapingDoc = json.loads(record.mapping_document)  #old
+    # print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
     
     print("[⌄] validation request received...")
@@ -322,7 +373,17 @@ def validateData():
     
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
-        resultString = dividedCompareParallel(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        print("Rows:",sourcedata.shape[0])
+        if(sourcedata.shape[0]<9000):
+            print("single processing")
+            
+            resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        # for i in range(10,15):
+        #     print(i,end=" :")
+        else:
+            print("multiprocessing")
+            resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        
     except Exception as e:
     # Print the exception message
         
