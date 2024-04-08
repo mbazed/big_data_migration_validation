@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 class MyCustomDropdown<T> extends StatefulWidget {
   late final String selectedMode;
   final Function(String) onModeChanged;
+  final String title;
+  final double width100;
 
   MyCustomDropdown({
     Key? key,
     required this.selectedMode,
     required this.onModeChanged,
+    required this.title,
+    required this.width100,
   }) : super(key: key);
 
   @override
@@ -45,6 +49,9 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      getIconOrImage('File Mode');
+    });
 // Initialize selected mode
   }
 
@@ -54,6 +61,7 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    double width100 = widget.width100;
     return CustomDropdown<String>(
       canCloseOutsideBounds: true,
       decoration: CustomDropdownDecoration(
@@ -87,6 +95,7 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
                 Text(
                   item.toString(),
                   style: TextStyle(
+                    // fontSize: width100 * 0.1,
                     fontSize: 14,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w400,
@@ -99,7 +108,7 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
         );
       },
       headerBuilder: (BuildContext context, String? selectedItem) {
-        Widget iconOrImage = getIconOrImage(selectedItem);
+        Widget iconOrImage = getIconOrImage(selectedItem ?? 'File Mode');
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,9 +119,9 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
                 iconOrImage,
                 SizedBox(width: 8),
                 Text(
-                  selectedItem ?? '',
+                  selectedItem!,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: width100 * 0.05,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w600,
                   ),
@@ -120,10 +129,10 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
               ],
             ),
             Text(
-              'Source',
+              widget.title,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.5),
-                fontSize: 14,
+                fontSize: width100 * 0.0,
                 fontFamily: "Montserrat",
                 fontWeight: FontWeight.w600, // Set the desired font size
               ),
@@ -145,7 +154,7 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
               ),
             ),
             Text(
-              'Source',
+              widget.title,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.5),
                 fontSize: 14,

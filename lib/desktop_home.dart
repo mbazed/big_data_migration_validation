@@ -570,8 +570,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       if (missingRows.isNotEmpty)
         "Missing Rows Errors":
             missingRows.map((row) => row.toString()).toList(),
-      if (outputString.isNotEmpty)
-        "Output Errors": [outputString.toString()],
+      if (outputString.isNotEmpty) "Output Errors": [outputString.toString()],
       if (nullErrorString.isNotEmpty)
         "Null String Errors":
             nullErrorString.map((error) => error.toString()).toList(),
@@ -871,6 +870,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                 child: MyCustomDropdown(
                                   selectedMode: sourceselectedMode,
                                   onModeChanged: handleSourceModeChanged,
+                                  title: 'Source',
+                                  width100: width100,
                                 ),
                               ),
                               sourceselectedMode == 'File Mode'
@@ -909,7 +910,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                     MediaQuery.of(context).size.height * 0.065,
                                 child: MyCustomDropdown(
                                     selectedMode: targetselectedMode,
-                                    onModeChanged: handleTargetModeChanged),
+                                    onModeChanged: handleTargetModeChanged,
+                                    title: 'Target',
+                                    width100: width100),
                               ),
                             ),
                             targetselectedMode == 'File Mode'
