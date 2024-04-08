@@ -240,7 +240,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  Future handleMapData() async {
+  Future<void> handleMapData() async {
     if (multiKey) {
       srcpk = _keyController1.text;
       trgpk = _keyController2.text;
@@ -1335,7 +1335,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                                 targetColumnList.length),
                                     onTextFieldValueChanged: (item, value) {
                                       // Update inputRuleString when a text field value changes
-                                      // updateInputRuleString(item, value);
+                                      updateInputRuleString(item, value);
                                     },
                                   )
                                 : Container(
