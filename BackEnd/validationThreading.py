@@ -46,10 +46,9 @@ def rowByRowCompare(sourceRow, targetRow, primaryKey):
                 outputString += f">> For {primaryKey}: {sourceRow[primaryKey]}, Column {column}\n"
                 outputString += f"Expected: {sourceValue}\n"
                 outputString += f"Found: {targetValue}\n"
-    # print(outputString)  # Printing here
     return outputString, nullErrorString
 
-def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key, queue):
+def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key, output_queue, null_error_queue):
     local_output_string = []  # Local list to store errors
     local_null_error_string = []  # Local list to store null errors
     for _, srcRow in chunk.iterrows():
@@ -70,7 +69,8 @@ def process_rows_dynamic(chunk, target_df, mappingDoc, primary_key, queue):
             local_output_string.append(f">> Primary key {primary_key_value} not found in target_df")
             local_output_string.append(srcRow)
 
-    queue.put((local_output_string, local_null_error_string))  # Put local lists in the queue
+    output_queue.put(local_output_string)  # Put local error list in the output queue
+    null_error_queue.put(local_null_error_string)  # Put local null error list in the null error queue
 
 def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key):
     mappingDoc = mappingDoc_input
@@ -82,9 +82,10 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
     missingRows = []
     duplicateRows = []
 
-    # Create a multiprocessing Manager to manage the queue
+    # Create a multiprocessing Manager to manage the queues
     manager = Manager()
-    queue = manager.Queue()
+    output_queue = manager.Queue()
+    null_error_queue = manager.Queue()
 
     # Create and start multiple processes
     processes = []
@@ -95,8 +96,6 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
 
         data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
         data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
-        print(data_types_source)
-        print(data_types_target)
         mismatched_data_types = []
 
         # Compare data types for each column
@@ -104,20 +103,14 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
             if column in data_types_target:
                 if data_types_source[column] != data_types_target[column]:
                     mismatched_data_types.append(column)
-                    mismatched_data_types.append(f"Column '{column}': Source type - {data_types_source[column]}, Target type - {data_types_target.get(column, 'Not found')}")
             else:
                 outputString.append(f">> Column '{column}' not found in target DataFrame")
-        
-        # Append mismatched data types to outputString
-        # if mismatched_data_types:
-        #     outputString.append("Mismatched Data Types:")
-        #     for column in mismatched_data_types:
-        #         outputString.append(f"Column '{column}': Source type - {data_types_source[column]}, Target type - {data_types_target.get(column, 'Not found')}")
-        # print(mismatched_data_types)
 
         for i in range(num_processes):
             chunk_size = source_df.shape[0] // num_processes
-            source_df_chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
+            start_index = i * chunk_size
+            end_index = (i + 1) * chunk_size if i < num_processes - 1 else source_df.shape[0]
+            source_df_chunk = source_df[start_index:end_index ]
             process = multiprocessing.Process(target=process_rows_dynamic, args=(source_df_chunk, target_df, mappingDoc, primary_key, queue))
             process.start()
             processes.append(process)
@@ -125,11 +118,14 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
         for process in processes:
             process.join()
 
-        # Collect errors from the queue
-        while not queue.empty():
-            local_output_string, local_null_error_string = queue.get()
-
+        # Collect errors from the output queue
+        while not output_queue.empty():
+            local_output_string = output_queue.get()
             outputString.extend(local_output_string) 
+
+        # Collect null errors from the null error queue
+        while not null_error_queue.empty():
+            local_null_error_string = null_error_queue.get()
             mainNullErrorString.extend(local_null_error_string)
 
         errorCount = ''.join(outputString).count(">>")
@@ -140,28 +136,26 @@ def dividedCompareParallel(sourceData, targetData, mappingDoc_input, primary_key
     elif source_df.shape[0] < target_df.shape[0]:
         outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
         duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
-        # print(duplicateRows)  # Collect duplicate rows
+
     else:
         outputString.append(f"\nValues are missing in the target DataFrame.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
-        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
-        # print(missingRows)
+        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]
         if not missingRows.empty:
-            # Convert missingRows DataFrame to a dictionary
             missingRows_dict = missingRows.to_dict(orient='records')
             missingRows = missingRows_dict
-            outputString.append("\nMissing Rows:\n" + json.dumps(missingRows))  # Serialize to JSON format
+            outputString.append("\nMissing Rows:\n" + json.dumps(missingRows))
         else:
-            outputString.append("\nNo Missing Rows Found")  # If missingRows is empty
+            outputString.append("\nNo Missing Rows Found")
     
-    end_time = time.time()  # Measure end time
+    end_time = time.time()
     processing_time = end_time - start_time
     print(processing_time)
 
     result_json = {
-        # "mismatchedDataTypes": mismatched_data_types,
+        "mismatchedDataTypes": mismatched_data_types,
         "missingRows": missingRows,
+        "nullErrorString": mainNullErrorString,
         "outputString": ''.join(outputString),
-        "nullErrorString": mainNullErrorString
     }
-  
+
     return json.dumps(result_json)

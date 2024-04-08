@@ -128,7 +128,10 @@ def mappColumn(src, trg, source_key_column, target_key_column):
     global connectionsList
     Sourcedata=df_to_list_of_dicts(src)
     TargetData=df_to_list_of_dicts(trg)
-    threshold = TargetData.__len__() * 0.05
+    if TargetData.__len__() >10000:
+        threshold = 100
+    else:
+        threshold = TargetData.__len__() * 0.05
     
     connectionsList = []
     hash_map={}

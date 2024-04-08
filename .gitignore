@@ -136,4 +136,9 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 BackEnd/instance/data.db
-BackEnd/instance/data.db
+*.txt
+*.db
+BackEnd/mappingLog.txt
+BackEnd/Data/scedule.xlsx
+BackEnd/mappingLog.txt
+BackEnd/mappingLog.txt
