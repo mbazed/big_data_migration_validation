@@ -157,6 +157,68 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     });
   }
 
+  void clearState() {
+    setState(() {
+      sourceselectedMode = 'File Mode';
+      targetselectedMode = 'File Mode';
+      source = '';
+      target = '';
+      message = '';
+      sourceData = '';
+      targetData = '';
+      firstButtonText = 'Upload';
+      multiKey = false;
+      requestID = "";
+      showerrbtn = true;
+      targetResult = null;
+      sourceResult = null;
+      sourceColumnList = [];
+      targetColumnList = [];
+      connections = [];
+      _sourceController.clear();
+      _targetController.clear();
+      _resultController.clear();
+      _sourceUserController.clear();
+      _sourcePassController.clear();
+      _sourceHostController.clear();
+      _sourceDBNameController.clear();
+      _sourceTableController.clear();
+      _targetUserController.clear();
+      _targetPassController.clear();
+      _targetHostController.clear();
+      _targetDBNameController.clear();
+      _targetTableController.clear();
+      _keyController1.clear();
+      _keyController2.clear();
+      // src2dKeys = [];
+      // trg2dKeys = [];
+      srcCandidateKeys = [];
+      trgCandidateKeys = [];
+      responseLines = [];
+      lineNumber = 0;
+      inputRuleString = '';
+      fileName = 'No file selected';
+    });
+  }
+
+// Define the inline function to update the inputRuleString
+  void updateInputRuleString(String item, String value) {
+    // Update the inputRuleString based on the changed text field value
+    // Assuming inputRuleString contains key-value pairs separated by '\n'
+    print("+++++++++++++");
+    print(inputRuleString);
+    print("+++++++++++++");
+    Map<String, String> rules = createRuleDictionary(inputRuleString);
+    rules[item.trim()] = value;
+
+    // Update the inputRuleString by joining the rules back
+    setState(() {
+      inputRuleString = rules.entries
+          .map((entry) => '${entry.key}: ${entry.value}')
+          .join('\n');
+    });
+  }
+
   Future<void> handleFileSelection(FilePickerResult? result,
       TextEditingController controller, String title) async {
     if (result != null) {
@@ -178,7 +240,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     }
   }
 
-  Future<void> handleMapData() async {
+  Future handleMapData() async {
     if (multiKey) {
       srcpk = _keyController1.text;
       trgpk = _keyController2.text;
@@ -281,6 +343,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   Future<void> handleUpload() async {
     setState(() {
       inputRuleString = "";
+      multiKey = false;
+      showDiagram = false;
+      showErrors = false;
+      showerrbtn = false;
     });
     var request;
     request = http.MultipartRequest('POST', uploadDataUrl);
@@ -421,6 +487,45 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       // Handle other errors
     }
   }
+
+  // void handleValidateData() async {
+  //   setState(() {
+  //     lineNumber = 0;
+  //   });
+  //   try {
+  //     final responseValidation = await http.post(
+  //       validateUrl,
+  //       body: {
+  //         'request_id': requestID,
+  //         'mappingDoc': inputRuleString,
+  //       },
+  //     );
+
+  //     if (responseValidation.statusCode == 200) {
+  //       var responseData = responseValidation.body;
+  //       var data = jsonDecode(responseData);
+  //       var validationDoc = data['validationDoc'].toString();
+  //       var validationStatus = data['message'].toString();
+  //       print('[+] Validation successful!  \n' + validationStatus);
+
+  //       // Display response in ListView
+  //       _resultController.text = '\n Validation Status: $validationStatus\n';
+
+  //       // Add validationDoc to a list for ListView
+  //       lineNumber = 0;
+  //       responseLines = validationDoc.split('\n');
+  //       setState(() {
+  //         showDiagram = false;
+  //         _resultController.text += responseLines.first + '\n';
+  //         showErrors = true;
+  //       });
+  //     } else {
+  //       print('[-] Validation failed: ${responseValidation.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     print('[!] Error during validation: $e');
+  //   }
+  // }
 
   Future<void> handleFindPrimaryKeys() async {
     setState(() {
