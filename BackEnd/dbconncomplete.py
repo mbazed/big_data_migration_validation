@@ -84,7 +84,6 @@ def fetch_table_to_dataframe_mongo(connection, database, table_name):
         print(f"Failed to retrieve data from collection: {e}")
         return None
 
-
 def gbtodf(db_type,host,user,password,database,table_name):
     
     # Connect to the selected database
@@ -104,5 +103,6 @@ def gbtodf(db_type,host,user,password,database,table_name):
     else:
         df = fetch_table_to_dataframe_sql(connection, table_name)
 
+    # Close the connection
     connection.close()
     return df
