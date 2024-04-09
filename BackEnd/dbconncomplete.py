@@ -37,7 +37,6 @@ def connect_mysql(host, user, password, database):
         user=user,
         password=password,
         database=database,
-        
     )
     return connection
 
@@ -85,26 +84,6 @@ def fetch_table_to_dataframe_mongo(connection, database, table_name):
         print(f"Failed to retrieve data from collection: {e}")
         return None
 
-def gbtodf(db_type,host,user,password,database,table_name):
-    # User input
-    # db_type = input("Enter the database type (mongodb/mysql/oracle): ").lower()
-    # host = input("Enter the host: ")
-    # user = input("Enter the user: ")
-    # password = input("Enter the password: ")
-    # database = input("Enter the database name: ")
-    # table_name = input("Enter the table name: ")
-
-    # Fetch data from the collection
-    cursor = collection.find()
-    data = list(cursor)
-
-    # Convert data to Pandas DataFrame
-    df = pd.DataFrame(data)
-
-    # Close the MongoDB connection
-    # connection.close()
-    
-    return df
 
 def gbtodf(db_type,host,user,password,database,table_name):
     
@@ -122,10 +101,8 @@ def gbtodf(db_type,host,user,password,database,table_name):
     # Fetch table into a Pandas DataFrame
     if db_type == 'MongoDB':
         df = fetch_table_to_dataframe_mongo(connection, database,table_name)
-        print(df)
     else:
         df = fetch_table_to_dataframe_sql(connection, table_name)
 
     connection.close()
-    print(df)
     return df
