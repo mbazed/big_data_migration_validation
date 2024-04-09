@@ -961,6 +961,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       tableController: _sourceTableController,
                                       width100: width100,
                                       labelTextPrefix: 'Source',
+                                      mode: sourceselectedMode
                                     ),
                             ],
                           ),
@@ -1004,6 +1005,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       tableController: _targetTableController,
                                       width100: width100,
                                       labelTextPrefix: 'Target',
+                                      mode: targetselectedMode,
                                     ),
                                   ),
                           ],

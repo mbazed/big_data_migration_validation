@@ -121,7 +121,7 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
                 Text(
                   selectedItem!,
                   style: TextStyle(
-                    fontSize: width100 * 0.05,
+                    fontSize: width100 * 0.025,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w600,
                   ),
@@ -353,7 +353,7 @@ class RowContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: children
             .map((child) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: child,
                 ))
             .toList(),
@@ -370,6 +370,7 @@ class ModeFields extends StatelessWidget {
   final TextEditingController tableController;
   final double width100;
   final String labelTextPrefix;
+  final String? mode;
 
   const ModeFields({
     Key? key,
@@ -380,6 +381,7 @@ class ModeFields extends StatelessWidget {
     required this.tableController,
     required this.width100,
     required this.labelTextPrefix,
+    required this.mode,
   }) : super(key: key);
 
   @override
@@ -392,10 +394,11 @@ class ModeFields extends StatelessWidget {
           children: [
             BuildTextField(
                 controller: hostController,
-                labelText: '$labelTextPrefix Host',
+                labelText: mode == 'MongoDB'? '$labelTextPrefix Connection String' :'$labelTextPrefix Host',
                 width100: width100),
           ],
         ),
+        if (mode != 'MongoDB')
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -418,7 +421,7 @@ class ModeFields extends StatelessWidget {
                 width100: width100 * 0.475),
             BuildTextField(
                 controller: tableController,
-                labelText: '$labelTextPrefix Table Name',
+                labelText: mode == 'MongoDB'? '$labelTextPrefix Collection Name' : '$labelTextPrefix Table Name',
                 width100: width100 * 0.475)
           ],
         ),
