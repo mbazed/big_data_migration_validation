@@ -15,6 +15,8 @@ from dbconncomplete import *
 from comonPk import *
 from commonCompositePk import get_two_keys
 from validation3 import *
+from sampling import *
+from validationThreading import *
 from cryptography.fernet import Fernet
 import uuid  # for generating unique request IDs
 
@@ -88,8 +90,8 @@ def get_data():
             
         record = DataRecord(
                 request_id=request_id,
-                source_data=decrypt_data(source_json),
-                target_data=decrypt_data(target_json),
+                source_data=source_json,
+                target_data=target_json,
            
             )
         db.session.add(record)
@@ -131,8 +133,8 @@ def get_from_db():
         # Store data in the database with the associated request ID
             record = DataRecord(
                 request_id=request_id,
-                source_data=decrypt_data(source_json),
-                target_data=decrypt_data(target_json),
+                source_data=source_json,
+                target_data=target_json,
            
                 )
             db.session.add(record)
@@ -182,8 +184,8 @@ def upload_files():
         # Store data in the database with the associated request ID
             record = DataRecord(
                 request_id=request_id,
-                source_data=decrypt_data(source_json),
-                target_data=decrypt_data(target_json),
+                source_data=source_json,
+                target_data=target_json,
            
             )
             db.session.add(record)
@@ -218,8 +220,8 @@ def findKeys():
     
     
 
-    sourcedata = json_to_df(record.source_data)
-    targetdata = json_to_df(record.target_data)
+    sourcedata = json_to_df(decrypt_data(record.source_data))
+    targetdata = json_to_df(decrypt_data(record.target_data))
     
     sourceColumns =(',').join( sourcedata.columns.tolist())
     targetColumns=(',').join( targetdata.columns.tolist())
@@ -281,8 +283,8 @@ def mapData():
     
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
-    sourcedata = json_to_df(record.source_data)
-    targetdata= json_to_df(record.target_data)
+    sourcedata = json_to_df(decrypt_data(record.source_data))
+    targetdata= json_to_df(decrypt_data(record.target_data))
     
     
     srcpkList = sourcePrimaryKey.strip().split(',')
@@ -348,18 +350,22 @@ def validateData():
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
     
-    sourcedata = json_to_df(record.source_data)
-    targetdata= json_to_df(record.target_data)
+    sourcedata = json_to_df(decrypt_data(record.source_data))
+    targetdata= json_to_df(decrypt_data(record.target_data))
     mapingDoc = json.loads(record.mapping_document)
     targetPrimaryKey = record.target_primary_key
+   
+    sample_percent = 10
     
+    sampled_source_data, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
+    sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
     print("[⌄] validation request received...")
     
     resultString = "Valiadation Failed!"
     
     # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
     try:
-        resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        resultString =dividedCompareParallel(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
     except Exception as e:
     # Print the exception message
         
