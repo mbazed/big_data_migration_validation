@@ -234,6 +234,8 @@ def findKeys():
      
     decrypt_source_data = decrypt_data(encrypted_source_data)
     decrypt_target_data = decrypt_data(encrypted_target_data)
+    # decrypt_source_data = record.source_data
+    # decrypt_target_data = record.target_data
     sourcedata = pd.read_json( decrypt_source_data)
     targetdata= pd.read_json(decrypt_target_data) 
     
@@ -302,8 +304,17 @@ def mapData():
     record = DataRecord.query.filter_by(request_id=request_id).first()
     encrypted_source_data = record.source_data
     encrypted_target_data = record.target_data
-    sourcedata = json_to_df(decrypt_data(encrypted_source_data))
-    targetdata= json_to_df(decrypt_data(encrypted_target_data))
+     
+    decrypt_source_data = decrypt_data(encrypted_source_data)
+    decrypt_target_data = decrypt_data(encrypted_target_data)
+    # decrypt_source_data = record.source_data
+    # decrypt_target_data = record.target_data
+    sourcedata = pd.read_json( decrypt_source_data)
+    targetdata= pd.read_json(decrypt_target_data) 
+    # encrypted_source_data = record.source_data
+    # encrypted_target_data = record.target_data
+    # sourcedata = json_to_df(decrypt_data(encrypted_source_data))
+    # targetdata= json_to_df(decrypt_data(encrypted_target_data))
     
     
     srcpkList = sourcePrimaryKey.strip().split(',')
@@ -366,7 +377,7 @@ def mapData():
 @app.route('/validateData', methods=['POST'])
 def validateData():
     request_id = request.form.get('request_id')
-    
+   
     record = DataRecord.query.filter_by(request_id=request_id).first()
     if record:
         encrypted_source_data = record.source_data
@@ -376,12 +387,13 @@ def validateData():
             decrypted_source_data = decrypt_data(encrypted_source_data)
             decrypted_target_data = decrypt_data(encrypted_target_data)
 
-            sourcedata = json_to_df(decrypted_source_data)
-            targetdata= json_to_df(decrypted_target_data)
+            # sourcedata = json_to_df(decrypted_source_data)
+            # targetdata= json_to_df(decrypted_target_data)
         else:
             print("[⌄] Error: encrypted data is missing.")
 
-    
+    sourcedata = pd.read_json( decrypted_source_data)
+    targetdata= pd.read_json(decrypted_target_data) 
     mapingDoc = json.loads(record.mapping_document)
     targetPrimaryKey = record.target_primary_key
    
