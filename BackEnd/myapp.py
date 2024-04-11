@@ -16,9 +16,10 @@ from comonPk import *
 from commonCompositePk import get_two_keys
 from validation3 import *
 from sampling import *
-from validationThreading import *
+# from validationThreading import *
 from cryptography.fernet import Fernet
 import uuid  # for generating unique request IDs
+import logging
 
 app = Flask(__name__)
 CORS(app)
@@ -45,10 +46,19 @@ def encrypt_data(data):
     encrypted_data = cipher_suite.encrypt(data.encode())
     return encrypted_data
 
-def decrypt_data(data):
-    decrypted_data = cipher_suite.decrypt(data.decode())
-    return decrypted_data
+# def decrypt_data(encrypted_data):
+#     decrypted_data = cipher_suite.decrypt(encrypted_data)
+#     return decrypted_data.decode()
 
+
+
+def decrypt_data(encrypted_data):
+    try:
+        decrypted_data = cipher_suite.decrypt(encrypted_data)
+        return decrypted_data.decode()
+    except Exception as e:
+        logging.error(f"Decryption failed: {e}")
+        return None
 # Create tables within the application context
 with app.app_context():
     db.create_all()
@@ -140,6 +150,7 @@ def get_from_db():
             db.session.add(record)
             db.session.commit()
 
+            # print(sourcedata,targetdata)
             message = '[+] Files Received successfully'
             print(message , "with request_id:", request_id)
             return jsonify({'message': message, 'request_id': request_id})
@@ -218,10 +229,16 @@ def findKeys():
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
     
+    encrypted_source_data = record.source_data
+    encrypted_target_data = record.target_data
+     
+    decrypt_source_data = decrypt_data(encrypted_source_data)
+    decrypt_target_data = decrypt_data(encrypted_target_data)
+    sourcedata = pd.read_json( decrypt_source_data)
+    targetdata= pd.read_json(decrypt_target_data) 
     
 
-    sourcedata = json_to_df(decrypt_data(record.source_data))
-    targetdata = json_to_df(decrypt_data(record.target_data))
+    # print(targetPrimaryKey,sourcedata,targetdata)
     
     sourceColumns =(',').join( sourcedata.columns.tolist())
     targetColumns=(',').join( targetdata.columns.tolist())
@@ -283,8 +300,10 @@ def mapData():
     
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
-    sourcedata = json_to_df(decrypt_data(record.source_data))
-    targetdata= json_to_df(decrypt_data(record.target_data))
+    encrypted_source_data = record.source_data
+    encrypted_target_data = record.target_data
+    sourcedata = json_to_df(decrypt_data(encrypted_source_data))
+    targetdata= json_to_df(decrypt_data(encrypted_target_data))
     
     
     srcpkList = sourcePrimaryKey.strip().split(',')
@@ -349,9 +368,20 @@ def validateData():
     request_id = request.form.get('request_id')
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
+    if record:
+        encrypted_source_data = record.source_data
+        encrypted_target_data = record.target_data
+
+        if encrypted_source_data and encrypted_target_data:
+            decrypted_source_data = decrypt_data(encrypted_source_data)
+            decrypted_target_data = decrypt_data(encrypted_target_data)
+
+            sourcedata = json_to_df(decrypted_source_data)
+            targetdata= json_to_df(decrypted_target_data)
+        else:
+            print("[⌄] Error: encrypted data is missing.")
+
     
-    sourcedata = json_to_df(decrypt_data(record.source_data))
-    targetdata= json_to_df(decrypt_data(record.target_data))
     mapingDoc = json.loads(record.mapping_document)
     targetPrimaryKey = record.target_primary_key
    
@@ -363,9 +393,9 @@ def validateData():
     
     resultString = "Valiadation Failed!"
     
-    # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
+    #print(targetPrimaryKey,sourcedata,targetdata)
     try:
-        resultString =dividedCompareParallel(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
+        resultString =dividedCompare(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
     except Exception as e:
     # Print the exception message
         
@@ -395,11 +425,11 @@ def download_report():
     data = record.mapping_document + record.validation_document
 
     # If the documents are already JSON strings, no need to load and dump them again
-    formatted_content = encrypt_data(data)
+    formatted_content = data
     
     # Create a PDF file
     pdf_path = f'{request_id}_output.pdf'
-    create_pdf(decrypt_data(formatted_content), pdf_path)
+    create_pdf(formatted_content, pdf_path)
 
     # Send the PDF file to the client
     response = send_file(pdf_path, as_attachment=True)
