@@ -16,7 +16,7 @@ def perform_sampling(source_data,  sample_percent=10):
 
     return sampled_df
 
-def collect_sample_data_with_primary_key(data_file,  sample_percent=10, primary_key='ID'):
+def collect_sample_data_with_primary_key(data_file,  sample_percent=10, primary_key=['ID']):
     # Perform sampling on the source data
     sampled_data = perform_sampling(data_file, sample_percent)
     
@@ -25,7 +25,7 @@ def collect_sample_data_with_primary_key(data_file,  sample_percent=10, primary_
 
     return sampled_data, sampled_primary_keys
 
-def collect_corresponding_data_from_target(target_file, sampled_primary_keys, primary_key='ID'):
+def collect_corresponding_data_from_target(target_file, sampled_primary_keys, primary_key=['ID']):
     # Read the target CSV file into a DataFrame
     target_df = target_file
     
