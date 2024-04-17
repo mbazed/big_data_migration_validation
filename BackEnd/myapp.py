@@ -2,7 +2,6 @@ import json
 
 from flask import Flask, request, jsonify, send_file
 import os
-
 from reportlab.pdfgen import canvas
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -16,8 +15,9 @@ from comonPk import *
 from commonCompositePk import get_two_keys
 from validation3 import *
 from sampling import *
-# from validationThreading import *
 from cryptography.fernet import Fernet
+from validationThreading import *
+from validationThreadingPool import *
 import uuid  # for generating unique request IDs
 import logging
 
@@ -266,21 +266,21 @@ def findKeys():
         targetPrimaryKey=None
         message = '[-] Primary key identification Failed!'
     
-    # record.source_primary_key = sourcePrimaryKey
-    # record.target_primary_key = targetPrimaryKey
+    record.source_primary_key = sourcePrimaryKey
+    record.target_primary_key = targetPrimaryKey
 
-    #         # Commit the changes to the database
-    # db.session.add(record)
+            # Commit the changes to the database
+    db.session.add(record)
     
     db.session.commit()
 
-    
+    message = '[+] Primary keys updated successfully'
         
     
         
     print(message)
     print("[^] returning response...")    
-    # print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
+    print(sourceColumns,targetColumns,sourcePrimaryKey,targetPrimaryKey,message)
     return jsonify({  'source-columns':sourceColumns.split(','),'target-columns':targetColumns.split(','), 'sourcePrimaryKey': sourcePrimaryKey, 'targetPrimaryKey': targetPrimaryKey,'message': message})
 
 
@@ -394,7 +394,23 @@ def validateData():
 
     sourcedata = pd.read_json( decrypted_source_data)
     targetdata= pd.read_json(decrypted_target_data) 
-    mapingDoc = json.loads(record.mapping_document)
+    mapingDoc = request.form.get('mappingDoc') #new
+    
+    # if mapingDoc:
+    #  try:
+    mappingDoc_strip = {k.strip(): v.strip() for k, v in (item.split(':') for item in mapingDoc.split('\n') if ':' in item)}
+    dictionary_format = {}
+    for key, value in mappingDoc_strip.items():
+        dictionary_format[key] = value.strip()
+    mapingDoc = dictionary_format
+    print(mapingDoc)
+    #  except ValueError:
+    #     print("Invalid mappingDoc format")
+    # else:
+    #   print("No mappingDoc provided")
+
+    # mapingDoc = json.loads(record.mapping_document)  #old
+    # print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
    
     sample_percent = 10
@@ -403,15 +419,29 @@ def validateData():
     sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
     print("[⌄] validation request received...")
     
-    resultString = "Valiadation Failed!"
+    resultString = "Validation Failed!"
     
     #print(targetPrimaryKey,sourcedata,targetdata)
     try:
-        resultString =dividedCompare(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
+
+        if (sourcedata.shape[0]>50000):
+          resultString =dividedCompare(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
+        print("Rows:",sourcedata.shape[0])
+        if(sourcedata.shape[0]<9000):
+            print("single processing")
+            
+            resultString =dividedCompare(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        # for i in range(10,15):
+        #     print(i,end=" :")
+        else:
+            print("multiprocessing")
+            resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+        
     except Exception as e:
     # Print the exception message
         
         print(f"validateData/Exception occurred: {str(e)}")
+    
         
     
     

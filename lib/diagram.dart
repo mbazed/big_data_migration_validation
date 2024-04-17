@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -29,13 +31,15 @@ class ConnectionLinesWidget extends StatefulWidget {
   final String inputRuleString;
   final double widgetWidth;
   final double widgetHeight;
+  final Function(String, String) onTextFieldValueChanged; // Callback function
 
-  ConnectionLinesWidget({
+  const ConnectionLinesWidget({
     required this.leftItems,
     required this.rightItems,
     required this.widgetWidth,
     required this.widgetHeight,
     required this.inputRuleString,
+    required this.onTextFieldValueChanged,
   });
 
   @override
@@ -48,19 +52,9 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
   Map<String, String> rulesCopy = {};
   Map<String, List<String>> rulesDictionary = {};
 
-  @override
-  void initState() {
-    super.initState();
-    rulesDictionary = {};
-    rulesCopy = {};
-    rulesDictionary = createConnectionDictionary(widget.inputRuleString);
-    rulesCopy = createRuleDictionary(widget.inputRuleString);
-    List<List<String>> connections = [];
-
-    rulesDictionary.forEach((key, values) {
-      List<String> connection = [key, ...values];
-      connections.add(connection);
-    });
+  void updateParentValue(int index, String value) {
+    // Call the callback function with the updated value
+    widget.onTextFieldValueChanged(widget.rightItems[index], value);
   }
 
   List<Container> generateTextButtons(
@@ -82,14 +76,8 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
                   '{' +
                   items[i].trim() +
                   '}';
-              // Update the text in the controller without losing focus
-              controllers[selectedTextFieldIndex].value =
-                  controllers[selectedTextFieldIndex].value.copyWith(
-                        text: updatedText,
-                        selection: TextSelection.fromPosition(
-                          TextPosition(offset: updatedText.length),
-                        ),
-                      );
+
+              updateParentValue(selectedTextFieldIndex, updatedText);
             }
           },
           child: Text(items[i]),
@@ -105,11 +93,6 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
     BuildContext context,
     String inputString,
   ) {
-    for (int i = 0; i < items.length; i++) {
-      setState(() {
-        controllers[i].text = '';
-      });
-    }
     List<SizedBox> textFields = [];
 
     for (int i = 0; i < items.length; i++) {
@@ -126,8 +109,11 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
                   selectedTextFieldIndex = i;
                 });
               },
-              onChanged: (value) => {},
+              onChanged: (value) {},
               onEditingComplete: () => {selectedTextFieldIndex = -1},
+              onSubmitted: (value) {
+                updateParentValue(i, value);
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: items[i],
@@ -144,27 +130,6 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
       );
     }
 
-    Map<String, String> rulesCopy = createRuleDictionary(inputString);
-
-    for (int i = 0; i < items.length; i++) {
-      String? ruleValue = rulesCopy[items[i].trim()];
-
-      // Check if ruleValue is not null before assigning to controllers[i].text
-      if (ruleValue != null) {
-        final updatedText = ruleValue;
-        // Update the text in the controller without losing focus
-        controllers[i].value = controllers[i].value.copyWith(
-              text: updatedText,
-              selection: TextSelection.fromPosition(
-                TextPosition(offset: updatedText.length),
-              ),
-            );
-      } else {
-        // Handle the case when the ruleValue is null (optional)
-        // You might want to provide a default value or handle it differently.
-        // print("Warning: Rule value is null for item ${items[i]}");
-      }
-    }
     return textFields;
   }
 
@@ -174,10 +139,6 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
       50,
       (index) => TextEditingController(),
     );
-    setState(() {
-      rulesDictionary = {};
-      rulesCopy = {};
-    });
 
     setState(() {
       rulesDictionary = createConnectionDictionary(widget.inputRuleString);
@@ -197,6 +158,29 @@ class _ConnectionLinesWidgetState extends State<ConnectionLinesWidget> {
         connections.add(connection);
       }
     });
+//value for text field-------------------------------------
+    Map<String, String> rulesCopy =
+        createRuleDictionary(widget.inputRuleString);
+
+    for (int i = 0; i < widget.rightItems.length; i++) {
+      String? ruleValue = rulesCopy[widget.rightItems[i].trim()];
+
+      // Check if ruleValue is not null before assigning to controllers[i].text
+      if (ruleValue != null) {
+        final updatedText = ruleValue;
+        // Update the text in the controller without losing focus
+        textControllers[i].value = textControllers[i].value.copyWith(
+              text: updatedText,
+              selection: TextSelection.fromPosition(
+                TextPosition(offset: updatedText.length),
+              ),
+            );
+      } else {
+        // Handle the case when the ruleValue is null (optional)
+        // You might want to provide a default value or handle it differently.
+        // print("Warning: Rule value is null for item ${items[i]}");
+      }
+    }
 
     return CustomPaint(
       painter: ConnectionLinesPainter(
@@ -290,9 +274,8 @@ class ConnectionLinesPainter extends CustomPainter {
         for (var connection in connections) {
           if (connection[0].trim() == rightitem.trim() &&
               connection[1].trim() == leftitem.trim()) {
-            textPainter.paint(canvas, Offset(rightX - 4, rightY - 14));
-
             drawConnectionPath(canvas, leftX, leftY, rightX, rightY, linePaint);
+            textPainter.paint(canvas, Offset(rightX - 4, rightY - 14));
           } else {}
         }
       }
@@ -402,70 +385,4 @@ Map<String, String> createRuleDictionary(String inputString) {
     }
   }
   return dictionary;
-}
-
-bool is1DList(List<dynamic> list) {
-  for (var element in list) {
-    if (element is List) {
-      return false;
-    }
-  }
-  return true;
-}
-
-bool is2DList(List<dynamic> list) {
-  for (var element in list) {
-    if (element is! List) {
-      return false;
-    }
-  }
-  return true;
-}
-
-List<List<String>> convertStringToListOfLists(String input) {
-  List<List<String>> result = [];
-  List<String> currentList = [];
-  bool insideList = false;
-
-  // Iterate through each character in the input string
-  for (int i = 0; i < input.length; i++) {
-    String currentChar = input[i];
-
-    // If the current character is '[', mark that we're inside a list
-    if (currentChar == '[') {
-      insideList = true;
-      currentList = [];
-    }
-    // If the current character is ']', mark that we're outside a list
-    else if (currentChar == ']') {
-      insideList = false;
-      result.add(currentList);
-    }
-    // If the current character is a letter or digit and we're inside a list, add it to the current list
-    else if (RegExp(r'[a-zA-Z0-9]').hasMatch(currentChar) && insideList) {
-      int endIndex = input.indexOf(RegExp(r'[\],]'), i);
-      String item = input.substring(i, endIndex);
-      currentList.add(item);
-      i = endIndex - 1; // Move the index to the end of the current item
-    }
-  }
-  result.removeLast();
-  return result;
-}
-
-bool is2DListFromString(String input) {
-  // Remove leading and trailing square brackets
-  String trimmedInput = input.substring(1, input.length - 1);
-
-  // Check if the input is empty
-  if (trimmedInput.isEmpty) {
-    return false;
-  }
-
-  // Split by comma
-  List<String> items = trimmedInput.split(', ');
-
-  // Check if any item starts and ends with '[' and ']'
-  return items
-      .every((element) => element.startsWith('[') && element.endsWith(']'));
 }
