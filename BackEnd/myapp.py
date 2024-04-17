@@ -12,11 +12,14 @@ from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
 from comonPk import *
-from validationThreading import *
+from commonCompositePk import get_two_keys
 from validation3 import *
+from sampling import *
+from cryptography.fernet import Fernet
 from validationThreading import *
 from validationThreadingPool import *
 import uuid  # for generating unique request IDs
+import logging
 
 app = Flask(__name__)
 CORS(app)
@@ -27,6 +30,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
 class DataRecord(db.Model):
     id = Column(Integer, primary_key=True)
     request_id = Column(String, unique=True)
@@ -36,8 +42,23 @@ class DataRecord(db.Model):
     target_primary_key = Column(String)
     mapping_document = Column(String)
     validation_document = Column(String)
-    
+def encrypt_data(data):
+    encrypted_data = cipher_suite.encrypt(data.encode())
+    return encrypted_data
 
+# def decrypt_data(encrypted_data):
+#     decrypted_data = cipher_suite.decrypt(encrypted_data)
+#     return decrypted_data.decode()
+
+
+
+def decrypt_data(encrypted_data):
+    try:
+        decrypted_data = cipher_suite.decrypt(encrypted_data)
+        return decrypted_data.decode()
+    except Exception as e:
+        logging.error(f"Decryption failed: {e}")
+        return None
 # Create tables within the application context
 with app.app_context():
     db.create_all()
@@ -54,7 +75,7 @@ def get_data():
         if(source_type == 'File Mode'):
             source_file = request.files['sourceFile']
             sourcedata = read_file_content_df(source_file)
-            source_json = sourcedata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
         else:
             source_hostname = request.form.get('source_hostname')
             source_username = request.form.get('source_username')
@@ -62,12 +83,12 @@ def get_data():
             source_password = request.form.get('source_password')
             source_table = request.form.get('source_table')
             sourcedata = gbtodf(source_type,source_hostname,source_username,source_password,source_database,source_table)
-            source_json = sourcedata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
             
         if(target_type == 'File Mode'):
             target_file = request.files['targetFile']
             targetdata = read_file_content_df(target_file)
-            target_json = targetdata.to_json()
+            target_json = encrypt_data(targetdata.to_json())
         else:
             target_hostname = request.form.get('target_hostname')
             target_username = request.form.get('target_username')
@@ -75,7 +96,7 @@ def get_data():
             target_password = request.form.get('target_password')
             target_table = request.form.get('target_table')
             targetdata = gbtodf(target_type,target_hostname,target_username,target_password,target_database,target_table)
-            target_json = targetdata.to_json()
+            target_json = encrypt_data(targetdata.to_json())
             
         record = DataRecord(
                 request_id=request_id,
@@ -116,8 +137,8 @@ def get_from_db():
         try:
             sourcedata = gbtodf(source_database_type,source_hostname,source_username,source_password,source_database,source_table)
             targetdata = gbtodf(target_database_type,target_hostname,target_username,target_password,target_database,target_table)
-            source_json = sourcedata.to_json()
-            target_json = targetdata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
+            target_json = encrypt_data(targetdata.to_json())
 
         # Store data in the database with the associated request ID
             record = DataRecord(
@@ -129,6 +150,7 @@ def get_from_db():
             db.session.add(record)
             db.session.commit()
 
+            # print(sourcedata,targetdata)
             message = '[+] Files Received successfully'
             print(message , "with request_id:", request_id)
             return jsonify({'message': message, 'request_id': request_id})
@@ -167,8 +189,8 @@ def upload_files():
             targetdata = read_file_content_df(target_file)
 
         # Convert DataFrames to JSON strings for storage
-            source_json = sourcedata.to_json()
-            target_json = targetdata.to_json()
+            source_json = encrypt_data(sourcedata.to_json())
+            target_json = encrypt_data(targetdata.to_json())
 
         # Store data in the database with the associated request ID
             record = DataRecord(
@@ -207,10 +229,18 @@ def findKeys():
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
     
+    encrypted_source_data = record.source_data
+    encrypted_target_data = record.target_data
+     
+    decrypt_source_data = decrypt_data(encrypted_source_data)
+    decrypt_target_data = decrypt_data(encrypted_target_data)
+    # decrypt_source_data = record.source_data
+    # decrypt_target_data = record.target_data
+    sourcedata = pd.read_json( decrypt_source_data)
+    targetdata= pd.read_json(decrypt_target_data) 
     
 
-    sourcedata = json_to_df(record.source_data)
-    targetdata = json_to_df(record.target_data)
+    # print(targetPrimaryKey,sourcedata,targetdata)
     
     sourceColumns =(',').join( sourcedata.columns.tolist())
     targetColumns=(',').join( targetdata.columns.tolist())
@@ -272,8 +302,19 @@ def mapData():
     
     
     record = DataRecord.query.filter_by(request_id=request_id).first()
-    sourcedata = json_to_df(record.source_data)
-    targetdata= json_to_df(record.target_data)
+    encrypted_source_data = record.source_data
+    encrypted_target_data = record.target_data
+     
+    decrypt_source_data = decrypt_data(encrypted_source_data)
+    decrypt_target_data = decrypt_data(encrypted_target_data)
+    # decrypt_source_data = record.source_data
+    # decrypt_target_data = record.target_data
+    sourcedata = pd.read_json( decrypt_source_data)
+    targetdata= pd.read_json(decrypt_target_data) 
+    # encrypted_source_data = record.source_data
+    # encrypted_target_data = record.target_data
+    # sourcedata = json_to_df(decrypt_data(encrypted_source_data))
+    # targetdata= json_to_df(decrypt_data(encrypted_target_data))
     
     
     srcpkList = sourcePrimaryKey.strip().split(',')
@@ -336,11 +377,23 @@ def mapData():
 @app.route('/validateData', methods=['POST'])
 def validateData():
     request_id = request.form.get('request_id')
-    
+   
     record = DataRecord.query.filter_by(request_id=request_id).first()
-    
-    sourcedata = json_to_df(record.source_data)
-    targetdata= json_to_df(record.target_data)
+    if record:
+        encrypted_source_data = record.source_data
+        encrypted_target_data = record.target_data
+
+        if encrypted_source_data and encrypted_target_data:
+            decrypted_source_data = decrypt_data(encrypted_source_data)
+            decrypted_target_data = decrypt_data(encrypted_target_data)
+
+            # sourcedata = json_to_df(decrypted_source_data)
+            # targetdata= json_to_df(decrypted_target_data)
+        else:
+            print("[⌄] Error: encrypted data is missing.")
+
+    sourcedata = pd.read_json( decrypted_source_data)
+    targetdata= pd.read_json(decrypted_target_data) 
     mapingDoc = request.form.get('mappingDoc') #new
     
     # if mapingDoc:
@@ -359,13 +412,20 @@ def validateData():
     # mapingDoc = json.loads(record.mapping_document)  #old
     # print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
+   
+    sample_percent = 10
     
+    sampled_source_data, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
+    sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
     print("[⌄] validation request received...")
     
     resultString = "Validation Failed!"
     
-    # print(sourcePrimaryKey,targetPrimaryKey,sourcedata,targetdata)
+    #print(targetPrimaryKey,sourcedata,targetdata)
     try:
+
+        if (sourcedata.shape[0]>50000):
+          resultString =dividedCompare(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
         print("Rows:",sourcedata.shape[0])
         if(sourcedata.shape[0]<9000):
             print("single processing")
@@ -433,3 +493,4 @@ def create_pdf(content, pdf_path):
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=4564, debug=True)
+    

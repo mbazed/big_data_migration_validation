@@ -1,7 +1,7 @@
 import pandas as pd
 import pymongo
 import mysql.connector
-import cx_Oracle
+# import cx_Oracle
 
 # def connect_mongodb(host, port, user, password, database):
 #     client = pymongo.MongoClient(f"mongodb://{user}:{password}@{host}:{port}/")
@@ -40,10 +40,10 @@ def connect_mysql(host, user, password, database):
     )
     return connection
 
-def connect_oracle(host, user, password, database):
-    dsn = cx_Oracle.makedsn(host, 1521, service_name=database)
-    connection = cx_Oracle.connect(user=user, password=password, dsn=dsn)
-    return connection
+# def connect_oracle(host, user, password, database):
+#     dsn = cx_Oracle.makedsn(host, 1521, service_name=database)
+#     connection = cx_Oracle.connect(user=user, password=password, dsn=dsn)
+#     return connection
 
 def fetch_table_to_dataframe_sql(connection, table_name):
     cursor = connection.cursor()
@@ -91,8 +91,8 @@ def gbtodf(db_type,host,user,password,database,table_name):
         connection = connect_mongodb(host)
     elif db_type == 'MySQL':
         connection = connect_mysql(host, user, password, database)
-    elif db_type == 'Oracle DB':
-        connection = connect_oracle(host, user, password, database)
+    # elif db_type == 'Oracle DB':
+    #     connection = connect_oracle(host, user, password, database)
     else:
         print("Invalid database type. Exiting.")
         return
