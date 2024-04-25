@@ -83,6 +83,18 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   var missingRows = [];
   var outputString = "";
   var nullErrorString = [];
+  var mismatchedDataTypes = [];
+  var missingRowsCount = 0;
+  var mismatchedCount = 0;
+  var nullErrorCount = 0;
+  var corruptedCount = 0;
+  var rowsChecked = 0;
+
+  bool uploadCompleted = false;
+  bool findPrimaryKeysCompleted = false;
+  bool mapDataCompleted = false;
+  bool validateDataCompleted = false;
+  bool downloadReportCompleted = false;
 
   @override
   void initState() {
@@ -317,14 +329,33 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             'outputString Datatype: ${parsedValidationDoc['outputString'].runtimeType}');
         print(
             'nullErrorString: ${parsedValidationDoc['nullErrorString'].runtimeType}');
+        print(
+            'missingRowsCount: ${parsedValidationDoc['missingRowsCount'].runtimeType}');
+        print(
+            'mismatchedCount: ${parsedValidationDoc['mismatchedCount'].runtimeType}');
+        print(
+            'nullErrorCount: ${parsedValidationDoc['nullErrorCount'].runtimeType}');
+        print(
+            'corruptedCount: ${parsedValidationDoc['corruptedCount'].runtimeType}');
+        print('rowsChecked: ${parsedValidationDoc['rowsChecked'].runtimeType}');
         print('ValidationDoc Datatype: ${validationDoc.runtimeType}');
 
         missingRows = parsedValidationDoc['missingRows'] ?? [];
-        outputString = parsedValidationDoc['corrupedData'] ?? "";
+        outputString = parsedValidationDoc['corruptedData'] ?? "";
         nullErrorString = parsedValidationDoc['nullErrorString'] ?? [];
+        mismatchedDataTypes = parsedValidationDoc['mismatchedDataTypes'] ?? [];
+        missingRowsCount = parsedValidationDoc['missingRowsCount'];
+        mismatchedCount = parsedValidationDoc['mismatchedCount'];
+        nullErrorCount = parsedValidationDoc['nullErrorCount'];
+        corruptedCount = parsedValidationDoc['corruptedCount'];
+        rowsChecked = parsedValidationDoc['rowsChecked'];
 
         responseLines = validationDoc.toString().split('\n');
         print('Parsed data: $parsedValidationDoc');
+        print('c1: $missingRowsCount');
+        print('c2: $mismatchedCount');
+        print('c3: $nullErrorCount');
+        print('c4: $corruptedCount');
         print('Missing Rows: $missingRows');
         print('Output String: $outputString');
         print('Null Error String: $nullErrorString');
@@ -387,15 +418,16 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     } else {
       //db mode source
       try {
-        if (_sourceUserController.text != "" &&
-            _sourcePassController.text != "" &&
+        if (
+          // _sourceUserController.text != "" &&
+          //   _sourcePassController.text != "" &&
             _sourceHostController.text != "" &&
             _sourceDBNameController.text != "" &&
             _sourceTableController.text != "") {
           requestBody['source_hostname'] = _sourceHostController.text;
-          requestBody['source_username'] = _sourceUserController.text;
+          // requestBody['source_username'] = _sourceUserController.text;
           requestBody['source_database'] = _sourceDBNameController.text;
-          requestBody['source_password'] = _sourcePassController.text;
+          // requestBody['source_password'] = _sourcePassController.text;
           requestBody['source_table'] = _sourceTableController.text;
         } else {
           _resultController.text =
@@ -437,15 +469,16 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     } else {
       //db mode target
       try {
-        if (_targetUserController.text != "" &&
-            _targetPassController.text != "" &&
+        if (
+          // _targetUserController.text != "" &&
+          //   _targetPassController.text != "" &&
             _targetHostController.text != "" &&
             _targetDBNameController.text != "" &&
             _targetTableController.text != "") {
           requestBody['target_hostname'] = _targetHostController.text;
-          requestBody['target_username'] = _targetUserController.text;
+          // requestBody['target_username'] = _targetUserController.text;
           requestBody['target_database'] = _targetDBNameController.text;
-          requestBody['target_password'] = _targetPassController.text;
+          // requestBody['target_password'] = _targetPassController.text;
           requestBody['target_table'] = _targetTableController.text;
         } else {
           _resultController.text =
@@ -635,22 +668,23 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   Widget buildErrorExpansionPanelList() {
     List<MapEntry<String, List<String>>> nonEmptyCategories = [];
     final Map<String, List<String>> categorizedErrors = {
-      if (missingRows.isNotEmpty)
-        "Missing Rows Errors":
-            missingRows.map((row) => row.toString()).toList(),
-      if (outputString.isNotEmpty) "Output Errors": [outputString.toString()],
-      if (nullErrorString.isNotEmpty)
-        "Null String Errors":
-            nullErrorString.map((error) => error.toString()).toList(),
+      "Missing Rows Errors": missingRows.isNotEmpty
+          ? missingRows.map((row) => row.toString()).toList()
+          : [],
+      "Output Errors": outputString.isNotEmpty ? [outputString.toString()] : [],
+      "Null String Errors": nullErrorString.isNotEmpty
+          ? nullErrorString.map((error) => error.toString()).toList()
+          : [],
+      "Mismatched Data types": missingRows.isNotEmpty
+          ? missingRows.map((row) => row.toString()).toList()
+          : [],
     };
 
     // Filter out empty categories
-    nonEmptyCategories = categorizedErrors.entries.where((entry) {
-      return entry.value.isNotEmpty;
-    }).toList();
+    nonEmptyCategories = categorizedErrors.entries.toList();
 
     return ExpansionPanelList(
-      expandIconColor: Colors.red.shade900,
+      expandIconColor: Colors.black87,
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
           isExpandedList[index] = !isExpandedList[index];
@@ -659,9 +693,17 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       children: nonEmptyCategories.map<ExpansionPanel>((entry) {
         final category = entry.key;
         final errors = entry.value.cast<String>();
+        final int totalCountForCategory = _getTotalCountForCategory(category);
+        final double percentage;
+        totalCountForCategory > 0
+            ? percentage = totalCountForCategory * 100 / rowsChecked
+            : percentage = 0;
+
         if (isExpandedList.isEmpty) {
           isExpandedList = List<bool>.filled(nonEmptyCategories.length, false);
         }
+        final bool isExpansionEnabled = totalCountForCategory > 0;
+
         return ExpansionPanel(
           backgroundColor: Colors.grey[350],
           headerBuilder: (BuildContext context, bool isExpanded) {
@@ -671,15 +713,21 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     topRight: Radius.circular(50),
                     bottomRight: Radius.circular(50)),
               ),
-              tileColor: isExpandedList[nonEmptyCategories.indexOf(entry)]
-                  ? Colors.red.shade600
-                  : Colors.red.shade900,
-              textColor: Colors.red.shade100,
-              title: Text(category),
+              tileColor: isExpansionEnabled
+                  ? isExpandedList[nonEmptyCategories.indexOf(entry)]
+                      ? Colors.red.shade600
+                      : Colors.red.shade900
+                  : Colors.green,
+              textColor:
+                  isExpansionEnabled ? Colors.red.shade100 : Colors.white,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text(category), Text('$percentage %')],
+              ),
             );
           },
           body: Column(
-            children: errors.map((error) {
+            children: errors.take(1000).map((error) {
               return SizedBox(
                 width: double.infinity,
                 child: ListTile(
@@ -687,16 +735,32 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   tileColor: Colors.grey.shade200,
                   title: SingleChildScrollView(
                     child: Text(
-                        error.replaceAll(">> ", "").replaceAll("\\n", "\n")),
+                        error.replaceAll(">> ", "\n").replaceAll("\\n", "\n")),
                   ),
                 ),
               );
             }).toList(),
           ),
-          isExpanded: isExpandedList[nonEmptyCategories.indexOf(entry)],
+          isExpanded: isExpansionEnabled &&
+              isExpandedList[nonEmptyCategories.indexOf(entry)],
         );
       }).toList(),
     );
+  }
+
+  int _getTotalCountForCategory(String category) {
+    switch (category) {
+      case "Missing Rows Errors":
+        return missingRowsCount;
+      case "Output Errors":
+        return corruptedCount;
+      case "Null String Errors":
+        return nullErrorCount;
+      case "Mismatched Data types":
+        return mismatchedCount;
+      default:
+        return 0;
+    }
   }
 
   double _uploadProgress = 0.0;
@@ -716,12 +780,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       } // Update other progress indicators as needed
     });
   }
-
-  bool uploadCompleted = false;
-  bool findPrimaryKeysCompleted = false;
-  bool mapDataCompleted = false;
-  bool validateDataCompleted = false;
-  bool downloadReportCompleted = false;
 
   Widget buildProgressIndicator(double progress, double containerWidth) {
     return Container(
@@ -961,8 +1019,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       tableController: _sourceTableController,
                                       width100: width100,
                                       labelTextPrefix: 'Source',
-                                      mode: sourceselectedMode
-                                    ),
+                                      mode: sourceselectedMode),
                             ],
                           ),
                         ],
@@ -1057,7 +1114,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     ),
                   ),
                   width: MediaQuery.of(context).size.width * 0.35,
-                  height: MediaQuery.of(context).size.height * 0.215,
+                  height: MediaQuery.of(context).size.height * 0.15,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: SingleChildScrollView(
@@ -1302,14 +1359,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       updateInputRuleString(item, value);
                                     },
                                   )
-                                : Container(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'No data available',
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.grey),
-                                    ),
-                                  ),
+                                : null,
                           ),
                         ],
                       )
@@ -1324,12 +1374,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                           ),
                         ],
                       )
-                    : Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'No data available',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
-                        ),
+                    : Text(
+                        'No data available',
+                        style: TextStyle(
+                            fontSize: width100 * 0.05,
+                            color: Colors.grey,
+                            fontFamily: 'Inter'),
                       ),
               ],
             ),

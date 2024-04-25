@@ -121,7 +121,7 @@ class _CustomDropdownState extends State<MyCustomDropdown> {
                 Text(
                   selectedItem!,
                   style: TextStyle(
-                    fontSize: width100 * 0.025,
+                    fontSize: width100 * 0.03,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w600,
                   ),

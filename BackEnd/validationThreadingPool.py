@@ -41,10 +41,27 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
     missingRows = []
     corruptedData = []
     duplicateRows = []
+    CerrorCount = 0
 
     start_time = time.time()
 
-    if source_df.shape[0] == target_df.shape[0]:
+    if source_df.shape[0] < target_df.shape[0]:
+        corruptedData.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
+        duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
+
+    elif source_df.shape[0] > target_df.shape[0]:
+        corruptedData.append(f">> Values are missing in the target DataFrame.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
+        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]
+        if not missingRows.empty:
+            missingRows_dict = missingRows.to_dict(orient='records')
+            missingRows = missingRows_dict
+            print('before:' + corrupedData)
+            corruptedData.append("Missing Rows:" + json.dumps(missingRows))
+            print('after:' + corrupedData)
+        else:
+            corruptedData.append("No Missing Rows Found")
+
+    else:
 
         data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
         data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
@@ -78,29 +95,37 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
             corruptedData.extend(local_output_string)
             mainNullErrorString.extend(local_null_error_string)
 
-    elif source_df.shape[0] < target_df.shape[0]:
-        corruptedData.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
-        duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
+    CerrorCount = ''.join(corruptedData).count(">>")
+    errornos=[f"Total errors found: {CerrorCount} "]
+    errornos.extend(corruptedData)
+    corrupedData=errornos
 
-    else:
-        corruptedData.append(f">> Values are missing in the target DataFrame.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
-        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]
-        if not missingRows.empty:
-            missingRows_dict = missingRows.to_dict(orient='records')
-            missingRows = missingRows_dict
-            corruptedData.append("Missing Rows:" + json.dumps(missingRows))
-        else:
-            corruptedData.append("No Missing Rows Found")
 
+    NerrorCount = ''.join(mainNullErrorString).count(">>")
+    errornos=[f"Total errors found: {NerrorCount} "]
+    errornos.extend(mainNullErrorString)
+    mainNullErrorString=errornos
+    
     end_time = time.time()
     processing_time = end_time - start_time
     print(processing_time)
 
+    print(len(missingRows))
+    print(len(mismatched_data_types))
+    print(NerrorCount)
+    print(CerrorCount)
+
     result_json = {
+        "missingRowsCount": len(missingRows),
+        "mismatchedCount": len(mismatched_data_types),
+        "nullErrorCount": NerrorCount,
+        "corruptedCount": CerrorCount,
         "mismatchedDataTypes": mismatched_data_types,
         "nullErrorString": mainNullErrorString,
         "missingRows": missingRows,
         "corruptedData": ''.join(corruptedData),
+        "rowsChecked": source_df.shape[0],
+
     }
 
     return json.dumps(result_json)

@@ -12,7 +12,6 @@ from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
 from comonPk import *
-from commonCompositePk import get_two_keys
 from validation3 import *
 from sampling import *
 from cryptography.fernet import Fernet

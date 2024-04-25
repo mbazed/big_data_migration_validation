@@ -73,7 +73,20 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
 
     start_time = time.time()
 
-    if source_df.shape[0] == target_df.shape[0]:
+    if source_df.shape[0] < target_df.shape[0]:
+        duplicateRows.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
+        duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
+    elif source_df.shape[0] > target_df.shape[0]:
+        missingRows.append(f">> Values are missing in the target DataFrame.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
+        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
+        # print(missingRows)
+        if not missingRows.empty:
+            # Convert missingRows DataFrame to a dictionary
+            missingRows_dict = missingRows.to_dict(orient='records')
+            missingRows = missingRows_dict
+            print('missingRows:' + str(missingRows)) 
+            
+    else:
         # Compare data types of source and target DataFrames
         data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
         data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
@@ -112,19 +125,6 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         errornos.extend(corrupedData)
         corrupedData=errornos
         # logging.info(f"dividedCompare: primary_key - {primary_key}, corrupedData - {corrupedData}, Total errors found: {errorCount}")
-
-    elif source_df.shape[0] < target_df.shape[0]:
-        duplicateRows.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
-        duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
-        # print(duplicateRows)  # Collect duplicate rows
-    else:
-        missingRows.append(f">> Values are missing in the target DataFrame.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
-        missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
-        # print(missingRows)
-        if not missingRows.empty:
-            # Convert missingRows DataFrame to a dictionary
-            missingRows_dict = missingRows.to_dict(orient='records')
-            missingRows = missingRows_dict
         #     corrupedData.append("Missing Rows:" + json.dumps(missingRows))  # Serialize to JSON format
         # else:
         #     corrupedData.append("No Missing Rows Found")  # If missingRows is empty
@@ -139,6 +139,10 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     processing_time = end_time - start_time
     print(processing_time)
     
+    print(len(missingRows))
+    print(len(mismatched_data_types))
+    print(NerrorCount)
+    print(CerrorCount)
 
     # Construct JSON object
     result_json = {
@@ -149,7 +153,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     "missingRows": missingRows,
     "mismatchedDataTypes": mismatched_data_types,
     "nullErrorString": nullErrorString,
-    "corrupedData": ''.join(corrupedData)
+    "corruptedData": ''.join(corrupedData),
+    "rowsChecked": source_df.shape[0],
    }
 
     # print(result_json)
