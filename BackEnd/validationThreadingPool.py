@@ -61,39 +61,39 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
         else:
             corruptedData.append("No Missing Rows Found")
 
-    else:
+    # else:
 
-        data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
-        data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
+    data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
+    data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
 
-        # Compare data types for each column
-        for column in data_types_source:
-            if column in data_types_target:
-                if data_types_source[column] != data_types_target[column]:
-                    mismatched_data_types.append(column)
-            else:
-                corruptedData.append(f"Column '{column}' not found in target DataFrame")
+    # Compare data types for each column
+    for column in data_types_source:
+        if column in data_types_target:
+            if data_types_source[column] != data_types_target[column]:
+                mismatched_data_types.append(column)
+        else:
+            corruptedData.append(f"Column '{column}' not found in target DataFrame")
 
-        # Split the source data into chunks for multiprocessing
-        chunks = []
-        chunk_size = source_df.shape[0] // num_processes
-        for i in range(num_processes):
-            chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
-            chunks.append((chunk, target_df, mappingDoc, primary_key))
+    # Split the source data into chunks for multiprocessing
+    chunks = []
+    chunk_size = source_df.shape[0] // num_processes
+    for i in range(num_processes):
+        chunk = source_df[i * chunk_size:(i + 1) * chunk_size]
+        chunks.append((chunk, target_df, mappingDoc, primary_key))
 
-        # Create a multiprocessing Manager to manage the results
-        # manager = Manager()
-        # output_queue = manager.Queue()
-        # null_error_queue = manager.Queue()
+    # Create a multiprocessing Manager to manage the results
+    # manager = Manager()
+    # output_queue = manager.Queue()
+    # null_error_queue = manager.Queue()
 
-        # Create a Pool of processes and map the function
-        with Pool(processes=num_processes) as pool:
-            results = pool.map(process_rows_dynamic, chunks)
+    # Create a Pool of processes and map the function
+    with Pool(processes=num_processes) as pool:
+        results = pool.map(process_rows_dynamic, chunks)
 
-        # Collect results
-        for local_output_string, local_null_error_string in results:
-            corruptedData.extend(local_output_string)
-            mainNullErrorString.extend(local_null_error_string)
+    # Collect results
+    for local_output_string, local_null_error_string in results:
+        corruptedData.extend(local_output_string)
+        mainNullErrorString.extend(local_null_error_string)
 
     CerrorCount = ''.join(corruptedData).count(">>")
     errornos=[f"Total errors found: {CerrorCount} "]

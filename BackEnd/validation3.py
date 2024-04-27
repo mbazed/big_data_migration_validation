@@ -76,7 +76,7 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     if source_df.shape[0] < target_df.shape[0]:
         duplicateRows.append(f">> Target DataFrame contains duplicate values.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
         duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
-    elif source_df.shape[0] > target_df.shape[0]:
+    if source_df.shape[0] > target_df.shape[0]:
         missingRows.append(f">> Values are missing in the target DataFrame.No.of rows of source: {source_df.shape[0]}No.of rows of target: {target_df.shape[0]}")
         missingRows = source_df[~source_df[primary_key].isin(target_df[primary_key])]  # Find entire missing rows
         # print(missingRows)
@@ -86,48 +86,48 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
             missingRows = missingRows_dict
             print('missingRows:' + str(missingRows)) 
             
-    else:
-        # Compare data types of source and target DataFrames
-        data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
-        data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
-        # print(data_types_source)
-        # print(data_types_target)
+    # if source_df.shape[0] == target_df.shape[0]:
+    # Compare data types of source and target DataFrames
+    data_types_source = source_df.dtypes.replace('object', 'string').to_dict()
+    data_types_target = target_df.dtypes.replace('object', 'string').to_dict()
+    # print(data_types_source)
+    # print(data_types_target)
 
-        # Compare data types for each column
-        for column in data_types_source:
-            if column in data_types_target:
-                if data_types_source[column] != data_types_target[column]:
-                    mismatched_data_types.append(column)
-            else:
-                corrupedData.append(f">> Column '{column}' not found in target DataFrame")
+    # Compare data types for each column
+    for column in data_types_source:
+        if column in data_types_target:
+            if data_types_source[column] != data_types_target[column]:
+                mismatched_data_types.append(column)
+        else:
+            corrupedData.append(f">> Column '{column}' not found in target DataFrame")
 
 
-        for _, srcRow in source_df.iterrows():
-            transformed_source_row = generate_target_data(srcRow, mappingDoc)
-            primary_key_value = transformed_source_row[primary_key]
+    for _, srcRow in source_df.iterrows():
+        transformed_source_row = generate_target_data(srcRow, mappingDoc)
+        primary_key_value = transformed_source_row[primary_key]
 
-            # Convert primary_key_value to the data type of target_df[primary_key].values
-            primary_key_value = target_df[primary_key].values.dtype.type(primary_key_value)
+        # Convert primary_key_value to the data type of target_df[primary_key].values
+        primary_key_value = target_df[primary_key].values.dtype.type(primary_key_value)
 
-            if primary_key_value in target_df[primary_key].values:
-                target_row = target_df[target_df[primary_key] == primary_key_value]
-                result, nullErrors = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
-                if result:
-                    corrupedData.extend(result)
-                if nullErrors:
-                    nullErrorString.extend(nullErrors)
-            else:
-                corrupedData.append(f">> Primary key {primary_key_value} not found in target_df")
-                corrupedData.append(str(srcRow))  # Convert srcRow to string
+        if primary_key_value in target_df[primary_key].values:
+            target_row = target_df[target_df[primary_key] == primary_key_value]
+            result, nullErrors = rowByRowCompare(transformed_source_row, target_row.iloc[0], primary_key)
+            if result:
+                corrupedData.extend(result)
+            if nullErrors:
+                nullErrorString.extend(nullErrors)
+        else:
+            corrupedData.append(f">> Primary key {primary_key_value} not found in target_df")
+            corrupedData.append(str(srcRow))  # Convert srcRow to string
        
-        CerrorCount = ''.join(corrupedData).count(">>")
-        errornos=[f"Total errors found: {CerrorCount} "]
-        errornos.extend(corrupedData)
-        corrupedData=errornos
-        # logging.info(f"dividedCompare: primary_key - {primary_key}, corrupedData - {corrupedData}, Total errors found: {errorCount}")
-        #     corrupedData.append("Missing Rows:" + json.dumps(missingRows))  # Serialize to JSON format
-        # else:
-        #     corrupedData.append("No Missing Rows Found")  # If missingRows is empty
+    CerrorCount = ''.join(corrupedData).count(">>")
+    errornos=[f"Total errors found: {CerrorCount} "]
+    errornos.extend(corrupedData)
+    corrupedData=errornos
+    # logging.info(f"dividedCompare: primary_key - {primary_key}, corrupedData - {corrupedData}, Total errors found: {errorCount}")
+    #corrupedData.append("Missing Rows:" + json.dumps(missingRows))  # Serialize to JSON format
+    # else:
+    #corrupedData.append("No Missing Rows Found")  # If missingRows is empty
     
 
     NerrorCount = ''.join(nullErrorString).count(">>")
