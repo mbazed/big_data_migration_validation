@@ -182,6 +182,7 @@ class FileMode extends StatefulWidget {
   late final String firstButtonText;
   final String title;
   final double width100;
+  VoidCallback? onPressed;
 
   FileMode(
       {required this.controller,
@@ -189,7 +190,8 @@ class FileMode extends StatefulWidget {
       required this.firstButtonText,
       required this.title,
       required this.width100,
-      required this.onFilePickerResult});
+      required this.onFilePickerResult,
+      this.onPressed});
 
   @override
   _FileModeState createState() => _FileModeState();
@@ -237,6 +239,7 @@ class _FileModeState extends State<FileMode> {
                     padding: const EdgeInsets.only(right: 10.0),
                     child: InkWell(
                       onTap: () async {
+                        if(widget.controller.text.isNotEmpty)widget.onPressed!();
                         resultPicker = await FilePicker.platform.pickFiles(
                           allowMultiple: false,
                           type: FileType.custom,

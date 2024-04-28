@@ -104,7 +104,7 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
     NerrorCount = ''.join(mainNullErrorString).count(">>")
     errornos=[f"Total errors found: {NerrorCount} "]
     errornos.extend(mainNullErrorString)
-    mainNullErrorString=errornos
+    mainNullErrorString=''.join(errornos)
     
     end_time = time.time()
     processing_time = end_time - start_time

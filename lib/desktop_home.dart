@@ -82,7 +82,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
   var missingRows = [];
   var outputString = "";
-  var nullErrorString = [];
+  var nullErrorString = "";
   var mismatchedDataTypes = [];
   var missingRowsCount = 0;
   var mismatchedCount = 0;
@@ -143,7 +143,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       inputRuleString = '';
       missingRows = [];
       outputString = "";
-      nullErrorString = [];
+      nullErrorString = "";
       downloadReportCompleted = false;
       isExpandedList = [];
     });
@@ -321,28 +321,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         print('[+] Validation successful!  \n' + validationStatus);
 
         var parsedValidationDoc = jsonDecode(validationDoc);
-        print(
-            'ParsedValidationDoc Datatype: ${parsedValidationDoc.runtimeType}');
-        print(
-            'Missing Rows Datatype: ${parsedValidationDoc['missingRows'].runtimeType}');
-        print(
-            'outputString Datatype: ${parsedValidationDoc['outputString'].runtimeType}');
-        print(
-            'nullErrorString: ${parsedValidationDoc['nullErrorString'].runtimeType}');
-        print(
-            'missingRowsCount: ${parsedValidationDoc['missingRowsCount'].runtimeType}');
-        print(
-            'mismatchedCount: ${parsedValidationDoc['mismatchedCount'].runtimeType}');
-        print(
-            'nullErrorCount: ${parsedValidationDoc['nullErrorCount'].runtimeType}');
-        print(
-            'corruptedCount: ${parsedValidationDoc['corruptedCount'].runtimeType}');
-        print('rowsChecked: ${parsedValidationDoc['rowsChecked'].runtimeType}');
-        print('ValidationDoc Datatype: ${validationDoc.runtimeType}');
 
         missingRows = parsedValidationDoc['missingRows'] ?? [];
         outputString = parsedValidationDoc['corruptedData'] ?? "";
-        nullErrorString = parsedValidationDoc['nullErrorString'] ?? [];
+        nullErrorString = parsedValidationDoc['nullErrorString']
+            .toString()
+            .replaceAll(",", "");
         mismatchedDataTypes = parsedValidationDoc['mismatchedDataTypes'] ?? [];
         missingRowsCount = parsedValidationDoc['missingRowsCount'];
         mismatchedCount = parsedValidationDoc['mismatchedCount'];
@@ -351,14 +335,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         rowsChecked = parsedValidationDoc['rowsChecked'];
 
         responseLines = validationDoc.toString().split('\n');
-        print('Parsed data: $parsedValidationDoc');
-        print('c1: $missingRowsCount');
-        print('c2: $mismatchedCount');
-        print('c3: $nullErrorCount');
-        print('c4: $corruptedCount');
-        print('Missing Rows: $missingRows');
-        print('Output String: $outputString');
-        print('Null Error String: $nullErrorString');
+
         setState(() {
           showDiagram = false;
           showErrors = true;
@@ -419,11 +396,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       //db mode source
       try {
         if (
-          // _sourceUserController.text != "" &&
-          //   _sourcePassController.text != "" &&
+            // _sourceUserController.text != "" &&
+            //   _sourcePassController.text != "" &&
             _sourceHostController.text != "" &&
-            _sourceDBNameController.text != "" &&
-            _sourceTableController.text != "") {
+                _sourceDBNameController.text != "" &&
+                _sourceTableController.text != "") {
           requestBody['source_hostname'] = _sourceHostController.text;
           // requestBody['source_username'] = _sourceUserController.text;
           requestBody['source_database'] = _sourceDBNameController.text;
@@ -470,11 +447,11 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       //db mode target
       try {
         if (
-          // _targetUserController.text != "" &&
-          //   _targetPassController.text != "" &&
+            // _targetUserController.text != "" &&
+            //   _targetPassController.text != "" &&
             _targetHostController.text != "" &&
-            _targetDBNameController.text != "" &&
-            _targetTableController.text != "") {
+                _targetDBNameController.text != "" &&
+                _targetTableController.text != "") {
           requestBody['target_hostname'] = _targetHostController.text;
           // requestBody['target_username'] = _targetUserController.text;
           requestBody['target_database'] = _targetDBNameController.text;
@@ -671,13 +648,12 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       "Missing Rows Errors": missingRows.isNotEmpty
           ? missingRows.map((row) => row.toString()).toList()
           : [],
-      "Output Errors": outputString.isNotEmpty ? [outputString.toString()] : [],
-      "Null String Errors": nullErrorString.isNotEmpty
-          ? nullErrorString.map((error) => error.toString()).toList()
-          : [],
+      "Null String Errors":
+          nullErrorString.isNotEmpty ? [nullErrorString.toString()] : [],
       "Mismatched Data types": missingRows.isNotEmpty
           ? missingRows.map((row) => row.toString()).toList()
           : [],
+      "Errors": outputString.isNotEmpty ? [outputString.toString()] : [],
     };
 
     // Filter out empty categories
@@ -696,7 +672,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         final int totalCountForCategory = _getTotalCountForCategory(category);
         final double percentage;
         totalCountForCategory > 0
-            ? percentage = totalCountForCategory * 100 / rowsChecked
+            ? percentage = totalCountForCategory * 100.00 / rowsChecked
             : percentage = 0;
 
         if (isExpandedList.isEmpty) {
@@ -752,7 +728,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     switch (category) {
       case "Missing Rows Errors":
         return missingRowsCount;
-      case "Output Errors":
+      case "Errors":
         return corruptedCount;
       case "Null String Errors":
         return nullErrorCount;
@@ -1010,6 +986,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       onFilePickerResult: (result) =>
                                           handleFileSelection(result,
                                               _sourceController, 'Source'),
+                                      onPressed: () => handleTap(),
                                     )
                                   : ModeFields(
                                       hostController: _sourceHostController,
@@ -1051,6 +1028,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                     onFilePickerResult: (result) =>
                                         handleFileSelection(result,
                                             _targetController, 'Target'),
+                                    onPressed: () => handleTap(),
                                   )
                                 : Align(
                                     alignment: Alignment.centerLeft,

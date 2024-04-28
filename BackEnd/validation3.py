@@ -84,7 +84,6 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
             # Convert missingRows DataFrame to a dictionary
             missingRows_dict = missingRows.to_dict(orient='records')
             missingRows = missingRows_dict
-            print('missingRows:' + str(missingRows)) 
             
     # if source_df.shape[0] == target_df.shape[0]:
     # Compare data types of source and target DataFrames
@@ -133,16 +132,12 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     NerrorCount = ''.join(nullErrorString).count(">>")
     errornos=[f"Total errors found: {NerrorCount} "]
     errornos.extend(nullErrorString)
-    nullErrorString=errornos
+    nullErrorString=''.join(errornos)
 
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
     print(processing_time)
     
-    print(len(missingRows))
-    print(len(mismatched_data_types))
-    print(NerrorCount)
-    print(CerrorCount)
 
     # Construct JSON object
     result_json = {
