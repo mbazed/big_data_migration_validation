@@ -215,11 +215,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
 // Define the inline function to update the inputRuleString
   void updateInputRuleString(String item, String value) {
-    // Update the inputRuleString based on the changed text field value
-    // Assuming inputRuleString contains key-value pairs separated by '\n'
-    print("+++++++++++++");
-    print(inputRuleString);
-    print("+++++++++++++");
     Map<String, String> rules = createRuleDictionary(inputRuleString);
     rules[item.trim()] = value;
 
@@ -239,14 +234,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         firstButtonText = 'Upload';
         fileName = result.files.single.name;
         controller.text = fileName;
-        _resultController.text +=
+        _resultController.text =
             '$title selected: $fileName\n'; // Append to the existing text
       });
     } else {
       setState(() {
         fileName = 'No file selected';
         controller.text = fileName;
-        _resultController.text +=
+        _resultController.text =
             '$title: $fileName\n'; // Append to the existing text
       });
     }
@@ -286,8 +281,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         // );
 
         inputRuleString = data['MapingDoc'].toString();
-        _resultController.text =
-            '\nMapping status: $mapingStatus\nResult:\n$mapingDoc\n';
+        _resultController.text = '$mapingStatus';
         setState(() {
           if (mapingStatus[1] == '+') {
             firstButtonText = 'Validate Data';
@@ -319,6 +313,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         var validationDoc = data['validationDoc'];
         var validationStatus = data['message'].toString();
         print('[+] Validation successful!  \n' + validationStatus);
+        _resultController.text = '[+] Validation successful';
 
         var parsedValidationDoc = jsonDecode(validationDoc);
 
@@ -343,6 +338,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         });
       } else {
         print('[-] Validation failed: ${responseValidation.statusCode}');
+        _resultController.text = '[-] Validation failed';
       }
     } catch (e) {
       print('[!] Error during validation: $e');
@@ -383,8 +379,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             ));
           }
         } else {
-          _resultController.text =
-              '${_resultController.text}Source result is Null\n';
+          _resultController.text = '[-]Source File not selected\n';
           print('[!] Source result is null');
           // Handle the case when either sourceResult or targetResult is null
           return;
@@ -407,8 +402,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           // requestBody['source_password'] = _sourcePassController.text;
           requestBody['source_table'] = _sourceTableController.text;
         } else {
-          _resultController.text =
-              '${_resultController.text}Please fill all the fields!\n';
+          _resultController.text = '[-]Please fill all the fields!\n';
           return;
         }
       } catch (e) {
@@ -434,8 +428,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             ));
           }
         } else {
-          _resultController.text =
-              '${_resultController.text}Target result is Null\n';
+          _resultController.text = '[-]Target File not selected';
           print('[!] Target result is null');
           // Handle the case when either sourceResult or targetResult is null
           return;
@@ -458,8 +451,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           // requestBody['target_password'] = _targetPassController.text;
           requestBody['target_table'] = _targetTableController.text;
         } else {
-          _resultController.text =
-              '${_resultController.text}Please fill all the fields!\n';
+          _resultController.text = '[-]Please fill all the fields!\n';
           return;
         }
       } catch (e) {
@@ -485,15 +477,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         print('Message: $message');
 
         setState(() {
-          _resultController.text = '${_resultController.text}${message}\n';
+          _resultController.text = '${message}\n';
           firstButtonText = 'Find Primary Keys';
           uploadCompleted = true;
           _updateProgress();
         });
       }
     } catch (e) {
-      _resultController.text =
-          '${_resultController.text}Error during File Upload: $e\n';
+      _resultController.text = 'Error during File Upload: $e\n';
       print('[!] Error during File Upload: $e');
       // Handle other errors
     }
@@ -554,7 +545,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           srcpk = srcCandidateKeys[0];
           trgpk = trgCandidateKeys[0];
           _resultController.text =
-              '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
+              'Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
         });
       } else {
         print('[-] Primary Key Fetch failed: ${response.statusCode}');
@@ -698,7 +689,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   isExpansionEnabled ? Colors.red.shade100 : Colors.white,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(category), if(category != 'Other Errors') Text('$percentage %')],
+                children: [
+                  Text(category),
+                  if (category != 'Other Errors') Text('$percentage %')
+                ],
               ),
             );
           },
@@ -947,7 +941,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         // Left side (Input)
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(top: 16.0, left: 16),
+            padding: const EdgeInsets.only(top: 16.0, left: 60),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1113,7 +1107,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         // Right side (Results)
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(top: 16.0, right: 60),
             child: Column(
               children: [
                 Padding(

@@ -274,8 +274,9 @@ class ConnectionLinesPainter extends CustomPainter {
         for (var connection in connections) {
           if (connection[0].trim() == rightitem.trim() &&
               connection[1].trim() == leftitem.trim()) {
-            drawConnectionPath(canvas, leftX, leftY, rightX, rightY, linePaint);
-            textPainter.paint(canvas, Offset(rightX - 4, rightY - 14));
+            drawConnectionPath(
+                canvas, leftX, leftY, rightX - 4, rightY, linePaint);
+            textPainter.paint(canvas, Offset(rightX - 11, rightY - 14));
           } else {}
         }
       }
