@@ -55,9 +55,9 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
         if not missingRows.empty:
             missingRows_dict = missingRows.to_dict(orient='records')
             missingRows = missingRows_dict
-            print('before:' + corrupedData)
+            print('before:' + ''.join(corruptedData))
             corruptedData.append("Missing Rows:" + json.dumps(missingRows))
-            print('after:' + corrupedData)
+            print('after:' + ''.join(corruptedData))
         else:
             corruptedData.append("No Missing Rows Found")
 
@@ -108,12 +108,8 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
     
     end_time = time.time()
     processing_time = end_time - start_time
-    print(processing_time)
+    print(f"Processing Time: {processing_time}")
 
-    print(len(missingRows))
-    print(len(mismatched_data_types))
-    print(NerrorCount)
-    print(CerrorCount)
 
     result_json = {
         "missingRowsCount": len(missingRows),

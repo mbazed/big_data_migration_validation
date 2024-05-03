@@ -653,7 +653,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       "Mismatched Data types": missingRows.isNotEmpty
           ? missingRows.map((row) => row.toString()).toList()
           : [],
-      "Errors": outputString.isNotEmpty ? [outputString.toString()] : [],
+      "Other Errors": outputString.isNotEmpty ? [outputString.toString()] : [],
     };
 
     // Filter out empty categories
@@ -698,7 +698,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   isExpansionEnabled ? Colors.red.shade100 : Colors.white,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(category), Text('$percentage %')],
+                children: [Text(category), if(category != 'Other Errors') Text('$percentage %')],
               ),
             );
           },
@@ -728,7 +728,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
     switch (category) {
       case "Missing Rows Errors":
         return missingRowsCount;
-      case "Errors":
+      case "Other Errors":
         return corruptedCount;
       case "Null String Errors":
         return nullErrorCount;

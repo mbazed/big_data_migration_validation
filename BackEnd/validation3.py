@@ -136,7 +136,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
 
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
-    print(processing_time)
+    print(f"Processing Time: {processing_time}")
+
     
 
     # Construct JSON object

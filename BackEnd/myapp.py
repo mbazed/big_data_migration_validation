@@ -414,8 +414,7 @@ def validateData():
    
     sample_percent = 10
     
-    sampled_source_data, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
-    sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
+    
     print("[⌄] validation request received...")
     
     resultString = "Validation Failed!"
@@ -423,9 +422,7 @@ def validateData():
     #print(targetPrimaryKey,sourcedata,targetdata)
     try:
 
-        if (sourcedata.shape[0]>50000):
-          resultString =dividedCompare(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
-        print("Rows:",sourcedata.shape[0])
+       
         if(sourcedata.shape[0]<9000):
             print("single processing")
             
@@ -434,7 +431,13 @@ def validateData():
         #     print(i,end=" :")
         else:
             print("multiprocessing")
-            resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+            if (sourcedata.shape[0]>50000):
+                sampled_source_data, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
+                sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
+                resultString =dividedCompareParallelPool(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
+        #     #     # print("Rows:",sourcedata.shape[0])
+            else:
+                resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
         
     except Exception as e:
     # Print the exception message
@@ -453,7 +456,7 @@ def validateData():
     db.session.commit()
     print("[^] returning response...")
 
-    return jsonify({'validationDoc': resultString, 'message': 'Validation Complete!'}) 
+    return jsonify({'validationDoc': resultString, 'message': 'Validation Complete!'})
 
 
 @app.route('/download', methods=['POST'])
