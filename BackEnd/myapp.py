@@ -376,6 +376,10 @@ def mapData():
 @app.route('/validateData', methods=['POST'])
 def validateData():
     request_id = request.form.get('request_id')
+    sample_percent = int(request.form.get('samplePercentage'))
+
+    print(f"Sample Percentage: {sample_percent}")
+    print(type(sample_percent))
    
     record = DataRecord.query.filter_by(request_id=request_id).first()
     if record:
@@ -412,7 +416,6 @@ def validateData():
     # print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
    
-    sample_percent = 10
     
     
     print("[⌄] validation request received...")

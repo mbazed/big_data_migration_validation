@@ -4,6 +4,7 @@ import 'dart:html' as html;
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'diagram.dart';
@@ -30,10 +31,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   String targetData = '';
 
   String firstButtonText = 'Upload';
+  // String firstButtonText = 'Validate Data';
+
   bool multiKey = false;
   String requestID = "";
   bool isLoading = false;
   bool showerrbtn = true;
+
+  int samplePercentage = 10;
 
   FilePickerResult? targetResult;
   FilePickerResult? sourceResult;
@@ -66,7 +71,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   final TextEditingController _targetHostController = TextEditingController();
   final TextEditingController _targetDBNameController = TextEditingController();
   final TextEditingController _targetTableController = TextEditingController();
-
+  final TextEditingController _samplePercentageController =
+      TextEditingController();
   TextEditingController _keyController1 = TextEditingController();
   TextEditingController _keyController2 = TextEditingController();
   List<String> srcCandidateKeys = [];
@@ -304,6 +310,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         body: {
           'request_id': requestID,
           'mappingDoc': inputRuleString,
+          'samplePercentage': samplePercentage.toString(),
         },
       );
 
@@ -1057,7 +1064,137 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                     ),
                     onPressed: () {
                       if (!isLoading) {
-                        chooseHandler(firstButtonText);
+                        if (firstButtonText == 'Validate Data') {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Sampling Confirmation'),
+                                content: Text(
+                                  'Do you want to enter a sample percentage?',
+                                  style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: width100 * 0.02),
+                                ),
+                                actions: <Widget>[
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          border: Border.all(
+                                            color: Color(0xFF3A4F39),
+                                          ),
+                                        ),
+                                        width: width100 * 0.425,
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Colors.white,
+                                            backgroundColor: Color(0xFF3A4F39),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                    'Enter Sample Percentage',
+                                                    style: TextStyle(
+                                                        fontFamily: 'Inter',
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  content: TextFormField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .allow(
+                                                              RegExp(r'[0-9]')),
+                                                    ],
+                                                    controller:
+                                                        _samplePercentageController,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          'Sample Percentage',
+                                                    ),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          child: Text('Cancel'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              samplePercentage =
+                                                                  int.parse(
+                                                                      _samplePercentageController
+                                                                          .text);
+                                                            });
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                            chooseHandler(
+                                                                firstButtonText); // Call chooseHandler after submitting
+                                                          },
+                                                          child: Text('Submit'),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: Text('Yes'),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height:
+                                              10.0), // Add vertical spacing between buttons
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          border: Border.all(
+                                            color: Color(0xFF3A4F39),
+                                          ),
+                                        ),
+                                        width: width100 * 0.425,
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Color(0xFF3A4F39),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            chooseHandler(
+                                                firstButtonText); // Call chooseHandler directly
+                                          },
+                                          child: Text('No'),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        } else
+                          chooseHandler(firstButtonText);
                       }
                     },
                     child: Align(
@@ -1077,25 +1214,34 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.5),
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    border: Border.all(
-                      color: Colors.grey.withOpacity(0.7),
-                    ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.15,
+                    minHeight: MediaQuery.of(context).size.height * 0.05,
                   ),
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Text(
-                        _resultController.text.isNotEmpty
-                            ? _resultController.text
-                            : '--',
-                        style: TextStyle(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: _resultController.text.contains("[+]")
+                          ? Colors.green.withOpacity(0.5)
+                          : _resultController.text.contains("[-]")
+                              ? Colors.red.withOpacity(0.5)
+                              : Colors.grey.withOpacity(0.5),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(0.7),
+                      ),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Text(
+                          _resultController.text.isNotEmpty
+                              ? _resultController.text
+                              : '--',
+                          style: TextStyle(),
+                        ),
                       ),
                     ),
                   ),
@@ -1173,7 +1319,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                                       ),
                                       suggestionsDecoration:
                                           SuggestionDecoration(
-                                              color: Colors.lightGreen.shade300,
+                                              color: Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(2.0),
                                               border: Border.all(
