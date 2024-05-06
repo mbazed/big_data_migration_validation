@@ -85,12 +85,6 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
         # logging.info(f"dividedCompare: primary_key - {primary_key}, outputString - {outputString}, Total errors found: {errorCount}")
 
     elif source_df.shape[0] < target_df.shape[0]:
-<<<<<<< Updated upstream
-        outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nTarget DataFrame contains duplicate values.")
-    else:
-        outputString.append(f"\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}\nValues are missing in the target DataFrame.")
-
-=======
         outputString.append(f"\nTarget DataFrame contains duplicate values.\nNo.of rows of source: {source_df.shape[0]}\nNo.of rows of target: {target_df.shape[0]}")
         duplicateRows = target_df[target_df.duplicated(subset=primary_key, keep=False)]
         # print(duplicateRows)  # Collect duplicate rows
@@ -103,5 +97,4 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
     end_time = time.time()  # Measure end time
     processing_time = end_time - start_time
     print(processing_time)
->>>>>>> Stashed changes
     return ''.join(outputString)
