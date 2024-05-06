@@ -416,8 +416,9 @@ def validateData():
     # mapingDoc = json.loads(record.mapping_document)  #old
     # print(mapingDoc)
     targetPrimaryKey = record.target_primary_key
-   
-    
+    if ( sample_percent!=100):
+        sourcedata, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
+        targetdata = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
     
     print("[⌄] validation request received...")
     
@@ -435,14 +436,13 @@ def validateData():
         #     print(i,end=" :")
         else:
             print("multiprocessing")
-            if (sourcedata.shape[0]>50000 and sample_percent!=100):
+           
                 
-                sampled_source_data, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
-                sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
-                resultString =dividedCompareParallelPool(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)
+                
+               
         #     #     # print("Rows:",sourcedata.shape[0])
-            else:
-                resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
+      
+            resultString =dividedCompareParallelPool(sourcedata,targetdata,mapingDoc,targetPrimaryKey)
         
     except Exception as e:
     # Print the exception message
