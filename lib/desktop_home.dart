@@ -751,7 +751,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(category),
-                  if (category != 'Other Errors') Text('$percentage %')
+                  if (category != 'Other Errors') Text('${percentage.toStringAsFixed(2)} %')
                 ],
               ),
             );
