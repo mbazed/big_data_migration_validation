@@ -327,6 +327,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
         var parsedValidationDoc = jsonDecode(validationDoc);
 
+        print(parsedValidationDoc);
         missingRows = parsedValidationDoc['missingRows'] ?? [];
         outputString = parsedValidationDoc['corruptedData'] ?? "";
         nullErrorString = parsedValidationDoc['nullErrorString']
@@ -601,11 +602,13 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             multiKey = false;
           }
 
-          _resultController.text =
-              '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
+          // _resultController.text =
+          //     '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
+          _resultController.text = '[+] Primary Key Fetch successful';
         });
       } else {
         print('[-] Primary Key Fetch failed: ${response.statusCode}');
+        _resultController.text = '[-] Primary Key Fetch failed';
         setState(() {
           firstButtonText = 'Upload';
         });
@@ -698,8 +701,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           : [],
       "Null String Errors":
           nullErrorString.isNotEmpty ? [nullErrorString.toString()] : [],
-      "Mismatched Data types": missingRows.isNotEmpty
-          ? missingRows.map((row) => row.toString()).toList()
+      "Mismatched Data types": mismatchedDataTypes.isNotEmpty
+          ? mismatchedDataTypes.map((row) => row.toString()).toList()
           : [],
       "Other Errors": outputString.isNotEmpty ? [outputString.toString()] : [],
     };
