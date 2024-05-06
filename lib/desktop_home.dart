@@ -506,6 +506,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       showDiagram = true;
       showErrors = false;
       showerrbtn = false;
+      // findPrimaryKeysCompleted = true;
+      // _updateProgress();
     });
     try {
       final response = await http.post(
@@ -525,6 +527,8 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         setState(() {
           _keyController1.text = "";
           _keyController2.text = "";
+          findPrimaryKeysCompleted = true;
+          _updateProgress();
 
           sourceColumnList = data['source-columns']
               .toString()
@@ -1360,10 +1364,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: _resultController.text.contains("[+]")
-                          ? Colors.lightGreen.shade700.withOpacity(.5)
+                          ? Colors.lightGreen.shade700.withOpacity(.4)
                           : _resultController.text.contains("[-]") ||
                                   _resultController.text.contains("Error")
-                              ? Colors.red.shade700.withOpacity(.5)
+                              ? Colors.red.shade700.withOpacity(.4)
                               : Colors.grey.withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                       border: Border.all(
@@ -1386,10 +1390,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                               : '--',
                           style: TextStyle(
                             color: _resultController.text.contains("[+]")
-                                ? Colors.white
+                                ? Color(0xFF3A4F39)
                                 : _resultController.text.contains("[-]") ||
                                         _resultController.text.contains("Error")
-                                    ? Colors.white
+                                    ? Colors.red.shade900
                                     : Colors.black,
                           ),
                         ),
@@ -1644,7 +1648,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                         ],
                       )
                     : Text(
-                        'No data available',
+                        '',
                         style: TextStyle(
                             fontSize: width100 * 0.05,
                             color: Colors.grey,
