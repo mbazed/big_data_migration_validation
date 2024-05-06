@@ -241,14 +241,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         fileName = result.files.single.name;
         controller.text = fileName;
         _resultController.text =
-            '$title selected: $fileName\n'; // Append to the existing text
+            '$title selected: $fileName'; // Append to the existing text
       });
     } else {
       setState(() {
         fileName = 'No file selected';
         controller.text = fileName;
         _resultController.text =
-            '$title: $fileName\n'; // Append to the existing text
+            '$title: $fileName'; // Append to the existing text
       });
     }
   }
@@ -386,7 +386,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
             ));
           }
         } else {
-          _resultController.text = '[-]Source File not selected\n';
+          _resultController.text = '[-]Source File not selected';
           print('[!] Source result is null');
           // Handle the case when either sourceResult or targetResult is null
           return;
@@ -409,7 +409,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           // requestBody['source_password'] = _sourcePassController.text;
           requestBody['source_table'] = _sourceTableController.text;
         } else {
-          _resultController.text = '[-]Please fill all the fields!\n';
+          _resultController.text = '[-]Please fill all the fields!';
           return;
         }
       } catch (e) {
@@ -458,7 +458,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           // requestBody['target_password'] = _targetPassController.text;
           requestBody['target_table'] = _targetTableController.text;
         } else {
-          _resultController.text = '[-]Please fill all the fields!\n';
+          _resultController.text = '[-]Please fill all the fields!';
           return;
         }
       } catch (e) {
@@ -484,14 +484,14 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
         print('Message: $message');
 
         setState(() {
-          _resultController.text = '${message}\n';
+          _resultController.text = '${message}';
           firstButtonText = 'Find Primary Keys';
           uploadCompleted = true;
           _updateProgress();
         });
       }
     } catch (e) {
-      _resultController.text = 'Error during File Upload: $e\n';
+      _resultController.text = 'Error during File Upload: $e';
       print('[!] Error during File Upload: $e');
       // Handle other errors
     }
@@ -552,7 +552,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
           srcpk = srcCandidateKeys[0];
           trgpk = trgCandidateKeys[0];
           _resultController.text =
-              'Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
+              'Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}';
         });
       } else {
         print('[-] Primary Key Fetch failed: ${response.statusCode}');
@@ -924,19 +924,24 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   @override
   Widget build(BuildContext context) {
     lineNumber = 0;
-    Widget scrollableTopContainer = Container(
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.all(Radius.circular(3)),
-        border: Border.all(color: Theme.of(context).colorScheme.error),
+    Widget scrollableTopContainer = ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.75,
+        minHeight: MediaQuery.of(context).size.height * 0.25,
       ),
-      width: MediaQuery.of(context).size.width * 0.5,
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: buildErrorExpansionPanelList()),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+          border: Border.all(color: Theme.of(context).colorScheme.error),
+        ),
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: buildErrorExpansionPanelList()),
+        ),
       ),
     );
 
@@ -1068,131 +1073,218 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Sampling Confirmation'),
-                                content: Text(
-                                  'Do you want to enter a sample percentage?',
-                                  style: TextStyle(
-                                      fontFamily: 'Inter',
-                                      fontSize: width100 * 0.02),
-                                ),
-                                actions: <Widget>[
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                              return Center(
+                                child: Container(
+                                  width: width100 * 0.6, // Adjust the width
+                                  height: width100 * 0.4, // Adjust the height
+                                  padding: EdgeInsets.all(20.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    border: Border.all(
+                                        color: Color(0xFF3A4F39), width: 4),
+                                    color: Colors.white,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          border: Border.all(
-                                            color: Color(0xFF3A4F39),
-                                          ),
-                                        ),
-                                        width: width100 * 0.425,
-                                        child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Colors.white,
-                                            backgroundColor: Color(0xFF3A4F39),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                    'Enter Sample Percentage',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Inter',
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  content: TextFormField(
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .allow(
-                                                              RegExp(r'[0-9]')),
-                                                    ],
-                                                    controller:
-                                                        _samplePercentageController,
-                                                    decoration: InputDecoration(
-                                                      hintText:
-                                                          'Sample Percentage',
-                                                    ),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Text('Cancel'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              samplePercentage =
-                                                                  int.parse(
-                                                                      _samplePercentageController
-                                                                          .text);
-                                                            });
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            chooseHandler(
-                                                                firstButtonText); // Call chooseHandler after submitting
-                                                          },
-                                                          child: Text('Submit'),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: Text('Yes'),
+                                      Text(
+                                        'Sampling Confirmation',
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: width100 * 0.03,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SizedBox(
-                                          height:
-                                              10.0), // Add vertical spacing between buttons
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          border: Border.all(
-                                            color: Color(0xFF3A4F39),
-                                          ),
+                                      SizedBox(height: 20.0),
+                                      Text(
+                                        'Do you want to enter a sample percentage?',
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: width100 * 0.024,
                                         ),
-                                        width: width100 * 0.425,
-                                        child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Color(0xFF3A4F39),
+                                      ),
+                                      SizedBox(height: 20.0),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                minimumSize: Size(
+                                                    width100 * 0.5,
+                                                    width100 * 0.075),
+                                                backgroundColor:
+                                                    Color(0xFF3A4F39),
+                                                foregroundColor: Colors.white),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    backgroundColor:
+                                                        Color(0xFF3A4F39),
+                                                    insetPadding:
+                                                        EdgeInsets.zero,
+                                                    contentPadding:
+                                                        EdgeInsets.zero,
+                                                    clipBehavior: Clip.none,
+                                                    content: Builder(builder:
+                                                        (BuildContext context) {
+                                                      return Container(
+                                                        width: width100 *
+                                                            0.6, // Adjust the width
+                                                        height: width100 *
+                                                            0.3, // Adjust the height
+                                                        padding: EdgeInsets.all(
+                                                            20.0),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0),
+                                                          border: Border.all(
+                                                              color: Color(
+                                                                  0xFF3A4F39),
+                                                              width: 4),
+                                                          color: Colors.white,
+                                                        ),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  'Enter Sampling Percentage',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    fontSize:
+                                                                        width100 *
+                                                                            0.03,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                ),
+                                                                IconButton(
+                                                                  icon: Icon(Icons
+                                                                      .close),
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              children: [
+                                                                TextFormField(
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  inputFormatters: [
+                                                                    FilteringTextInputFormatter
+                                                                        .allow(RegExp(
+                                                                            r'[0-9]')),
+                                                                  ],
+                                                                  controller:
+                                                                      _samplePercentageController,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    hintText:
+                                                                        'Enter a value between 1 and 100',
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    height:
+                                                                        20.0),
+                                                                ElevatedButton(
+                                                                  style: ElevatedButton.styleFrom(
+                                                                      minimumSize: Size(
+                                                                          width100 *
+                                                                              0.5,
+                                                                          width100 *
+                                                                              0.075),
+                                                                      backgroundColor:
+                                                                          Color(
+                                                                              0xFF3A4F39),
+                                                                      foregroundColor:
+                                                                          Colors
+                                                                              .white),
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(
+                                                                        () {
+                                                                      samplePercentage =
+                                                                          int.tryParse(_samplePercentageController.text) ??
+                                                                              0;
+                                                                    });
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                    chooseHandler(
+                                                                        firstButtonText);
+                                                                  },
+                                                                  child: Text(
+                                                                      'Submit'),
+                                                                )
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                      );
+                                                    }),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Text('Yes'),
                                           ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            chooseHandler(
-                                                firstButtonText); // Call chooseHandler directly
-                                          },
-                                          child: Text('No'),
-                                        ),
+                                          SizedBox(height: 10.0),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              textStyle: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                              side: BorderSide(
+                                                  color: Color(0xFF3A4F39),
+                                                  width: 2),
+                                              minimumSize: Size(width100 * 0.5,
+                                                  width100 * 0.075),
+                                              backgroundColor: Colors.white,
+                                              foregroundColor:
+                                                  Color(0xFF3A4F39),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              chooseHandler(firstButtonText);
+                                            },
+                                            child: Text('No'),
+                                          ),
+                                        ],
                                       ),
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               );
                             },
                           );
+                          ;
                         } else
                           chooseHandler(firstButtonText);
                       }
@@ -1222,25 +1314,38 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: _resultController.text.contains("[+]")
-                          ? Colors.green.withOpacity(0.5)
-                          : _resultController.text.contains("[-]")
-                              ? Colors.red.withOpacity(0.5)
+                          ? Colors.green.shade700
+                          : _resultController.text.contains("[-]") ||
+                                  _resultController.text.contains("Error")
+                              ? Colors.red.shade700
                               : Colors.grey.withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                       border: Border.all(
-                        color: Colors.grey.withOpacity(0.7),
+                        color: _resultController.text.contains("[+]")
+                            ? Colors.green.shade900
+                            : _resultController.text.contains("[-]") ||
+                                    _resultController.text.contains("Error")
+                                ? Colors.red.shade900
+                                : Colors.grey.withOpacity(0.7),
                       ),
                     ),
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Text(
                           _resultController.text.isNotEmpty
                               ? _resultController.text
                               : '--',
-                          style: TextStyle(),
+                          style: TextStyle(
+                            color: _resultController.text.contains("[+]")
+                                ? Colors.white
+                                : _resultController.text.contains("[-]") ||
+                                        _resultController.text.contains("Error")
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
                         ),
                       ),
                     ),
