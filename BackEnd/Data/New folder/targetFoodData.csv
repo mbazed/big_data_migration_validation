@@ -1,0 +1,245 @@
+ID,FID,Location,Type,Item,Quantity,UnitPrice,TotalPrice,Date
+ID07351,FID07351,"East,Boston",Bars,Carrot,33,1.77,58.41,1-Jan-23
+ID07352,FID07352,"East,Boston",Crackers,Whole Wheat,87,3.49,303.63,4-Jan-23
+ID07353,FID07353,"West,Los Angeles",Cookies,Chocolate Chip,58,1.87,108.46,7-Jan-23
+ID07354,FID07354,"East,New York",Cookies,Chocolate Chip,82,1.87,153.34,10-Jan-23
+ID07355,FID07355,"East,Boston",Cookies,Arrowroot,38,2.18,82.84,13-Jan-23
+ID07356,FID07356,"East,Boston",Bars,Carrot,54,1.77,95.58,16-Jan-23
+ID07357,FID07357,"East,Boston",Crackers,Whole Wheat,149,3.49,520.01,19-Jan-23
+ID07358,FID07358,"West,Los Angeles",Bars,Carrot,51,1.77,90.27,22-Jan-23
+ID07359,FID07359,"East,New York",Bars,Carrot,100,1.77,177,25-Jan-23
+ID07360,FID07360,"East,New York",Snacks,Potato Chips,28,1.35,37.8,28-Jan-23
+ID07361,FID07361,"East,Boston",Cookies,Arrowroot,36,2.18,78.48,31-Jan-23
+ID07362,FID07362,"East,Boston",Cookies,Chocolate Chip,31,1.87,57.97,3-Feb-23
+ID07363,FID07363,"East,Boston",Crackers,Whole Wheat,28,3.49,97.72,6-Feb-23
+ID07364,FID07364,"West,Los Angeles",Bars,Carrot,44,1.77,77.88,9-Feb-23
+ID07365,FID07365,"East,New York",Bars,Carrot,23,1.77,40.71,12-Feb-23
+ID07366,FID07366,"East,New York",Snacks,Potato Chips,27,1.35,36.45,15-Feb-23
+ID07367,FID07367,"East,Boston",Cookies,Arrowroot,43,2.18,93.74,18-Feb-23
+ID07368,FID07368,"East,Boston",Cookies,Oatmeal Raisin,123,2.84,349.32,21-Feb-23
+ID07369,FID07369,"West,Los Angeles",Bars,Bran,42,1.87,78.54,24-Feb-23
+ID07370,FID07370,"West,Los Angeles",Cookies,Oatmeal Raisin,33,2.84,93.72,27-Feb-23
+ID07371,FID07371,"East,New York",Cookies,Chocolate Chip,85,1.87,158.95,2-Mar-23
+ID07372,FID07372,"West,San Diego",Cookies,Oatmeal Raisin,30,2.84,85.2,5-Mar-23
+ID07373,FID07373,"East,Boston",Bars,Carrot,61,1.77,107.97,8-Mar-23
+ID07374,FID07374,"East,Boston",Crackers,Whole Wheat,40,3.49,139.6,11-Mar-23
+ID07375,FID07375,"West,Los Angeles",Cookies,Chocolate Chip,86,1.87,160.82,14-Mar-23
+ID07376,FID07376,"East,New York",Bars,Carrot,38,1.77,67.26,17-Mar-23
+ID07377,FID07377,"East,New York",Snacks,Potato Chips,68,1.68,114.24,20-Mar-23
+ID07378,FID07378,"West,San Diego",Cookies,Chocolate Chip,39,1.87,72.93,23-Mar-23
+ID07379,FID07379,"East,Boston",Bars,Bran,103,1.87,192.61,26-Mar-23
+ID07380,FID07380,"East,Boston",Cookies,Oatmeal Raisin,193,2.84,548.12,29-Mar-23
+ID07381,FID07381,"West,Los Angeles",Bars,Carrot,58,1.77,102.66,1-Apr-23
+ID07382,FID07382,"West,Los Angeles",Snacks,Potato Chips,68,1.68,114.24,4-Apr-23
+ID07383,FID07383,"East,New York",Bars,Carrot,91,1.77,161.07,7-Apr-23
+ID07384,FID07384,"East,New York",Crackers,Whole Wheat,23,3.49,80.27,10-Apr-23
+ID07385,FID07385,"West,San Diego",Snacks,Potato Chips,28,1.68,47.04,13-Apr-23
+ID07386,FID07386,"East,Boston",Bars,Carrot,48,1.77,84.96,16-Apr-23
+ID07387,FID07387,"East,Boston",Snacks,Potato Chips,134,1.68,225.12,19-Apr-23
+ID07388,FID07388,"West,Los Angeles",Bars,Carrot,20,1.77,35.4,22-Apr-23
+ID07389,FID07389,"East,New York",Bars,Carrot,53,1.77,93.81,25-Apr-23
+ID07390,FID07390,"East,New York",Snacks,Potato Chips,64,1.68,107.52,28-Apr-23
+ID07391,FID07391,"West,San Diego",Cookies,Chocolate Chip,63,1.87,117.81,1-May-23
+ID07392,FID07392,"East,Boston",Bars,Bran,105,1.87,196.35,4-May-23
+ID07393,FID07393,"East,Boston",Cookies,Oatmeal Raisin,138,2.84,391.92,7-May-23
+ID07394,FID07394,"West,Los Angeles",Bars,Carrot,25,1.77,44.25,10-May-23
+ID07395,FID07395,"West,Los Angeles",Crackers,Whole Wheat,21,3.49,73.29,13-May-23
+ID07396,FID07396,"East,New York",Bars,Carrot,61,1.77,107.97,16-May-23
+ID07397,FID07397,"East,New York",Snacks,Potato Chips,49,1.68,82.32,19-May-23
+ID07398,FID07398,"West,San Diego",Cookies,Chocolate Chip,55,1.87,102.85,22-May-23
+ID07399,FID07399,"East,Boston",Cookies,Arrowroot,27,2.18,58.86,25-May-23
+ID07400,FID07400,"East,Boston",Bars,Carrot,58,1.77,102.66,28-May-23
+ID07401,FID07401,"East,Boston",Crackers,Whole Wheat,33,3.49,115.17,31-May-23
+ID07402,FID07402,"West,Los Angeles",Cookies,Oatmeal Raisin,288,2.84,817.92,3-Jun-23
+ID07403,FID07403,"East,New York",Cookies,Chocolate Chip,76,1.87,142.12,6-Jun-23
+ID07404,FID07404,"West,San Diego",Bars,Carrot,42,1.77,74.34,9-Jun-23
+ID07405,FID07405,"West,San Diego",Crackers,Whole Wheat,20,3.49,69.8,12-Jun-23
+ID07406,FID07406,"East,Boston",Bars,Carrot,75,1.77,132.75,15-Jun-23
+ID07407,FID07407,"East,Boston",Crackers,Whole Wheat,38,3.49,132.62,18-Jun-23
+ID07408,FID07408,"West,Los Angeles",Bars,Carrot,306,1.77,541.62,21-Jun-23
+ID07409,FID07409,"West,Los Angeles",Snacks,Potato Chips,28,1.68,47.04,24-Jun-23
+ID07410,FID07410,"East,New York",Bars,Bran,110,1.87,205.7,27-Jun-23
+ID07411,FID07411,"East,New York",Cookies,Oatmeal Raisin,51,2.84,144.84,30-Jun-23
+ID07412,FID07412,"West,San Diego",Bars,Carrot,52,1.77,92.04,3-Jul-23
+ID07413,FID07413,"West,San Diego",Crackers,Whole Wheat,28,3.49,97.72,6-Jul-23
+ID07414,FID07414,"East,Boston",Bars,Carrot,136,1.77,240.72,9-Jul-23
+ID07415,FID07415,"East,Boston",Crackers,Whole Wheat,42,3.49,146.58,12-Jul-23
+ID07416,FID07416,"West,Los Angeles",Cookies,Chocolate Chip,75,1.87,140.25,15-Jul-23
+ID07417,FID07417,"East,New York",Bars,Bran,72,1.87,134.64,18-Jul-23
+ID07418,FID07418,"East,New York",Cookies,Oatmeal Raisin,56,2.84,159.04,21-Jul-23
+ID07419,FID07419,"West,San Diego",Bars,Bran,51,1.87,95.37,24-Jul-23
+ID07420,FID07420,"West,San Diego",Snacks,Potato Chips,31,1.68,52.08,27-Jul-23
+ID07421,FID07421,"East,Boston",Bars,Bran,56,1.87,104.72,30-Jul-23
+ID07422,FID07422,"East,Boston",Cookies,Oatmeal Raisin,137,2.84,389.08,2-Aug-23
+ID07423,FID07423,"West,Los Angeles",Cookies,Chocolate Chip,107,1.87,200.09,5-Aug-23
+ID07424,FID07424,"East,New York",Bars,Carrot,24,1.77,42.48,8-Aug-23
+ID07425,FID07425,"East,New York",Crackers,Whole Wheat,30,3.49,104.7,11-Aug-23
+ID07426,FID07426,"West,San Diego",Cookies,Chocolate Chip,70,1.87,130.9,14-Aug-23
+ID07427,FID07427,"East,Boston",Cookies,Arrowroot,31,2.18,67.58,17-Aug-23
+ID07428,FID07428,"East,Boston",Bars,Carrot,109,1.77,192.93,20-Aug-23
+ID07429,FID07429,"East,Boston",Crackers,Whole Wheat,21,3.49,73.29,23-Aug-23
+ID07430,FID07430,"West,Los Angeles",Cookies,Chocolate Chip,80,1.87,149.6,26-Aug-23
+ID07431,FID07431,"East,New York",Bars,Bran,75,1.87,140.25,29-Aug-23
+ID07432,FID07432,"East,New York",Cookies,Oatmeal Raisin,74,2.84,210.16,1-Sep-23
+ID07433,FID07433,"West,San Diego",Bars,Carrot,45,1.77,79.65,4-Sep-23
+ID07434,FID07434,"East,Boston",Cookies,Arrowroot,28,2.18,61.04,7-Sep-23
+ID07435,FID07435,"East,Boston",Bars,Carrot,143,1.77,253.11,10-Sep-23
+ID07436,FID07436,"East,Boston",Snacks,Pretzels,27,3.15,85.05,13-Sep-23
+ID07437,FID07437,"West,Los Angeles",Bars,Carrot,133,1.77,235.41,16-Sep-23
+ID07438,FID07438,"East,New York",Cookies,Arrowroot,110,2.18,239.8,19-Sep-23
+ID07439,FID07439,"East,New York",Cookies,Chocolate Chip,65,1.87,121.55,22-Sep-23
+ID07440,FID07440,"West,San Diego",Bars,Bran,33,1.87,61.71,25-Sep-23
+ID07441,FID07441,"East,Boston",Cookies,Arrowroot,81,2.18,176.58,28-Sep-23
+ID07442,FID07442,"East,Boston",Bars,Carrot,77,1.77,136.29,1-Oct-23
+ID07443,FID07443,"East,Boston",Crackers,Whole Wheat,38,3.49,132.62,4-Oct-23
+ID07444,FID07444,"West,Los Angeles",Bars,Carrot,40,1.77,70.8,7-Oct-23
+ID07445,FID07445,"West,Los Angeles",Snacks,Potato Chips,114,1.68,191.52,10-Oct-23
+ID07446,FID07446,"East,New York",Cookies,Arrowroot,224,2.18,488.32,13-Oct-23
+ID07447,FID07447,"East,New York",Bars,Carrot,141,1.77,249.57,16-Oct-23
+ID07448,FID07448,"East,New York",Crackers,Whole Wheat,32,3.49,111.68,19-Oct-23
+ID07449,FID07449,"West,San Diego",Bars,Carrot,20,1.77,35.4,22-Oct-23
+ID07450,FID07450,"East,Boston",Cookies,Arrowroot,40,2.18,87.2,25-Oct-23
+ID07451,FID07451,"East,Boston",Cookies,Chocolate Chip,49,1.87,91.63,28-Oct-23
+ID07452,FID07452,"East,Boston",Crackers,Whole Wheat,46,3.49,160.54,31-Oct-23
+ID07453,FID07453,"West,Los Angeles",Bars,Carrot,39,1.77,69.03,3-Nov-23
+ID07454,FID07454,"West,Los Angeles",Snacks,Potato Chips,62,1.68,104.16,6-Nov-23
+ID07455,FID07455,"East,New York",Bars,Carrot,90,1.77,159.3,9-Nov-23
+ID07456,FID07456,"West,San Diego",Cookies,Arrowroot,103,2.18,224.54,12-Nov-23
+ID07457,FID07457,"West,San Diego",Cookies,Oatmeal Raisin,32,2.84,90.88,15-Nov-23
+ID07458,FID07458,"East,Boston",Bars,Bran,66,1.87,123.42,18-Nov-23
+ID07459,FID07459,"East,Boston",Cookies,Oatmeal Raisin,97,2.84,275.48,21-Nov-23
+ID07460,FID07460,"West,Los Angeles",Bars,Carrot,30,1.77,53.1,24-Nov-23
+ID07461,FID07461,"West,Los Angeles",Snacks,Potato Chips,29,1.68,48.72,27-Nov-23
+ID07462,FID07462,"East,New York",Bars,Carrot,92,1.77,162.84,30-Nov-23
+ID07463,FID07463,"West,San Diego",Cookies,Arrowroot,139,2.18,303.02,3-Dec-23
+ID07464,FID07464,"West,San Diego",Cookies,Oatmeal Raisin,29,2.84,82.36,6-Dec-23
+ID07465,FID07465,"East,Boston",Bars,Banana,30,2.27,68.1,9-Dec-23
+ID07466,FID07466,"East,Boston",Cookies,Chocolate Chip,36,1.87,67.32,12-Dec-23
+ID07467,FID07467,"East,Boston",Crackers,Whole Wheat,41,3.49,143.09,15-Dec-23
+ID07468,FID07468,"West,Los Angeles",Bars,Carrot,44,1.77,77.88,18-Dec-23
+ID07469,FID07469,"West,Los Angeles",Snacks,Potato Chips,29,1.68,48.72,21-Dec-23
+ID07470,FID07470,"East,New York",Cookies,Arrowroot,237,2.18,516.66,24-Dec-23
+ID07471,FID07471,"East,New York",Cookies,Chocolate Chip,65,1.87,121.55,27-Dec-23
+ID07472,FID07472,"West,San Diego",Cookies,Arrowroot,83,2.18,180.94,30-Dec-23
+ID07473,FID07473,"East,Boston",Cookies,Arrowroot,32,2.18,69.76,2-Jan-23
+ID07474,FID07474,"East,Boston",Bars,Carrot,63,1.77,111.51,5-Jan-23
+ID07475,FID07475,"East,Boston",Snacks,Pretzels,29,3.15,91.35,8-Jan-23
+ID07476,FID07476,"West,Los Angeles",Bars,Bran,77,1.87,143.99,11-Jan-23
+ID07477,FID07477,"West,Los Angeles",Cookies,Oatmeal Raisin,80,2.84,227.2,14-Jan-23
+ID07478,FID07478,"East,New York",Bars,Carrot,102,1.77,180.54,17-Jan-23
+ID07479,FID07479,"East,New York",Crackers,Whole Wheat,31,3.49,108.19,20-Jan-23
+ID07480,FID07480,"West,San Diego",Bars,Carrot,56,1.77,99.12,23-Jan-23
+ID07481,FID07481,"East,Boston",Cookies,Arrowroot,52,2.18,113.36,26-Jan-23
+ID07482,FID07482,"East,Boston",Bars,Carrot,51,1.77,90.27,29-Jan-23
+ID07483,FID07483,"East,Boston",Snacks,Potato Chips,24,1.68,40.32,1-Feb-23
+ID07484,FID07484,"West,Los Angeles",Cookies,Arrowroot,58,2.18,126.44,4-Feb-23
+ID07485,FID07485,"West,Los Angeles",Cookies,Chocolate Chip,34,1.87,63.58,7-Feb-23
+ID07486,FID07486,"East,New York",Bars,Carrot,34,1.77,60.18,10-Feb-23
+ID07487,FID07487,"East,New York",Snacks,Potato Chips,21,1.68,35.28,13-Feb-23
+ID07488,FID07488,"West,San Diego",Cookies,Oatmeal Raisin,29,2.84,82.36,16-Feb-23
+ID07489,FID07489,"East,Boston",Bars,Carrot,68,1.77,120.36,19-Feb-23
+ID07490,FID07490,"East,Boston",Snacks,Pretzels,31,3.15,97.65,22-Feb-23
+ID07491,FID07491,"West,Los Angeles",Cookies,Arrowroot,30,2.18,65.4,25-Feb-23
+ID07492,FID07492,"West,Los Angeles",Cookies,Chocolate Chip,232,1.87,433.84,28-Feb-23
+ID07493,FID07493,"East,New York",Bars,Bran,68,1.87,127.16,2-Mar-23
+ID07494,FID07494,"East,New York",Cookies,Oatmeal Raisin,97,2.84,275.48,5-Mar-23
+ID07495,FID07495,"West,San Diego",Bars,Bran,86,1.87,160.82,8-Mar-23
+ID07496,FID07496,"West,San Diego",Snacks,Potato Chips,41,1.68,68.88,11-Mar-23
+ID07497,FID07497,"East,Boston",Bars,Carrot,93,1.77,164.61,14-Mar-23
+ID07498,FID07498,"East,Boston",Snacks,Potato Chips,47,1.68,78.96,17-Mar-23
+ID07499,FID07499,"West,Los Angeles",Bars,Carrot,103,1.77,182.31,20-Mar-23
+ID07500,FID07500,"West,Los Angeles",Snacks,Potato Chips,33,1.68,55.44,23-Mar-23
+ID07501,FID07501,"East,New York",Bars,Bran,57,1.87,106.59,26-Mar-23
+ID07502,FID07502,"East,New York",Cookies,Oatmeal Raisin,65,2.84,184.6,29-Mar-23
+ID07503,FID07503,"West,San Diego",Bars,Carrot,118,1.77,208.86,1-Apr-23
+ID07504,FID07504,"East,Boston",Cookies,Arrowroot,36,2.18,78.48,4-Apr-23
+ID07505,FID07505,"East,Boston",Cookies,Oatmeal Raisin,123,2.84,349.32,7-Apr-23
+ID07506,FID07506,"West,Los Angeles",Bars,Carrot,90,1.77,159.3,10-Apr-23
+ID07507,FID07507,"West,Los Angeles",Crackers,Whole Wheat,21,3.49,73.29,13-Apr-23
+ID07508,FID07508,"East,New York",Bars,Carrot,48,1.77,84.96,16-Apr-23
+ID07509,FID07509,"East,New York",Snacks,Potato Chips,24,1.68,40.32,19-Apr-23
+ID07510,FID07510,"West,San Diego",Cookies,Chocolate Chip,67,1.87,125.29,22-Apr-23
+ID07511,FID07511,"East,Boston",Bars,Bran,27,1.87,50.49,25-Apr-23
+ID07512,FID07512,"East,Boston",Cookies,Oatmeal Raisin,129,2.84,366.36,28-Apr-23
+ID07513,FID07513,"West,Los Angeles",Cookies,Arrowroot,77,2.18,167.86,1-May-23
+ID07514,FID07514,"West,Los Angeles",Cookies,Chocolate Chip,58,1.87,108.46,4-May-23
+ID07515,FID07515,"East,New York",Bars,Bran,47,1.87,87.89,7-May-23
+ID07516,FID07516,"East,New York",Cookies,Oatmeal Raisin,33,2.84,93.72,10-May-23
+ID07517,FID07517,"West,San Diego",Cookies,Chocolate Chip,82,1.87,153.34,13-May-23
+ID07518,FID07518,"East,Boston",Bars,Carrot,58,1.77,102.66,16-May-23
+ID07519,FID07519,"East,Boston",Snacks,Pretzels,30,3.15,94.5,19-May-23
+ID07520,FID07520,"West,Los Angeles",Cookies,Chocolate Chip,43,1.87,80.41,22-May-23
+ID07521,FID07521,"East,New York",Bars,Carrot,84,1.77,148.68,25-May-23
+ID07522,FID07522,"West,San Diego",Cookies,Arrowroot,36,2.18,78.48,28-May-23
+ID07523,FID07523,"West,San Diego",Cookies,Oatmeal Raisin,44,2.84,124.96,31-May-23
+ID07524,FID07524,"East,Boston",Bars,Bran,27,1.87,50.49,3-Jun-23
+ID07525,FID07525,"East,Boston",Cookies,Oatmeal Raisin,120,2.84,340.8,6-Jun-23
+ID07526,FID07526,"East,Boston",Crackers,Whole Wheat,26,3.49,90.74,9-Jun-23
+ID07527,FID07527,"West,Los Angeles",Bars,Carrot,73,1.77,129.21,12-Jun-23
+ID07528,FID07528,"East,New York",Bars,Bran,38,1.87,71.06,15-Jun-23
+ID07529,FID07529,"East,New York",Cookies,Oatmeal Raisin,40,2.84,113.6,18-Jun-23
+ID07530,FID07530,"West,San Diego",Bars,Carrot,41,1.77,72.57,21-Jun-23
+ID07531,FID07531,"East,Boston",Bars,Banana,27,2.27,61.29,24-Jun-23
+ID07532,FID07532,"East,Boston",Cookies,Chocolate Chip,38,1.87,71.06,27-Jun-23
+ID07533,FID07533,"East,Boston",Crackers,Whole Wheat,34,3.49,118.66,30-Jun-23
+ID07534,FID07534,"West,Los Angeles",Bars,Bran,65,1.87,121.55,3-Jul-23
+ID07535,FID07535,"West,Los Angeles",Cookies,Oatmeal Raisin,60,2.84,170.4,6-Jul-23
+ID07536,FID07536,"East,New York",Cookies,Arrowroot,37,2.18,80.66,9-Jul-23
+ID07537,FID07537,"East,New York",Cookies,Chocolate Chip,40,1.87,74.8,12-Jul-23
+ID07538,FID07538,"West,San Diego",Bars,Bran,26,1.87,48.62,15-Jul-23
+ID07539,FID07539,"East,Boston",Bars,Banana,22,2.27,49.94,18-Jul-23
+ID07540,FID07540,"East,Boston",Cookies,Chocolate Chip,32,1.87,59.84,21-Jul-23
+ID07541,FID07541,"East,Boston",Crackers,Whole Wheat,23,3.49,80.27,24-Jul-23
+ID07542,FID07542,"West,Los Angeles",Cookies,Arrowroot,20,2.18,43.6,27-Jul-23
+ID07543,FID07543,"West,Los Angeles",Cookies,Chocolate Chip,64,1.87,119.68,30-Jul-23
+ID07544,FID07544,"East,New York",Bars,Carrot,71,1.77,125.67,2-Aug-23
+ID07545,FID07545,"West,San Diego",Cookies,Arrowroot,90,2.18,196.2,5-Aug-23
+ID07546,FID07546,"West,San Diego",Cookies,Oatmeal Raisin,38,2.84,107.92,8-Aug-23
+ID07547,FID07547,"East,Boston",Bars,Carrot,55,1.77,97.35,11-Aug-23
+ID07548,FID07548,"East,Boston",Snacks,Pretzels,22,3.15,69.3,14-Aug-23
+ID07549,FID07549,"West,Los Angeles",Bars,Carrot,34,1.77,60.18,17-Aug-23
+ID07550,FID07550,"East,New York",Bars,Bran,39,1.87,72.93,20-Aug-23
+ID07551,FID07551,"East,New York",Cookies,Oatmeal Raisin,41,2.84,116.44,23-Aug-23
+ID07552,FID07552,"West,San Diego",Bars,Carrot,41,1.77,72.57,26-Aug-23
+ID07553,FID07553,"East,Boston",Cookies,Arrowroot,136,2.18,296.48,29-Aug-23
+ID07554,FID07554,"East,Boston",Bars,Carrot,25,1.77,44.25,1-Sep-23
+ID07555,FID07555,"East,Boston",Snacks,Pretzels,26,3.15,81.9,4-Sep-23
+ID07556,FID07556,"West,Los Angeles",Bars,Bran,50,1.87,93.5,7-Sep-23
+ID07557,FID07557,"West,Los Angeles",Cookies,Oatmeal Raisin,79,2.84,224.36,10-Sep-23
+ID07558,FID07558,"East,New York",Bars,Carrot,30,1.77,53.1,13-Sep-23
+ID07559,FID07559,"East,New York",Snacks,Potato Chips,20,1.68,33.6,16-Sep-23
+ID07560,FID07560,"West,San Diego",Bars,Carrot,49,1.77,86.73,19-Sep-23
+ID07561,FID07561,"East,Boston",Cookies,Arrowroot,40,2.18,87.2,22-Sep-23
+ID07562,FID07562,"East,Boston",Bars,Carrot,31,1.77,54.87,25-Sep-23
+ID07563,FID07563,"East,Boston",Snacks,Pretzels,21,3.15,66.15,28-Sep-23
+ID07564,FID07564,"West,Los Angeles",Bars,Bran,43,1.87,80.41,1-Oct-23
+ID07565,FID07565,"West,Los Angeles",Cookies,Oatmeal Raisin,47,2.84,133.48,4-Oct-23
+ID07566,FID07566,"East,New York",Cookies,Arrowroot,175,2.18,381.5,7-Oct-23
+ID07567,FID07567,"East,New York",Cookies,Chocolate Chip,23,1.87,43.01,10-Oct-23
+ID07568,FID07568,"West,San Diego",Bars,Carrot,40,1.77,70.8,13-Oct-23
+ID07569,FID07569,"East,Boston",Cookies,Arrowroot,87,2.18,189.66,16-Oct-23
+ID07570,FID07570,"East,Boston",Bars,Carrot,43,1.77,76.11,19-Oct-23
+ID07571,FID07571,"East,Boston",Crackers,Whole Wheat,30,3.49,104.7,22-Oct-23
+ID07572,FID07572,"West,Los Angeles",Bars,Carrot,35,1.77,61.95,25-Oct-23
+ID07573,FID07573,"East,New York",Bars,Bran,57,1.87,106.59,28-Oct-23
+ID07574,FID07574,"East,New York",Snacks,Potato Chips,25,1.68,42,31-Oct-23
+ID07575,FID07575,"West,San Diego",Cookies,Chocolate Chip,24,1.87,44.88,3-Nov-23
+ID07576,FID07576,"East,Boston",Bars,Bran,83,1.87,155.21,6-Nov-23
+ID07577,FID07577,"East,Boston",Cookies,Oatmeal Raisin,124,2.84,352.16,9-Nov-23
+ID07578,FID07578,"West,Los Angeles",Bars,Carrot,137,1.77,242.49,12-Nov-23
+ID07579,FID07579,"East,New York",Cookies,Arrowroot,146,2.18,318.28,15-Nov-23
+ID07580,FID07580,"East,New York",Cookies,Chocolate Chip,34,1.87,63.58,18-Nov-23
+ID07581,FID07581,"West,San Diego",Bars,Carrot,20,1.77,35.4,21-Nov-23
+ID07582,FID07582,"East,Boston",Cookies,Arrowroot,139,2.18,303.02,24-Nov-23
+ID07583,FID07583,"East,Boston",Cookies,Chocolate Chip,211,1.87,394.57,27-Nov-23
+ID07584,FID07584,"East,Boston",Crackers,Whole Wheat,20,3.49,69.8,30-Nov-23
+ID07585,FID07585,"West,Los Angeles",Bars,Bran,42,1.87,78.54,3-Dec-23
+ID07586,FID07586,"West,Los Angeles",Cookies,Oatmeal Raisin,100,2.84,284,6-Dec-23
+ID07587,FID07587,"East,New York",Bars,Carrot,38,1.77,67.26,9-Dec-23
+ID07588,FID07588,"East,New York",Crackers,Whole Wheat,25,3.49,87.25,12-Dec-23
+ID07589,FID07589,"West,San Diego",Cookies,Chocolate Chip,96,1.87,179.52,15-Dec-23
+ID07590,FID07590,"East,Boston",Cookies,Arrowroot,34,2.18,74.12,18-Dec-23
+ID07591,FID07591,"East,Boston",Cookies,Chocolate Chip,245,1.87,458.15,21-Dec-23
+ID07592,FID07592,"East,Boston",Crackers,Whole Wheat,30,3.49,104.7,24-Dec-23
+ID07593,FID07593,"West,Los Angeles",Bars,Bran,30,1.87,56.1,27-Dec-23
+ID07594,FID07594,"West,Los Angeles",Cookies,Oatmeal Raisin,44,2.84,124.96,30-Dec-23

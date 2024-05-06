@@ -11,7 +11,8 @@ import pandas as pd
 from readSouce import *
 from tokenfinder import *
 from dbconncomplete import *
-from comonPk import *
+# from comonPk import *
+from commonCompositePk import get_two_keys
 from validation3 import *
 from sampling import *
 from cryptography.fernet import Fernet
@@ -265,11 +266,11 @@ def findKeys():
         targetPrimaryKey=None
         message = '[-] Primary key identification Failed!'
     
-    record.source_primary_key = sourcePrimaryKey
-    record.target_primary_key = targetPrimaryKey
+    # record.source_primary_key = sourcePrimaryKey
+    # record.target_primary_key = targetPrimaryKey
 
-            # Commit the changes to the database
-    db.session.add(record)
+    #         # Commit the changes to the database
+    # db.session.add(record)
     
     db.session.commit()
 
@@ -434,7 +435,8 @@ def validateData():
         #     print(i,end=" :")
         else:
             print("multiprocessing")
-            if (sourcedata.shape[0]>50000):
+            if (sourcedata.shape[0]>50000 and sample_percent!=100):
+                
                 sampled_source_data, sampled_primary_keys = collect_sample_data_with_primary_key(sourcedata, sample_percent, targetPrimaryKey)
                 sampled_target_data = collect_corresponding_data_from_target(targetdata, sampled_primary_keys, targetPrimaryKey)
                 resultString =dividedCompareParallelPool(sampled_source_data,sampled_target_data,mapingDoc,targetPrimaryKey)

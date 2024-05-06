@@ -72,7 +72,8 @@ def dividedCompareParallelPool(sourceData, targetData, mappingDoc_input, primary
             if data_types_source[column] != data_types_target[column]:
                 mismatched_data_types.append(column)
         else:
-            corruptedData.append(f"Column '{column}' not found in target DataFrame")
+            # corruptedData.append(f"Column '{column}' not found in target DataFrame")
+            pass
 
     # Split the source data into chunks for multiprocessing
     chunks = []

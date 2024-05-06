@@ -98,7 +98,8 @@ def dividedCompare(sourceData, targetData, mappingDoc_input, primary_key):
             if data_types_source[column] != data_types_target[column]:
                 mismatched_data_types.append(column)
         else:
-            corrupedData.append(f">> Column '{column}' not found in target DataFrame")
+            # corrupedData.append(f">> Column '{column}' not found in target DataFrame")
+            pass
 
 
     for _, srcRow in source_df.iterrows():

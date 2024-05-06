@@ -38,7 +38,7 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   bool isLoading = false;
   bool showerrbtn = true;
 
-  int samplePercentage = 10;
+  int samplePercentage = 100;
 
   FilePickerResult? targetResult;
   FilePickerResult? sourceResult;
@@ -75,6 +75,9 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
       TextEditingController();
   TextEditingController _keyController1 = TextEditingController();
   TextEditingController _keyController2 = TextEditingController();
+
+  List<List<String>> src2dKeys = [];
+  List<List<String>> trg2dKeys = [];
   List<String> srcCandidateKeys = [];
   List<String> trgCandidateKeys = [];
 
@@ -500,8 +503,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
   Future<void> handleFindPrimaryKeys() async {
     setState(() {
       inputRuleString = "";
+      showDiagram = true;
+      showErrors = false;
+      showerrbtn = false;
     });
-    showDiagram = true;
     try {
       final response = await http.post(
         pkUrl,
@@ -518,8 +523,6 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
 
         // Access the 'primarykey' value
         setState(() {
-          findPrimaryKeysCompleted = true;
-          _updateProgress();
           _keyController1.text = "";
           _keyController2.text = "";
 
@@ -535,24 +538,67 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
               .replaceAll(']', '')
               .split(',')
               .cast<String>();
-          srcCandidateKeys = data['sourcePrimaryKey'].toString().split(',');
-          trgCandidateKeys = data['targetPrimaryKey'].toString().split(',');
           var srcCandidateKeysStr = data['sourcePrimaryKey'].toString();
           var trgCandidateKeysStr = data['targetPrimaryKey'].toString();
+          print(srcCandidateKeysStr);
+
+          src2dKeys = convertStringToListOfLists(srcCandidateKeysStr);
+          trg2dKeys = convertStringToListOfLists(trgCandidateKeysStr);
+
+          if (src2dKeys.length > 0) {
+            if (src2dKeys[0].length > 1) {
+              print("src composite pk");
+
+              srcCandidateKeys = src2dKeys
+                  .map((e) =>
+                      e.toString().replaceAll('[', '').replaceAll(']', ''))
+                  .toList();
+
+              _keyController1.text = srcCandidateKeys[0];
+              srcpk = srcCandidateKeys[0];
+            } else {
+              print("src single pk ");
+              srcCandidateKeys = srcCandidateKeysStr
+                  .replaceAll('[', '')
+                  .replaceAll(']', '')
+                  .split(',');
+              _keyController1.text = srcCandidateKeys[0];
+              srcpk = srcCandidateKeys[0];
+            }
+          } else {
+            print("src2dKeys is empty");
+          }
+
+          if (trg2dKeys.length > 0) {
+            if (trg2dKeys[0].length > 1) {
+              print("tar composite pk");
+              trgCandidateKeys = trg2dKeys
+                  .map((e) =>
+                      e.toString().replaceAll('[', '').replaceAll(']', ''))
+                  .toList();
+              _keyController2.text = trgCandidateKeys[0];
+              trgpk = trgCandidateKeys[0];
+            } else {
+              print("tar single pk ");
+              trgCandidateKeys = trgCandidateKeysStr
+                  .replaceAll('[', '')
+                  .replaceAll(']', '')
+                  .split(',');
+              _keyController2.text = trgCandidateKeys[0];
+              trgpk = trgCandidateKeys[0];
+            }
+          } else {
+            print("trg2dKeys is empty");
+          }
+
           if (srcCandidateKeys.length > 1 || trgCandidateKeys.length > 1) {
             multiKey = true;
-            _keyController1.text = srcCandidateKeys[0];
-            _keyController2.text = trgCandidateKeys[0];
           } else {
-            _keyController1.text = srcCandidateKeys[0];
-            _keyController2.text = trgCandidateKeys[0];
             multiKey = false;
           }
 
-          srcpk = srcCandidateKeys[0];
-          trgpk = trgCandidateKeys[0];
           _resultController.text =
-              'Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}';
+              '${_resultController.text}Primary Key of source: ${srcCandidateKeysStr}\nPrimary Key of Target: ${trgCandidateKeysStr}\n';
         });
       } else {
         print('[-] Primary Key Fetch failed: ${response.statusCode}');
@@ -1314,10 +1360,10 @@ class _DesktopDataValidatorPageState extends State<DesktopDataValidatorPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: _resultController.text.contains("[+]")
-                          ? Colors.green.shade700
+                          ? Colors.lightGreen.shade700.withOpacity(.5)
                           : _resultController.text.contains("[-]") ||
                                   _resultController.text.contains("Error")
-                              ? Colors.red.shade700
+                              ? Colors.red.shade700.withOpacity(.5)
                               : Colors.grey.withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                       border: Border.all(

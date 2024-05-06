@@ -16,7 +16,7 @@ def perform_sampling(source_data,  sample_percent=10):
 
     return sampled_df
 
-def collect_sample_data_with_primary_key(data_file,  sample_percent=10, primary_key='ID'):
+def collect_sample_data_with_primary_key(data_file,  sample_percent=100, primary_key='ID'):
     # Perform sampling on the source data
     sampled_data = perform_sampling(data_file, sample_percent)
     

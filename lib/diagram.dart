@@ -387,3 +387,34 @@ Map<String, String> createRuleDictionary(String inputString) {
   }
   return dictionary;
 }
+
+List<List<String>> convertStringToListOfLists(String input) {
+  List<List<String>> result = [];
+  List<String> currentList = [];
+  bool insideList = false;
+
+  // Iterate through each character in the input string
+  for (int i = 0; i < input.length; i++) {
+    String currentChar = input[i];
+
+    // If the current character is '[', mark that we're inside a list
+    if (currentChar == '[') {
+      insideList = true;
+      currentList = [];
+    }
+    // If the current character is ']', mark that we're outside a list
+    else if (currentChar == ']') {
+      insideList = false;
+      result.add(currentList);
+    }
+    // If the current character is a letter or digit and we're inside a list, add it to the current list
+    else if (RegExp(r'[a-zA-Z0-9]').hasMatch(currentChar) && insideList) {
+      int endIndex = input.indexOf(RegExp(r'[\],]'), i);
+      String item = input.substring(i, endIndex);
+      currentList.add(item);
+      i = endIndex - 1; // Move the index to the end of the current item
+    }
+  }
+  result.removeLast();
+  return result;
+}
