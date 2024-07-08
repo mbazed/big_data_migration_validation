@@ -14,6 +14,30 @@ Here are some of the project's best features:
 *   User-friendly monitoring interface
 *   Integration with various databases
 
+<h2>🛠️ Usage:</h2>
+
+<h3>Installation</h3>
+
+<p>1. Clone the repository and navigate to the project directory:</p>
+
+```
+git clone https://github.com/mbazed/big_data_migration_validation.git cd big_data_migration_validation
+```
+
+<p>2. Install the dependencies:</p>
+
+```
+flutter pub get
+```
+
+<h3>Running the Application</h3>
+
+<p>To run the application on your device or emulator:</p>
+
+```
+flutter run
+```
+
 <h2>Project Screenshots:</h2>
 
 <table>
