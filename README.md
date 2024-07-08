@@ -21,7 +21,8 @@ Here are some of the project's best features:
 <p>1. Clone the repository and navigate to the project directory:</p>
 
 ```
-git clone https://github.com/mbazed/big_data_migration_validation.git cd big_data_migration_validation
+git clone https://github.com/mbazed/big_data_migration_validation.git
+cd big_data_migration_validation
 ```
 
 <p>2. Install the dependencies:</p>
