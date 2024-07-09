@@ -98,6 +98,6 @@ python myapp.py
   
 <h2>💻 Built with</h2>
 
-*  Dart <img src="https://camo.githubusercontent.com/843563a22d9907b87a7f821971d6fe0a047a8f1a10dfc8b909a58e88d8af8225/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f646172742e737667" alt="Icon" width="16" style="background-color: transparent; padding: 5px;">
-*   Flutter <img src="https://camo.githubusercontent.com/d9f17f57987edbe60a4bda810abac268094d57d4f1989ddb59f8f5e17384d58b/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f666c75747465722e737667" alt="Icon" width="16" style="background-color: transparent; padding: 5px;">
-*   Python <img src="https://camo.githubusercontent.com/4123408b6fdb496e1ca591f4b2379d1fe3b7cc53a95b6a8a8acd8df012016af8/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f707974686f6e2e737667" alt="Icon" width="16" style="background-color: transparent; padding: 5px;">
+*  Dart <img src="https://skillicons.dev/icons?i=dart" alt="Icon" width="16" style="background-color: transparent; padding: 5px;">
+*   Flutter <img src="https://skillicons.dev/icons?i=flutter" alt="Icon" width="16" style="background-color: transparent; padding: 5px;">
+*   Python <img src="https://skillicons.dev/icons?i=python" alt="Icon" width="16" style="background-color: transparent; padding: 5px;">
