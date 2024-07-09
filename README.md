@@ -20,24 +20,66 @@ Here are some of the project's best features:
 
 <p>1. Clone the repository and navigate to the project directory:</p>
 
-```
+```bash
 git clone https://github.com/mbazed/big_data_migration_validation.git
 cd big_data_migration_validation
 ```
 
 <p>2. Install the dependencies:</p>
 
-```
+```bash
 flutter pub get
+```
+<h3>Backend Setup</h4>
+
+The backend of this project is built using Python and Flask. Follow these steps to set up and run the backend server locally.
+
+<h3>Prerequisites</h3>
+
+Ensure you have Python and pip installed on your machine. You can download Python from the [official website](https://www.python.org/downloads/). Make sure to check the option to add Python to your PATH during the installation.
+
+Verify the installation by running the following commands:
+```bash
+python --version
+pip --version
+```
+Install the required dependencies using pip:
+
+```bash
+pip install -r requirements.txt
 ```
 
 <h3>Running the Application</h3>
 
 <p>To run the application on your device or emulator:</p>
 
-```
+```bash
 flutter run
 ```
+
+<p>You must run the backend separately in another terminal window.<br>For that, open another terminal window and navigate to the backend directory:</p>
+
+```bash
+cd BackEnd
+```
+
+<p>Now, to run the Flask server locally, execute the following command</p>
+
+```bash
+python myapp.py
+```
+
+<p>If the server is running correctly, you should see output similar to:</p>
+
+```bash
+ * Serving Flask app 'myapp'
+ * Debug mode: on
+```
+
+<h3>Test Data</h3>
+<p>The project includes multiple files for testing purposes located in the <b>Data</b> folder inside the <b>BackEnd</b> directory. These files contain sample data that can be used to validate the application's functionality.</p>
+
+<p>Navigate to the Data folder, and You can use these files to perform various tests and ensure that the data migration validation processes are working correctly.</p>
 
 <h2>Project Screenshots:</h2>
 
